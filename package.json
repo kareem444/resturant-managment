@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,9 +12,30 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "assert": "^2.1.0",
+    "axios": "^1.6.1",
+    "buffer": "^6.0.3",
+    "capitalize-the-first-letter": "^1.0.8",
+    "chart.js": "^4.4.0",
+    "daisyui": "^2.41.0",
+    "dayjs": "^1.11.7",
+    "firebase": "^10.6.0",
+    "i18next": "^23.7.3",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-http-backend": "^2.4.1",
+    "js-cookie": "^3.0.5",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^13.4.0",
+    "react-notifications": "^1.7.4",
+    "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "react-tailwindcss-datepicker": "^1.6.0",
+    "react-thermal-printer": "^0.16.0",
+    "react-to-print": "^2.14.15",
+    "theme-change": "^2.2.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.6.0",
@@ -51,5 +74,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.8",
+    "@types/js-cookie": "^3.0.6",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.19",
+    "react-router-dom": "^6.18.0",
+    "tailwindcss": "^3.2.4"
   }
 }
