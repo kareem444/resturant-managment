@@ -20,7 +20,7 @@
     "daisyui": "^2.41.0",
     "dayjs": "^1.11.7",
     "firebase": "^10.6.0",
-    "i18next": "^23.7.3",
+    "i18next": "^23.7.5",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.1",
     "js-cookie": "^3.0.5",
@@ -28,15 +28,16 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.48.2",
     "react-i18next": "^13.4.0",
     "react-notifications": "^1.7.4",
     "react-redux": "^8.0.5",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-tailwindcss-datepicker": "^1.6.0",
     "react-thermal-printer": "^0.16.0",
     "react-to-print": "^2.14.15",
     "theme-change": "^2.2.0",
-    "typescript": "^4.9.5",
+    "typescript": "^5.2.2",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.6.0",
     "workbox-broadcast-update": "^6.6.0",
@@ -50,6 +51,9 @@
     "workbox-routing": "^6.6.0",
     "workbox-strategies": "^6.6.0",
     "workbox-streams": "^6.6.0"
+  },
+  "overrides": {
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

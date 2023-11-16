@@ -1,15 +1,13 @@
-import React,  { Suspense } from 'react';
+import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './app/store'
+import {store} from './common/redux/store'
 import { Provider } from 'react-redux'
-import SuspenseContent from './containers/SuspenseContent';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import I18nextHandler from './core/i18next.handler';
-
-I18nextHandler()
+import SplashScreenComponent from './common/components/SplashScreenComponent';
+import './common/config'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +15,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   // <React.StrictMode>
-  <Suspense fallback={<SuspenseContent />}>
+  <Suspense fallback={<SplashScreenComponent />}>
     <Provider store={store}>
       <App />
     </Provider>

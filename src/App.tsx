@@ -1,30 +1,18 @@
-import React, { lazy, useEffect } from 'react'
-import './App.css';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { themeChange } from 'theme-change'
-import checkAuth from './app/auth';
-import initializeApp from './app/init';
-import { useLang } from './hooks/useLang';
-
-// Importing pages
-const Layout = lazy(() => import('./containers/Layout'))
-const Login = lazy(() => import('./pages/Login'))
-const ForgotPassword = lazy(() => import('./pages/ForgotPassword'))
-const Register = lazy(() => import('./pages/Register'))
-const Documentation = lazy(() => import('./pages/Documentation'))
-
+// import checkAuth from './unUsed/app/auth';
+// import initializeApp from './unUsed/app/init';
+import RoutesContainer from './common/routes';
+import { useTranslate } from './common/hooks/useTranslate';
 
 // Initializing different libraries
-initializeApp()
-
+// initializeApp()
 
 // Check for login and initialize axios
-const token = checkAuth()
-
+// const token = checkAuth()
 
 function App() {
-
-  const { dir } = useLang()
+  const { dir } = useTranslate()
 
   useEffect(() => {
     document.body.dir = dir
@@ -37,22 +25,7 @@ function App() {
 
 
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/documentation" element={<Documentation />} />
-
-          {/* Place new routes over this */}
-          <Route path="/app/*" element={<Layout />} />
-
-          <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />} />
-
-        </Routes>
-      </Router>
-    </>
+    <RoutesContainer />
   )
 }
 

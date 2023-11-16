@@ -1,4 +1,20 @@
 {
-  "app_title": "Dreamy Weddings",
-  "language": "Language"
+  "appName": "Royaa Rakamya",
+  "language": "Language",
+  "login": "Login",
+  "register": "Register",
+  "mobile": "Mobile",
+  "password": "Password",
+  "forgotPassword": "Forgot Password",
+  "dontHaveAccount": "Don't have an account?",
+  "thisFieldIsRequired": "This field is required",
+  "name": "Name",
+  "alreadyHaveAccount": "Already have an account?",
+  "weWillSendOTP": "We will send OTP to this number",
+  "sendOTP": "Send OTP",
+  "otpVerification": "OTP Verification",
+  "weHaveSentOTP": "We have sent OTP to your mobile number",
+  "verify": "Verify",
+  "invalidOTP": "Invalid OTP",
+  "dashboard": "Dashboard"
 }

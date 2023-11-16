@@ -12,6 +12,9 @@
 # production
 /build
 
+/src/unUsed
+.vscode
+
 # misc
 .DS_Store
 .env.local
