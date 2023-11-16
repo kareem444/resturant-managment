@@ -4,19 +4,17 @@ import BellIcon from '@heroicons/react/24/outline/BellIcon'
 import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 import MoonIcon from '@heroicons/react/24/outline/MoonIcon'
 import SunIcon from '@heroicons/react/24/outline/SunIcon'
-import { NavLink, Routes, Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { IMAGE_SRC } from '../constants/imageConstants'
 import { useTranslate } from '../hooks/useTranslate'
 import SwitchButtonComponent from '../components/SwitchButtonComponent'
-import { useAppDispatch, useAppSelector } from '../redux/store'
-import { openRightDrawerAction } from '../redux/rightDrawer/RightDrawerSlice'
 import usePageTitle from '../hooks/usePageTitle'
+import useRightBarReducer from '../redux/rightDrawer/useRightDrawerReducer'
 
 function HeaderContainer() {
     const { toggleEnAr, translate, isArabic } = useTranslate()
-    const dispatch = useAppDispatch()
-    // const { noOfNotifications, pageTitle } = useSelector(state => state.header)
     const { title } = usePageTitle()
+    const { openRightDrawer } = useRightBarReducer()
     const [currentTheme, setCurrentTheme] = useState(
         localStorage.getItem('theme')
     )
@@ -38,13 +36,11 @@ function HeaderContainer() {
 
     // Opening right sidebar for notification
     const openNotification = () => {
-        dispatch(
-            openRightDrawerAction({
-                title: 'Notifications',
-                isOpen: true,
-                Element: <div>Notification</div>
-            })
-        )
+        openRightDrawer({
+            isOpen: true,
+            title: 'Notifications',
+            Element: <div>Notification</div>
+        })
     }
 
     function logoutUser() {

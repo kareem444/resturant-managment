@@ -4,22 +4,18 @@ import 'react-notifications/lib/notifications.css';
 import LeftSidebarContainer from './LeftSideBarContainer';
 import PageContentContainer from './PageContentContainer';
 import ModalLayoutContainer from './ModalContainer';
-import { useAppDispatch, useAppSelector } from '../redux/store';
-import { notificationState } from "../redux/notification/NotificationSelectors";
-import { removeNotificationAction } from "../redux/notification/NotificationSlice";
 import RightSidebarContainer from "./RightSidebarContainer";
+import useNotificationReducer from "../redux/notification/useNotificationReducer";
 
 function LayoutContainer() {
-    const dispatch = useAppDispatch()
-    const { body, status } = useAppSelector(notificationState)
-
+    const { state, removeNotification } = useNotificationReducer()
     useEffect(() => {
-        if (body !== "") {
-            if (status === 'success') NotificationManager.success(body, status)
-            if (status === 'error') NotificationManager.error(body, status)
-            dispatch(removeNotificationAction())
+        if (state.body !== "") {
+            if (state.status === 'success') NotificationManager.success(state.body, state.status)
+            if (state.status === 'error') NotificationManager.error(state.body, state.status)
+            removeNotification()
         }
-    }, [body])
+    }, [state.body])
 
     return (
         <>

@@ -1,17 +1,14 @@
 import XMarkIcon from '@heroicons/react/24/solid/XMarkIcon'
-import { useAppDispatch, useAppSelector } from '../redux/store'
-import { closeRightDrawerAction } from '../redux/rightDrawer/RightDrawerSlice'
-import { rightDrawerState } from '../redux/rightDrawer/RightDrawerSelectors'
+import useRightBarReducer from '../redux/rightDrawer/useRightDrawerReducer'
 
 function RightSidebarContainer() {
-    const { isOpen, title, Element } = useAppSelector(rightDrawerState)
-    const dispatch = useAppDispatch()
+    const { state , closeRightDrawer} = useRightBarReducer()
 
     return (
         <div
             className={
                 ' fixed overflow-hidden z-20 bg-gray-900 bg-opacity-25 inset-0 transform ease-in-out ' +
-                (isOpen
+                (state.isOpen
                     ? ' transition-opacity opacity-100 duration-500 translate-x-0  '
                     : ' transition-all delay-500 opacity-0 translate-x-full  ')
             }
@@ -19,7 +16,7 @@ function RightSidebarContainer() {
             <section
                 className={
                     'w-80 md:w-96  right-0 absolute bg-base-100 h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform  ' +
-                    (isOpen ? ' translate-x-0 ' : ' translate-x-full ')
+                    (state.isOpen ? ' translate-x-0 ' : ' translate-x-full ')
                 }
             >
                 <div className='relative  pb-5 flex flex-col  h-full'>
@@ -27,11 +24,11 @@ function RightSidebarContainer() {
                     <div className='navbar   flex pl-4 pr-4   shadow-md '>
                         <button
                             className='float-left btn btn-circle btn-outline btn-sm'
-                            onClick={() => dispatch(closeRightDrawerAction())}
+                            onClick={closeRightDrawer}
                         >
                             <XMarkIcon className='h-5 w-5' />
                         </button>
-                        <span className='ml-2 font-bold text-xl'>{title}</span>
+                        <span className='ml-2 font-bold text-xl'>{state.title}</span>
                     </div>
 
                     {/* ------------------ Content Start ------------------ */}
@@ -39,7 +36,7 @@ function RightSidebarContainer() {
                         <div className='flex flex-col w-full'>
                             {/* Loading drawer body according to different drawer type */}
                             {
-                                Element && Element
+                                state.Element && state.Element
                             }
                         </div>
                     </div>
@@ -49,7 +46,7 @@ function RightSidebarContainer() {
 
             <section
                 className=' w-screen h-full cursor-pointer '
-                onClick={() => dispatch(closeRightDrawerAction())}
+                onClick={closeRightDrawer}
             ></section>
         </div>
     )
