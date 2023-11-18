@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { Suspense, lazy, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useEffect, useRef } from "react"
@@ -10,16 +10,15 @@ const Error404Component = lazy(() => import('../components/Error404Component'))
 
 function PageContentContainer() {
     const mainContentRef = useRef(null);
-    // const { pageTitle } = useSelector(state => state.header)
-
+    const { pathname } = useLocation()
 
     // Scroll back to top on new page load
-    // useEffect(() => {
-    //     mainContentRef.current && mainContentRef.current!.scroll({
-    //         top: 0,
-    //         behavior: "smooth"
-    //     });
-    // }, [pageTitle])
+    useEffect(() => {
+        mainContentRef.current && (mainContentRef.current as any).scroll({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, [pathname])
 
     const [routesElements, setRoutesElements] = useState([] as { path: string, component: any }[])
     useEffect(() => {

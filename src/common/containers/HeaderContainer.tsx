@@ -5,7 +5,7 @@ import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 import MoonIcon from '@heroicons/react/24/outline/MoonIcon'
 import SunIcon from '@heroicons/react/24/outline/SunIcon'
 import { Link } from 'react-router-dom'
-import { IMAGE_SRC } from '../constants/imageConstants'
+import { IMAGE_SRC } from '../constants/srcConstants'
 import { useTranslate } from '../hooks/useTranslate'
 import SwitchButtonComponent from '../components/SwitchButtonComponent'
 import usePageTitle from '../hooks/usePageTitle'
@@ -65,14 +65,36 @@ function HeaderContainer() {
                 <div className='order-last'>
                     {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection, 
                 also includes corporate and retro themes in tailwind.config file */}
+    {/* themes: ["light", "dark", "cupcake", "bumblebee", "emerald", "corporate", "synthwave", "retro", "cyberpunk", "valentine", "halloween", "garden", "forest", "aqua", "lofi", "pastel", "fantasy", "wireframe", "black", "luxury", "dracula", "cmyk", "autumn", "business", "acid", "lemonade", "night", "coffee", "winter"], */}
 
-                    {/* <select className="select select-sm mr-4" data-choose-theme>
+                    <select className="select select-sm mr-4" data-choose-theme>
                         <option disabled selected>Theme</option>
                         <option value="light">Default</option>
                         <option value="dark">Dark</option>
                         <option value="corporate">Corporate</option>
                         <option value="retro">Retro</option>
-                    </select> */}
+                        <option value="bumblebee">Bumblebee</option>
+                        <option value="winter">Winter</option>
+                        <option value="night">Night</option>
+                        <option value="acid">Acid</option>
+                        <option value="business">Business</option>
+                        <option value="cmyk">Cmyk</option>
+                        <option value="luxury">luxury</option>
+                        <option value="black">black</option>
+                        <option value="wireframe">wireframe</option>
+                        <option value="fantasy">fantasy</option>
+                        <option value="pastel">pastel</option>
+                        <option value="lofi">lofi</option>
+                        <option value="aqua">aqua</option>
+                        <option value="forest">forest</option>
+                        <option value="garden">garden</option>
+                        <option value="halloween">halloween</option>
+                        <option value="valentine">valentine</option>
+                        <option value="cyberpunk">cyberpunk</option>
+                        <option value="synthwave">synthwave</option>
+                        <option value="emerald">emerald</option>
+                        <option value="cupcake">cupcake</option>
+                    </select>
 
                     <SwitchButtonComponent
                         name='switchLang'
@@ -86,7 +108,7 @@ function HeaderContainer() {
                     />
 
                     {/* Light and dark theme selection toogle **/}
-                    <label className='swap '>
+                    {/* <label className='swap '>
                         <input type='checkbox' />
                         <SunIcon
                             data-set-theme='light'
@@ -104,7 +126,7 @@ function HeaderContainer() {
                                 (currentTheme === 'light' ? 'swap-on' : 'swap-off')
                             }
                         />
-                    </label>
+                    </label> */}
 
                     {/* Notification icon */}
                     <button
