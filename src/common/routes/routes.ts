@@ -1,42 +1,64 @@
 import { lazy } from 'react'
-import UnitsPage from '../../app/admin/units'
-import ProductsPage from '../../app/admin/products'
-import AdditionsPage from '../../app/admin/additions'
-import TablesPage from '../../app/admin/tables'
-import DeliveryPage from '../../app/admin/delivary'
-import CustomersPage from '../../app/admin/customers'
-import SalesBillsPage from '../../app/admin/salesBills'
-import BouncedSalesPage from '../../app/admin/bouncedSales'
-import SuppliersPage from '../../app/admin/subbliers'
-import PurchasesBillsPage from '../../app/admin/purchasesBills'
-import BouncedPurchasesPage from '../../app/admin/bouncedPurchases'
-import ExpensesPage from '../../app/admin/expenses'
-import EmployeesPage from '../../app/admin/employees'
-import ProfessionsPage from '../../app/admin/profession'
-import PaymentsPage from '../../app/admin/payments'
-import MembersPage from '../../app/admin/members'
-import ProductsReportsPage from '../../app/admin/productsReports'
-import SalesReportsPage from '../../app/admin/salesReports'
-import ClientsStatementsReportsPage from '../../app/admin/clientsStatments'
-import ValueAddedReportsPage from '../../app/admin/valueAddedTaxReports'
-import TobaccoDutyReportsPage from '../../app/admin/tobaccoDutyReports'
-import PurchasesReportsPage from '../../app/admin/purchasesReports'
-import SuppliersStatementsReportsPage from '../../app/admin/suppliersStatments'
-import ExpensesReportsPage from '../../app/admin/expensesReports'
-import PaymentsReportsPage from '../../app/admin/paymentsReports'
-import DeliveryReportsPage from '../../app/admin/deliveryReports'
-import EmployeesReportsPage from '../../app/admin/employeesReports'
-
-// const Dashboard = lazy(() => import('../pages/protected/Dashboard'))
-const LoginPage = lazy(() => import('../../app/auth/login'))
-const RegisterPage = lazy(() => import('../../app/auth/register'))
-const ForgotPasswordPage = lazy(() => import('../../app/auth/forgotPassword'))
-const OtpPage = lazy(() => import('../../app/auth/otp'))
+const LoginPage = lazy(() => import('../../app/auth/pages/login'))
+const RegisterPage = lazy(() => import('../../app/auth/pages/register'))
+const ForgotPasswordPage = lazy(() => import('../../app/auth/pages/forgotPassword'))
+const OtpPage = lazy(() => import('../../app/auth/pages/otp'))
 const LayoutContainer = lazy(() => import('../containers/LayoutContainer'))
-const DashBoardPage = lazy(() => import('../../app/admin/dashboard'))
-const GroupsPage = lazy(() => import('../../app/admin/groups'))
+const DashBoardPage = lazy(() => import('../../app/admin/pages/dashboard'))
+const GroupsPage = lazy(() => import('../../app/admin/pages/groups'))
+const SalesBillsPage = lazy(() => import('../../app/admin/pages/salesBills'))
+const BouncedSalesPage = lazy(() => import('../../app/admin/pages/bouncedSales'))
+const UnitsPage = lazy(() => import('../../app/admin/pages/units'))
+const ProductsPage = lazy(() => import('../../app/admin/pages/products'))
+const AdditionsPage = lazy(() => import('../../app/admin/pages/additions'))
+const TablesPage = lazy(() => import('../../app/admin/pages/tables'))
+const DeliveryPage = lazy(() => import('../../app/admin/pages/delivary'))
+const CustomersPage = lazy(() => import('../../app/admin/pages/customers'))
+const SuppliersPage = lazy(() => import('../../app/admin/pages/subbliers'))
+const PurchasesBillsPage = lazy(() => import('../../app/admin/pages/purchasesBills'))
+const BouncedPurchasesPage = lazy(() => import('../../app/admin/pages/bouncedPurchases'))
+const ExpensesPage = lazy(() => import('../../app/admin/pages/expenses'))
+const EmployeesPage = lazy(() => import('../../app/admin/pages/employees'))
+const ProfessionsPage = lazy(() => import('../../app/admin/pages/profession'))
+const PaymentsPage = lazy(() => import('../../app/admin/pages/payments'))
+const MembersPage = lazy(() => import('../../app/admin/pages/members'))
+const ProductsReportsPage = lazy(() => import('../../app/admin/pages/productsReports'))
+const SalesReportsPage = lazy(() => import('../../app/admin/pages/salesReports'))
+const ClientsStatementsReportsPage = lazy(() => import('../../app/admin/pages/clientsStatments'))
+const ValueAddedReportsPage = lazy(() => import('../../app/admin/pages/valueAddedTaxReports'))
+const TobaccoDutyReportsPage = lazy(() => import('../../app/admin/pages/tobaccoDutyReports'))
+const PurchasesReportsPage = lazy(() => import('../../app/admin/pages/purchasesReports'))
+const SuppliersStatementsReportsPage = lazy(() => import('../../app/admin/pages/suppliersStatments'))
+const ExpensesReportsPage = lazy(() => import('../../app/admin/pages/expensesReports'))
+const PaymentsReportsPage = lazy(() => import('../../app/admin/pages/paymentsReports'))
+const DeliveryReportsPage = lazy(() => import('../../app/admin/pages/deliveryReports'))
+const EmployeesReportsPage = lazy(() => import('../../app/admin/pages/employeesReports'))
+const SettingsPage = lazy(() => import('../../app/admin/pages/settings'))
 
-export const routes = {
+
+interface Route {
+    path: string
+    component: React.ComponentType<any>
+}
+
+interface FullRoute extends Route {
+    fullPath: string
+}
+
+export interface NestedRoutes {
+    [key: string]: FullRoute
+}
+
+interface Routes {
+    login: Route
+    forgotPassword: Route
+    register: Route
+    otp: Route
+    layout: Route
+    admin: NestedRoutes
+}
+
+export const routes: Routes = {
     login: {
         path: '/login',
         component: LoginPage
@@ -202,6 +224,11 @@ export const routes = {
             path: '/admin/employees-reports',
             fullPath: '/app/admin/employees-reports',
             component: EmployeesReportsPage
-        }, 
+        },
+        settings: {
+            path: '/admin/settings',
+            fullPath: '/app/admin/settings',
+            component: SettingsPage
+        }
     }
 }

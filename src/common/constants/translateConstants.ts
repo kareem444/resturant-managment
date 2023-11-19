@@ -87,4 +87,6 @@ export const TRANSLATE = {
     SUPPLIERS_REPORTS: 'suppliers-reports',
     SALES: 'sales',
     SALES_BILLS: 'sales-bills',
+    AR: 'ar',
+    EN: 'en',
 }

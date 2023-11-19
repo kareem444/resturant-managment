@@ -87,6 +87,8 @@
   "groups-reports" : "Groups Reports",
   "tables-reports" : "Tables Reports",
   "customers-reports" : "Customers Reports",
-  "suppliers-reports" : "Suppliers Reports"
+  "suppliers-reports" : "Suppliers Reports",
+  "ar": "AR",
+  "en": "ENG"
 }
 

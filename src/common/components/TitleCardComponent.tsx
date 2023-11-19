@@ -21,7 +21,11 @@ const TitleCardComponent: FC<TitleCardProps> = ({
       }
     >
       {/* Title for Card */}
-      <SubtitleComponent styleClass={TopSideButtons ? 'inline-block flex items-center justify-between' : ''}>
+      <SubtitleComponent
+        styleClass={
+          TopSideButtons ? 'inline-block flex items-center justify-between' : ''
+        }
+      >
         <h3>{title}</h3>
 
         {/* Top side button, show only if present */}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TableButtonsComponent } from './TableButtonsComponent'
+import { TableButtonsComponent } from './IconsButtonsComponent'
 
 export interface ITableContent {
     header: string[]

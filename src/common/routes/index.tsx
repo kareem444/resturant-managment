@@ -1,5 +1,3 @@
-import { lazy } from 'react'
-
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { routes } from './routes'
 
@@ -17,7 +15,7 @@ export default function RoutesContainer() {
 
         <Route
           path='*'
-          element={<Navigate to={false ? '/app/welcome' : '/login'} replace />}
+          element={<Navigate to='/login' replace />}
         />
       </Routes>
     </Router>

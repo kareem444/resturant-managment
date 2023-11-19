@@ -2,7 +2,7 @@ import PlusIcon from '@heroicons/react/24/outline/PlusIcon'
 import MinusIcon from '@heroicons/react/24/outline/MinusIcon'
 import { FC, useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { SideBarRoute } from '../routes/sideBarRoutes'
+import { SideBarRoute } from '../../app/admin/routes/AdminSideBarRoutes'
 import { useTranslate } from '../hooks/useTranslate'
 
 const SideBarSubMenuContainer: FC<SideBarRoute> = ({ submenu, name, icon }) => {
