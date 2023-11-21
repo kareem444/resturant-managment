@@ -15,7 +15,7 @@ export interface SideBarRoute {
   submenu?: SideBarRoute[];
 }
 
-export const AdminSideBarRoutes: SideBarRoute[] = [
+export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: routes.admin.dashboard.fullPath,
     name: TRANSLATE.DASHBOARD,

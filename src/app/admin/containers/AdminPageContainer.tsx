@@ -4,7 +4,7 @@ import ScrollToTopComponent from '../../../common/components/ScrollToTopComponen
 import SetRoutesContainer from '../../../common/containers/SetRoutesContainer'
 import LeftSidebarContainer from './AdminDrawerContainer'
 
-function AdminPageContentContainer() {
+function AdminPageContainer() {
     return (
         <div className='drawer drawer-mobile'>
             <input
@@ -27,4 +27,4 @@ function AdminPageContentContainer() {
     )
 }
 
-export default AdminPageContentContainer
+export default AdminPageContainer

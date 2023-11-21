@@ -1,4 +1,4 @@
-import { AdminSideBarRoutes } from '../routes/AdminSideBarRoutes'
+import { AdminDrawerRoutes } from '../routes/AdminDrawerRoutes'
 import { NavLink, useLocation } from 'react-router-dom'
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon'
 import SideBarSubMenuContainer from '../../../common/containers/SideBarSubMenuContainer'
@@ -34,7 +34,7 @@ function LeftSidebarContainer() {
                     {translate(TRANSLATE.APP_NAME)}
                 </a>
             </li>
-            {AdminSideBarRoutes.map((route, k) => {
+            {AdminDrawerRoutes.map((route, k) => {
                 return (
                     <li key={k}>
                         {

@@ -34,7 +34,7 @@ const PaymentsReportsPage = lazy(() => import('../../app/admin/pages/paymentsRep
 const DeliveryReportsPage = lazy(() => import('../../app/admin/pages/deliveryReports'))
 const EmployeesReportsPage = lazy(() => import('../../app/admin/pages/employeesReports'))
 const SettingsPage = lazy(() => import('../../app/admin/pages/settings'))
-
+const PosHomePage = lazy(() => import('../../app/pos/pages/home'))
 
 interface Route {
     path: string
@@ -56,6 +56,7 @@ interface Routes {
     otp: Route
     layout: Route
     admin: NestedRoutes
+    pos: NestedRoutes
 }
 
 export const routes: Routes = {
@@ -230,5 +231,12 @@ export const routes: Routes = {
             fullPath: '/app/admin/settings',
             component: SettingsPage
         }
+    },
+    pos: {
+        home: {
+            path: '/pos/home',
+            fullPath: '/app/pos/home',
+            component: PosHomePage
+        },
     }
 }
