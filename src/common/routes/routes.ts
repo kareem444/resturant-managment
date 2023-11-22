@@ -34,7 +34,12 @@ const PaymentsReportsPage = lazy(() => import('../../app/admin/pages/paymentsRep
 const DeliveryReportsPage = lazy(() => import('../../app/admin/pages/deliveryReports'))
 const EmployeesReportsPage = lazy(() => import('../../app/admin/pages/employeesReports'))
 const SettingsPage = lazy(() => import('../../app/admin/pages/settings'))
-const PosHomePage = lazy(() => import('../../app/pos/pages/home'))
+const PosHomeLayoutContainer = lazy(() => import('src/app/pos/containers/PosHomeLayoutContainer'))
+const PosProductsPage = lazy(() => import('src/app/pos/pages/products'))
+const PosDeliveryPage = lazy(() => import('src/app/pos/pages/delivery'))
+const PosInvoicePage = lazy(() => import('src/app/pos/pages/invoice'))
+const PosSettingsPage = lazy(() => import('src/app/pos/pages/settings'))
+const PosTablesPage = lazy(() => import('src/app/pos/pages/tables'))
 
 interface Route {
     path: string
@@ -56,7 +61,10 @@ interface Routes {
     otp: Route
     layout: Route
     admin: NestedRoutes
-    pos: NestedRoutes
+    pos: { 
+        home: NestedRoutes
+        settings: FullRoute
+    }
 }
 
 export const routes: Routes = {
@@ -234,9 +242,36 @@ export const routes: Routes = {
     },
     pos: {
         home: {
-            path: '/pos/home',
-            fullPath: '/app/pos/home',
-            component: PosHomePage
+            homeLayout :{
+                path: '/pos/home/*',
+                fullPath: '/app/pos/home/*',
+                component: PosHomeLayoutContainer
+            },
+            products: {
+                path: '/products',
+                fullPath: '/app/pos/home/products',
+                component: PosProductsPage
+            },
+            tables: {
+                path: '/tables',
+                fullPath: '/app/pos/home/tables',
+                component: PosTablesPage
+            },
+            delivery: {
+                path: '/delivery',
+                fullPath: '/app/pos/home/delivery',
+                component: PosDeliveryPage
+            },
+            invoice: {
+                path: '/invoice',
+                fullPath: '/app/pos/home/invoice',
+                component: PosInvoicePage
+            },
+        },
+        settings: {
+            path: '/pos/settings',
+            fullPath: '/app/pos/settings',
+            component: PosSettingsPage
         },
     }
 }

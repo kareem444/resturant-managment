@@ -1,7 +1,7 @@
+import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import ShoppingCart from '@heroicons/react/24/outline/ShoppingCartIcon'
-import TrashIcon from '@heroicons/react/24/outline/TrashIcon'
 
-const PosOrderTopButtonsFeature = () => {
+const PosOrderTopButtonsComponent = () => {
     return (
         <div className='p-3 flex justify-between h-14 w-full'>
             <div className='indicator'>
@@ -17,4 +17,4 @@ const PosOrderTopButtonsFeature = () => {
     )
 };
 
-export default PosOrderTopButtonsFeature;
+export default PosOrderTopButtonsComponent;

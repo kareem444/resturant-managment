@@ -1,4 +1,4 @@
-import PosOrderItemComponent from 'src/app/pos/components/PosOrderItemComponent'
+import PosOrderItemComponent from 'src/app/pos/components/order/PosOrderItemComponent'
 import { RECENT_TRANSACTIONS } from 'src/unUsed/utils/dummyData'
 import {
     LeadingActions,
@@ -9,7 +9,7 @@ import {
 } from 'react-swipeable-list'
 import 'react-swipeable-list/dist/styles.css'
 
-export default function PosOrderItemsFeature() {
+export default function PosOrderItemsComponents() {
     const leadingActions = () => (
         <LeadingActions>
             <SwipeAction

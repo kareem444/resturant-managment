@@ -1,7 +1,7 @@
-import { routes } from '../../../common/routes/routes'
 import SetRoutesContainer from '../../../common/containers/SetRoutesContainer'
 import PosDrawerContainer from './PosDrawerContainer'
 import ChevronRightIcon from '@heroicons/react/24/outline/ChevronRightIcon'
+import { PosRoutes } from '../routes/PosRoutes'
 
 function PosPageContainer() {
     return (
@@ -15,7 +15,7 @@ function PosPageContainer() {
                 <label htmlFor="left-sidebar-drawer" className="drawer-button lg:hidden z-50">
                     <ChevronRightIcon className='w-10 p-1 absolute top-1/3 bg-cyan-500 rounded-lg text-white' />
                 </label>
-                <SetRoutesContainer routes={routes.pos} />
+                <SetRoutesContainer routes={PosRoutes.withoutOrderSection} />
             </div>
             <div className='drawer-side'>
                 <label htmlFor='left-sidebar-drawer' className='drawer-overlay'></label>

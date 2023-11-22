@@ -1,6 +1,4 @@
-import React from 'react'
-
-export default function PosOrderTotalPayFeature() {
+const PosOrderTotalPayComponent = () => {
     return (
         <div className='card bg-base-200 w-full my-2'>
             <div className='card-body p-3'>
@@ -24,4 +22,6 @@ export default function PosOrderTotalPayFeature() {
             </div>
         </div>
     )
-}
+};
+
+export default PosOrderTotalPayComponent;

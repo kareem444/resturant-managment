@@ -13,7 +13,7 @@ const DemoNames = [
     'dessert'
 ]
 
-export default function PosHeaderFeature() {
+export default function PosProductsHeaderFeature() {
     return (
         <div className='navbar bg-base-100 rounded-2xl'>
             <div className='flex flex-col items-center justify-center py-3 bg-cyan-600 rounded-2xl w-2/12 shadow-md '>
