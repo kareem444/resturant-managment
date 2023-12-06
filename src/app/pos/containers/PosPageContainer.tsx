@@ -2,8 +2,13 @@ import SetRoutesContainer from '../../../common/containers/SetRoutesContainer'
 import PosDrawerContainer from './PosDrawerContainer'
 import ChevronRightIcon from '@heroicons/react/24/outline/ChevronRightIcon'
 import { PosRoutes } from '../routes/PosRoutes'
+import { useEffect } from 'react'
 
 function PosPageContainer() {
+    useEffect(() => {
+        document.querySelector('html')?.setAttribute('data-theme', "winter");
+        localStorage.setItem('theme', 'winter')
+    }, [])
     return (
         <div className='drawer drawer-mobile bg-base-200 text-slate-500' data-theme="winter">
             <input

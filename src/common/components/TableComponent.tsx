@@ -24,18 +24,17 @@ export const TableComponent: React.FC<ITableContent> = ({
     buttons
 }) => {
     return (
-        <div className='overflow-x-auto w-full'>
+        <div className='overflow-x-auto w-full no-scrollbar overflow-y-scroll h-full'>
             <table className='table w-full'>
                 <thead>
                     <tr>
                         {header.map((h, k) => {
                             return (
-                                <th key={k} className='text-left'>
+                                <td key={k} className='text-left !z-0'>
                                     {h}
-                                </th>
+                                </td>
                             )
                         })}
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

@@ -15,7 +15,7 @@ const DemoNames = [
 
 export default function PosProductsHeaderFeature() {
     return (
-        <div className='navbar bg-base-100 rounded-2xl'>
+        <div className='navbar bg-base-100 rounded-2xl shadow-md'>
             <div className='flex flex-col items-center justify-center py-3 bg-cyan-600 rounded-2xl w-2/12 shadow-md '>
                 <div className='text-xl font-bol text-white cursor-pointer '>All</div>
             </div>

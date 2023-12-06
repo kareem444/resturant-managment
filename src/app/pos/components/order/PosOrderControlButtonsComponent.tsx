@@ -1,8 +1,10 @@
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
 import { ReactComponent as ReceiptIcon } from '../../../../common/assets/svg/receipt.svg'
+import PosDiscountModalComponent from '../modal/discount/PosDiscountModalComponent'
+import PosCustomerModalComponent from '../modal/customer/PosCustomerModalComponent'
 
 const PosOrderControlButtonsComponent = () => {
-    const { openModel } = useModalReducer() 
+    const { openModel } = useModalReducer()
     return (
         <div className='flex justify-between bg-cyan-500 p-1 rounded-2xl text-white'>
             <div className='btn btn-ghost '>
@@ -12,9 +14,10 @@ const PosOrderControlButtonsComponent = () => {
                 className='btn btn-ghost'
                 onClick={() => {
                     openModel({
-                        size: 'xl',
+                        size: '2xl',
                         title: 'Discount',
-                        Element: <div>Modal</div>,
+                        titleClassName: 'text-slate-500',
+                        Element: <PosDiscountModalComponent />,
                         isOpen: true
                     })
                 }}
@@ -28,9 +31,10 @@ const PosOrderControlButtonsComponent = () => {
                 className='btn btn-ghost'
                 onClick={() => {
                     openModel({
-                        size: '5xl',
-                        title: 'User',
-                        Element: <div>User Modal</div>,
+                        size: '3xl',
+                        title: 'Customer',
+                        titleClassName: 'text-slate-500',
+                        Element: <PosCustomerModalComponent />,
                         isOpen: true
                     })
                 }}

@@ -52,14 +52,14 @@ export default function LoginFormFeature() {
                 type='number'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.MOBILE)}
-                input={InputProperty}
+                validatedInput={InputProperty}
             />
 
             <InputTextComponent
                 type='password'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.PASSWORD)}
-                input={{
+                validatedInput={{
                     ...InputProperty,
                     name: 'password'
                 }}

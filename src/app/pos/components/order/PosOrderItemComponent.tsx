@@ -1,6 +1,6 @@
 const PosOrderItemComponent = () => {
   return (
-    <div className='card bg-base-200 w-full my-2 cursor-grab active:cursor-grabbing'>
+    <div className='card bg-base-200 w-full my-1 cursor-grab active:cursor-grabbing'>
       <div className='card-body p-3 flex flex-row justify-between items-center'>
         <div className="flex flex-row">
           <img

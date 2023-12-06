@@ -5,4 +5,7 @@ export const ModalInitialState: IModalState = {
     Element: null,
     title: "",
     size: "md",
+    className: "",
+    closeButtonClassName: "",
+    titleClassName: "",
 };

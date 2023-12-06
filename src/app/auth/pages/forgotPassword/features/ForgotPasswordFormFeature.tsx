@@ -50,7 +50,7 @@ export default function ForgotPasswordFormFeature() {
                 type='number'
                 containerStyle='mt-4 mb-8'
                 labelTitle={translate(TRANSLATE.MOBILE)}
-                input={InputProperty}
+                validatedInput={InputProperty}
             />
         </AuthContainer>
     )

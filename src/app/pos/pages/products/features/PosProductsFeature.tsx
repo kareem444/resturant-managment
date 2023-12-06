@@ -5,9 +5,9 @@ export default function PosProductsFeature() {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {
                 RECENT_TRANSACTIONS.map((item, index) => (
-                    <div className="card bg-white shadow-xl cursor-pointer" key={index}>
-                        <figure className="p-3">
-                            <img src={item.avatar} alt="Shoes" className="w-full " />
+                    <div className="card bg-white shadow-md cursor-pointer h-52" key={index}>
+                        <figure className="p-3 h-5/6">
+                            <img src={item.avatar} alt="Shoes" className="w-full h-full rounded-lg" />
                         </figure>
                         <div className="card-body flex-row justify-between p-4">
                             <span>{item.name}</span>

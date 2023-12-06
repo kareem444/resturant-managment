@@ -53,14 +53,14 @@ export default function RegisterFormFeature() {
                 type='text'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.NAME)}
-                input={InputProperty}
+                validatedInput={InputProperty}
             />
 
             <InputTextComponent
                 type='number'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.MOBILE)}
-                input={{
+                validatedInput={{
                     ...InputProperty,
                     name: 'mobile'
                 }}
@@ -70,7 +70,7 @@ export default function RegisterFormFeature() {
                 type='password'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.PASSWORD)}
-                input={{
+                validatedInput={{
                     ...InputProperty,
                     name: 'password'
                 }}

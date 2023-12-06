@@ -96,7 +96,7 @@ const SearchComponent: FC<SearchBarProps> = ({
       {filter?.showFilterBadge && filterParam && (
         <button
           onClick={() => updateFilterParam('')}
-          className='btn btn-xs btn-active normal-case mx-2'
+          className='btn btn-xs btn-outline hover:bg-transparent hover:text-current normal-case mx-2'
         >
           {filterParam}
           <XMarkIcon className='w-4 ml-2 ' />

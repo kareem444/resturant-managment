@@ -6,14 +6,14 @@ import PosOrderTotalPayComponent from "../components/order/PosOrderTotalPayCompo
 
 const PosOrderContainer = () => {
     return (
-        <div className='card bg-white h-full p-4 grid grid-rows-6 pb-8'>
-            <div className='row-span-4'>
+        <div className='card bg-white h-full p-4 flex flex-col overflow-y-scroll no-scrollbar shadow-md'>
+            <div className=''>
                 <PosOrderTopButtonsComponent />
-                <div className='overflow-y-scroll no-scrollbar w-full h-5/6'>
-                    <PosOrderItemsComponents />
-                </div>
             </div>
-            <div className='w-full flex flex-col row-span-3 mt-auto'>
+            <div className='overflow-y-scroll no-scrollbar w-full flex-auto min-h-16'>
+                <PosOrderItemsComponents />
+            </div>
+            <div className='w-full flex flex-col mt-4'>
                 <PosOrderControlButtonsComponent />
                 <PosOrderTotalPayComponent />
                 <PosOrderSubmitButtonComponent />

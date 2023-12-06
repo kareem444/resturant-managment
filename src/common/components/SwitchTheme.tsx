@@ -17,7 +17,7 @@ export default function SwitchThemeComponent() {
             ) {
                 setCurrentTheme('dark')
             } else {
-                setCurrentTheme('light')
+                setCurrentTheme('winter')
             }
         }
         // 👆 false parameter is required for react project
@@ -27,7 +27,7 @@ export default function SwitchThemeComponent() {
         <label className='swap pointer-events-auto'>
             <input type='checkbox' />
             <SunIcon
-                data-set-theme='light'
+                data-set-theme='winter'
                 data-act-class='ACTIVECLASS'
                 className={
                     'fill-current w-6 h-6 ' +
@@ -39,7 +39,7 @@ export default function SwitchThemeComponent() {
                 data-act-class='ACTIVECLASS'
                 className={
                     'fill-current w-6 h-6 ' +
-                    (currentTheme === 'light' ? 'swap-on' : 'swap-off')
+                    (currentTheme === 'winter' ? 'swap-on' : 'swap-off')
                 }
             />
         </label>
