@@ -6,6 +6,7 @@ import { closeModalAction, openModalAction } from './ModalSlice'
 export default function useModalReducer() {
     const state: IModalState = useAppSelector(modalState)
     const dispatch = useAppDispatch()
+
     return {
         state,
         openModel: (payload: IModalState) => {

@@ -22,7 +22,7 @@ const tableContent: ITableContent = {
     }
 }
 
-export default function GroupsProfessionsFeature() {
+export default function BranchesDetailsFeature() {
 
     return (
         <AdminDetailsPageContainer tableContent={tableContent} />

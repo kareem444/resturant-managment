@@ -5,11 +5,25 @@ import { routes } from 'src/common/routes/routes'
 import PosLogoComponent from '../components/PosLogoComponent'
 import { PosRoutes } from '../routes/PosRoutes'
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
-import PosShiftModalComponent from '../components/modal/PosShiftModalComponent'
 import OnlineStateComponent from 'src/common/components/OnlineStateComponent'
 
 function PosDrawerContainer() {
     const { openModel } = useModalReducer()
+
+    const openShiftModal = () => {
+        openModel({
+            size: 'sm',
+            title: {
+                text: 'Shift'
+            },
+            className: 'bg-base-300',
+            closeButton: {
+                className: 'btn btn-outline btn-sm'
+            },
+            modalComponent: 'posShiftModalComponent',
+            isOpen: true
+        })
+    }
 
     return (
         <ul className='menu w-28 bg-cyan-500 rounded-3xl m-3 ml-0 sm:ml-2 shadow-lg border-gray-300 border'>
@@ -21,16 +35,7 @@ function PosDrawerContainer() {
                     ))}
                     <PosIconButtonComponent
                         icon='fi-rr-power'
-                        onClick={() => {
-                            openModel({
-                                size: 'sm',
-                                title: 'Shift',
-                                className: 'bg-base-300',
-                                closeButtonClassName: '!bg-white ',
-                                Element: <PosShiftModalComponent />,
-                                isOpen: true
-                            })
-                        }}
+                        onClick={openShiftModal}
                     />
                 </ul>
                 <div>

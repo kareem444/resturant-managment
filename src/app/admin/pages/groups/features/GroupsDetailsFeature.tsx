@@ -2,27 +2,54 @@ import { RECENT_TRANSACTIONS } from '../../../../../unUsed/utils/dummyData'
 import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
 import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
+import useModalReducer from 'src/common/redux/modal/useModalReducer'
 
-const tableContent: ITableContent = {
-    header: ['Name', 'Email', 'Location', 'Amount', 'Date'],
-    items: RECENT_TRANSACTIONS,
-    selectors: {
-        Email: (item: any) => item['email'],
-        Location: (item: any) => item['location'],
-        Amount: (item: any) => `$${item['amount']}`,
-        Date: (item: any) => moment(item['date']).format('D MMM'),
-    },
-    avatarSelector: (item: any) => item['avatar'],
-    nameSelector: (item: any) => item['name'],
-    buttons: {
-        onEdit: (item: any) => { },
-        onDelete: (item: any) => { },
-        onPrint: (item: any) => { },
-        onLock: (item: any) => { },
-    }
-}
 
 export default function GroupsDetailsFeature() {
+    const { openModel } = useModalReducer()
+
+    const openEditUnitModal = () => {
+        openModel({
+            modalComponent: 'adminEditGroupModal',
+            size: '3xl',
+            title: {
+                text: 'Edit Group'
+            },
+        })
+    }
+
+    const openDeleteUnitModal = () => {
+        openModel({
+            modalComponent: 'adminDeleteGroupModal',
+            size: 'sm',
+            title: {
+                text: 'Delete Group'
+            },
+            closeButton: {
+                showCloseButton: true
+            },
+            buttons: [
+                {
+                    text: 'Delete',
+                }
+            ]
+        })
+    }
+
+    const tableContent: ITableContent = {
+        header: ['Name', 'Date'],
+        filter: ['Name'],
+        defaultFilterItem: 'Name',
+        items: RECENT_TRANSACTIONS,
+        selectors: {
+            Date: (item: any) => moment(item['date']).format('D-MM-YYYY hh:mm:ss A'),
+        },
+        nameSelector: (item: any) => item['name'],
+        buttons: {
+            onEdit: (item: any) => openEditUnitModal(),
+            onDelete: (item: any) => openDeleteUnitModal()
+        }
+    }
 
     return (
         <AdminDetailsPageContainer tableContent={tableContent} />

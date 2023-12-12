@@ -27,7 +27,7 @@ export default function LoginFormFeature() {
 
     const InputProperty = {
         name: 'mobile',
-        rules: {
+        regularRules: {
             required: {
                 value: true,
                 message: translate(TRANSLATE.THIS_FIELD_IS_REQUIRED)

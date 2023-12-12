@@ -1,5 +1,4 @@
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
-import PosSubmitPaymentModalComponent from '../modal/PosSubmitPaymentModalComponent'
 
 const PosOrderSubmitButtonComponent = () => {
     const { openModel } = useModalReducer()
@@ -7,8 +6,10 @@ const PosOrderSubmitButtonComponent = () => {
     const onClick = () => {
         openModel({
             size: '3xl',
-            title: 'Submit Payment',
-            Element: <PosSubmitPaymentModalComponent />,
+            title: {
+                text: 'Submit Payment',
+            },
+            modalComponent: 'posSubmitPaymentModalComponent',
             isOpen: true
         })
     }

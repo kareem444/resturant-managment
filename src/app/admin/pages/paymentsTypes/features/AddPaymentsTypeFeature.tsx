@@ -3,7 +3,7 @@ import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import usePageTitle from '../../../../../common/hooks/usePageTitle'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 
-export default function AddPaymentFeature() {
+export default function AddPaymentsTypeFeature() {
     const { titleWithoutLetterS } = usePageTitle()
     const { translate } = useTranslate()
 

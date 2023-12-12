@@ -1,13 +1,17 @@
 import { lazy } from 'react'
 const LoginPage = lazy(() => import('../../app/auth/pages/login'))
 const RegisterPage = lazy(() => import('../../app/auth/pages/register'))
-const ForgotPasswordPage = lazy(() => import('../../app/auth/pages/forgotPassword'))
+const ForgotPasswordPage = lazy(
+    () => import('../../app/auth/pages/forgotPassword')
+)
 const OtpPage = lazy(() => import('../../app/auth/pages/otp'))
 const LayoutContainer = lazy(() => import('../containers/LayoutContainer'))
 const DashBoardPage = lazy(() => import('../../app/admin/pages/dashboard'))
 const GroupsPage = lazy(() => import('../../app/admin/pages/groups'))
 const SalesBillsPage = lazy(() => import('../../app/admin/pages/salesBills'))
-const BouncedSalesPage = lazy(() => import('../../app/admin/pages/bouncedSales'))
+const BouncedSalesPage = lazy(
+    () => import('../../app/admin/pages/bouncedSales')
+)
 const UnitsPage = lazy(() => import('../../app/admin/pages/units'))
 const ProductsPage = lazy(() => import('../../app/admin/pages/products'))
 const AdditionsPage = lazy(() => import('../../app/admin/pages/additions'))
@@ -15,26 +19,48 @@ const TablesPage = lazy(() => import('../../app/admin/pages/tables'))
 const DeliveryPage = lazy(() => import('../../app/admin/pages/delivary'))
 const CustomersPage = lazy(() => import('../../app/admin/pages/customers'))
 const SuppliersPage = lazy(() => import('../../app/admin/pages/subbliers'))
-const PurchasesBillsPage = lazy(() => import('../../app/admin/pages/purchasesBills'))
-const BouncedPurchasesPage = lazy(() => import('../../app/admin/pages/bouncedPurchases'))
+const PurchasesBillsPage = lazy(
+    () => import('../../app/admin/pages/purchasesBills')
+)
+const BouncedPurchasesPage = lazy(
+    () => import('../../app/admin/pages/bouncedPurchases')
+)
 const ExpensesPage = lazy(() => import('../../app/admin/pages/expenses'))
-const EmployeesPage = lazy(() => import('../../app/admin/pages/employees'))
-const ProfessionsPage = lazy(() => import('../../app/admin/pages/profession'))
-const PaymentsPage = lazy(() => import('../../app/admin/pages/payments'))
+const PaymentsTypesPage = lazy(() => import('../../app/admin/pages/paymentsTypes'))
 const MembersPage = lazy(() => import('../../app/admin/pages/members'))
-const ProductsReportsPage = lazy(() => import('../../app/admin/pages/productsReports'))
-const SalesReportsPage = lazy(() => import('../../app/admin/pages/salesReports'))
-const ClientsStatementsReportsPage = lazy(() => import('../../app/admin/pages/clientsStatments'))
-const ValueAddedReportsPage = lazy(() => import('../../app/admin/pages/valueAddedTaxReports'))
-const TobaccoDutyReportsPage = lazy(() => import('../../app/admin/pages/tobaccoDutyReports'))
-const PurchasesReportsPage = lazy(() => import('../../app/admin/pages/purchasesReports'))
-const SuppliersStatementsReportsPage = lazy(() => import('../../app/admin/pages/suppliersStatments'))
-const ExpensesReportsPage = lazy(() => import('../../app/admin/pages/expensesReports'))
-const PaymentsReportsPage = lazy(() => import('../../app/admin/pages/paymentsReports'))
-const DeliveryReportsPage = lazy(() => import('../../app/admin/pages/deliveryReports'))
-const EmployeesReportsPage = lazy(() => import('../../app/admin/pages/employeesReports'))
+const ProductsReportsPage = lazy(
+    () => import('../../app/admin/pages/productsReports')
+)
+const SalesReportsPage = lazy(
+    () => import('../../app/admin/pages/salesReports')
+)
+const ValueAddedReportsPage = lazy(
+    () => import('../../app/admin/pages/valueAddedTaxReports')
+)
+const TobaccoDutyReportsPage = lazy(
+    () => import('../../app/admin/pages/tobaccoDutyReports')
+)
+const PurchasesReportsPage = lazy(
+    () => import('../../app/admin/pages/purchasesReports')
+)
+const ExpensesReportsPage = lazy(
+    () => import('../../app/admin/pages/expensesReports')
+)
+const PaymentsReportsPage = lazy(
+    () => import('../../app/admin/pages/paymentsReports')
+)
+const DeliveryReportsPage = lazy(
+    () => import('../../app/admin/pages/deliveryReports')
+)
 const SettingsPage = lazy(() => import('../../app/admin/pages/settings'))
-const PosHomeLayoutContainer = lazy(() => import('src/app/pos/containers/PosHomeLayoutContainer'))
+const BranchesPage = lazy(() => import('src/app/admin/pages/branches'))
+const RolesPage = lazy(() => import('src/app/admin/pages/roles'))
+const DiscountsPage = lazy(() => import('src/app/admin/pages/discounts'))
+const ShiftReportsPage = lazy(() => import('src/app/admin/pages/shiftReports'))
+
+const PosHomeLayoutContainer = lazy(
+    () => import('src/app/pos/containers/PosHomeLayoutContainer')
+)
 const PosProductsPage = lazy(() => import('src/app/pos/pages/products'))
 const PosDeliveryPage = lazy(() => import('src/app/pos/pages/delivery'))
 const PosInvoicePage = lazy(() => import('src/app/pos/pages/invoice'))
@@ -61,7 +87,7 @@ interface Routes {
     otp: Route
     layout: Route
     admin: NestedRoutes
-    pos: { 
+    pos: {
         home: NestedRoutes
         settings: FullRoute
     }
@@ -159,26 +185,6 @@ export const routes: Routes = {
             fullPath: '/app/admin/expenses',
             component: ExpensesPage
         },
-        employees: {
-            path: '/admin/employees',
-            fullPath: '/app/admin/employees',
-            component: EmployeesPage
-        },
-        professions: {
-            path: '/admin/professions',
-            fullPath: '/app/admin/professions',
-            component: ProfessionsPage
-        },
-        payments: {
-            path: '/admin/payments',
-            fullPath: '/app/admin/payments',
-            component: PaymentsPage
-        },
-        members: {
-            path: '/admin/members',
-            fullPath: '/app/admin/members',
-            component: MembersPage
-        },
         productsReports: {
             path: '/admin/products-reports',
             fullPath: '/app/admin/products-reports',
@@ -188,11 +194,6 @@ export const routes: Routes = {
             path: '/admin/sales-reports',
             fullPath: '/app/admin/sales-reports',
             component: SalesReportsPage
-        },
-        clientStatementsReports: {
-            path: '/admin/clients-statements-reports',
-            fullPath: '/app/admin/clients-statements-reports',
-            component: ClientsStatementsReportsPage
         },
         valueAddedReports: {
             path: '/admin/value-added-reports',
@@ -209,11 +210,6 @@ export const routes: Routes = {
             fullPath: '/app/admin/purchases-reports',
             component: PurchasesReportsPage
         },
-        suppliersStatementsReports: {
-            path: '/admin/suppliers-statements-reports',
-            fullPath: '/app/admin/suppliers-statements-reports',
-            component: SuppliersStatementsReportsPage
-        },
         expensesReports: {
             path: '/admin/expenses-reports',
             fullPath: '/app/admin/expenses-reports',
@@ -229,10 +225,35 @@ export const routes: Routes = {
             fullPath: '/app/admin/delivery-reports',
             component: DeliveryReportsPage
         },
-        employeesReports: {
-            path: '/admin/employees-reports',
-            fullPath: '/app/admin/employees-reports',
-            component: EmployeesReportsPage
+        shiftReports: {
+            path: '/admin/shift-reports',
+            fullPath: '/app/admin/shift-reports',
+            component: ShiftReportsPage
+        },
+        members: {
+            path: '/admin/members',
+            fullPath: '/app/admin/members',
+            component: MembersPage
+        },
+        roles: {
+            path: '/admin/roles',
+            fullPath: '/app/admin/roles',
+            component: RolesPage
+        },
+        branches: {
+            path: '/admin/branches',
+            fullPath: '/app/admin/branches',
+            component: BranchesPage
+        },
+        discounts: {
+            path: '/admin/discounts',
+            fullPath: '/app/admin/discounts',
+            component: DiscountsPage
+        },
+        paymentsTypes: {
+            path: '/admin/payments-types',
+            fullPath: '/app/admin/payments-types',
+            component: PaymentsTypesPage
         },
         settings: {
             path: '/admin/settings',
@@ -242,7 +263,7 @@ export const routes: Routes = {
     },
     pos: {
         home: {
-            homeLayout :{
+            homeLayout: {
                 path: '/pos/home/*',
                 fullPath: '/app/pos/home/*',
                 component: PosHomeLayoutContainer
@@ -266,12 +287,31 @@ export const routes: Routes = {
                 path: '/invoice',
                 fullPath: '/app/pos/home/invoice',
                 component: PosInvoicePage
-            },
+            }
         },
         settings: {
             path: '/pos/settings',
             fullPath: '/app/pos/settings',
             component: PosSettingsPage
-        },
+        }
     }
 }
+
+
+// clientStatementsReports: {
+//     path: '/admin/clients-statements-reports',
+//     fullPath: '/app/admin/clients-statements-reports',
+//     component: ClientsStatementsReportsPage
+// },
+
+// suppliersStatementsReports: {
+//     path: '/admin/suppliers-statements-reports',
+//     fullPath: '/app/admin/suppliers-statements-reports',
+//     component: SuppliersStatementsReportsPage
+// },
+
+// employeesReports: {
+//     path: '/admin/employees-reports',
+//     fullPath: '/app/admin/employees-reports',
+//     component: EmployeesReportsPage
+// },

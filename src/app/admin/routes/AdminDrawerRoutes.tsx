@@ -24,15 +24,15 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Products',
+    name: 'Menu',
     submenu: [
-      {
-        path: routes.admin.groups.fullPath,
-        name: 'groups',
-      },
       {
         path: routes.admin.units.fullPath,
         name: 'units',
+      },
+      {
+        path: routes.admin.groups.fullPath,
+        name: 'groups',
       },
       {
         path: routes.admin.products.fullPath,
@@ -40,14 +40,22 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
       },
       {
         path: routes.admin.additions.fullPath,
+        name: 'additions-group',
+      },
+      {
+        path: routes.admin.additions.fullPath,
         name: 'additions',
+      },
+      {
+        path: routes.admin.additions.fullPath,
+        name: 'compo-offers',
       },
     ]
   },
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Requests',
+    name: 'Services',
     submenu: [
       {
         path: routes.admin.tables.fullPath,
@@ -113,28 +121,6 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'personnel',
-    submenu: [
-      {
-        path: routes.admin.employees.fullPath,
-        // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
-        name: 'employees',
-      },
-      {
-        path: routes.admin.professions.fullPath,
-        // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
-        name: 'professions',
-      },
-    ]
-  },
-  {
-    path: routes.admin.payments.fullPath,
-    name: 'payments',
-    // icon: <Squares2X2Icon className={iconClasses} />,
-  },
-  {
-    path: '',
-    // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
     name: 'reports',
     submenu: [
       {
@@ -147,11 +133,11 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
         name: 'sales-reports',
       },
-      {
-        path: routes.admin.clientStatementsReports.fullPath,
-        // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
-        name: 'clients-statements-reports',
-      },
+      // {
+      //   path: routes.admin.clientStatementsReports.fullPath,
+      //   // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
+      //   name: 'clients-statements-reports',
+      // },
       {
         path: routes.admin.valueAddedReports.fullPath,
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
@@ -167,11 +153,11 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
         name: 'purchases-reports',
       },
-      {
-        path: routes.admin.suppliersStatementsReports.fullPath,
-        // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
-        name: 'suppliers-statements-reports',
-      },
+      // {
+      //   path: routes.admin.suppliersStatementsReports.fullPath,
+      //   // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
+      //   name: 'suppliers-statements-reports',
+      // },
       {
         path: routes.admin.expensesReports.fullPath,
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
@@ -188,15 +174,37 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
         name: 'delivery-reports',
       },
       {
-        path: routes.admin.employeesReports.fullPath,
+        path: routes.admin.shiftReports.fullPath,
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
-        name: 'employees-reports',
+        name: 'shift-reports',
       },
     ]
   },
   {
-    path: routes.admin.members.fullPath,
-    name: 'members',
-    // icon: <Squares2X2Icon className={iconClasses} />,
-  },
+    path: '',
+    // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
+    name: 'management',
+    submenu: [
+      {
+        name: 'members',
+        path: routes.admin.members.fullPath,
+      },
+      {
+        name: 'roles',
+        path: routes.admin.roles.fullPath,
+      },
+      {
+        name: 'branches',
+        path: routes.admin.branches.fullPath,
+      },
+      {
+        name: 'discounts',
+        path: routes.admin.discounts.fullPath,
+      },
+      {
+        name: 'payments-types',
+        path: routes.admin.paymentsTypes.fullPath,
+      },
+    ]
+  }
 ];

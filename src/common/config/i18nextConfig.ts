@@ -11,6 +11,7 @@ const I18nextHandler = () => i18next
         supportedLngs: ['en', 'ar'],
         fallbackLng: 'en',
         debug: false,
+        preload: ['en', 'ar'],
         detection: {
             order: ['path', 'cookie', 'htmlTag'],
             caches: ['cookie'],

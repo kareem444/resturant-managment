@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TitleCardComponent from '../../../common/components/TitleCardComponent'
-import SearchComponent from '../../../common/components/SearchComponent'
+import FilterComponent from '../../../common/components/FilterComponent'
 import {
     ITableContent,
     TableComponent
@@ -16,7 +16,7 @@ interface IAdminDetailsPageContainerProps {
 
 export const AdminDetailsPageContainer: React.FC<
     IAdminDetailsPageContainerProps
-    > = ({ tableContent, className }) => {
+> = ({ tableContent, className }) => {
     const [searchedItems, setSearchedItems] = useState(tableContent.items)
     const { title } = usePageTitle()
     const { translate } = useTranslate()
@@ -26,13 +26,20 @@ export const AdminDetailsPageContainer: React.FC<
             title={`${title} ${translate(TRANSLATE.DETAILS)}`}
             topMargin={'mt-2 h-5/6 overflow-y-hidden flex-1' + ' ' + className}
             TopSideButtons={
-                <SearchComponent
-                    filter={{ items: tableContent.header, showFilterBadge: true }}
-                    update={{
-                        items: tableContent.items,
-                        onUpdateState: setSearchedItems
-                    }}
-                />
+                !!tableContent.filter && (
+                    <FilterComponent
+                        filter={{
+                            items: tableContent.filter,
+                            showFilterBadge: true,
+                            defaultFilterItem: tableContent.defaultFilterItem,
+                            showFilterDropButton: tableContent.showFilterDropDown
+                        }}
+                        update={{
+                            items: tableContent.items,
+                            onUpdateState: setSearchedItems
+                        }}
+                    />
+                )
             }
         >
             <TableComponent {...tableContent} items={searchedItems} />

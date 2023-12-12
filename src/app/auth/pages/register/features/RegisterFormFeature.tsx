@@ -28,7 +28,7 @@ export default function RegisterFormFeature() {
 
     const InputProperty = {
         name: 'name',
-        rules: {
+        regularRules: {
             required: {
                 value: true,
                 message: translate(TRANSLATE.THIS_FIELD_IS_REQUIRED)

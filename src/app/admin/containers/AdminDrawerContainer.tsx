@@ -5,10 +5,13 @@ import SideBarSubMenuContainer from '../../../common/containers/SideBarSubMenuCo
 import { useTranslate } from '../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../common/constants/TranslateConstants'
 import { IMAGE_SRC } from '../../../common/constants/SrcConstants'
+import { useState } from 'react'
 
 function LeftSidebarContainer() {
     const location = useLocation()
     const { translate } = useTranslate()
+
+    const [expandedMenuIndex, setExpandedMenuIndex] = useState(-1)
 
     const close = () => {
         document.getElementById('left-sidebar-drawer')?.click()
@@ -34,29 +37,38 @@ function LeftSidebarContainer() {
                     {translate(TRANSLATE.APP_NAME)}
                 </a>
             </li>
-            {AdminDrawerRoutes.map((route, k) => {
+            {AdminDrawerRoutes.map((route, index) => {
                 return (
-                    <li key={k}>
-                        {
-                            route.submenu ?
-                                <SideBarSubMenuContainer {...route} /> :
-                                <NavLink
-                                    end
-                                    to={route.path}
-                                    className={({ isActive }) =>
-                                        `${isActive ? 'font-semibold  bg-base-200 ' : ' font-normal'
-                                        }` + ' active:bg-base-300 active:dark:text-white active:text-accent-content'
-                                    }
-                                >
-                                    {route.icon} {translate(route.name)}
-                                    {location.pathname === route.path ? (
-                                        <span
-                                            className='absolute inset-y-0 left-0 w-1 rounded-tr-md rounded-br-md bg-primary '
-                                            aria-hidden='true'
-                                        ></span>
-                                    ) : null}
-                                </NavLink>
-                        }
+                    <li key={index}>
+                        {route.submenu ? (
+                            <SideBarSubMenuContainer
+                                {...route}
+                                isMenuExpanded={expandedMenuIndex === index}
+                                index={index}
+                                setExpandedMenuIndex={setExpandedMenuIndex}
+                                onClick={() => {
+                                    setExpandedMenuIndex(expandedMenuIndex === index ? -1 : index)
+                                }}
+                            />
+                        ) : (
+                            <NavLink
+                                end
+                                to={route.path}
+                                className={({ isActive }) =>
+                                    `${isActive ? 'font-semibold  bg-base-200 ' : ' font-normal'
+                                    }` +
+                                    ' active:bg-base-300 active:dark:text-white active:text-accent-content'
+                                }
+                            >
+                                {route.icon} {translate(route.name)}
+                                {location.pathname === route.path ? (
+                                    <span
+                                        className='absolute inset-y-0 left-0 w-1 rounded-tr-md rounded-br-md bg-primary '
+                                        aria-hidden='true'
+                                    ></span>
+                                ) : null}
+                            </NavLink>
+                        )}
                     </li>
                 )
             })}

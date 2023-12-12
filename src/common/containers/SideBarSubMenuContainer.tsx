@@ -1,13 +1,27 @@
 import PlusIcon from '@heroicons/react/24/outline/PlusIcon'
 import MinusIcon from '@heroicons/react/24/outline/MinusIcon'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { SideBarRoute } from '../../app/admin/routes/AdminDrawerRoutes'
 import { useTranslate } from '../hooks/useTranslate'
 
-const SideBarSubMenuContainer: FC<SideBarRoute> = ({ submenu, name, icon }) => {
+interface SideBarSubMenuContainerProps extends SideBarRoute {
+    isMenuExpanded?: boolean
+    setExpandedMenuIndex?: (index: number) => void
+    index?: number
+    onClick?: () => void
+}
+
+const SideBarSubMenuContainer: FC<SideBarSubMenuContainerProps> = ({
+    submenu,
+    name,
+    icon,
+    isMenuExpanded = false,
+    index = 0,
+    setExpandedMenuIndex,
+    onClick
+}) => {
     const location = useLocation()
-    const [isExpanded, setIsExpanded] = useState(false)
     const { translate } = useTranslate()
 
     /** Open Submenu list if path found in routes, this is for directly loading submenu routes  first time */
@@ -16,34 +30,40 @@ const SideBarSubMenuContainer: FC<SideBarRoute> = ({ submenu, name, icon }) => {
             submenu?.filter(m => {
                 return m.path === location.pathname
             })[0]
-        )
-            setIsExpanded(true)
+        ) {
+            setExpandedMenuIndex && setExpandedMenuIndex(index)
+        }
     }, [])
 
     return (
         <div className='flex-col active:bg-base-100 hover:bg-base-200 active:dark:text-white active:text-accent-content'>
             {/** Route header */}
-            <div className='w-full' onClick={() => setIsExpanded(!isExpanded)} >
+            <div
+                className='w-full'
+                onClick={() => {
+                    onClick && onClick()
+                }}
+            >
                 {icon} {translate(name)}
-                {isExpanded ? (
+                {isMenuExpanded ? (
                     <MinusIcon
                         className={
                             'w-5 h-5 mt-1 float-right delay-400 duration-500 transition-all  ' +
-                            (isExpanded ? 'rotate-180' : '')
+                            (isMenuExpanded ? 'rotate-180' : '')
                         }
                     />
                 ) : (
                     <PlusIcon
                         className={
                             'w-5 h-5 mt-1 float-right delay-400 duration-500 transition-all  ' +
-                            (isExpanded ? 'rotate-180' : '')
+                            (isMenuExpanded ? 'rotate-180' : '')
                         }
                     />
                 )}
             </div>
 
             {/** Submenu list */}
-            <div className={` w-full ` + (isExpanded ? '' : 'hidden')}>
+            <div className={` w-full ` + (isMenuExpanded ? '' : 'hidden')}>
                 <ul className={`menu-compact`}>
                     {submenu?.map((m, k) => {
                         return (

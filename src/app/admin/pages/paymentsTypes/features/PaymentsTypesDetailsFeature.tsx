@@ -22,7 +22,7 @@ const tableContent: ITableContent = {
     }
 }
 
-export default function EmployeesDetailsFeature() {
+export default function PaymentsTypesDetailsFeature() {
 
     return (
         <AdminDetailsPageContainer tableContent={tableContent} />

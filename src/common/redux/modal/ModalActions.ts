@@ -1,4 +1,5 @@
 import { IModalState } from './ModalInterface'
+import { ModalInitialState } from './ModalState'
 
 export const openModal = (
     state: IModalState,
@@ -7,22 +8,15 @@ export const openModal = (
         type: string
     }
 ) => {
-    const { title, Element, size , className} = action.payload
+    const { title, modalComponent, size, className, closeButton, xButton, buttons } = action.payload
     state.isOpen = true
-    state.Element = Element
-    state.title = title
+    state.modalComponent = modalComponent
+    state.title = title || undefined
     state.size = size || 'md'
-    state.className = className
-    state.closeButtonClassName = action.payload.closeButtonClassName
-    state.titleClassName = action.payload.titleClassName
+    state.className = className || ''
+    state.closeButton = closeButton || { showCloseButton: false }
+    state.xButton = xButton || { showXButton: true }
+    state.buttons = buttons || undefined
 }
 
-export const closeModal = (state: IModalState) => {
-    state.isOpen = false
-    state.Element = null
-    state.title = ''
-    state.size = 'md'
-    state.className = ''
-    state.closeButtonClassName = ''
-    state.titleClassName = ''
-}
+export const closeModal = (state: IModalState) => ModalInitialState
