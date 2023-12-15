@@ -1,10 +1,4 @@
-import {
-    ChangeEvent,
-    FC,
-    useEffect,
-    useRef,
-    useState
-} from 'react'
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { ControllerRenderProps } from 'react-hook-form'
 
 export interface DropDownSearchComponentProps {
@@ -80,13 +74,13 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     const [result, setResult] = useState<IDropDownSearchItemProperties>()
     const [showMenu, setShowMenu] = useState(false)
 
-    let timer: ReturnType<typeof setTimeout> | undefined = undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined = undefined
 
     const inputRef = useRef<HTMLInputElement>(null)
 
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (timer) {
-            clearTimeout(timer);
+            clearTimeout(timer)
         }
 
         if (result) {
@@ -99,7 +93,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
                 item.text.toLowerCase().includes(e.target.value.toLowerCase())
             )
             setSearchedItems(searchResult)
-        }, 500);
+        }, 500)
     }
 
     const handleOnChoose = (item: IDropDownSearchItemProperties) => {
@@ -130,8 +124,15 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
             <div className='relative'>
                 {showIcon && (
                     <i
-                        className={`fi ${handelICon()} w-4 h-4 absolute top-1/2 transform -translate-y-1/2 text-gray-600 ${icon.position
-                            }-4 ${icon.className}`}
+                        className={
+                            `fi w-4 h-4 absolute top-1/2 transform -translate-y-1/2 text-gray-600` +
+                            ` ${icon.className} ` +
+                            `${handelICon()}`
+                        }
+                        style={{
+                            right: icon.position === 'right' ? '1rem' : undefined,
+                            left: icon.position === 'left' ? '1rem' : undefined
+                        }}
                     />
                 )}
                 <input
