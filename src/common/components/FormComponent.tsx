@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { InputTextComponentProps } from './InputTextComponent'
+import { InputComponentProps } from './InputComponent'
 import AdminButtonComponent, {
     AdminButtonContainerProps
 } from 'src/app/admin/components/AdminButtonContainer'
@@ -12,7 +12,7 @@ export interface IDefaultValuesProperties {
 
 interface IFormComponentProperties {
     defaultValues?: IDefaultValuesProperties
-    inputs: InputTextComponentProps[][]
+    inputs: InputComponentProps[][]
     onSubmit?: SubmitHandler<IDefaultValuesProperties>
     button?: AdminButtonContainerProps
 }

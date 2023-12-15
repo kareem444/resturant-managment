@@ -1,4 +1,4 @@
-import InputTextComponent from '../../../../../common/components/InputTextComponent'
+import InputComponent from '../../../../../common/components/InputComponent'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthContainer from '../../../containers/AuthContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -46,7 +46,7 @@ export default function ForgotPasswordFormFeature() {
             }}
         >
             <p className='my-8 font-semibold text-center'>{translate(TRANSLATE.WE_WILL_SEND_OTP)}</p>
-            <InputTextComponent
+            <InputComponent
                 type='number'
                 containerStyle='mt-4 mb-8'
                 labelTitle={translate(TRANSLATE.MOBILE)}

@@ -4,19 +4,23 @@ import { ControllerRenderProps } from 'react-hook-form'
 interface UploadImageComponentProps {
     field?: ControllerRenderProps<any, string>
     className?: string
+    onFileChange?: (file: File | null) => void
 }
 
 const UploadImageComponent: FC<UploadImageComponentProps> = ({
     field,
-    className
+    className,
+    onFileChange
 }) => {
     const [file, setFile] = useState<File | null>(null)
-
 
     const handelOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFile(e.target.files ? e.target.files[0] : null)
         if (field) {
             field?.onChange(e.target.files ? e.target.files[0] : null)
+        }
+        if (onFileChange) {
+            onFileChange(e.target.files ? e.target.files[0] : null)
         }
     }
 

@@ -1,4 +1,4 @@
-import InputTextComponent from '../../../../../common/components/InputTextComponent'
+import InputComponent from '../../../../../common/components/InputComponent'
 import AuthContainer from '../../../containers/AuthContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
@@ -49,14 +49,14 @@ export default function RegisterFormFeature() {
                 link: { path: routes.login.path, text: translate(TRANSLATE.LOGIN) }
             }}
         >
-            <InputTextComponent
+            <InputComponent
                 type='text'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.NAME)}
                 validatedInput={InputProperty}
             />
 
-            <InputTextComponent
+            <InputComponent
                 type='number'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.MOBILE)}
@@ -66,7 +66,7 @@ export default function RegisterFormFeature() {
                 }}
             />
 
-            <InputTextComponent
+            <InputComponent
                 type='password'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.PASSWORD)}

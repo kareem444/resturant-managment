@@ -1,4 +1,4 @@
-import InputTextComponent from '../../../../../common/components/InputTextComponent'
+import InputComponent from '../../../../../common/components/InputComponent'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthContainer from '../../../containers/AuthContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -48,14 +48,14 @@ export default function LoginFormFeature() {
                 link: { path: routes.register.path, text: translate(TRANSLATE.REGISTER) }
             }}
         >
-            <InputTextComponent
+            <InputComponent
                 type='number'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.MOBILE)}
                 validatedInput={InputProperty}
             />
 
-            <InputTextComponent
+            <InputComponent
                 type='password'
                 containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.PASSWORD)}

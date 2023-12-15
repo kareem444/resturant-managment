@@ -1,12 +1,12 @@
 import { IDefaultValuesProperties } from 'src/common/components/FormComponent'
-import { InputTextComponentProps } from 'src/common/components/InputTextComponent'
+import { InputComponentProps } from 'src/common/components/InputComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
 
 /* #region add unit form items Structure */
 const inputsItems = (
     translate: (text: string | string[], option?: translateOptions) => string
-): InputTextComponentProps[][] => {
+): InputComponentProps[][] => {
     return [
         [
             {
@@ -32,13 +32,70 @@ const inputsItems = (
                     }
                 },
                 labelStyle: 'ml-auto'
+            }
+        ],
+        [
+            {
+                labelTitle: 'Dummy Label 1',
+                type: 'dropdownSearch',
+                labelStyle: 'mt-8',
+                validatedInput: {
+                    name: 'doropdown1',
+                    rules: {
+                        isRequired: true,
+                        isArabic: true
+                    }
+                },
+                dropDownSearchInput: {
+                    data: [
+                        { id: 1, name: 'Dummy 1' },
+                        { id: 2, name: 'Dummy 2' },
+                        { id: 3, name: 'Dummy 3' },
+                        { id: 4, name: 'Dummy 4' }
+                    ],
+                    selectors: {
+                        value: 'id',
+                        text: 'name'
+                    },
+                    input: {
+                        placeholder: 'Dummy Placeholder'
+                    }
+                },
+                placeholder: 'Dummy Placeholder'
             },
+            {
+                labelTitle: 'Dummy Label 1',
+                labelStyle: 'mt-8',
+                type: 'dropdownSearch',
+                validatedInput: {
+                    name: 'doropdown1',
+                    rules: {
+                        isRequired: true,
+                        isArabic: true
+                    }
+                },
+                dropDownSearchInput: {
+                    data: [
+                        { id: 1, name: 'Dummy 1' },
+                        { id: 2, name: 'Dummy 2' },
+                        { id: 3, name: 'Dummy 3' },
+                        { id: 4, name: 'Dummy 4' }
+                    ],
+                    selectors: {
+                        value: 'id',
+                        text: 'name'
+                    },
+                    input: {
+                        placeholder: 'Dummy Placeholder'
+                    }
+                },
+                placeholder: 'Dummy Placeholder'
+            }
         ],
         [
             {
                 labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                labelStyle: "mt-10",
-
+                labelStyle: 'mt-10',
                 validatedInput: {
                     name: 'nameEn',
                     rules: {
@@ -50,19 +107,18 @@ const inputsItems = (
             {
                 type: 'file',
                 containerStyle: 'mt-5 flex justify-center',
-                labelTitle: "Image",
+                labelTitle: 'Image',
                 labelStyle: 'm-auto',
                 validatedInput: {
                     name: 'image',
                     rules: {
-                        isRequired: true,
+                        isRequired: true
                     }
-                },
+                }
             },
             {
                 labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                labelStyle: "mt-10",
-
+                labelStyle: 'mt-10',
                 validatedInput: {
                     name: 'nameEn',
                     rules: {
@@ -70,12 +126,12 @@ const inputsItems = (
                         isEnglish: true
                     }
                 }
-            },
+            }
         ],
         [
             {
                 labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                labelStyle: "mt-6",
+                labelStyle: 'mt-6',
                 validatedInput: {
                     name: 'nameEn',
                     rules: {
@@ -97,8 +153,8 @@ const inputsItems = (
                     }
                 },
                 labelStyle: 'ml-auto mt-6'
-            },
-        ],
+            }
+        ]
     ]
 }
 
@@ -108,11 +164,13 @@ export const AdminAddProductFeatureFormStructure = () => {
     return {
         inputs: inputsItems(translate),
         button: { text: translate(TRANSLATE.ADD), icon: 'fi-rr-plus' },
-        onSubmit: (data: IDefaultValuesProperties) => { console.log(data); },
+        onSubmit: (data: IDefaultValuesProperties) => {
+            console.log(data)
+        },
         defaultValues: {
             nameEn: '',
             nameAr: '',
-            image: '',
+            image: ''
         }
     }
 }
@@ -126,7 +184,7 @@ export const AdminEditProductModalFormStructure = () => {
         onSubmit: (data: IDefaultValuesProperties) => { },
         defaultValues: {
             nameEn: 'Dummy Name',
-            nameAr: 'اسم وهمي',
+            nameAr: 'اسم وهمي'
         }
     }
 }

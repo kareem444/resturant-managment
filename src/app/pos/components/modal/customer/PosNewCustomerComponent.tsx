@@ -1,4 +1,4 @@
-import InputTextComponent from 'src/common/components/InputTextComponent'
+import InputComponent from 'src/common/components/InputComponent'
 
 interface Props {
     searchedMobileNumber: string
@@ -9,19 +9,19 @@ const PosNewCustomerComponent: React.FC<Props> = ({ searchedMobileNumber }) => {
         <>
             <div className='divider my-0 mb-4'></div>
             <div className='grid sm:grid-cols-2 gap-4 mb-3'>
-                <InputTextComponent labelTitle='Name' labelStyle='text-lg' />
-                <InputTextComponent
+                <InputComponent labelTitle='Name' labelStyle='text-lg' />
+                <InputComponent
                     labelTitle='Mobile'
                     labelStyle='text-lg'
                     type='number'
                     defaultValue={searchedMobileNumber}
                 />
-                <InputTextComponent
+                <InputComponent
                     labelTitle='Tax Number'
                     labelStyle='text-lg'
                     type='number'
                 />
-                <InputTextComponent labelTitle='Address' labelStyle='text-lg' />
+                <InputComponent labelTitle='Address' labelStyle='text-lg' />
             </div>
             <div
                 className='btn btn-info text-white bg-cyan-500 w-full mt-4'

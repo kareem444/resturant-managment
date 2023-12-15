@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import InputTextComponent, { InputTextComponentProps } from './InputTextComponent'
+import InputComponent, { InputComponentProps } from './InputComponent'
 
 interface MultipleInputTextsComponentProps {
-    inputs: InputTextComponentProps[]
+    inputs: InputComponentProps[]
     containerClassName?: string
 }
 
@@ -15,7 +15,7 @@ const MultipleInputTextsComponent: FC<
                 inputs.map((input, index) => {
                     return (
                         <div className='flex-1' key={index}>
-                            <InputTextComponent {...input} />
+                            <InputComponent {...input} />
                         </div>
                     )
                 }

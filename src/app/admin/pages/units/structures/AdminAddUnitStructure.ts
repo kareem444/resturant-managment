@@ -1,12 +1,12 @@
 import { IDefaultValuesProperties } from 'src/common/components/FormComponent'
-import { InputTextComponentProps } from 'src/common/components/InputTextComponent'
+import { InputComponentProps } from 'src/common/components/InputComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
 
 /* #region add unit form items Structure */
 const inputsItems = (
     translate: (text: string | string[], option?: translateOptions) => string
-): InputTextComponentProps[][] => {
+): InputComponentProps[][] => {
     return [
         [
             {
@@ -33,7 +33,7 @@ const inputsItems = (
                 },
                 labelStyle: 'ml-auto'
             },
-        ],
+        ]
     ]
 }
 
@@ -47,7 +47,6 @@ export const AdminAddUnitFeatureFormStructure = () => {
         defaultValues: {
             nameEn: '',
             nameAr: '',
-            image: '',
         }
     }
 }
