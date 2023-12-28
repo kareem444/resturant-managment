@@ -40,10 +40,6 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
       },
       {
         path: routes.admin.additions.fullPath,
-        name: 'additions-group',
-      },
-      {
-        path: routes.admin.additions.fullPath,
         name: 'additions',
       },
       {
@@ -110,6 +106,11 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
         path: routes.admin.bouncedPurchases.fullPath,
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
         name: 'bounced-purchases',
+      },
+      {
+        path: routes.admin.expensesDestination.fullPath,
+        // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
+        name: 'expenses-destinations',
       },
       {
         path: routes.admin.expenses.fullPath,
@@ -202,8 +203,12 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
         path: routes.admin.discounts.fullPath,
       },
       {
-        name: 'payments-types',
-        path: routes.admin.paymentsTypes.fullPath,
+        name: 'taxes',
+        path: routes.admin.taxes.fullPath,
+      },
+      {
+        name: 'payments-methods',
+        path: routes.admin.paymentsMethods.fullPath,
       },
     ]
   }

@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+
 const LoginPage = lazy(() => import('../../app/auth/pages/login'))
 const RegisterPage = lazy(() => import('../../app/auth/pages/register'))
 const ForgotPasswordPage = lazy(
@@ -26,7 +27,8 @@ const BouncedPurchasesPage = lazy(
     () => import('../../app/admin/pages/bouncedPurchases')
 )
 const ExpensesPage = lazy(() => import('../../app/admin/pages/expenses'))
-const PaymentsTypesPage = lazy(() => import('../../app/admin/pages/paymentsTypes'))
+const ExpensesDestinationPage = lazy(() => import('../../app/admin/pages/expensesDestination'))
+const PaymentsMethodsPage = lazy(() => import('../../app/admin/pages/paymentsMethods'))
 const MembersPage = lazy(() => import('../../app/admin/pages/members'))
 const ProductsReportsPage = lazy(
     () => import('../../app/admin/pages/productsReports')
@@ -56,6 +58,7 @@ const SettingsPage = lazy(() => import('../../app/admin/pages/settings'))
 const BranchesPage = lazy(() => import('src/app/admin/pages/branches'))
 const RolesPage = lazy(() => import('src/app/admin/pages/roles'))
 const DiscountsPage = lazy(() => import('src/app/admin/pages/discounts'))
+const TaxesPage = lazy(() => import('src/app/admin/pages/taxes'))
 const ShiftReportsPage = lazy(() => import('src/app/admin/pages/shiftReports'))
 
 const PosHomeLayoutContainer = lazy(
@@ -180,6 +183,11 @@ export const routes: Routes = {
             fullPath: '/app/admin/bounced-purchases',
             component: BouncedPurchasesPage
         },
+        expensesDestination: {
+            path: '/admin/expenses-destinations',
+            fullPath: '/app/admin/expenses-destinations',
+            component: ExpensesDestinationPage
+        },
         expenses: {
             path: '/admin/expenses',
             fullPath: '/app/admin/expenses',
@@ -250,10 +258,15 @@ export const routes: Routes = {
             fullPath: '/app/admin/discounts',
             component: DiscountsPage
         },
-        paymentsTypes: {
-            path: '/admin/payments-types',
-            fullPath: '/app/admin/payments-types',
-            component: PaymentsTypesPage
+        taxes: {
+            path: '/admin/taxes',
+            fullPath: '/app/admin/taxes',
+            component: TaxesPage
+        },
+        paymentsMethods: {
+            path: '/admin/payments-methods',
+            fullPath: '/app/admin/payments-methods',
+            component: PaymentsMethodsPage
         },
         settings: {
             path: '/admin/settings',

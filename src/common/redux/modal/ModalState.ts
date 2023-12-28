@@ -4,7 +4,7 @@ export const ModalInitialState: IModalState = {
     isOpen: false,
     modalComponent: undefined,
     title: undefined,
-    size: "md",
+    size: "3xl",
     className: "",
     xButton: {
         showXButton: true,

@@ -17,7 +17,7 @@ const ScrollToTopComponent: FC<Props> = ({ children }) => {
     }, [pathname])
 
     return (
-        <main className="flex-1 overflow-y-auto pt-8 px-6  bg-base-200" ref={mainContentRef}>
+        <main className="flex-1 overflow-y-scroll no-scrollbar flex flex-col py-6 px-6 bg-base-200" ref={mainContentRef}>
             {children}
         </main>
     )

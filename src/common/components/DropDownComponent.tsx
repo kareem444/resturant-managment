@@ -6,7 +6,7 @@ export interface DropDownComponentItemProps {
 }
 
 interface DropDownComponentProps {
-    placeHolder: string
+    placeHolder?: string
     containerClassName?: string
     inputClassName?: string
     listClassName?: string

@@ -12,11 +12,10 @@ function AdminPageContainer() {
                 type='checkbox'
                 className='drawer-toggle'
             />
-            <div className='drawer-content flex flex-col '>
+            <div className='drawer-content flex flex-col'>
                 <AdminHeaderContainer />
                 <ScrollToTopComponent>
                     <SetRoutesContainer routes={routes.admin} />
-                    <div className='h-16'></div>
                 </ScrollToTopComponent>
             </div>
             <div className='drawer-side'>

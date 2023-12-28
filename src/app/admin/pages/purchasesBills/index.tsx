@@ -4,8 +4,8 @@ import PurchasesBillsDetailsFeature from "./features/PurchasesBillssDetailsFeatu
 function PurchasesBillsPage() {
     return (
         <>
-            <AddPurchasesBillFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
+            {/* <AddPurchasesBillFeature /> */}
+            {/* <div className='divider my-2 w-1/4 collapse-open mx-auto'></div> */}
             <PurchasesBillsDetailsFeature />
         </>
     )

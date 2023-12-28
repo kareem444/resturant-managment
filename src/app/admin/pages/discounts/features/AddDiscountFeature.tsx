@@ -1,27 +1,73 @@
+import FormComponent from 'src/common/components/FormComponent'
 import CollapseComponent from '../../../../../common/components/CollapseComponent'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import usePageTitle from '../../../../../common/hooks/usePageTitle'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
+import AdminItemsBoxComponent from 'src/app/admin/components/AdminItemsBoxComponent'
+import { useState } from 'react'
+import { AdminAddDiscountFeatureFormStructure } from '../structures/AdminAddDiscountStructure'
+import { IDropDownSearchItemProperties } from 'src/common/components/DropDownSearchComponent'
 
-export default function AddDiscountFeature() {
+const AddDiscountFeature = () => {
     const { titleWithoutLetterS } = usePageTitle()
     const { translate } = useTranslate()
 
+    const [showProductList, setShowProductList] = useState(false)
+    const [showCustomerList, setShowCustomerList] = useState(false)
+
+    const [selectedProducts, setSelectedProducts] = useState<
+        IDropDownSearchItemProperties[]
+    >([])
+    const [selectedCustomers, setSelectedCustomers] = useState<
+        IDropDownSearchItemProperties[]
+    >([])
+
     return (
-        <CollapseComponent title={`${translate(TRANSLATE.ADD)} ${titleWithoutLetterS}`}>
-            <div className='hero py-5 bg-base-200'>
-                <div className='hero-content text-center'>
-                    <div className='max-w-md'>
-                        <h1 className='text-5xl font-bold'>Hello there</h1>
-                        <p className='py-6'>
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-                            excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-                            et a id nisi.
-                        </p>
-                        <button className='btn btn-primary'>Get Started</button>
+        <CollapseComponent
+            title={`${translate(TRANSLATE.ADD)} ${titleWithoutLetterS}`}
+        >
+            <div className='flex gap-10'>
+                <FormComponent
+                    {...AdminAddDiscountFeatureFormStructure(
+                        setShowProductList,
+                        setShowCustomerList,
+                        setSelectedProducts,
+                        setSelectedCustomers
+                    )}
+                />
+                {(showProductList || showCustomerList) && (
+                    <div className='w-1/4 flex flex-col gap-5'>
+                        {showProductList && (
+                            <AdminItemsBoxComponent
+                                title='Products'
+                                items={selectedProducts}
+                                selector={(item: IDropDownSearchItemProperties) => item.text}
+                                onDeleteAll={() => setSelectedProducts([])}
+                                onDeleteItem={(item: IDropDownSearchItemProperties) =>
+                                    setSelectedProducts(prev =>
+                                        prev.filter(prevItem => prevItem.value !== item.value)
+                                    )
+                                }
+                            />
+                        )}
+                        {showCustomerList && (
+                            <AdminItemsBoxComponent
+                                title='Customers'
+                                items={selectedCustomers}
+                                selector={(item: IDropDownSearchItemProperties) => item.text}
+                                onDeleteAll={() => setSelectedCustomers([])}
+                                onDeleteItem={(item: IDropDownSearchItemProperties) =>
+                                    setSelectedCustomers(prev =>
+                                        prev.filter(prevItem => prevItem.value !== item.value)
+                                    )
+                                }
+                            />
+                        )}
                     </div>
-                </div>
+                )}
             </div>
         </CollapseComponent>
     )
 }
+
+export default AddDiscountFeature

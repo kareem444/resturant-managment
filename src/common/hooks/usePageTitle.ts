@@ -10,14 +10,9 @@ export default function usePageTitle() {
     const titleWithoutLetterS: string | null = path
         ? translate(path.slice(0, -1))
         : null;
-    // let title: string | null = null
-    // for (const key in routes.admin) {
-    //     // @ts-ignore
-    //     const pathInRoutes = routes.admin[key].path?.split('/').pop()
-    //     if (path === pathInRoutes) {
-    //         const pureTitle = path?.split('-').join(' ')
-    //         title = `${pureTitle?.charAt(0).toUpperCase()}${pureTitle?.slice(1)}`
-    //     }
-    // }
-    return { title, titleWithoutLetterS };
+    const titleWithoutLetterES: string | null = path
+        ? translate(path.slice(0, -2))
+        : null;
+
+    return { title, titleWithoutLetterS, titleWithoutLetterES };
 }

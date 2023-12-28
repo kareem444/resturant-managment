@@ -1,27 +1,26 @@
+import FormComponent from 'src/common/components/FormComponent'
 import CollapseComponent from '../../../../../common/components/CollapseComponent'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import usePageTitle from '../../../../../common/hooks/usePageTitle'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
+import AdminRolesComponents from '../components/AdminRolesComponents'
+import { AdminAddRoleFeatureFormStructure } from '../structures/AdminAddRolesStructure'
+import { useState } from 'react'
 
 export default function AddRoleFeature() {
     const { titleWithoutLetterS } = usePageTitle()
     const { translate } = useTranslate()
 
+    const [isAdminRole, setIsAdminRole] = useState<boolean>(true)
+
     return (
-        <CollapseComponent title={`${translate(TRANSLATE.ADD)} ${titleWithoutLetterS}`}>
-            <div className='hero py-5 bg-base-200'>
-                <div className='hero-content text-center'>
-                    <div className='max-w-md'>
-                        <h1 className='text-5xl font-bold'>Hello there</h1>
-                        <p className='py-6'>
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-                            excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-                            et a id nisi.
-                        </p>
-                        <button className='btn btn-primary'>Get Started</button>
-                    </div>
-                </div>
-            </div>
+        <CollapseComponent
+            title={`${translate(TRANSLATE.ADD)} ${titleWithoutLetterS}`}
+        >
+            <FormComponent
+                {...AdminAddRoleFeatureFormStructure(setIsAdminRole)}
+                child={<AdminRolesComponents isAdminRole={isAdminRole} />}
+            />
         </CollapseComponent>
     )
 }

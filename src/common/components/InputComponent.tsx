@@ -8,8 +8,12 @@ import {
 import CustomValidationHelper, {
     IInputCustomRulesProperties
 } from '../helper/customValidationHelper'
-import UploadImageComponent from './UploadImageComponent'
-import DropDownSearchComponent, { DropDownSearchComponentProps } from './DropDownSearchComponent'
+import UploadFileComponent, {
+    UploadFileComponentProps
+} from './UploadImageComponent'
+import DropDownSearchComponent, {
+    DropDownSearchComponentProps
+} from './DropDownSearchComponent'
 
 export interface InputComponentProps {
     type?: HTMLInputTypeAttribute | 'dropdown' | 'dropdownSearch'
@@ -19,6 +23,7 @@ export interface InputComponentProps {
     labelStyle?: string
     defaultValue?: string
     className?: string
+    uploadFileInput?: UploadFileComponentProps
     dropDownSearchInput?: DropDownSearchComponentProps
     validatedInput?: {
         name: string
@@ -44,11 +49,19 @@ const InputComponent: FC<InputComponentProps> = ({
     validatedInput,
     defaultValue = '',
     className,
-    dropDownSearchInput
+    dropDownSearchInput,
+    uploadFileInput
 }) => {
     const initInput = (field?: ControllerRenderProps<any, string>) => {
         if (type == 'file')
-            return <UploadImageComponent field={field} className={className} />
+            return (
+                <UploadFileComponent
+                    iconClassName={uploadFileInput?.iconClassName}
+                    field={field}
+                    className={className}
+                />
+            )
+
         if (type == 'dropdownSearch')
             return (
                 <DropDownSearchComponent
@@ -69,44 +82,50 @@ const InputComponent: FC<InputComponentProps> = ({
     }
 
     return (
-        <div className={`form-control w-full ${containerStyle}`}>
-            {!!labelTitle && (
-                <label className='label'>
-                    <span className={'label-text text-base-content ' + labelStyle}>
-                        {labelTitle}
-                    </span>
-                </label>
-            )}
-            {!!validatedInput ? (
-                <>
-                    <Controller
-                        name={validatedInput.name}
-                        control={validatedInput.control}
-                        rules={
-                            CustomValidationHelper(validatedInput?.rules) ??
-                            validatedInput.regularRules
-                        }
-                        defaultValue={defaultValue}
-                        render={({ field }) => initInput(field)}
-                    />
-                    {validatedInput.error[validatedInput.name] && (
-                        <label className={'label'}>
-                            <span
-                                className={
-                                    'm-auto text-sm text-error' +
-                                    ' ' +
-                                    validatedInput.errorClassName
-                                }
-                            >
-                                {validatedInput.error[validatedInput.name].message}
-                            </span>
-                        </label>
-                    )}
-                </>
-            ) : (
-                initInput()
-            )}
-        </div>
+        <>
+            {
+                type !== 'hidden' && (
+                    <div className={`form-control w-full ${containerStyle}`}>
+                        {!!labelTitle && (
+                            <label className='label'>
+                                <span className={'label-text text-base-content ' + labelStyle}>
+                                    {labelTitle}
+                                </span>
+                            </label>
+                        )}
+                        {!!validatedInput ? (
+                            <>
+                                <Controller
+                                    name={validatedInput.name}
+                                    control={validatedInput.control}
+                                    rules={
+                                        CustomValidationHelper(validatedInput?.rules) ??
+                                        validatedInput.regularRules
+                                    }
+                                    defaultValue={defaultValue}
+                                    render={({ field }) => initInput(field)}
+                                />
+                                {validatedInput.error[validatedInput.name] && (
+                                    <label className={'label'}>
+                                        <span
+                                            className={
+                                                'm-auto text-sm text-error' +
+                                                ' ' +
+                                                validatedInput.errorClassName
+                                            }
+                                        >
+                                            {validatedInput.error[validatedInput.name].message}
+                                        </span>
+                                    </label>
+                                )}
+                            </>
+                        ) : (
+                            initInput()
+                        )}
+                    </div>
+                )
+            }
+        </>
     )
 }
 

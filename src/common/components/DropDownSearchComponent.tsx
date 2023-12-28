@@ -20,39 +20,38 @@ export interface DropDownSearchComponentProps {
     }
     showIcon?: boolean
     data?: any[]
+    onSelect?: (item: IDropDownSearchItemProperties) => void
     selectors?: {
         text: string
         value: string
-    }
+    },
+    defaultSelectedValue?: any
 }
 
-interface IDropDownSearchItemProperties {
+export interface IDropDownSearchItemProperties {
     text: string
-    value: string
+    value: any
 }
 
 const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     showIcon = true,
-
     input = {
         placeholder: 'Search...',
         defaultValue: undefined,
         className: ''
     },
-
     icon = {
         name: 'fi-rs-plus',
         iconOnExpanded: 'fi-br-minus',
         position: 'right'
     },
-
     menu = {
         isMenuFloat: true
     },
-
     data,
-
-    selectors
+    onSelect,
+    selectors,
+    defaultSelectedValue
 }) => {
     const [items, setItems] = useState<IDropDownSearchItemProperties[]>()
     const [searchedItems, setSearchedItems] =
@@ -78,14 +77,18 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
 
     const inputRef = useRef<HTMLInputElement>(null)
 
+    const resetButton = () => {
+        setResult(undefined)
+        input.field?.onChange(undefined)
+    }
+
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (timer) {
             clearTimeout(timer)
         }
 
         if (result) {
-            setResult(undefined)
-            input.field?.onChange(undefined)
+            resetButton()
         }
 
         timer = setTimeout(() => {
@@ -96,6 +99,18 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
         }, 500)
     }
 
+    useEffect(() => {
+        if (defaultSelectedValue) {
+            setResult({
+                text: defaultSelectedValue[selectors!.text],
+                value: defaultSelectedValue[selectors!.value]
+            })
+            if (input.field) {
+                input.field.onChange(defaultSelectedValue[selectors!.value])
+            }
+        }
+    }, [defaultSelectedValue])
+
     const handleOnChoose = (item: IDropDownSearchItemProperties) => {
         setResult(item)
         if (inputRef.current) {
@@ -103,6 +118,9 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
         }
         if (input.field) {
             input.field?.onChange(item.value)
+        }
+        if (onSelect) {
+            onSelect(item)
         }
     }
 
@@ -148,8 +166,11 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
             </div>
             {showMenu && (
                 <ul
-                    className={`max-h-32 w-full bg-base-200 shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar ${menu.isMenuFloat && 'absolute'
-                        }`}
+                    className={
+                        `max-h-32 w-full bg-base-200 shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar` +
+                        ` ${menu.isMenuFloat && 'absolute'} ` +
+                        ` ${menu.className} `
+                    }
                 >
                     {searchedItems?.map((item, index) => (
                         <li key={index}>

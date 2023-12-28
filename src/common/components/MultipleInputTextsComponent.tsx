@@ -6,21 +6,19 @@ interface MultipleInputTextsComponentProps {
     containerClassName?: string
 }
 
-const MultipleInputTextsComponent: FC<
-    MultipleInputTextsComponentProps
-> = ({ inputs, containerClassName }) => {
+const MultipleInputTextsComponent: FC<MultipleInputTextsComponentProps> = ({
+    inputs,
+    containerClassName
+}) => {
     return (
         <div className={`flex gap-10 ${containerClassName}`}>
-            {
-                inputs.map((input, index) => {
-                    return (
-                        <div className='flex-1' key={index}>
-                            <InputComponent {...input} />
-                        </div>
-                    )
-                }
+            {inputs.map((input, index) => {
+                return (
+                    <div className='flex-1' key={index}>
+                        <InputComponent {...input} />
+                    </div>
                 )
-            }
+            })}
         </div>
     )
 }

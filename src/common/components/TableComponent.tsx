@@ -12,13 +12,19 @@ export interface ITableContent {
     avatarSelector?: any
     nameSelector?: any
     isDraggable?: boolean
+    maxStringLength?: number
     onDrag?: (item: any) => void
     buttons?: {
         onEdit?: (item: any) => void
         onDelete?: (item: any) => void
         onPrint?: (item: any) => void
         onLock?: (item: any) => void
-    }
+        switch?: {
+            defaultValue?: boolean
+            defaultValueSelector?: (item: any) => boolean
+            onSwitch?: (value: boolean, item: any) => void
+        }
+    },
 }
 
 export const TableComponent: React.FC<ITableContent> = ({
@@ -29,7 +35,8 @@ export const TableComponent: React.FC<ITableContent> = ({
     nameSelector,
     buttons,
     isDraggable = false,
-    onDrag
+    onDrag,
+    maxStringLength = 20,
 }) => {
     const [dragResult, setDragResult] = useState<[any, any]>([null, null])
 
@@ -43,6 +50,17 @@ export const TableComponent: React.FC<ITableContent> = ({
             onDrag && onDrag(dragResult)
         }
     }, [dragResult[0], dragResult[1]])
+
+    const handelButtons = (item: any) => {
+        if (buttons) {
+            if (buttons.switch) {
+                if (buttons.switch.defaultValueSelector) {
+                    buttons.switch.defaultValue = buttons.switch.defaultValueSelector(item)
+                }
+            }
+            return buttons
+        }
+    }
 
     return (
         <div className='overflow-x-auto w-full no-scrollbar overflow-y-scroll h-full'>
@@ -90,12 +108,18 @@ export const TableComponent: React.FC<ITableContent> = ({
                                     </td>
                                 )}
                                 {Object.keys(selectors).map((key, index) => {
+                                    let value = selectors[key](l)
+                                    if (value.length > maxStringLength) {
+                                        value = value.substring(0, maxStringLength) + '...'
+                                    }
                                     // @ts-ignore
-                                    return <td key={index}>{selectors[key](l)}</td>
+                                    return <td key={index}>{value}</td>
                                 })}
                                 {buttons && (
-                                    <td className='flex justify-end'>
-                                        <TableButtonsComponent {...buttons} item={l} />
+                                    <td >
+                                        <div className='flex justify-end'>
+                                            <TableButtonsComponent {...handelButtons(l)} item={l} />
+                                        </div>
                                     </td>
                                 )}
                             </DraggableItemComponent>
@@ -103,6 +127,6 @@ export const TableComponent: React.FC<ITableContent> = ({
                     })}
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }

@@ -6,9 +6,8 @@ interface SwitchButtonComponentProps {
         labelStyle?: string
     }
     containerStyle?: string
-    defaultValue: boolean
-    onSwitch: ({ name, value }: { name: string; value: any }) => void
-    name: string
+    defaultValue?: boolean
+    onSwitch?: (value: boolean) => void
 }
 
 const SwitchButtonComponent: FC<SwitchButtonComponentProps> = ({
@@ -16,29 +15,28 @@ const SwitchButtonComponent: FC<SwitchButtonComponentProps> = ({
     containerStyle,
     defaultValue = false,
     onSwitch,
-    name
 }) => {
     const [value, setValue] = useState(defaultValue)
 
     const updateToggleValue = () => {
         setValue(!value)
-        onSwitch({ name, value: !value })
+        if (onSwitch) {
+            onSwitch(!value)
+        }
     }
 
     return (
-        <div className={`form-control w-full ${containerStyle}`}>
-            <label className='label cursor-pointer'>
-                {label && <span className={'label-text text-base-content ' + label.labelStyle}>
-                    {label.title}
-                </span>}
-                <input
-                    type='checkbox'
-                    className='toggle'
-                    checked={value}
-                    onChange={e => updateToggleValue()}
-                />
-            </label>
-        </div>
+        <label className={`label cursor-pointer` + `  ` + containerStyle}>
+            {label && <span className={'label-text text-base-content ' + label.labelStyle}>
+                {label.title}
+            </span>}
+            <input
+                type='checkbox'
+                className='toggle'
+                checked={value}
+                onChange={e => updateToggleValue()}
+            />
+        </label>
     )
 }
 

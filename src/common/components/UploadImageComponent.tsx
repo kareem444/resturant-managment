@@ -1,16 +1,18 @@
 import { ChangeEvent, FC, useState } from 'react'
 import { ControllerRenderProps } from 'react-hook-form'
 
-interface UploadImageComponentProps {
+export interface UploadFileComponentProps {
     field?: ControllerRenderProps<any, string>
     className?: string
     onFileChange?: (file: File | null) => void
+    iconClassName?: string
 }
 
-const UploadImageComponent: FC<UploadImageComponentProps> = ({
+const UploadFileComponent: FC<UploadFileComponentProps> = ({
     field,
     className,
-    onFileChange
+    onFileChange,
+    iconClassName
 }) => {
     const [file, setFile] = useState<File | null>(null)
 
@@ -46,10 +48,10 @@ const UploadImageComponent: FC<UploadImageComponentProps> = ({
                     className='h-full w-full rounded-xl'
                 />
             ) : (
-                <i className='fi fi-rr-picture m-auto text-4xl dark:text-gray-500' />
+                <i className={'fi fi-rr-picture m-auto text-4xl dark:text-gray-500' + ' ' + iconClassName} />
             )}
         </div>
     )
 }
 
-export default UploadImageComponent
+export default UploadFileComponent

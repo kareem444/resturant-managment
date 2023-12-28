@@ -4,8 +4,8 @@ import BouncedPurchasesDetailsFeature from "./features/BouncedPurchasesDetailsFe
 function BouncedPurchasesPage() {
     return (
         <>
-            <AddBouncedPurchaseFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
+            {/* <AddBouncedPurchaseFeature /> */}
+            {/* <div className='divider my-2 w-1/4 collapse-open mx-auto'></div> */}
             <BouncedPurchasesDetailsFeature />
         </>
     )

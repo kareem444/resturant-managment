@@ -4,6 +4,7 @@ import PencilIcon from '@heroicons/react/24/outline/PencilSquareIcon'
 import TrashIcon from '@heroicons/react/24/outline/TrashIcon'
 import PrinterIcon from '@heroicons/react/24/outline/PrinterIcon'
 import LockOpenIcon from '@heroicons/react/24/outline/LockOpenIcon'
+import SwitchButtonComponent from './SwitchButtonComponent'
 
 interface ITableButtonsComponent {
     item?: any
@@ -11,6 +12,10 @@ interface ITableButtonsComponent {
     onDelete?: (item: any) => void
     onPrint?: (item: any) => void
     onLock?: (item: any) => void
+    switch?: {
+        defaultValue?: boolean
+        onSwitch?: (value: boolean, item: any) => void
+    }
 }
 
 export const TableButtonsComponent: React.FC<ITableButtonsComponent> = ({
@@ -18,7 +23,8 @@ export const TableButtonsComponent: React.FC<ITableButtonsComponent> = ({
     onEdit,
     onDelete,
     onPrint,
-    onLock
+    onLock,
+    switch: { defaultValue, onSwitch } = {},
 }) => {
     return (
         <>
@@ -45,6 +51,15 @@ export const TableButtonsComponent: React.FC<ITableButtonsComponent> = ({
                     <LockOpenIcon className='w-5 h-5' />
                 </button>
             )}
+
+            {
+                onSwitch && (
+                    <SwitchButtonComponent
+                        defaultValue={defaultValue}
+                        onSwitch={(value) => { onSwitch(value, item) }}
+                    />
+                )
+            }
         </>
     )
 }

@@ -12,11 +12,36 @@ export type ModalComponentsKeys = ObjectKeys<typeof modalComponents>
 
 function ModalLayoutContainer() {
     const { state, closeModal } = useModalReducer()
+
+    const handelMaxWidth = (): string => {
+        const sizes = [
+            { name: 'sm', value: '24rem' },
+            { name: 'md', value: '28rem' },
+            { name: 'lg', value: '32rem' },
+            { name: 'xl', value: '36rem' },
+            { name: '2xl', value: '42rem' },
+            { name: '3xl', value: '48rem' },
+            { name: '4xl', value: '56rem' },
+            { name: '5xl', value: '64rem' },
+            { name: '6xl', value: '72rem' },
+            { name: '7xl', value: '80rem' },
+        ]
+        const size = sizes.find((size) => size.name === state.size)
+        return size?.value ?? '32rem'
+    }
+
     return (
         <>
             {/* Put this part before </body> tag */}
             <div className={`modal ${state.isOpen && 'modal-open'}`}>
-                <div className={`modal-box max-w-${state.size} ${state.className}`}>
+                <div
+                    className={
+                        `modal-box no-scrollbar` +
+                        ` ${state.className} `
+                    }
+
+                style={{ maxWidth: handelMaxWidth()}}
+                >
                     {state.xButton?.showXButton && (
                         <button
                             className={
@@ -61,7 +86,9 @@ function ModalLayoutContainer() {
                                         <button
                                             key={index}
                                             className={
-                                                'btn hover:bg-red-700 bg-red-900 border-none text-white flex-1 mt-4' + ' ' + button.className
+                                                'btn hover:bg-red-700 bg-red-900 border-none text-white flex-1 mt-4' +
+                                                ' ' +
+                                                button.className
                                             }
                                             onClick={button.onClick}
                                         >

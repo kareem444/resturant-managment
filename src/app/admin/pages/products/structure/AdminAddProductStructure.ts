@@ -1,4 +1,4 @@
-import { IDefaultValuesProperties } from 'src/common/components/FormComponent'
+import { IDefaultValuesProperties, IFormComponentProperties } from 'src/common/components/FormComponent'
 import { InputComponentProps } from 'src/common/components/InputComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
@@ -6,185 +6,52 @@ import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
 /* #region add unit form items Structure */
 const inputsItems = (
     translate: (text: string | string[], option?: translateOptions) => string
-): InputComponentProps[][] => {
+): InputComponentProps[] => {
     return [
-        [
-            {
-                labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                validatedInput: {
-                    name: 'nameEn',
-                    rules: {
-                        isRequired: true,
-                        isEnglish: true
-                    }
-                }
-            },
-            {
-                labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.AR} )`, {
-                    isArabic: true
-                }),
-                className: 'text-right',
-                validatedInput: {
-                    name: 'nameAr',
-                    rules: {
-                        isRequired: true,
-                        isArabic: true
-                    }
-                },
-                labelStyle: 'ml-auto'
-            }
-        ],
-        [
-            {
-                labelTitle: 'Dummy Label 1',
-                type: 'dropdownSearch',
-                labelStyle: 'mt-8',
-                validatedInput: {
-                    name: 'doropdown1',
-                    rules: {
-                        isRequired: true,
-                        isArabic: true
-                    }
-                },
-                dropDownSearchInput: {
-                    data: [
-                        { id: 1, name: 'Dummy 1' },
-                        { id: 2, name: 'Dummy 2' },
-                        { id: 3, name: 'Dummy 3' },
-                        { id: 4, name: 'Dummy 4' }
-                    ],
-                    selectors: {
-                        value: 'id',
-                        text: 'name'
-                    },
-                    input: {
-                        placeholder: 'Dummy Placeholder'
-                    }
-                },
-                placeholder: 'Dummy Placeholder'
-            },
-            {
-                labelTitle: 'Dummy Label 1',
-                labelStyle: 'mt-8',
-                type: 'dropdownSearch',
-                validatedInput: {
-                    name: 'doropdown1',
-                    rules: {
-                        isRequired: true,
-                        isArabic: true
-                    }
-                },
-                dropDownSearchInput: {
-                    data: [
-                        { id: 1, name: 'Dummy 1' },
-                        { id: 2, name: 'Dummy 2' },
-                        { id: 3, name: 'Dummy 3' },
-                        { id: 4, name: 'Dummy 4' }
-                    ],
-                    selectors: {
-                        value: 'id',
-                        text: 'name'
-                    },
-                    input: {
-                        placeholder: 'Dummy Placeholder'
-                    }
-                },
-                placeholder: 'Dummy Placeholder'
-            }
-        ],
-        [
-            {
-                labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                labelStyle: 'mt-10',
-                validatedInput: {
-                    name: 'nameEn',
-                    rules: {
-                        isRequired: true,
-                        isEnglish: true
-                    }
-                }
-            },
-            {
-                type: 'file',
-                containerStyle: 'mt-5 flex justify-center',
-                labelTitle: 'Image',
-                labelStyle: 'm-auto',
-                validatedInput: {
-                    name: 'image',
-                    rules: {
-                        isRequired: true
-                    }
-                }
-            },
-            {
-                labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                labelStyle: 'mt-10',
-                validatedInput: {
-                    name: 'nameEn',
-                    rules: {
-                        isRequired: true,
-                        isEnglish: true
-                    }
-                }
-            }
-        ],
-        [
-            {
-                labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-                labelStyle: 'mt-6',
-                validatedInput: {
-                    name: 'nameEn',
-                    rules: {
-                        isRequired: true,
-                        isEnglish: true
-                    }
-                }
-            },
-            {
-                labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.AR} )`, {
-                    isArabic: true
-                }),
-                className: 'text-right',
-                validatedInput: {
-                    name: 'nameAr',
-                    rules: {
-                        isRequired: true,
-                        isArabic: true
-                    }
-                },
-                labelStyle: 'ml-auto mt-6'
-            }
-        ]
+        
     ]
 }
 
-export const AdminAddProductFeatureFormStructure = () => {
-    const { translate } = useTranslate()
-
+const handelFormProperties = (
+    translate: (text: string | string[], option?: translateOptions) => string,
+    isEdit?: boolean
+): IFormComponentProperties => {
     return {
         inputs: inputsItems(translate),
-        button: { text: translate(TRANSLATE.ADD), icon: 'fi-rr-plus' },
+        button: {
+            text: translate(isEdit ? TRANSLATE.ADD : TRANSLATE.EDIT),
+            icon: isEdit ? 'fi-rr-pencil' : 'fi-rr-plus'
+        },
+        containerClassName: '!grid-cols-4',
+        childClassnames: 'sm:!col-span-2',
         onSubmit: (data: IDefaultValuesProperties) => {
             console.log(data)
         },
         defaultValues: {
             nameEn: '',
             nameAr: '',
+            price: '',
             image: ''
         }
     }
 }
 
-export const AdminEditProductModalFormStructure = () => {
+export const AdminAddProductFeatureFormStructure = (): IFormComponentProperties => {
+    const { translate } = useTranslate()
+    return handelFormProperties(translate)
+}
+
+export const AdminEditProductModalFormStructure = (): IFormComponentProperties => {
     const { translate } = useTranslate()
 
     return {
-        inputs: inputsItems(translate),
-        button: { text: translate(TRANSLATE.EDIT), icon: 'fi-rr-pencil' },
+        ...handelFormProperties(translate, true),
         onSubmit: (data: IDefaultValuesProperties) => { },
         defaultValues: {
             nameEn: 'Dummy Name',
-            nameAr: 'اسم وهمي'
+            nameAr: 'اسم وهمي',
+            price: '100',
+            image: ''
         }
     }
 }

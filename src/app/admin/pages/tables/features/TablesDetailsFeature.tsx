@@ -2,27 +2,55 @@ import { RECENT_TRANSACTIONS } from '../../../../../unUsed/utils/dummyData'
 import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
 import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
-
-const tableContent: ITableContent = {
-    header: ['Name', 'Email', 'Location', 'Amount', 'Date'],
-    items: RECENT_TRANSACTIONS,
-    selectors: {
-        Email: (item: any) => item['email'],
-        Location: (item: any) => item['location'],
-        Amount: (item: any) => `$${item['amount']}`,
-        Date: (item: any) => moment(item['date']).format('D MMM'),
-    },
-    avatarSelector: (item: any) => item['avatar'],
-    nameSelector: (item: any) => item['name'],
-    buttons: {
-        onEdit: (item: any) => { },
-        onDelete: (item: any) => { },
-        onPrint: (item: any) => { },
-        onLock: (item: any) => { },
-    }
-}
+import useModalReducer from 'src/common/redux/modal/useModalReducer'
 
 export default function TablesDetailsFeature() {
+    const { openModel } = useModalReducer()
+
+    const openEditUnitModal = () => {
+        openModel({
+            modalComponent: 'adminEditTableModal',
+            size: '3xl',
+            title: {
+                text: 'Edit Group'
+            },
+        })
+    }
+
+    const openDeleteUnitModal = () => {
+        openModel({
+            modalComponent: 'adminDeleteTableModal',
+            size: 'sm',
+            title: {
+                text: 'Delete Group'
+            },
+            closeButton: {
+                showCloseButton: true
+            },
+            buttons: [
+                {
+                    text: 'Delete',
+                }
+            ]
+        })
+    }
+
+    const tableContent: ITableContent = {
+        header: ['Name', 'Number', 'Branch', 'Date'],
+        filter: ['Name', 'Number', 'Branch'],
+        defaultFilterItem: 'Name',
+        items: RECENT_TRANSACTIONS,
+        selectors: {
+            Number: (item: any) =>  item['amount'] ,
+            Branch: (item: any) =>  item['location'] ,
+            Date: (item: any) => moment(item['date']).format('D-MM-YYYY hh:mm:ss A'),
+        },
+        nameSelector: (item: any) => item['name'],
+        buttons: {
+            onEdit: (item: any) => openEditUnitModal(),
+            onDelete: (item: any) => openDeleteUnitModal()
+        }
+    }
 
     return (
         <AdminDetailsPageContainer tableContent={tableContent} />

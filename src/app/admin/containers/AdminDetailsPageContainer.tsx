@@ -24,7 +24,7 @@ export const AdminDetailsPageContainer: React.FC<
     return (
         <TitleCardComponent
             title={`${title} ${translate(TRANSLATE.DETAILS)}`}
-            topMargin={'mt-2 h-5/6 overflow-y-hidden flex-1' + ' ' + className}
+            topMargin={'h-full overflow-y-hidden flex-1' + ' ' + className}
             TopSideButtons={
                 !!tableContent.filter && (
                     <FilterComponent
