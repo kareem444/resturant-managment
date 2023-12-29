@@ -1,5 +1,5 @@
 import SwipingHorizontalEffectComponent from 'src/common/components/SwipingHorizontalEffectComponent'
-import { RECENT_TRANSACTIONS } from 'src/unUsed/utils/dummyData'
+import { RECENT_TRANSACTIONS } from 'src/common/utils/dummyData'
 
 const PosProductsFeature = () => {
     return (

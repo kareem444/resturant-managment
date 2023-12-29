@@ -2,7 +2,7 @@ import { ITableContent } from 'src/common/components/TableComponent';
 import moment from 'moment';
 import { AdminDetailsPageContainer } from 'src/app/admin/containers/AdminDetailsPageContainer';
 import PosInvoiceHeaderFeature from './features/PosInvoiceHeaderFeature';
-import { DUMMY_INVOICE_DATA } from '../../../../unUsed/utils/dummyData';
+import { DUMMY_INVOICE_DATA } from '../../../../common/utils/dummyData';
 
 const tableContent: ITableContent = {
     header: ['Id', 'Type', 'Price', 'Date'],

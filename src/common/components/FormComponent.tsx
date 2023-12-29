@@ -12,6 +12,7 @@ export interface IDefaultValuesProperties {
 export interface IFormComponentProperties {
     defaultValues?: IDefaultValuesProperties
     containerClassName?: string
+    formClassName?: string
     childClassnames?: string
     inputs: InputComponentProps[]
     onSubmit?: SubmitHandler<IDefaultValuesProperties>
@@ -24,8 +25,9 @@ const FormComponent: FC<IFormComponentProperties> = ({
     inputs,
     onSubmit,
     button,
-    containerClassName,
+    containerClassName = '',
     childClassnames,
+    formClassName = '',
     child
 }) => {
     const {
@@ -39,7 +41,7 @@ const FormComponent: FC<IFormComponentProperties> = ({
     const onFormSubmit: SubmitHandler<IDefaultValuesProperties> = data => onSubmit && onSubmit(data)
 
     return (
-        <form onSubmit={handleSubmit(onFormSubmit)} className='flex-1'>
+        <form onSubmit={handleSubmit(onFormSubmit)} className={'flex-1' + ' ' + formClassName}>
             <div
                 className={
                     'grid grid-cols-1 grid-rows-1 sm:grid-cols-12 gap-5 grid-flow-row' + ' ' + containerClassName

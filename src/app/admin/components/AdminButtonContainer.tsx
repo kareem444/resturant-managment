@@ -2,7 +2,8 @@ import { FC } from 'react'
 
 export interface AdminButtonContainerProps {
     buttonClassName?: string
-    text: string
+    containerClassName?: string
+    text?: string
     icon?: string
     onClick?: () => void
     type?: 'button' | 'submit' | 'reset'
@@ -10,13 +11,14 @@ export interface AdminButtonContainerProps {
 
 const AdminButtonComponent: FC<AdminButtonContainerProps> = ({
     buttonClassName,
+    containerClassName,
     text,
     icon,
     onClick,
     type = 'button'
 }) => {
     return (
-        <div className='flex justify-center'>
+        <div className={`flex justify-center ${containerClassName}`}>
             <button
                 type={type}
                 className={`btn btn-info text-white bg-cyan-500 w-1/3 mt-5 flex ${!!icon && 'justify-between'

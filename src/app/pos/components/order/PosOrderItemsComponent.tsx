@@ -1,5 +1,5 @@
 import PosOrderItemComponent from 'src/app/pos/components/order/PosOrderItemComponent'
-import { RECENT_TRANSACTIONS } from 'src/unUsed/utils/dummyData'
+import { RECENT_TRANSACTIONS } from 'src/common/utils/dummyData'
 import {
     LeadingActions,
     SwipeableList,

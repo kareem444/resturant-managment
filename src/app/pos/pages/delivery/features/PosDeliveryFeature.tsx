@@ -1,5 +1,5 @@
 import { BRANDS_SRC } from 'src/common/constants/SrcConstants'
-import { RECENT_TRANSACTIONS } from 'src/unUsed/utils/dummyData'
+import { RECENT_TRANSACTIONS } from 'src/common/utils/dummyData'
 
 const PosDeliveryFeature = () => {
     return (

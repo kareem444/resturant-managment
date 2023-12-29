@@ -1,4 +1,4 @@
-import { RECENT_TRANSACTIONS } from '../../../../../unUsed/utils/dummyData'
+import { RECENT_TRANSACTIONS } from '../../../../../common/utils/dummyData'
 import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
 import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
