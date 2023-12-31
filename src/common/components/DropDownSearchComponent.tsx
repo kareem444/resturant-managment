@@ -19,6 +19,7 @@ export interface DropDownSearchComponentProps {
         className?: string
     }
     showIcon?: boolean
+    clearAfterSelect?: boolean
     data?: any[]
     onSelect?: (item: IDropDownSearchItemProperties) => void
     selectors?: {
@@ -51,7 +52,8 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     data,
     onSelect,
     selectors,
-    defaultSelectedValue
+    defaultSelectedValue,
+    clearAfterSelect = false
 }) => {
     const [items, setItems] = useState<IDropDownSearchItemProperties[]>()
     const [searchedItems, setSearchedItems] =
@@ -121,6 +123,13 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
         }
         if (onSelect) {
             onSelect(item)
+        }
+        if (clearAfterSelect) {
+            resetButton()
+            if (inputRef.current) {
+                inputRef.current.value = ''
+            }
+            console.log("kareem");
         }
     }
 

@@ -6,6 +6,7 @@ export interface AdminButtonContainerProps {
     text?: string
     icon?: string
     onClick?: () => void
+    disabled?: boolean
     type?: 'button' | 'submit' | 'reset'
 }
 
@@ -15,11 +16,13 @@ const AdminButtonComponent: FC<AdminButtonContainerProps> = ({
     text,
     icon,
     onClick,
-    type = 'button'
+    type = 'button',
+    disabled = false
 }) => {
     return (
         <div className={`flex justify-center ${containerClassName}`}>
             <button
+                disabled={disabled}
                 type={type}
                 className={`btn btn-info text-white bg-cyan-500 w-1/3 mt-5 flex ${!!icon && 'justify-between'
                     } ${buttonClassName}`}

@@ -41,12 +41,23 @@ const inputsItems = (
         },
         {
             labelTitle: translate(`Amount (%)`),
-            containerStyle: '!col-span-12',
+            containerStyle: '',
             type: 'number',
             validatedInput: {
-                name: 'name',
+                name: 'amount',
                 rules: {
                     isRequired: true,
+                    isNumber: true
+                }
+            }
+        },
+        {
+            labelTitle: translate(`Minimum Amount`),
+            containerStyle: '',
+            type: 'number',
+            validatedInput: {
+                name: 'minimumAmount',
+                rules: {
                     isNumber: true
                 }
             }

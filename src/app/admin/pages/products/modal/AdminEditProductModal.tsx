@@ -1,5 +1,5 @@
 import FormComponent from 'src/common/components/FormComponent';
-import { AdminEditProductModalFormStructure } from '../structure/AdminAddProductStructure';
+import { AdminEditProductModalFormStructure } from '../structure/AdminEditProductStructure';
 
 const AdminEditProductModal = () => {
     return (

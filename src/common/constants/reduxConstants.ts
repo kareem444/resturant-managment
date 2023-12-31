@@ -4,5 +4,8 @@ export const REDUX = {
         header: "header",
         rightDrawer: "rightDrawer",
         notification: "notification",
+        admin: {
+            productUi: "admin/productUi",
+        }
     },
 };

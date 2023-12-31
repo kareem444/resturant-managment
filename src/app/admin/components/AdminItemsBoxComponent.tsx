@@ -6,7 +6,7 @@ interface AdminItemsBoxComponentProps {
     selector?: (item: any) => string
     showDeleteAllIcon?: boolean
     onDeleteAll?: () => void
-    onDeleteItem?: (item: any) => void
+    onDeleteItem?: (item: any, index: number) => void
 }
 
 const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
@@ -52,7 +52,7 @@ const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
                                 </span>
                             </span>
                             <i className='fi fi-br-cross-small mt-1 cursor-pointer hover:text-red-500'
-                                onClick={() => !!onDeleteItem && onDeleteItem(item)}
+                                onClick={() => !!onDeleteItem && onDeleteItem(item, index)}
                             ></i>
                         </div>
                         {index !== items.length - 1 && <div className='divider my-0'></div>}
