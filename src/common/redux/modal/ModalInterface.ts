@@ -1,4 +1,4 @@
-import { ModalComponentsKeys } from "src/common/containers/ModalContainer";
+import { ModalComponentsKeys, ModalEventsKeys } from "src/common/containers/ModalContainer";
 
 export interface IModalState {
     isOpen?: boolean;
@@ -18,9 +18,10 @@ export interface IModalState {
         className?: string;
         showCloseButton?: boolean;
     };
-    buttons? : {
+    buttons?: {
         text?: string;
         className?: string;
-        onClick?: () => void;
+        onClick?: ModalEventsKeys | undefined;
     }[];
+    onClose?: ModalEventsKeys | undefined;
 }

@@ -3,18 +3,21 @@ import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
 import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
-
+import useProductUiReducer from '../redux/ui/useProductUiReducer'
 
 export default function ProductsDetailsFeature() {
     const { openModel } = useModalReducer()
+    const { resetProduct } = useProductUiReducer()
 
     const openEditProductModal = () => {
+        resetProduct()
         openModel({
             modalComponent: 'adminEditProductModal',
-            size: '3xl',
+            size: '5xl',
             title: {
                 text: 'Edit Product'
             },
+            onClose: 'onEditProductModalClose',
         })
     }
 
@@ -31,6 +34,7 @@ export default function ProductsDetailsFeature() {
             buttons: [
                 {
                     text: 'Delete',
+                    onClick: 'onDeleteProductModalDelete',
                 }
             ]
         })

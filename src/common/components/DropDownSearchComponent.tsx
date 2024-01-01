@@ -137,7 +137,6 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
             if (inputRef.current) {
                 inputRef.current.value = ''
             }
-            console.log("kareem");
         }
     }
 

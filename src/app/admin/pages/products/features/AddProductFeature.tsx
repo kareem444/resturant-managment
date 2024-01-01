@@ -4,7 +4,7 @@ import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import usePageTitle from '../../../../../common/hooks/usePageTitle'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import { AdminAddProductFeatureFormStructure } from '../structure/AdminAddProductStructure'
-import AdminAddSizeToProductComponent from '../components/AdminAddSizeToProductComponent'
+import AdminAddSizeToProductSlice from '../slices/AdminAddSizeToProductSlice'
 import useProductUiReducer from '../redux/ui/useProductUiReducer'
 import AdminProductSideBordersSlice from '../slices/AdminProductSideBordersSlice'
 
@@ -33,7 +33,7 @@ export default function AddProductFeature() {
                     {...AdminAddProductFeatureFormStructure()}
                     child={
                         isMultiSizeProduct ? (
-                            <AdminAddSizeToProductComponent onSubmit={handelAddProductSize} />
+                            <AdminAddSizeToProductSlice onSubmit={handelAddProductSize} />
                         ) : undefined
                     }
                 />

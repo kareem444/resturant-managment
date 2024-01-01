@@ -3,12 +3,12 @@ import AdminButtonComponent from 'src/app/admin/components/AdminButtonContainer'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { useTranslate } from 'src/common/hooks/useTranslate'
 
-interface AdminAddSizeToProductComponentProps {
+interface AdminAddSizeToProductSliceProps {
     onSubmit?: (val: { size: string, price: string }) => void
 }
 
-const AdminAddSizeToProductComponent: FC<
-    AdminAddSizeToProductComponentProps
+const AdminAddSizeToProductSlice: FC<
+    AdminAddSizeToProductSliceProps
 > = ({ onSubmit }) => {
     const { translate } = useTranslate()
 
@@ -109,4 +109,4 @@ const AdminAddSizeToProductComponent: FC<
     )
 }
 
-export default AdminAddSizeToProductComponent
+export default AdminAddSizeToProductSlice

@@ -11,7 +11,7 @@ export default function ComboOffersDetailsFeature() {
     const openEditComboOfferModal = () => {
         openModel({
             modalComponent: 'adminEditComboOfferModal',
-            size: '3xl',
+            size: '5xl',
             title: {
                 text: 'Edit ComboOffer'
             },

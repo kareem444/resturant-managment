@@ -8,7 +8,7 @@ export const openModal = (
         type: string
     }
 ) => {
-    const { title, modalComponent, size, className, closeButton, xButton, buttons } = action.payload
+    const { title, modalComponent, size, className, closeButton, xButton, buttons, onClose } = action.payload
     state.isOpen = true
     state.modalComponent = modalComponent
     state.title = title || undefined
@@ -17,6 +17,7 @@ export const openModal = (
     state.closeButton = closeButton || { showCloseButton: false }
     state.xButton = xButton || { showXButton: true }
     state.buttons = buttons || undefined
+    state.onClose = onClose || undefined
 }
 
 export const closeModal = (state: IModalState) => ModalInitialState

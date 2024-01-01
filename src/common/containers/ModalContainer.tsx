@@ -1,17 +1,25 @@
 import useModalReducer from '../redux/modal/useModalReducer'
 import { PosModalStructure } from '../../app/pos/structure/PosModalStructure'
-import { AdminModalStructure } from '../../app/admin/structure/AdminModalStructure'
+import { AdminModalComponentsStructure } from '../../app/admin/structure/modal/AdminModalComponentsStructure'
 import { ObjectKeys } from 'react-hook-form/dist/types/path/common'
+import { AdminModalEventsStructure } from 'src/app/admin/structure/modal/AdminModalEventsStructure'
 
 const modalComponents = {
     ...PosModalStructure,
-    ...AdminModalStructure
+    ...AdminModalComponentsStructure
+}
+
+const modalEvents = {
+    ...AdminModalEventsStructure,
 }
 
 export type ModalComponentsKeys = ObjectKeys<typeof modalComponents>
+export type ModalEventsKeys = ObjectKeys<typeof modalEvents>
 
 function ModalLayoutContainer() {
     const { state, closeModal } = useModalReducer()
+
+    const onCloseEvent = modalEvents[state.onClose || 'onEditProductModalClose']()
 
     const handelMaxWidth = (): string => {
         const sizes = [
@@ -24,10 +32,17 @@ function ModalLayoutContainer() {
             { name: '4xl', value: '56rem' },
             { name: '5xl', value: '64rem' },
             { name: '6xl', value: '72rem' },
-            { name: '7xl', value: '80rem' },
+            { name: '7xl', value: '80rem' }
         ]
-        const size = sizes.find((size) => size.name === state.size)
+        const size = sizes.find(size => size.name === state.size)
         return size?.value ?? '32rem'
+    }
+
+    const handelOnClose = () => {
+        closeModal()
+        if (state.onClose) {
+            onCloseEvent?.close()
+        }
     }
 
     return (
@@ -35,12 +50,8 @@ function ModalLayoutContainer() {
             {/* Put this part before </body> tag */}
             <div className={`modal ${state.isOpen && 'modal-open'}`}>
                 <div
-                    className={
-                        `modal-box no-scrollbar` +
-                        ` ${state.className} `
-                    }
-
-                style={{ maxWidth: handelMaxWidth()}}
+                    className={`modal-box no-scrollbar` + ` ${state.className} `}
+                    style={{ maxWidth: handelMaxWidth() }}
                 >
                     {state.xButton?.showXButton && (
                         <button
@@ -49,7 +60,7 @@ function ModalLayoutContainer() {
                                 ' bg-red-500 ' +
                                 state.xButton.className
                             }
-                            onClick={closeModal}
+                            onClick={handelOnClose}
                         >
                             ✕
                         </button>
@@ -76,7 +87,7 @@ function ModalLayoutContainer() {
                                             ' ' +
                                             state.closeButton?.className
                                         }
-                                        onClick={closeModal}
+                                        onClick={handelOnClose}
                                     >
                                         {state.closeButton?.text ?? 'Close'}
                                     </button>
@@ -90,7 +101,11 @@ function ModalLayoutContainer() {
                                                 ' ' +
                                                 button.className
                                             }
-                                            onClick={button.onClick}
+                                            onClick={() => {
+                                                if (button.onClick) {
+                                                    modalEvents[button.onClick]()
+                                                }
+                                            }}
                                         >
                                             {button.text ?? 'Submit'}
                                         </button>

@@ -49,6 +49,12 @@ export default function useProductUiReducer() {
         },
         removeAllProductAdditions: () => {
             dispatch(removeAllProductAdditionsAction())
+        },
+        resetProduct: () => {
+            dispatch(changeProductTypeAction({ productType: 'fixed' }))
+            dispatch(removeAllProductSizeAction())
+            dispatch(removeAllProductTaxesAction())
+            dispatch(removeAllProductAdditionsAction())
         }
     }
 }
