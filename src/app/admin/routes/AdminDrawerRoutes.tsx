@@ -43,8 +43,8 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
         name: 'additions',
       },
       {
-        path: routes.admin.additions.fullPath,
-        name: 'compo-offers',
+        path: routes.admin.comboOffers.fullPath,
+        name: 'combo-offers',
       },
     ]
   },

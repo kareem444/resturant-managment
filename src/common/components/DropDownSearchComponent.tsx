@@ -7,6 +7,7 @@ export interface DropDownSearchComponentProps {
         defaultValue?: string
         className?: string
         field?: ControllerRenderProps<any, string>
+        disabled?: boolean
     }
     icon?: {
         name?: string
@@ -21,12 +22,13 @@ export interface DropDownSearchComponentProps {
     showIcon?: boolean
     clearAfterSelect?: boolean
     data?: any[]
-    onSelect?: (item: IDropDownSearchItemProperties) => void
+    onSelect?: (item: IDropDownSearchItemProperties, itemData?: any) => void
     selectors?: {
         text: string
         value: string
     },
-    defaultSelectedValue?: any
+    defaultSelectedValue?: any,
+    onInputChange?: (val: string) => void
 }
 
 export interface IDropDownSearchItemProperties {
@@ -39,7 +41,8 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     input = {
         placeholder: 'Search...',
         defaultValue: undefined,
-        className: ''
+        className: '',
+        disabled: false
     },
     icon = {
         name: 'fi-rs-plus',
@@ -53,26 +56,26 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     onSelect,
     selectors,
     defaultSelectedValue,
-    clearAfterSelect = false
+    clearAfterSelect = false,
+    onInputChange
 }) => {
     const [items, setItems] = useState<IDropDownSearchItemProperties[]>()
-    const [searchedItems, setSearchedItems] =
-        useState<IDropDownSearchItemProperties[]>()
+    const [searchedItems, setSearchedItems] = useState<IDropDownSearchItemProperties[]>()
 
     useEffect(() => {
         if (data) {
-            const result = data.map(item => {
+            const convertData = data.map(item => {
                 return {
                     text: selectors ? item[selectors.text] : undefined,
                     value: selectors ? item[selectors.value] : undefined
                 }
             })
-            setItems(result)
-            setSearchedItems(result)
+            setItems(convertData)
+            setSearchedItems(convertData)
         }
     }, [data])
 
-    const [result, setResult] = useState<IDropDownSearchItemProperties>()
+    const [selected, setSelected] = useState<IDropDownSearchItemProperties>()
     const [showMenu, setShowMenu] = useState(false)
 
     let timer: ReturnType<typeof setTimeout> | undefined = undefined
@@ -80,7 +83,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     const inputRef = useRef<HTMLInputElement>(null)
 
     const resetButton = () => {
-        setResult(undefined)
+        setSelected(undefined)
         input.field?.onChange(undefined)
     }
 
@@ -89,8 +92,12 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
             clearTimeout(timer)
         }
 
-        if (result) {
+        if (selected) {
             resetButton()
+        }
+
+        if (onInputChange) {
+            onInputChange(e.target.value)
         }
 
         timer = setTimeout(() => {
@@ -103,7 +110,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
 
     useEffect(() => {
         if (defaultSelectedValue) {
-            setResult({
+            setSelected({
                 text: defaultSelectedValue[selectors!.text],
                 value: defaultSelectedValue[selectors!.value]
             })
@@ -114,7 +121,8 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     }, [defaultSelectedValue])
 
     const handleOnChoose = (item: IDropDownSearchItemProperties) => {
-        setResult(item)
+        setSelected(item)
+        const selectedItemData = data?.find(dataItem => dataItem[selectors!.value] === item.value)
         if (inputRef.current) {
             inputRef.current.value = item.text
         }
@@ -122,7 +130,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
             input.field?.onChange(item.value)
         }
         if (onSelect) {
-            onSelect(item)
+            onSelect(item, selectedItemData)
         }
         if (clearAfterSelect) {
             resetButton()
@@ -166,11 +174,12 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
                     ref={inputRef}
                     type='text'
                     placeholder={input.placeholder}
-                    defaultValue={result?.text ?? input.defaultValue ?? undefined}
+                    defaultValue={selected?.text ?? input.defaultValue ?? undefined}
                     className={`input input-bordered w-full ${input.className}`}
                     onFocus={() => setShowMenu(true)}
                     onBlur={handleOnBluer}
                     onChange={handleOnChange}
+                    disabled={input.disabled}
                 />
             </div>
             {showMenu && (

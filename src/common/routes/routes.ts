@@ -15,6 +15,7 @@ const BouncedSalesPage = lazy(
 )
 const UnitsPage = lazy(() => import('../../app/admin/pages/units'))
 const ProductsPage = lazy(() => import('../../app/admin/pages/products'))
+const ComboOffersPage = lazy(() => import('../../app/admin/pages/comboOffers'))
 const AdditionsPage = lazy(() => import('../../app/admin/pages/additions'))
 const TablesPage = lazy(() => import('../../app/admin/pages/tables'))
 const DeliveryPage = lazy(() => import('../../app/admin/pages/delivary'))
@@ -142,6 +143,11 @@ export const routes: Routes = {
             path: '/admin/additions',
             fullPath: '/app/admin/additions',
             component: AdditionsPage
+        },
+        comboOffers: {
+            path: '/admin/combo-offers',
+            fullPath: '/app/admin/combo-offers',
+            component: ComboOffersPage
         },
         tables: {
             path: '/admin/tables',
