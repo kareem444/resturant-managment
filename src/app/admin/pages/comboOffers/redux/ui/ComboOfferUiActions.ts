@@ -1,7 +1,7 @@
 import { IComboOfferProduct } from '../../interfaces/AdminComboOfferInterface'
 import { IComboOfferUiState } from './ComboOfferUiInterface'
 
-export const addComboOfferProduct = (
+export const addComboOfferProductToAdd = (
     state: IComboOfferUiState,
     action: {
         payload: IComboOfferProduct
@@ -9,23 +9,52 @@ export const addComboOfferProduct = (
     }
 ) => {
     const { price, product, size } = action.payload
-    state.products?.push({
+    state.productsToAdd?.push({
         price,
         product,
         size,
     })
 }
 
-export const removeComboOfferProduct = (
+export const removeComboOfferProductToAdd = (
     state: IComboOfferUiState,
     action: {
         payload: number
         type: string
     }
 ) => {
-    state.products?.splice(action.payload, 1)
+    state.productsToAdd?.splice(action.payload, 1)
 }
 
-export const removeComboOfferAllProducts = (state: IComboOfferUiState) => {
-    state.products = []
+export const removeComboOfferAllProductsToAdd = (state: IComboOfferUiState) => {
+    state.productsToAdd = []
+}
+
+export const addComboOfferProductToEdit = (
+    state: IComboOfferUiState,
+    action: {
+        payload: IComboOfferProduct
+        type: string
+    }
+) => {
+    const { price, product, size } = action.payload
+    state.productsToEdit?.push({
+        price,
+        product,
+        size,
+    })
+}
+
+export const removeComboOfferProductToEdit = (
+    state: IComboOfferUiState,
+    action: {
+        payload: number
+        type: string
+    }
+) => {
+    state.productsToEdit?.splice(action.payload, 1)
+}
+
+export const removeComboOfferAllProductsToEdit = (state: IComboOfferUiState) => {
+    state.productsToEdit = []
 }

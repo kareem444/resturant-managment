@@ -8,22 +8,22 @@ import useModalReducer from 'src/common/redux/modal/useModalReducer'
 export default function ComboOffersDetailsFeature() {
     const { openModel } = useModalReducer()
 
-    const openEditUnitModal = () => {
+    const openEditComboOfferModal = () => {
         openModel({
-            modalComponent: 'adminEditProductModal',
+            modalComponent: 'adminEditComboOfferModal',
             size: '3xl',
             title: {
-                text: 'Edit Unit'
+                text: 'Edit ComboOffer'
             },
         })
     }
 
-    const openDeleteUnitModal = () => {
+    const openDeleteComboOfferModal = () => {
         openModel({
-            modalComponent: 'adminDeleteProductModal',
+            modalComponent: 'adminDeleteComboOfferModal',
             size: 'sm',
             title: {
-                text: 'Delete Unit'
+                text: 'Delete ComboOffer'
             },
             closeButton: {
                 showCloseButton: true
@@ -47,8 +47,8 @@ export default function ComboOffersDetailsFeature() {
         },
         nameSelector: (item: any) => item['name'],
         buttons: {
-            onEdit: (item: any) => openEditUnitModal(),
-            onDelete: (item: any) => openDeleteUnitModal()
+            onEdit: (item: any) => openEditComboOfferModal(),
+            onDelete: (item: any) => openDeleteComboOfferModal()
         },
         isDraggable: false,
         onDrag: (item: any) => { }

@@ -8,22 +8,22 @@ import useModalReducer from 'src/common/redux/modal/useModalReducer'
 export default function ProductsDetailsFeature() {
     const { openModel } = useModalReducer()
 
-    const openEditUnitModal = () => {
+    const openEditProductModal = () => {
         openModel({
             modalComponent: 'adminEditProductModal',
             size: '3xl',
             title: {
-                text: 'Edit Unit'
+                text: 'Edit Product'
             },
         })
     }
 
-    const openDeleteUnitModal = () => {
+    const openDeleteProductModal = () => {
         openModel({
             modalComponent: 'adminDeleteProductModal',
             size: 'sm',
             title: {
-                text: 'Delete Unit'
+                text: 'Delete Product'
             },
             closeButton: {
                 showCloseButton: true
@@ -47,8 +47,8 @@ export default function ProductsDetailsFeature() {
         },
         nameSelector: (item: any) => item['name'],
         buttons: {
-            onEdit: (item: any) => openEditUnitModal(),
-            onDelete: (item: any) => openDeleteUnitModal()
+            onEdit: (item: any) => openEditProductModal(),
+            onDelete: (item: any) => openDeleteProductModal()
         },
         isDraggable: false,
         onDrag: (item: any) => { }

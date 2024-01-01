@@ -2,9 +2,12 @@ import { useAppDispatch, useAppSelector } from 'src/common/redux/store'
 import { IComboOfferUiState } from './ComboOfferUiInterface'
 import { comboOfferUiState } from './ComboOfferUiSelectors'
 import {
-    addComboOfferProductAction,
-    removeComboOfferAllProductsAction,
-    removeComboOfferProductAction
+    addComboOfferProductToAddAction,
+    addComboOfferProductToEditAction,
+    removeComboOfferAllProductsToAddAction,
+    removeComboOfferAllProductsToEditAction,
+    removeComboOfferProductToAddAction,
+    removeComboOfferProductToEditAction
 } from './ComboOfferUiSlice'
 import { IComboOfferProduct } from '../../interfaces/AdminComboOfferInterface'
 
@@ -14,14 +17,23 @@ export default function useComboOfferUiReducer() {
 
     return {
         state,
-        addComboOfferProduct: (payload: IComboOfferProduct) => {
-            dispatch(addComboOfferProductAction(payload))
+        addComboOfferProductToAdd: (payload: IComboOfferProduct) => {
+            dispatch(addComboOfferProductToAddAction(payload))
         },
-        removeComboOfferProduct: (payload: number) => {
-            dispatch(removeComboOfferProductAction(payload))
+        removeComboOfferProductToAdd: (payload: number) => {
+            dispatch(removeComboOfferProductToAddAction(payload))
         },
-        removeComboOfferAllProducts: () => {
-            dispatch(removeComboOfferAllProductsAction())
+        removeComboOfferAllProductsToAdd: () => {
+            dispatch(removeComboOfferAllProductsToAddAction())
+        },
+        addComboOfferProductToEdit: (payload: IComboOfferProduct) => {
+            dispatch(addComboOfferProductToEditAction(payload))
+        },
+        removeComboOfferProductToEdit: (payload: number) => {
+            dispatch(removeComboOfferProductToEditAction(payload))
+        },
+        removeComboOfferAllProductsToEdit: () => {
+            dispatch(removeComboOfferAllProductsToEditAction())
         }
     }
 }

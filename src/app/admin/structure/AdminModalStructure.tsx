@@ -14,6 +14,7 @@ import AdminEditMemberModal from '../pages/members/modal/AdminEditMemberModal'
 import AdminEditTaxModal from '../pages/taxes/modal/AdminEditTaxModal'
 import AdminEditBranchModal from '../pages/branches/modal/AdminEditBranchModal'
 import AdminEditDiscountModal from '../pages/discounts/modal/AdminEditDiscountModal'
+import AdminEditComboOfferModal from '../pages/comboOffers/modal/AdminEditComboOfferModal'
 
 export const AdminModalStructure = {
     adminEditUnitModal: <AdminEditUnitModal />,
@@ -27,6 +28,10 @@ export const AdminModalStructure = {
     adminEditProductModal: <AdminEditProductModal />,
     adminDeleteProductModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this product?' />
+    ),
+    adminEditComboOfferModal: <AdminEditComboOfferModal />,
+    adminDeleteComboOfferModal: (
+        <AlertActionModalBodyComponent text='Are you sure you want to delete this combo offer?' />
     ),
     adminEditAdditionModal: <AdminEditAdditionModal />,
     adminDeleteAdditionModal: (

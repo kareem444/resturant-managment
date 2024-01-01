@@ -1,5 +1,6 @@
 import { IComboOfferProduct } from "../../interfaces/AdminComboOfferInterface";
 
 export interface IComboOfferUiState {
-    products?: IComboOfferProduct[];
+    productsToAdd?: IComboOfferProduct[];
+    productsToEdit?: IComboOfferProduct[];
 }
