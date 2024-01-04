@@ -1,3 +1,4 @@
+import { OnEditComboOfferModalCloseEvent } from '../../pages/comboOffers/modal/AdminEditComboOfferModalEvents'
 import {
     OnDeleteProductModalDeleteEvent,
     OnEditProductModalCloseEvent
@@ -5,5 +6,6 @@ import {
 
 export const AdminModalEventsStructure = {
     onEditProductModalClose: OnEditProductModalCloseEvent,
-    onDeleteProductModalDelete: OnDeleteProductModalDeleteEvent
+    onDeleteProductModalDelete: OnDeleteProductModalDeleteEvent,
+    onEditComboOfferModalClose: OnEditComboOfferModalCloseEvent,
 }

@@ -3,18 +3,23 @@ import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
 import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
+import useComboOfferUiReducer from '../redux/ui/useComboOfferUiReducer'
 
 
 export default function ComboOffersDetailsFeature() {
     const { openModel } = useModalReducer()
 
+    const { removeComboOfferAllProductsToEdit } = useComboOfferUiReducer()
+
     const openEditComboOfferModal = () => {
+        removeComboOfferAllProductsToEdit()
         openModel({
             modalComponent: 'adminEditComboOfferModal',
             size: '5xl',
             title: {
                 text: 'Edit ComboOffer'
             },
+            onClose: 'onEditComboOfferModalClose'
         })
     }
 
