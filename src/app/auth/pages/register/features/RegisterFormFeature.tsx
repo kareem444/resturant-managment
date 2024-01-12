@@ -1,5 +1,5 @@
 import InputComponent from '../../../../../common/components/InputComponent'
-import AuthContainer from '../../../containers/AuthContainer'
+import AuthFormContainer from '../../../containers/AuthFormContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
@@ -23,26 +23,22 @@ export default function RegisterFormFeature() {
     })
 
     const onSubmit: SubmitHandler<IRegisterInputs> = data => {
-        navigate(routes.otp.path)
+        // navigate(routes.otp.path)
     }
 
     const InputProperty = {
         name: 'name',
-        regularRules: {
-            required: {
-                value: true,
-                message: translate(TRANSLATE.THIS_FIELD_IS_REQUIRED)
-            }
+        rules: {
+            isRequired: true,
         },
         control: control,
         error: errors
     }
 
     return (
-        <AuthContainer
+        <AuthFormContainer
             onFormSubmit={onSubmit}
             handelSubmit={handleSubmit}
-            title={translate(TRANSLATE.REGISTER)}
             buttonText={translate(TRANSLATE.REGISTER)}
             navigate={{
                 text: translate(TRANSLATE.ALREADY_HAVE_ACCOUNT),
@@ -51,9 +47,22 @@ export default function RegisterFormFeature() {
         >
             <InputComponent
                 type='text'
-                containerStyle='mt-4'
                 labelTitle={translate(TRANSLATE.NAME)}
                 validatedInput={InputProperty}
+            />
+
+            <InputComponent
+                type='email'
+                containerStyle='mt-4'
+                labelTitle={'Email'}
+                validatedInput={{
+                    ...InputProperty,
+                    name: 'email',
+                    rules: {
+                        ...InputProperty.rules,
+                        isEmail: true
+                    }
+                }}
             />
 
             <InputComponent
@@ -62,7 +71,21 @@ export default function RegisterFormFeature() {
                 labelTitle={translate(TRANSLATE.MOBILE)}
                 validatedInput={{
                     ...InputProperty,
-                    name: 'mobile'
+                    name: 'mobile',
+                    rules: {
+                        ...InputProperty.rules,
+                        isMobile: true
+                    }
+                }}
+            />
+
+            <InputComponent
+                type='text'
+                containerStyle='mt-4'
+                labelTitle={'Organization Name'}
+                validatedInput={{
+                    ...InputProperty,
+                    name: 'organizationName',
                 }}
             />
 
@@ -75,6 +98,6 @@ export default function RegisterFormFeature() {
                     name: 'password'
                 }}
             />
-        </AuthContainer>
+        </AuthFormContainer>
     )
 }

@@ -1,6 +1,6 @@
 import InputComponent from '../../../../../common/components/InputComponent'
 import { Link, useNavigate } from 'react-router-dom'
-import AuthContainer from '../../../containers/AuthContainer'
+import AuthFormContainer from '../../../containers/AuthFormContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
@@ -27,27 +27,34 @@ export default function LoginFormFeature() {
 
     const InputProperty = {
         name: 'mobile',
-        regularRules: {
-            required: {
-                value: true,
-                message: translate(TRANSLATE.THIS_FIELD_IS_REQUIRED)
-            }
+        rules: {
+            isRequired: true,
         },
         control: control,
         error: errors
     }
 
     return (
-        <AuthContainer
+        <AuthFormContainer
             onFormSubmit={onSubmit}
             handelSubmit={handleSubmit}
-            title={translate(TRANSLATE.LOGIN)}
             buttonText={translate(TRANSLATE.LOGIN)}
+            inputsContainerClassName='!mb-0'
             navigate={{
                 text: translate(TRANSLATE.DONT_HAVE_ACCOUNT),
                 link: { path: routes.register.path, text: translate(TRANSLATE.REGISTER) }
             }}
         >
+            <InputComponent
+                type='text'
+                containerStyle='mt-4'
+                labelTitle={'Organization Code'}
+                validatedInput={{
+                    ...InputProperty,
+                    name: 'organizationCode'
+                }}
+            />
+
             <InputComponent
                 type='number'
                 containerStyle='mt-4'
@@ -65,13 +72,13 @@ export default function LoginFormFeature() {
                 }}
             />
 
-            <div className='text-right text-primary mt-4'>
+            <div className='text-right mt-4'>
                 <Link to={routes.forgotPassword.path}>
                     <span className='text-sm  inline-block hover:text-primary hover:underline hover:cursor-pointer transition duration-200'>
                         {`${translate(TRANSLATE.FORGOT_PASSWORD)}?`}
                     </span>
                 </Link>
             </div>
-        </AuthContainer>
+        </AuthFormContainer>
     )
 }

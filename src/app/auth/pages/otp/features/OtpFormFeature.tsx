@@ -1,4 +1,4 @@
-import AuthContainer from '../../../containers/AuthContainer'
+import AuthFormContainer from '../../../containers/AuthFormContainer'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import { routes } from '../../../../../common/routes/routes'
@@ -22,9 +22,8 @@ export default function OtpFormFeature() {
     }
 
     return (
-        <AuthContainer
+        <AuthFormContainer
             onFormSubmit={onSubmit}
-            title={translate(TRANSLATE.OTP_VERIFICATION)}
             buttonText={translate(TRANSLATE.VERIFY)}
             navigate={{
                 text: translate(TRANSLATE.DONT_HAVE_ACCOUNT),
@@ -36,6 +35,6 @@ export default function OtpFormFeature() {
                 <p>{translate(TRANSLATE.WE_HAVE_SENT_OTP)} 12454</p>
             </div>
             <OtpComponent numberOfInputs={4} styleClasses='mt-20 mb-8' onChange={(e: string) => setOtp(e)} />
-        </AuthContainer>
+        </AuthFormContainer>
     )
 }
