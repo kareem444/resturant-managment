@@ -72,8 +72,8 @@ const useFetch = <T>({
                 if (options?.echoState === 'none') {
                     setSilentData({ ...defaultServerDataState, data })
                 } else if (options?.echoState === 'data') {
-                    setSilentData({ ...defaultServerDataState })
                     setState({ ...defaultServerDataState, data })
+                    setSilentData({ ...defaultServerDataState })
                 } else {
                     setState({ ...defaultServerDataState, data })
                 }
@@ -100,11 +100,11 @@ const useFetch = <T>({
         }
     }
 
-    if (options?.isExecuteOnInit) {
-        useEffect(() => {
+    useEffect(() => {
+        if (options?.isExecuteOnInit) {
             query()
-        }, [])
-    }
+        }
+    }, [])
 
     return {
         query,

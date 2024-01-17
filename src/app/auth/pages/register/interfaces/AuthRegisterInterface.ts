@@ -1,5 +1,7 @@
 export type IRegisterInputs = {
-    name: string
-    mobile: string
+    name: string,
+    email: string,
+    mobile: string,
+    organizationName: string,
     password: string
 }

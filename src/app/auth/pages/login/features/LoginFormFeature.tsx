@@ -1,28 +1,49 @@
 import InputComponent from '../../../../../common/components/InputComponent'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AuthFormContainer from '../../../containers/AuthFormContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import { routes } from '../../../../../common/routes/routes'
 import { ILoginInputs } from '../interfaces/AuthLoginInterface'
+import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
+import { AuthRepo } from 'src/app/auth/repo/AuthRepo'
+import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent'
 
 export default function LoginFormFeature() {
     const { translate } = useTranslate()
-    const navigate = useNavigate()
     const {
         handleSubmit,
         formState: { errors },
         control
     } = useForm<ILoginInputs>({
         defaultValues: {
+            organizationCode: '',
             mobile: '',
             password: ''
         }
     })
 
+    const { mutate, isLoading } = useMutate({
+        queryFn: (data: ILoginInputs) => AuthRepo.login(data.organizationCode, data.mobile, data.password),
+        options: {
+            onSuccess() {
+                showNotification(
+                    NOTIFICATION_TYPE.SUCCESS,
+                    'Login successfully',
+                )
+            },
+            onError(e) {
+                showNotification(
+                    NOTIFICATION_TYPE.ERROR,
+                    e?.message || 'Something went wrong',
+                )
+            }
+        }
+    })
+
     const onSubmit: SubmitHandler<ILoginInputs> = data => {
-        navigate(routes.admin.dashboard.fullPath)
+        mutate(data)
     }
 
     const InputProperty = {
@@ -39,6 +60,7 @@ export default function LoginFormFeature() {
             onFormSubmit={onSubmit}
             handelSubmit={handleSubmit}
             buttonText={translate(TRANSLATE.LOGIN)}
+            isLoading={isLoading}
             inputsContainerClassName='!mb-0'
             navigate={{
                 text: translate(TRANSLATE.DONT_HAVE_ACCOUNT),

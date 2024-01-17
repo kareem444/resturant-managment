@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import SplashScreenComponent from './common/components/SplashScreenComponent';
 import './common/config'
+import 'react-notifications/lib/notifications.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -23,7 +23,7 @@ const NumpadButtonComponent: FC<NumpadButtonComponentProps> = ({
     return (
         <div className={'col-span-1'}>
             <button
-                className={basicGlassName + ' ' + className}
+                className={basicGlassName + ' btn btn-ghost border-gray-200 ' + className}
                 onClick={handleClick}
             >
                 {text}
@@ -65,7 +65,7 @@ const NumpadComponent: FC<NumpadComponentProps> = ({
     }
 
     return (
-        <div>
+        <>
             {showResult && (
                 <div className='flex justify-end my-2'>
                     <div className={basicGlassName + ' active:bg-white active:text-slate-500 py-2 ' + resultClassName}>
@@ -73,7 +73,7 @@ const NumpadComponent: FC<NumpadComponentProps> = ({
                     </div>
                 </div>
             )}
-            <div className='grid grid-cols-3 gap-2 w-full h-full my-2'>
+            <div className='grid grid-cols-3 gap-2 w-full my-2'>
                 {items.map((number, index) => (
                     <NumpadButtonComponent
                         key={index}
@@ -84,14 +84,14 @@ const NumpadComponent: FC<NumpadComponentProps> = ({
                 ))}
                 <div className='col-span-1'>
                     <button
-                        className={basicGlassName + ' ' + buttonClassName}
+                        className={basicGlassName + ' btn btn-ghost border-gray-200 ' + buttonClassName}
                         onClick={handleDelete}
                     >
                         <i className='fi fi-rr-delete'></i>
                     </button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

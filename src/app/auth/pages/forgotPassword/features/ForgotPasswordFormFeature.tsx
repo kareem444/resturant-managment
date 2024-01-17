@@ -1,15 +1,16 @@
 import InputComponent from '../../../../../common/components/InputComponent'
-import { useNavigate } from 'react-router-dom'
 import AuthFormContainer from '../../../containers/AuthFormContainer'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../../../common/constants/TranslateConstants'
 import { routes } from '../../../../../common/routes/routes'
 import { ILoginInputs } from '../../login/interfaces/AuthLoginInterface'
+import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
+import { AuthRepo } from 'src/app/auth/repo/AuthRepo'
+import { NOTIFICATION_TYPE, showNotification   } from 'src/common/components/ShowNotificationComponent'
 
 export default function ForgotPasswordFormFeature() {
     const { translate } = useTranslate()
-    const navigate = useNavigate()
     const {
         handleSubmit,
         formState: { errors },
@@ -20,8 +21,26 @@ export default function ForgotPasswordFormFeature() {
         }
     })
 
+    const { mutate, isLoading } = useMutate({
+        queryFn: (data: { mobile: string }) => AuthRepo.forgetPassword(data.mobile),
+        options: {
+            onSuccess() {
+                showNotification(
+                    NOTIFICATION_TYPE.SUCCESS,
+                    'Your Request has been sent successfully',
+                )
+            },
+            onError(e) {
+                showNotification(
+                    NOTIFICATION_TYPE.ERROR,
+                    e?.message || 'Something went wrong',
+                )
+            }
+        }
+    })
+
     const onSubmit: SubmitHandler<ILoginInputs> = data => {
-        // navigate(routes.otp.path)
+        mutate(data)
     }
 
     const InputProperty = {
@@ -38,6 +57,7 @@ export default function ForgotPasswordFormFeature() {
             onFormSubmit={onSubmit}
             handelSubmit={handleSubmit}
             buttonText={translate(TRANSLATE.SEND_OTP)}
+            isLoading={isLoading}
             navigate={{
                 text: translate(TRANSLATE.DONT_HAVE_ACCOUNT),
                 link: {

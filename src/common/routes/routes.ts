@@ -2,6 +2,7 @@ import { lazy } from 'react'
 
 const LoginPage = lazy(() => import('../../app/auth/pages/login'))
 const RegisterPage = lazy(() => import('../../app/auth/pages/register'))
+const SignUserPage = lazy(() => import('../../app/auth/pages/signUser'))
 const ForgotPasswordPage = lazy(
     () => import('../../app/auth/pages/forgotPassword')
 )
@@ -88,6 +89,7 @@ interface Routes {
     login: Route
     forgotPassword: Route
     register: Route
+    signUser: Route
     otp: Route
     layout: Route
     admin: NestedRoutes
@@ -109,6 +111,10 @@ export const routes: Routes = {
     register: {
         path: '/register',
         component: RegisterPage
+    },
+    signUser:{
+        path: '/sign-user',
+        component: SignUserPage
     },
     otp: {
         path: '/otp',

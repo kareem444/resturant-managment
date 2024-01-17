@@ -10,6 +10,7 @@ export default function AuthFormContainer(props: {
     handelSubmit?: UseFormHandleSubmit<any, undefined>
     inputsContainerClassName?: string
     buttonText?: string
+    isLoading?: boolean
     navigate: {
         text: string
         link: {
@@ -18,19 +19,19 @@ export default function AuthFormContainer(props: {
         }
     }
 }) {
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
 
     const handelSubmit: SubmitHandler<any> = (e: any) => {
-        setLoading(true)
+        // setLoading(true)
         props.onFormSubmit && props.onFormSubmit(e)
-        setLoading(false)
+        // setLoading(false)
     }
 
     const handelSubmitWithOutValidation = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setLoading(true)
+        // setLoading(true)
         props.onFormSubmit && props.onFormSubmit()
-        setLoading(false)
+        // setLoading(false)
     }
 
     return (
@@ -54,7 +55,7 @@ export default function AuthFormContainer(props: {
                     type='submit'
                     className={
                         'btn mt-4 w-full btn-info text-white hover:bg-cyan-600 bg-cyan-500' +
-                        (loading ? ' loading' : '')
+                        (props.isLoading ? ' loading !bg-cyan-800' : '')
                     }
                 >
                     {props.buttonText ?? 'Submit'}

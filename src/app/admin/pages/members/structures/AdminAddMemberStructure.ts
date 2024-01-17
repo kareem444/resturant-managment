@@ -41,7 +41,7 @@ const inputsItems = (
                 name: 'mobile',
                 rules: {
                     isRequired: true,
-                    isMobile: true
+                    isNumber: true
                 }
             }
         },

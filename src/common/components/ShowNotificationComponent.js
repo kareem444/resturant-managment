@@ -1,25 +1,33 @@
-import { useEffect } from 'react'
-import { NotificationContainer, NotificationManager } from 'react-notifications'
-import useNotificationReducer from '../redux/notification/useNotificationReducer';
+import {
+    NotificationContainer,
+    NotificationManager,
+} from "react-notifications";
+
+export const NOTIFICATION_TYPE = {
+    SUCCESS: "success",
+    ERROR: "error",
+}
+
+export const showNotification = (status, body, dismissAll = true) => {
+    if (dismissAll) {
+        NotificationManager.removeAll();
+    }
+    if (status === NOTIFICATION_TYPE.SUCCESS) {
+        NotificationManager.success(body, status);
+    }
+    if (status === NOTIFICATION_TYPE.ERROR) {
+        NotificationManager.error(body, status);
+    }
+};
 
 const ShowNotificationComponent = ({ children }) => {
-    const { state, removeNotification } = useNotificationReducer()
-    useEffect(() => {
-        if (state.body !== '') {
-            if (state.status === 'success')
-                NotificationManager.success(state.body, state.status)
-            if (state.status === 'error')
-                NotificationManager.error(state.body, state.status)
-            removeNotification()
-        }
-    }, [state.body])
     return (
         <>
             {children}
             {/** Notification layout container */}
             <NotificationContainer />
         </>
-    )
+    );
 };
 
 export default ShowNotificationComponent;

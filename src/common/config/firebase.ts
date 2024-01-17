@@ -2,9 +2,11 @@
 import { initializeApp } from 'firebase/app'
 import {
   CACHE_SIZE_UNLIMITED,
+  getFirestore,
   initializeFirestore,
-  persistentLocalCache
+  persistentLocalCache,
 } from 'firebase/firestore'
+import { getAuth } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,11 +25,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
-export const firestoreDB = initializeFirestore(app, {
-  localCache: persistentLocalCache({ 
-    cacheSizeBytes: CACHE_SIZE_UNLIMITED 
-    // cacheSizeBytes: 40 * 1000000 
-  })
-})
+// export const db = initializeFirestore(app, {
+//   localCache: persistentLocalCache({ 
+//     cacheSizeBytes: CACHE_SIZE_UNLIMITED 
+//     // cacheSizeBytes: 40 * 1000000 
+//   })
+// })
 // Initialize Cloud Firestore and get a reference to the service
-// export const firestoreDB = getFirestore(app)
+export const db = getFirestore(app)
+export const fireAuth = getAuth(app)
