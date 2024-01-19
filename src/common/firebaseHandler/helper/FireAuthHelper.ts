@@ -3,7 +3,9 @@ import {
     signInWithEmailAndPassword,
     signOut
 } from 'firebase/auth'
+import { ILocalUserModel } from 'src/app/auth/models/local/AuthLocalModel'
 import { fireAuth } from 'src/common/config/firebase'
+import { APP_INFO_LOCAL_DB_COLLECTIONS, AppInfoLocalDB } from 'src/common/config/localDBConfig'
 
 export class FireAuthHelper {
     private static checkIfValidEmail = (email: string) => {
@@ -58,7 +60,17 @@ export class FireAuthHelper {
         }
     }
 
-    static getCurrentUser = () => {
-        return fireAuth.currentUser
+    static getCurrentUser = async () => {
+        const storedData = await AppInfoLocalDB.get<ILocalUserModel>(APP_INFO_LOCAL_DB_COLLECTIONS.INFO)
+
+        return {
+            userId: fireAuth.currentUser?.uid ?? storedData[0].user_id,
+            email: fireAuth.currentUser?.email ?? storedData[0].email,
+            mobile: fireAuth.currentUser?.phoneNumber ?? storedData[0].mobile,
+            isRegistered: storedData[0].isRegistered,
+            name: storedData[0].name,
+            organizationCode: storedData[0].organizationCode,
+            organizationName: storedData[0].organizationName,
+        }
     }
 }

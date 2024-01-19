@@ -1,9 +1,9 @@
 import useComboOfferUiReducer from "../redux/ui/useComboOfferUiReducer"
 
-export const OnEditComboOfferModalCloseEvent = (): { close: () => void } => {
+export const OnEditComboOfferModalCloseEvent = (): { click: () => void } => {
     const { removeComboOfferAllProductsToEdit } = useComboOfferUiReducer()
     return {
-        close: () => {
+        click: () => {
             removeComboOfferAllProductsToEdit()
         },
     }

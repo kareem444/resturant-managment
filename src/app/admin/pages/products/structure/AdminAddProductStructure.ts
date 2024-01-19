@@ -4,14 +4,14 @@ import {
 } from 'src/common/components/FormComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { useTranslate } from 'src/common/hooks/useTranslate'
-import { ProductInputsStructure } from './AdminProductInputsStructure'
+import { AdminProductInputsStructure } from './AdminProductInputsStructure'
 
 export const AdminAddProductFeatureFormStructure =
     (): IFormComponentProperties => {
         const { translate } = useTranslate()
 
         return {
-            inputs: ProductInputsStructure(),
+            inputs: AdminProductInputsStructure(),
             button: {
                 text: translate(TRANSLATE.ADD),
                 icon: 'fi-rr-plus'

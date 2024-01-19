@@ -1,5 +1,5 @@
 import FormComponent from 'src/common/components/FormComponent';
-import { AdminEditBranchModalFormStructure } from '../structures/AdminAddBranchStructure';
+import { AdminEditBranchModalFormStructure } from '../structures/AdminEditBranchStructure';
 
 const AdminEditBranchModal = () => {
     return (

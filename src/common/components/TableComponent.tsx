@@ -79,7 +79,7 @@ export const TableComponent: React.FC<ITableContent> = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((l, k) => {
+                    {items?.map((l, k) => {
                         return (
                             <DraggableItemComponent
                                 key={k}

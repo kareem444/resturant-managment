@@ -157,10 +157,10 @@ export class LocalDB {
         });
     }
 
-    public async get(
+    public async get<T>(
         collection: string,
         options?: ILocalDBGetOptionsProperties
-    ): Promise<any[]> {
+    ): Promise<T[]> {
         return new Promise((resolve, reject) => {
             const transaction = this.db?.transaction(collection, "readonly");
             const store = transaction?.objectStore(collection);

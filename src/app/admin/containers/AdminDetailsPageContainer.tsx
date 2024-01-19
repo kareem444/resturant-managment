@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TitleCardComponent from '../../../common/components/TitleCardComponent'
 import FilterComponent from '../../../common/components/FilterComponent'
 import {
@@ -21,6 +21,10 @@ export const AdminDetailsPageContainer: React.FC<
     const { title } = usePageTitle()
     const { translate } = useTranslate()
 
+    useEffect(() => {
+        setSearchedItems(tableContent.items)
+    }, [tableContent.items])
+
     return (
         <TitleCardComponent
             title={`${title} ${translate(TRANSLATE.DETAILS)}`}
@@ -29,7 +33,7 @@ export const AdminDetailsPageContainer: React.FC<
                 !!tableContent.filter && (
                     <FilterComponent
                         filter={{
-                            items: tableContent.filter,
+                            items: tableContent.filter || [],
                             showFilterBadge: true,
                             defaultFilterItem: tableContent.defaultFilterItem,
                             showFilterDropButton: tableContent.showFilterDropDown

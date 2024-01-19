@@ -15,7 +15,7 @@ export interface IFormComponentProperties {
     formClassName?: string
     childClassnames?: string
     inputs: InputComponentProps[]
-    onSubmit?: SubmitHandler<IDefaultValuesProperties>
+    onSubmit?: SubmitHandler<any>
     button?: AdminButtonContainerProps,
     child?: JSX.Element
 }
@@ -38,7 +38,7 @@ const FormComponent: FC<IFormComponentProperties> = ({
         defaultValues
     })
 
-    const onFormSubmit: SubmitHandler<IDefaultValuesProperties> = data => onSubmit && onSubmit(data)
+    const onFormSubmit: SubmitHandler<any> = data => onSubmit && onSubmit(data)
 
     return (
         <form onSubmit={handleSubmit(onFormSubmit)} className={'flex-1' + ' ' + formClassName}>

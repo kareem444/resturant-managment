@@ -4,7 +4,7 @@ import { useTranslate } from 'src/common/hooks/useTranslate'
 import useProductUiReducer from '../redux/ui/useProductUiReducer'
 import { IDropDownSearchItemProperties } from 'src/common/components/DropDownSearchComponent'
 
-export const ProductInputsStructure = (): InputComponentProps[] => {
+export const AdminProductInputsStructure = (): InputComponentProps[] => {
     const { translate } = useTranslate()
 
     const {

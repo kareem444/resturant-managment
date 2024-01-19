@@ -7,13 +7,13 @@ import {
 } from 'firebase/firestore'
 import {
     IFireBaseWhere,
-    IFirebaseFindOptions
+    IFirebaseOptions
 } from '../interface/FirebaseInterface'
 
 export const handleWhereFilter = ({
     where,
     mixedWhere
-}: Partial<IFirebaseFindOptions>) => {
+}: Partial<IFirebaseOptions>) => {
     let whereStatement: any[] = []
 
     if (!!where) {

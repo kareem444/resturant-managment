@@ -1,146 +1,67 @@
-import { IDefaultValuesProperties, IFormComponentProperties } from 'src/common/components/FormComponent'
-import { InputComponentProps } from 'src/common/components/InputComponent'
+import { IFormComponentProperties } from 'src/common/components/FormComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
-import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
+import { useTranslate } from 'src/common/hooks/useTranslate'
+import { AdminBranchInputsStructure } from './AdminBranchInputsStructure'
+import { IAdminBranchInputs } from '../interfaces/AdminBranchesInterface'
+import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonContainer'
+import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
+import { AdminBranchesRepo } from '../repo/AdminBranchesRepo'
+import {
+    NOTIFICATION_TYPE,
+    showNotification
+} from 'src/common/components/ShowNotificationComponent'
+import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
+import { IAdminBranchModel } from 'src/app/admin/models/AdminBranchModel'
+import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 
-/* #region add group form items Structure */
-const inputsItems = (
-    translate: (text: string | string[], option?: translateOptions) => string
-): InputComponentProps[] => {
-    return [
-        {
-            labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-            validatedInput: {
-                name: 'nameEn',
-                rules: {
-                    isRequired: true,
-                    isEnglish: true
-                }
-            }
-        },
-        {
-            labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.AR} )`, {
-                isArabic: true
-            }),
-            className: 'text-right',
-            validatedInput: {
-                name: 'nameAr',
-                rules: {
-                    isRequired: true,
-                    isArabic: true
-                }
-            },
-            labelStyle: 'ml-auto'
-        },
-        {
-            labelTitle: translate(`Mobile`),
-            validatedInput: {
-                name: 'mobile',
-                rules: {
-                    isRequired: true,
-                    isNumber: true
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Address`),
-            validatedInput: {
-                name: 'address',
-                rules: {
-                    isRequired: true,
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Start Time`),
-            type: 'time',
-            validatedInput: {
-                name: 'startTime',
-                rules: {
-                    isRequired: true,
-                }
-            }
-        },
-        {
-            labelTitle: translate(`End Time`),
-            type: 'time',
-            validatedInput: {
-                name: 'endTime',
-                rules: {
-                    isRequired: true,
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Branch Code`),
-            validatedInput: {
-                name: 'branchCode',
-                rules: {
-                    isRequired: true,
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Tax Number`),
-            validatedInput: {
-                name: 'taxNumber',
-                rules: {
-                    isRequired: true,
-                }
-            }
-        },
-    ]
-}
+export const AdminAddBranchFeatureFormStructure =
+    (): IFormComponentProperties => {
+        const { translate } = useTranslate()
+        const { setState } = useAsyncState<IAdminBranchModel[]>(AsyncStateConstants.branches)
 
-const handelFormProperties = (
-    translate: (text: string | string[], option?: translateOptions) => string,
-    isEdit?: boolean
-): IFormComponentProperties => {
-    return {
-        inputs: inputsItems(translate),
-        button: {
-            text: translate(isEdit ? TRANSLATE.EDIT : TRANSLATE.ADD),
-            icon: isEdit ? 'fi-rr-pencil' : 'fi-rr-plus'
-        },
-        containerClassName: '',
-        childClassnames: '',
-        onSubmit: (data: IDefaultValuesProperties) => {
-            console.log(data)
-        },
-        defaultValues: {
-            nameEn: '',
+        const { mutate, isLoading } = useMutate({
+            queryFn: data => AdminBranchesRepo.createBranch(data),
+            options: {
+                onSuccess(id, param: IAdminBranchInputs) {
+                    setState(prevState => {
+                        return {
+                            data: [{ ...param, id }, ...(prevState?.data || [])]
+                        }
+                    })
+                    showNotification(
+                        NOTIFICATION_TYPE.SUCCESS,
+                        'Branch added successfully'
+                    )
+                },
+                onError(formattedError) {
+                    showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message)
+                }
+            }
+        })
+
+        const handelOnSubmit = (data: IAdminBranchInputs) => mutate(data)
+
+        const button: AdminButtonContainerProps = {
+            text: translate(TRANSLATE.ADD),
+            icon: 'fi-rr-plus',
+            isLoading
+        }
+
+        const defaultValues: IAdminBranchInputs = {
+            name: '',
             nameAr: '',
             mobile: '',
             address: '',
             startTime: '',
             endTime: '',
             branchCode: '',
-            taxNumber: '',
+            taxNumber: ''
+        }
+
+        return {
+            inputs: AdminBranchInputsStructure(),
+            button,
+            onSubmit: handelOnSubmit,
+            defaultValues: defaultValues as any
         }
     }
-}
-
-export const AdminAddBranchFeatureFormStructure = (): IFormComponentProperties => {
-    const { translate } = useTranslate()
-    return handelFormProperties(translate)
-}
-
-export const AdminEditBranchModalFormStructure = (): IFormComponentProperties => {
-    const { translate } = useTranslate()
-
-    return {
-        ...handelFormProperties(translate, true),
-        onSubmit: (data: IDefaultValuesProperties) => { },
-        defaultValues: {
-            nameEn: 'Name En',
-            nameAr: 'اسم عربي',
-            mobile: '0123456789',
-            address: 'Address',
-            startTime: '10:00',
-            endTime: '10:00',
-            branchCode: '123456789',
-            taxNumber: '123456789',
-        }
-    }
-}
-/* #endregion */

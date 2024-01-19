@@ -38,9 +38,11 @@ const useFetch = <T>({
             currentFetchingData.push(key)
 
             if (options?.echoState === 'all') {
-                setState({ ...defaultServerDataState, isLoading: true })
+                // setState({ ...defaultServerDataState, isLoading: true })
+                setState(prev => ({ ...prev, isLoading: true }))
             } else {
-                setSilentData({ ...defaultServerDataState, isLoading: true })
+                // setSilentData({ ...defaultServerDataState, isLoading: true })
+                setSilentData(prev => ({ ...prev, isLoading: true }))
             }
 
             try {

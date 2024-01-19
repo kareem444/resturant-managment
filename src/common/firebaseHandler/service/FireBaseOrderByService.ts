@@ -1,11 +1,11 @@
-import { IFirebaseFindOptions } from "../interface/FirebaseInterface";
+import { IFirebaseOptions } from "../interface/FirebaseInterface";
 import {
     orderBy as orderByStatement,
 } from 'firebase/firestore'
 
 export const handelOrderBy = ({
     orderBy
-}: Partial<IFirebaseFindOptions>) => {
+}: Partial<IFirebaseOptions>) => {
     let orderByList: any[] = []
 
     if (!!orderBy) {

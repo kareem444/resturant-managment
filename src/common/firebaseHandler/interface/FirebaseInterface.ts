@@ -24,9 +24,10 @@ interface IFireBaseOrderBy {
     direction?: 'asc' | 'desc'
 }
 
-export interface IFirebaseFindOptions {
+export interface IFirebaseOptions {
     where?: IFireBaseWhere
     mixedWhere?: IFireBaseMixedWhere | IFireBaseMixedWhere[]
     limit?: number,
     orderBy?: IFireBaseOrderBy | IFireBaseOrderBy[]
+    isAuthGuard?: boolean
 }

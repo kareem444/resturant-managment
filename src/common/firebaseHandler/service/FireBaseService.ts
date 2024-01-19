@@ -1,4 +1,4 @@
-import { IFirebaseFindOptions } from '../interface/FirebaseInterface'
+import { IFirebaseOptions } from '../interface/FirebaseInterface'
 import { handelOrderBy } from './FireBaseOrderByService'
 import { handleWhereFilter } from './FireBaseWhereService'
 import { limit as limitStatement, orderBy as orderByStatement } from 'firebase/firestore'
@@ -8,7 +8,7 @@ export const handelFindConstrains = ({
     mixedWhere,
     limit,
     orderBy
-}: Partial<IFirebaseFindOptions>) => {
+}: Partial<IFirebaseOptions>) => {
     let constrains = []
 
     let whereStatement: any[] = handleWhereFilter({ where, mixedWhere })

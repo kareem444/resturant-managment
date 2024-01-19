@@ -10,11 +10,45 @@ const modalComponents = {
 }
 
 const modalEvents = {
-    ...AdminModalEventsStructure,
+    ...AdminModalEventsStructure
 }
 
 export type ModalComponentsKeys = ObjectKeys<typeof modalComponents>
 export type ModalEventsKeys = ObjectKeys<typeof modalEvents>
+
+
+const Button = ({
+    className,
+    onClick,
+    text
+}: {
+    className?: string
+    onClick?: ModalEventsKeys
+    text?: string
+}) => {
+    const { closeModal } = useModalReducer()
+    const onClickEvent = modalEvents[onClick || 'onDeleteProductModalDelete']()
+
+    const handelOnClick = () => {
+        closeModal()
+        if (onClick) {
+            onClickEvent?.click()
+        }
+    }
+
+    return (
+        <button
+            className={
+                'btn hover:bg-red-700 bg-red-900 border-none text-white flex-1 mt-4' +
+                ' ' +
+                className
+            }
+            onClick={handelOnClick}
+        >
+            {text ?? 'Submit'}
+        </button>
+    )
+}
 
 function ModalLayoutContainer() {
     const { state, closeModal } = useModalReducer()
@@ -41,7 +75,7 @@ function ModalLayoutContainer() {
     const handelOnClose = () => {
         closeModal()
         if (state.onClose) {
-            onCloseEvent?.close()
+            onCloseEvent?.click()
         }
     }
 
@@ -94,21 +128,12 @@ function ModalLayoutContainer() {
                                 )}
                                 {state.buttons?.map((button, index) => {
                                     return (
-                                        <button
+                                        <Button
                                             key={index}
-                                            className={
-                                                'btn hover:bg-red-700 bg-red-900 border-none text-white flex-1 mt-4' +
-                                                ' ' +
-                                                button.className
-                                            }
-                                            onClick={() => {
-                                                if (button.onClick) {
-                                                    modalEvents[button.onClick]()
-                                                }
-                                            }}
-                                        >
-                                            {button.text ?? 'Submit'}
-                                        </button>
+                                            className={button.className}
+                                            onClick={button.onClick}
+                                            text={button.text}
+                                        />
                                     )
                                 })}
                             </div>

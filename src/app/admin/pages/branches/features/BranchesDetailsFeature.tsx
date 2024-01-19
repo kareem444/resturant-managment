@@ -1,61 +1,56 @@
-import { RECENT_TRANSACTIONS } from '../../../../../common/utils/dummyData'
-import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
-import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
-import useModalReducer from 'src/common/redux/modal/useModalReducer'
+import AdminModalActionsStructure from 'src/app/admin/structure/modal/AdminModalActionsStructure'
+import useFetch from 'src/common/DataHandler/hooks/server/useFetch'
+import { AdminBranchesRepo } from '../repo/AdminBranchesRepo'
+import { IAdminBranchModel } from 'src/app/admin/models/AdminBranchModel'
+import AdminDetailsStatusContainer from 'src/app/admin/containers/AdminDetailsStatusContainer'
+import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
+import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
+import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
 
 export default function BranchesDetailsFeature() {
-    const { openModel } = useModalReducer()
+    const { openEditModal, openDeleteModal } = AdminModalActionsStructure()
+    const { setState } = useEchoState<IAdminBranchModel>(EchoStateConstants.selectedItem)
 
-    const openEditBranchModal = () => {
-        openModel({
-            modalComponent: 'adminEditBranchModal',
-            size: '3xl',
-            title: {
-                text: 'Edit Branch'
-            },
-        })
-    }
-
-    const openDeleteBranchModal = () => {
-        openModel({
-            modalComponent: 'adminDeleteBranchModal',
-            size: 'sm',
-            title: {
-                text: 'Delete Branch'
-            },
-            closeButton: {
-                showCloseButton: true
-            },
-            buttons: [
-                {
-                    text: 'Delete',
-                }
-            ]
-        })
-    }
+    const { data, isLoading, isError } = useFetch<IAdminBranchModel[]>({
+        key: AsyncStateConstants.branches,
+        queryFn: () => AdminBranchesRepo.getBranches(),
+        options: {
+            isExecuteOnInit: true,
+            echoState: 'all'
+        }
+    })
 
     const tableContent: ITableContent = {
-        header: ['Name', 'Code', "Address", "Start Time", "End Time", 'Date'],
-        filter: ['Name'],
-        defaultFilterItem: 'Name',
-        items: RECENT_TRANSACTIONS,
-        maxStringLength: 15,
+        header: ['Name', 'Code', 'Address', 'Start Time', 'End Time'],
+        items: data ?? [],
         selectors: {
-            Code: (item: any) => "B01",
-            Address: (item: any) => item['location'],
-            StartTime: (item: any) => moment(item['date']).format('HH:mm'),
-            EndTime: (item: any) => moment(item['date']).format('HH:mm'),
-            Date: (item: any) => moment(item['date']).format('D-MM-YYYY hh:mm:ss A'),
+            Code: (item: IAdminBranchModel) => item.branchCode,
+            Address: (item: IAdminBranchModel) => item.address,
+            StartTime: (item: IAdminBranchModel) => item.startTime,
+            EndTime: (item: IAdminBranchModel) => item.endTime
         },
-        nameSelector: (item: any) => item['name'],
+        nameSelector: (item: IAdminBranchModel) => item.name,
         buttons: {
-            onEdit: (item: any) => openEditBranchModal(),
-            onDelete: (item: any) => openDeleteBranchModal()
+            onEdit: (item: IAdminBranchModel) => {
+                setState(item)
+                openEditModal('adminEditBranchModal')
+            },
+            onDelete: (item: IAdminBranchModel) => {
+                setState(item)
+                openDeleteModal('adminDeleteBranchModal', {
+                    onClick: 'onDeleteBranchModalDelete'
+                })
+            }
         }
     }
 
     return (
-        <AdminDetailsPageContainer tableContent={tableContent} />
+        <AdminDetailsStatusContainer
+            tableContent={tableContent}
+            isLoading={isLoading && !data}
+            isError={isError}
+            isData={!!data && data.length > 0}
+        />
     )
 }
