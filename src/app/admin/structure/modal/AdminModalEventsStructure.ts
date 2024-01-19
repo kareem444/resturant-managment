@@ -4,10 +4,12 @@ import {
     OnDeleteProductModalDeleteEvent,
     OnEditProductModalCloseEvent
 } from '../../pages/products/modal/AdminEditProductModalEvents'
+import { OnDeleteRoleModalDeleteEvent } from '../../pages/roles/modal/AdminRoleModalEvents'
 
 export const AdminModalEventsStructure = {
     onEditProductModalClose: OnEditProductModalCloseEvent,
     onDeleteProductModalDelete: OnDeleteProductModalDeleteEvent,
     onEditComboOfferModalClose: OnEditComboOfferModalCloseEvent,
-    onDeleteBranchModalDelete: OnDeleteBranchModalDeleteEvent
+    onDeleteBranchModalDelete: OnDeleteBranchModalDeleteEvent,
+    onDeleteRoleModalDelete: OnDeleteRoleModalDeleteEvent,
 }

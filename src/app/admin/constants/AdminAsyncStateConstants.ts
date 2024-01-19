@@ -1,3 +1,4 @@
 export const AdminAsyncStateConstants = {
-    branches : 'branches',
+    branches: 'branches',
+    roles: 'roles',
 }

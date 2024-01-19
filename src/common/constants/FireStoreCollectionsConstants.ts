@@ -9,6 +9,6 @@ export const FireStoreCollectionsConstants = {
     UNITS: 'units',
     CATEGORIES: 'categories',
     MEMBERS: 'members',
-    ROLES: 'roles',
+    ROLES: (userId: string) => `${mainCollection}/${userId}/` + 'roles',
     TAXES: 'taxes',
 }

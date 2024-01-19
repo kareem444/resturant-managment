@@ -2,16 +2,16 @@ import {
     AdminDrawerRoutes,
     SideBarRoute
 } from 'src/app/admin/routes/AdminDrawerRoutes'
-import { RoleOptionsComponentResult } from '../components/AdminAdminRoleOptionsComponent'
 import AdminRolesOptionsItems from '../components/AdminRolesOptionsItems'
 import { removeDashFromRoutNameHelper } from 'src/common/helper/routesHelper'
 import AdminRegularRoleOptionComponent from '../components/AdminRegularRoleOptionComponent'
+import { IRolesOptions } from '../interfaces/AdminRoleInterface'
 
 const handelRegularRoutesRoles = (
     route: SideBarRoute,
     setRoles: React.Dispatch<
         React.SetStateAction<{
-            [key: string]: RoleOptionsComponentResult | { [key: string]: boolean }
+            [key: string]: IRolesOptions | { [key: string]: boolean }
         }>
     >
 ) => {
@@ -52,7 +52,7 @@ const handelEnableOnlyAccessButton = (
 const handelRolesItem = (
     setRoles: React.Dispatch<
         React.SetStateAction<{
-            [key: string]: RoleOptionsComponentResult | { [key: string]: boolean }
+            [key: string]: IRolesOptions | { [key: string]: boolean }
         }>
     >
 ) => {
@@ -79,7 +79,7 @@ const handelRolesItem = (
                         routesIndex,
                         submenuIndex
                     ),
-                    onResult: (result: RoleOptionsComponentResult) =>
+                    onResult: (result: IRolesOptions) =>
                         setRoles(prev => ({
                             ...prev,
                             [removeDashFromRoutNameHelper(routeName)]: result
@@ -102,7 +102,7 @@ const handelRolesItem = (
 export const AdminAccordionDataStructure = (
     setRoles: React.Dispatch<
         React.SetStateAction<{
-            [key: string]: RoleOptionsComponentResult | { [key: string]: boolean }
+            [key: string]: IRolesOptions | { [key: string]: boolean }
         }>
     >
 ) => {

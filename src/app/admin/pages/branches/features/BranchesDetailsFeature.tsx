@@ -10,7 +10,7 @@ import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
 
 export default function BranchesDetailsFeature() {
     const { openEditModal, openDeleteModal } = AdminModalActionsStructure()
-    const { setState } = useEchoState<IAdminBranchModel>(EchoStateConstants.selectedItem)
+    const { setState } = useEchoState(EchoStateConstants.selectedItem)
 
     const { data, isLoading, isError } = useFetch<IAdminBranchModel[]>({
         key: AsyncStateConstants.branches,

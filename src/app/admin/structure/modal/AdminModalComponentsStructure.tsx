@@ -77,6 +77,9 @@ export const AdminModalComponentsStructure = {
     adminDeleteDiscountModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this discount?' />
     ),
+    adminDeleteRoleModal: (
+        <AlertActionModalBodyComponent text='Are you sure you want to delete this role?' />
+    ),
 }
 
 export type AdminModalStructureKeys = ObjectKeys<typeof AdminModalComponentsStructure>

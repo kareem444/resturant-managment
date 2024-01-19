@@ -1,8 +1,8 @@
 import AccordionComponent from 'src/common/components/AccordionComponent'
-import { RoleOptionsComponentResult } from './AdminAdminRoleOptionsComponent'
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { AdminAccordionDataStructure } from '../structures/AdminAddRoleAccordionDataStructure'
 import AdminPosRoleOptionsComponent from './AdminPosRoleOptionsComponent'
+import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 
 interface AdminRolesComponentsProps {
     isAdminRole?: boolean
@@ -11,9 +11,7 @@ interface AdminRolesComponentsProps {
 const AdminRolesComponents: FC<AdminRolesComponentsProps> = ({
     isAdminRole
 }) => {
-    const [roles, setRoles] = useState<{
-        [key: string]: RoleOptionsComponentResult | { [key: string]: boolean }
-    }>({})
+    const { setState: setRoles } = useEchoState('roles')
 
     return (
         <div className='mt-5 border rounded-lg p-4'>

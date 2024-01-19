@@ -1,18 +1,12 @@
 import { FC, useEffect, useState } from 'react'
 import CheckBoxComponent from 'src/common/components/CheckBoxComponent'
+import { IRolesOptions } from '../interfaces/AdminRoleInterface'
 
 export interface AdminRoleOptionsComponentProps {
     title?: string
     showDivider?: boolean
-    onResult?: (result: RoleOptionsComponentResult) => void
+    onResult?: (result: IRolesOptions) => void
     enableOnlyAccessButton?: boolean
-}
-
-export interface RoleOptionsComponentResult {
-    access: boolean
-    add: boolean
-    edit: boolean
-    delete: boolean
 }
 
 const RoleOptionsComponent: FC<AdminRoleOptionsComponentProps> = ({
@@ -23,7 +17,7 @@ const RoleOptionsComponent: FC<AdminRoleOptionsComponentProps> = ({
 }) => {
     const [isCanAccess, setIsCanAccess] = useState(true)
 
-    const [result, setResult] = useState<RoleOptionsComponentResult>({
+    const [result, setResult] = useState<IRolesOptions>({
         access: isCanAccess,
         add: false,
         edit: false,

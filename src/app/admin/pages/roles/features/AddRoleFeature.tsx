@@ -5,13 +5,13 @@ import usePageTitle from '../../../../../common/hooks/usePageTitle'
 import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import AdminRolesComponents from '../components/AdminRolesComponents'
 import { AdminAddRoleFeatureFormStructure } from '../structures/AdminAddRolesStructure'
-import { useState } from 'react'
+import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 
 export default function AddRoleFeature() {
     const { titleWithoutLetterS } = usePageTitle()
     const { translate } = useTranslate()
 
-    const [isAdminRole, setIsAdminRole] = useState<boolean>(true)
+    const { state: isAdminRole, setState: setIsAdminRole } = useEchoState('roleType', true)
 
     return (
         <CollapseComponent

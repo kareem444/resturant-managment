@@ -21,7 +21,7 @@ export class AdminBranchesRepo {
             const currentUser = await FireAuthHelper.getCurrentUser()
             const branches = await FireStoreHelper.find(
                 FireStoreCollectionsConstants.BRANCHES(currentUser.userId),
-                { isAuthGuard: true }
+                { isAuthGuard: true, orderBy: [{ field: 'createdAt', direction: 'desc' }] }
             )
             return branches
         })
