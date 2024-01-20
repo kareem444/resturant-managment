@@ -5,7 +5,38 @@ import {
 import AdminRolesOptionsItems from '../components/AdminRolesOptionsItems'
 import { removeDashFromRoutNameHelper } from 'src/common/helper/routesHelper'
 import AdminRegularRoleOptionComponent from '../components/AdminRegularRoleOptionComponent'
-import { IRolesOptions } from '../interfaces/AdminRoleInterface'
+import { IRolesOptions, iRoleTypes } from '../interfaces/AdminRoleInterface'
+
+const handelAddPosRolesForDashboardRole = (
+    setRoles: React.Dispatch<
+        React.SetStateAction<{
+            [key: string]: IRolesOptions | { [key: string]: boolean }
+        }>
+    >
+) => {
+    const adminPosRoles: string[] = [
+        'add-customer',
+        'apply-discount',
+        'sales-return',
+        'view-invoices'
+    ]
+
+    return {
+        title: 'pos',
+        component: (
+            <AdminRegularRoleOptionComponent
+                items={adminPosRoles}
+                isCheckAll={true}
+                onResult={val =>
+                    setRoles(prev => ({
+                        ...prev,
+                        pos: val
+                    }))
+                }
+            />
+        )
+    }
+}
 
 const handelRegularRoutesRoles = (
     route: SideBarRoute,
@@ -50,6 +81,7 @@ const handelEnableOnlyAccessButton = (
 }
 
 const handelRolesItem = (
+    roleType: iRoleTypes,
     setRoles: React.Dispatch<
         React.SetStateAction<{
             [key: string]: IRolesOptions | { [key: string]: boolean }
@@ -94,18 +126,22 @@ const handelRolesItem = (
     })
 
     accordionItems.push(handelRegularRoutesRoles(reportRoutes, setRoles))
+    if (roleType === 'dashboardAndPos') {
+        accordionItems.push(handelAddPosRolesForDashboardRole(setRoles))
+    }
 
     return accordionItems
 }
 
 /* #region accordion items area */
 export const AdminAccordionDataStructure = (
+    roleType: iRoleTypes,
     setRoles: React.Dispatch<
         React.SetStateAction<{
             [key: string]: IRolesOptions | { [key: string]: boolean }
         }>
     >
 ) => {
-    return handelRolesItem(setRoles)
+    return handelRolesItem(roleType, setRoles)
 }
 /* #endregion */

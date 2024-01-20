@@ -1,9 +1,11 @@
 import { InputComponentProps } from "src/common/components/InputComponent"
 import { TRANSLATE } from "src/common/constants/TranslateConstants"
 import { useTranslate } from "src/common/hooks/useTranslate"
+import { iRoleTypes } from "../interfaces/AdminRoleInterface"
+import { AdminRolesInputsConstant } from "../constants/AdminRoleDefaultVal"
 
 export const AdminRolesInputsStructure = (
-    setIsAdminRole: React.Dispatch<React.SetStateAction<boolean>>,
+    setIsAdminRole: React.Dispatch<React.SetStateAction<iRoleTypes>>,
 ): InputComponentProps[] => {
     const { translate } = useTranslate()
 
@@ -11,10 +13,9 @@ export const AdminRolesInputsStructure = (
         {
             labelTitle: translate(`${TRANSLATE.NAME}`),
             validatedInput: {
-                name: 'name',
+                name: AdminRolesInputsConstant.name,
                 rules: {
                     isRequired: true,
-                    isEnglish: true
                 }
             }
         },
@@ -22,18 +23,19 @@ export const AdminRolesInputsStructure = (
             labelTitle: 'Role',
             type: 'dropdownSearch',
             validatedInput: {
-                name: 'role',
+                name: AdminRolesInputsConstant.role,
                 rules: {
                     isRequired: true
                 }
             },
             dropDownSearchInput: {
                 data: [
+                    { id: 'dashboardAndPos', name: 'Dashboard & Pos' },
                     { id: 'dashboard', name: 'Dashboard' },
-                    { id: 'pos', name: 'Pos' }
+                    { id: 'pos', name: 'Pos' },
                 ],
-                onSelect: (value: any) => setIsAdminRole(value.value === 'dashboard'),
-                defaultSelectedValue: { id: 'dashboard', name: 'Dashboard' },
+                onSelect: (value: any) => setIsAdminRole(value.value),
+                defaultSelectedValue: { id: 'dashboardAndPos', name: 'Dashboard & Pos' },
                 selectors: {
                     value: 'id',
                     text: 'name'

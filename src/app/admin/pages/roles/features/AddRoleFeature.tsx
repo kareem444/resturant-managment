@@ -6,12 +6,18 @@ import { useTranslate } from '../../../../../common/hooks/useTranslate'
 import AdminRolesComponents from '../components/AdminRolesComponents'
 import { AdminAddRoleFeatureFormStructure } from '../structures/AdminAddRolesStructure'
 import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
+import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
+import { iRoleTypes } from '../interfaces/AdminRoleInterface'
 
 export default function AddRoleFeature() {
     const { titleWithoutLetterS } = usePageTitle()
     const { translate } = useTranslate()
 
-    const { state: isAdminRole, setState: setIsAdminRole } = useEchoState('roleType', true)
+    const { state: roleType, setState: setIsAdminRole } =
+        useEchoState<iRoleTypes>(
+            EchoStateConstants.selectedRoleType,
+            'dashboardAndPos'
+        )
 
     return (
         <CollapseComponent
@@ -19,7 +25,7 @@ export default function AddRoleFeature() {
         >
             <FormComponent
                 {...AdminAddRoleFeatureFormStructure(setIsAdminRole)}
-                child={<AdminRolesComponents isAdminRole={isAdminRole} />}
+                child={<AdminRolesComponents selectedRoleType={roleType} />}
             />
         </CollapseComponent>
     )

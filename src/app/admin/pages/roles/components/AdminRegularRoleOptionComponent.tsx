@@ -4,22 +4,12 @@ import { removeDashFromRoutNameHelper } from 'src/common/helper/routesHelper'
 
 interface Props {
     items?: string[]
+    isCheckAll?: boolean
     onResult?: (result: { [key: string]: boolean }) => void
 }
 
-const AdminRegularRoleOptionComponent: FC<Props> = ({ items, onResult }) => {
+const AdminRegularRoleOptionComponent: FC<Props> = ({ items, onResult, isCheckAll }) => {
     const [result, setResult] = useState<{ [key: string]: boolean }>()
-
-    useEffect(() => {
-        items?.forEach((value) => {
-            setResult(
-                pre => ({
-                    ...pre,
-                    [removeDashFromRoutNameHelper(value)]: false
-                })
-            )
-        })
-    }, [])
 
     useEffect(() => {
         if (result) {
@@ -33,7 +23,7 @@ const AdminRegularRoleOptionComponent: FC<Props> = ({ items, onResult }) => {
                 <CheckBoxComponent
                     key={index}
                     label={item}
-                    className=''
+                    checked={isCheckAll}
                     onChange={val => {
                         setResult(pre => ({
                             ...pre,

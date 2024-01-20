@@ -1,10 +1,28 @@
-import { IAdminRoles, IRolesOptions } from "../interfaces/AdminRoleInterface"
+import { IAdminRolesInputsEnum, IDashboardRoles, IPosRoles, IRolesOptions } from "../interfaces/AdminRoleInterface"
 
 const defaultRoles: IRolesOptions = {
     access: true, add: false, edit: false, delete: false
 }
 
-export const adminRoleDefaultVal: IAdminRoles = {
+export const posRolesDefaultVal = {
+    accessPos: true,
+    addCustomer: false,
+    applyDiscount: false,
+    salesReturn: false,
+    viewInvoices: false
+}
+
+const adminPosRolesDefaultVal: IPosRoles = {
+    pos: {
+        accessPos: true,
+        addCustomer: true,
+        applyDiscount: true,
+        salesReturn: true,
+        viewInvoices: true
+    }
+}
+
+export const adminRoleDefaultVal: IDashboardRoles = {
     units: defaultRoles,
     groups: defaultRoles,
     products: defaultRoles,
@@ -35,5 +53,11 @@ export const adminRoleDefaultVal: IAdminRoles = {
         shiftReports: false,
         tobaccoDutyReports: false,
         valueAddedReports: false
-    }
+    },
+    ...adminPosRolesDefaultVal
+}
+
+export const AdminRolesInputsConstant: IAdminRolesInputsEnum = {
+    name: 'name',
+    role: 'role',
 }

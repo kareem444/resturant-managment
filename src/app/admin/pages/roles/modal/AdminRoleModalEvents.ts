@@ -18,8 +18,6 @@ export const OnDeleteRoleModalDeleteEvent = (): {
         options: {
             onSuccess() {
                 setState(prevState => {
-                    console.log(selectedRole.id);
-                    console.log(prevState.data);
                     return {
                         data: prevState.data?.filter((role) => role.id !== selectedRole.id)
                     }
