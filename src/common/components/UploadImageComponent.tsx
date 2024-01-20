@@ -6,13 +6,15 @@ export interface UploadFileComponentProps {
     className?: string
     onFileChange?: (file: File | null) => void
     iconClassName?: string
+    disabled?: boolean
 }
 
 const UploadFileComponent: FC<UploadFileComponentProps> = ({
     field,
     className,
     onFileChange,
-    iconClassName
+    iconClassName,
+    disabled = false
 }) => {
     const [file, setFile] = useState<File | null>(null)
 
@@ -40,6 +42,7 @@ const UploadFileComponent: FC<UploadFileComponentProps> = ({
                 onChange={handelOnChange}
                 className='h-full w-full cursor-pointer absolute z-10 bottom-0.5 left-1 opacity-0'
                 style={{ fontSize: 0 }}
+                disabled={disabled}
             />
             {file ? (
                 <img

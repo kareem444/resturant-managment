@@ -17,7 +17,7 @@ export default function RolesDetailsFeature() {
         key: AsyncStateConstants.roles,
         queryFn: () => AdminRolesRepo.getRoles(),
         options: {
-            isExecuteOnInit: true,
+            isExecuteOnInitIfNoData: true,
             echoState: 'all'
         }
     })

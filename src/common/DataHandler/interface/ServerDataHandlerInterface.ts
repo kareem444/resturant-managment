@@ -16,6 +16,7 @@ export interface IQueryOptionsProperties {
     isReturnOnlySelectorProperties?: boolean;
     isComputedSelectorMustMatchResponseKey?: boolean;
     isExecuteOnInit?: boolean;
+    isExecuteOnInitIfNoData?: boolean;
     echoState?: 'all' | 'data' | 'none';
 }
 

@@ -8,7 +8,7 @@ export const FireStoreCollectionsConstants = {
     PRODUCTS: 'products',
     UNITS: 'units',
     CATEGORIES: 'categories',
-    MEMBERS: 'members',
+    MEMBERS: (userId: string) => `${mainCollection}/${userId}/` + 'members',
     ROLES: (userId: string) => `${mainCollection}/${userId}/` + 'roles',
     TAXES: 'taxes',
 }

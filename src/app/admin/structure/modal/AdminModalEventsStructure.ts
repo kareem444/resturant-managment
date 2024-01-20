@@ -1,5 +1,6 @@
 import { OnDeleteBranchModalDeleteEvent } from '../../pages/branches/modal/AdminBranchModalEvents'
 import { OnEditComboOfferModalCloseEvent } from '../../pages/comboOffers/modal/AdminEditComboOfferModalEvents'
+import { OnDeleteMemberModalDeleteEvent } from '../../pages/members/modal/AdminMemberModalEvents'
 import {
     OnDeleteProductModalDeleteEvent,
     OnEditProductModalCloseEvent
@@ -12,4 +13,5 @@ export const AdminModalEventsStructure = {
     onEditComboOfferModalClose: OnEditComboOfferModalCloseEvent,
     onDeleteBranchModalDelete: OnDeleteBranchModalDeleteEvent,
     onDeleteRoleModalDelete: OnDeleteRoleModalDeleteEvent,
+    onDeleteMemberModalDelete: OnDeleteMemberModalDeleteEvent
 }

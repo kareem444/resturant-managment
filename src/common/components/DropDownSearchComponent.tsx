@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import { ControllerRenderProps } from 'react-hook-form'
+import LoadingSpinComponent from './LoadingSpinComponent'
 
 export interface DropDownSearchComponentProps {
     input?: {
@@ -28,6 +29,7 @@ export interface DropDownSearchComponentProps {
         value: string
     },
     defaultSelectedValue?: any,
+    isLoading?: boolean
     onInputChange?: (val: string) => void
 }
 
@@ -57,6 +59,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     selectors,
     defaultSelectedValue,
     clearAfterSelect = false,
+    isLoading = false,
     onInputChange
 }) => {
     const [items, setItems] = useState<IDropDownSearchItemProperties[]>()
@@ -156,7 +159,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     return (
         <div className='relative'>
             <div className='relative'>
-                {showIcon && (
+                {(showIcon && !isLoading) && (
                     <i
                         className={
                             `fi w-4 h-4 absolute top-1/2 transform -translate-y-1/2 text-gray-600` +
@@ -169,6 +172,11 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
                         }}
                     />
                 )}
+                {
+                    isLoading && (
+                        <LoadingSpinComponent className='!w-4 !h-4 absolute top-1/3 right-4 ' />
+                    )
+                }
                 <input
                     ref={inputRef}
                     type='text'

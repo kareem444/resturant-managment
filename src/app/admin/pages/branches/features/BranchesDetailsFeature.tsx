@@ -16,7 +16,7 @@ export default function BranchesDetailsFeature() {
         key: AsyncStateConstants.branches,
         queryFn: () => AdminBranchesRepo.getBranches(),
         options: {
-            isExecuteOnInit: true,
+            isExecuteOnInitIfNoData: true,
             echoState: 'all'
         }
     })

@@ -1,61 +1,58 @@
-import { RECENT_TRANSACTIONS } from '../../../../../common/utils/dummyData'
-import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
-import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
-import useModalReducer from 'src/common/redux/modal/useModalReducer'
+import AdminDetailsStatusContainer from 'src/app/admin/containers/AdminDetailsStatusContainer'
+import AdminModalActionsStructure from 'src/app/admin/structure/modal/AdminModalActionsStructure'
+import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
+import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
+import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
+import { AdminMembersRepo } from '../repo/AdminMembersRepo'
+import useFetch from 'src/common/DataHandler/hooks/server/useFetch'
+import { IAdminMemberModel } from 'src/app/admin/models/AdminMemberModel'
 
 export default function MembersDetailsFeature() {
-    const { openModel } = useModalReducer()
+    const { openEditModal, openDeleteModal } = AdminModalActionsStructure()
+    const { setState } = useEchoState(EchoStateConstants.selectedItem)
 
-    const openEditUnitModal = () => {
-        openModel({
-            modalComponent: 'adminEditMemberModal',
-            size: '3xl',
-            title: {
-                text: 'Edit Group'
-            },
-        })
-    }
-
-    const openDeleteUnitModal = () => {
-        openModel({
-            modalComponent: 'adminDeleteMemberModal',
-            size: 'sm',
-            title: {
-                text: 'Delete Group'
-            },
-            closeButton: {
-                showCloseButton: true
-            },
-            buttons: [
-                {
-                    text: 'Delete',
-                }
-            ]
-        })
-    }
+    const { data, isLoading, isError } = useFetch<IAdminMemberModel[]>({
+        key: AsyncStateConstants.members,
+        queryFn: () => AdminMembersRepo.getMembers(),
+        options: {
+            isExecuteOnInitIfNoData: true,
+            echoState: 'all'
+        }
+    })
 
     const tableContent: ITableContent = {
-        header: ['Name', "Mobile", "Email", "Branch", "Role", 'Date'],
-        filter: ['Name'],
-        defaultFilterItem: 'Name',
-        items: RECENT_TRANSACTIONS,
+        header: ['Name', "Mobile", "Email", "Password", "Branch", "Role"],
+        items: data ?? [],
         maxStringLength: 15,
         selectors: {
-            Mobile: (item: any) => "024157454",
-            Email: (item: any) => item['email'],
-            Branch: (item: any) => item['location'],
-            Role: (item: any) => "admin",
-            Date: (item: any) => moment(item['date']).format('D MMM YYYY HH:mm'),
+            Mobile: (item: IAdminMemberModel) => item.mobile || '-',
+            Email: (item: IAdminMemberModel) => item.email || '-',
+            Password: (item: IAdminMemberModel) => item.password,
+            Branch: (item: IAdminMemberModel) => item.branch.name,
+            Role: (item: IAdminMemberModel) => item.role.name,
         },
-        avatarSelector: (item: any) => item['avatar'],
-        nameSelector: (item: any) => item['name'],
+        nameSelector: (item: IAdminMemberModel) => item.name,
         buttons: {
-            onEdit: (item: any) => openEditUnitModal(),
-            onDelete: (item: any) => openDeleteUnitModal()
+            onEdit: (item: IAdminMemberModel) => {
+                setState(item)
+                openEditModal('adminEditMemberModal')
+            },
+            onDelete: (item: IAdminMemberModel) => {
+                setState(item)
+                openDeleteModal('adminDeleteMemberModal', {
+                    onClick: 'onDeleteMemberModalDelete'
+                })
+            }
         }
     }
+
     return (
-        <AdminDetailsPageContainer tableContent={tableContent} />
+        <AdminDetailsStatusContainer
+            tableContent={tableContent}
+            isLoading={isLoading && !data}
+            isError={isError}
+            isData={!!data && data.length > 0}
+        />
     )
 }

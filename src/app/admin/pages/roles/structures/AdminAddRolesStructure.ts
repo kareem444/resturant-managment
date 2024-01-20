@@ -71,7 +71,7 @@ export const AdminAddRoleFeatureFormStructure = (
             }
         }
         let handelData: IAdminRoleModel = {
-            name: data.name as string,
+            name: (data.name as string).trim(),
             role: roleType,
             permissions: handelRoles()
         }

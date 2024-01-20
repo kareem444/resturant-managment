@@ -23,6 +23,7 @@ export interface InputComponentProps {
     labelStyle?: string
     defaultValue?: string
     className?: string
+    disabled?: boolean
     uploadFileInput?: UploadFileComponentProps
     dropDownSearchInput?: DropDownSearchComponentProps
     validatedInput?: {
@@ -50,15 +51,19 @@ const InputComponent: FC<InputComponentProps> = ({
     defaultValue = '',
     className,
     dropDownSearchInput,
-    uploadFileInput
+    uploadFileInput,
+    disabled = false
 }) => {
     const initInput = (field?: ControllerRenderProps<any, string>) => {
+        if (field) { field.disabled = disabled }
+
         if (type == 'file')
             return (
                 <UploadFileComponent
                     iconClassName={uploadFileInput?.iconClassName}
                     field={field}
                     className={className}
+                    disabled={field?.disabled ?? disabled}
                 />
             )
 
@@ -66,7 +71,7 @@ const InputComponent: FC<InputComponentProps> = ({
             return (
                 <DropDownSearchComponent
                     {...dropDownSearchInput}
-                    input={{ field, defaultValue, placeholder, className }}
+                    input={{ ...dropDownSearchInput?.input, field, defaultValue, placeholder, className, disabled: field?.disabled ?? disabled }}
                 />
             )
 
@@ -76,6 +81,7 @@ const InputComponent: FC<InputComponentProps> = ({
                 placeholder={placeholder}
                 defaultValue={!field ? defaultValue : undefined}
                 className={`input input-bordered w-full ${className}`}
+                disabled={field?.disabled ?? disabled}
                 {...field}
             />
         )

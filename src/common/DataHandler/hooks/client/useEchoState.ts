@@ -4,20 +4,22 @@ import {
     deleteClientDataAction,
     setClientDataAction
 } from '../../redux/client/ClientDataHandlerSlice'
+import { useEffect } from 'react'
 
 const useEchoState = <T>(
     key: string,
     defaultVal?: T,
-    initVal?: T
+    initVal?: T,
+    isOverrideInitVal?: boolean
 ) => {
-    let state: T = useAppSelector(
-        (state: RootState) => state.clientDataHandler.data[key]
-    ) ?? defaultVal;
+    let state: T =
+        useAppSelector((state: RootState) => state.clientDataHandler.data[key]) ??
+        defaultVal
 
     const dispatch = useDispatch()
 
     const setState = (updatedState: ((prevState: T) => T) | Partial<T>) => {
-        let newState;
+        let newState
         if (typeof updatedState === 'function') {
             newState = (updatedState as (prevState: T) => T)(state)
         } else {
@@ -34,16 +36,17 @@ const useEchoState = <T>(
         dispatch(deleteClientDataAction(key))
     }
 
-    if (initVal && !state) {
-        state = initVal
-        setState(initVal)
-    }
+    useEffect(() => {
+        if (initVal && (!state || isOverrideInitVal)) {
+            setState(initVal)
+        }
+    }, [initVal, isOverrideInitVal])
 
     return {
         state,
         setState,
         select,
-        deleteState,
+        deleteState
     }
 }
 

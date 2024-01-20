@@ -14,7 +14,7 @@ export const OnDeleteBranchModalDeleteEvent = (): {
     const { state: allBranches, setState } = useAsyncState<IAdminBranchModel[]>(AsyncStateConstants.branches)
 
     const { mutate } = useMutate({
-        queryFn: () => AdminBranchesRepo.deleteBranch(selectedBranch.id),
+        queryFn: () => AdminBranchesRepo.deleteBranch(selectedBranch.id!),
         options: {
             onSuccess() {
                 setState({

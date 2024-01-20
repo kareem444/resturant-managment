@@ -103,7 +103,9 @@ const useFetch = <T>({
     }
 
     useEffect(() => {
-        if (options?.isExecuteOnInit) {
+        if (options?.isExecuteOnInitIfNoData && !state?.data) {
+            query()
+        } else if (options?.isExecuteOnInit) {
             query()
         }
     }, [])

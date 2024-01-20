@@ -21,7 +21,7 @@ export const AdminEditBranchModalFormStructure = (): IFormComponentProperties =>
     const { closeModal } = useModalReducer()
 
     const { mutate, isLoading } = useMutate({
-        queryFn: data => AdminBranchesRepo.updateBranch(selectedBranch?.id, data),
+        queryFn: data => AdminBranchesRepo.updateBranch(selectedBranch?.id!, data),
         options: {
             onSuccess(_, param: IAdminBranchInputs) {
                 setState(prevState => {
@@ -46,7 +46,20 @@ export const AdminEditBranchModalFormStructure = (): IFormComponentProperties =>
         }
     })
 
-    const handelOnSubmit = (data: IAdminBranchInputs) => mutate(data)
+    const handelOnSubmit = (data: IAdminBranchInputs) => {
+        const handelData: IAdminBranchModel = {
+            name: data.name.trim(),
+            nameAr: data.nameAr.trim(),
+            mobile: data.mobile.trim(),
+            address: data.address.trim(),
+            startTime: data.startTime.trim(),
+            endTime: data.endTime.trim(),
+            branchCode: data.branchCode.trim(),
+            taxNumber: data.taxNumber.trim()
+        }
+
+        mutate(handelData)
+    }
 
     const button: AdminButtonContainerProps = {
         text: translate(TRANSLATE.EDIT),
