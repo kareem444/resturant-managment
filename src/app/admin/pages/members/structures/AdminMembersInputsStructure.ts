@@ -73,12 +73,14 @@ export const AdminMembersInputsItemsStructure = (
             }
         },
         {
+            type: 'number',
             labelTitle: translate(`Password`),
             containerStyle: '!col-start-7',
             validatedInput: {
                 name: AdminMemberInputsConstants.password!,
                 rules: {
-                    isRequired: true
+                    isRequired: true,
+                    isNumber: true
                 }
             }
         },

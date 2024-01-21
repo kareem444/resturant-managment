@@ -5,10 +5,15 @@ import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCol
 import { FireAuthHelper } from 'src/common/firebaseHandler/helper/FireAuthHelper'
 import {
     APP_INFO_LOCAL_DB_COLLECTIONS,
+    APP_INFO_LOCAL_DB_COLLECTIONS_IDS,
     AppInfoLocalDB
 } from 'src/common/config/localDBConfig'
-import { IApiRequestTrailModel, IApiUserModel } from '../models/api/AuthApiModel'
-import { ILocalUserModel } from '../models/local/AuthLocalModel'
+import {
+    IApiRequestTrailModel,
+    IApiUserModel
+} from '../models/api/AuthApiModel'
+import { ILocalOrganizationModel } from '../models/local/AuthLocalModel'
+import { HashHelper } from 'src/common/helper/EncryptHelper'
 
 export class AuthRepo {
     private static checkRequestTrailExist(data: {
@@ -101,14 +106,19 @@ export class AuthRepo {
             }
 
             const handelAddLocalData = async (userId?: string) => {
-                const localData: ILocalUserModel = {
-                    id: 'user',
+                const hashedRandomPassword = await HashHelper.hash(
+                    process.env.REACT_APP_DEFAULT_TEMPORARY_PASSWORD!
+                )
+                const localData: ILocalOrganizationModel = {
+                    id: APP_INFO_LOCAL_DB_COLLECTIONS_IDS.ORGANIZATION,
                     email: user.email,
                     organizationCode: organizationCode,
                     organizationName: user.organizationName,
-                    user_id: userId ?? user.id,
+                    owner_name: user.name,
+                    organization_id: userId ?? user.id,
                     mobile: mobile,
-                    name: user.name
+                    organization_name: user.name,
+                    temporaryPassword: user.temporaryPassword ?? hashedRandomPassword
                 }
                 AppInfoLocalDB.add(APP_INFO_LOCAL_DB_COLLECTIONS.INFO, localData, true)
             }
@@ -133,10 +143,15 @@ export class AuthRepo {
                     { password: setData.password }
                 )
                 delete setData.password
+                delete setData.createdAt
+                delete setData.updatedAt
                 await FireStoreHelper.set(
                     FireStoreCollectionsConstants.USERS,
                     userCredentials.uid,
-                    setData
+                    setData,
+                    {
+                        override: true
+                    }
                 )
                 await handelAddLocalData(userCredentials.uid)
                 return { ...user, id: userCredentials.uid, isRegistered: true }
@@ -149,7 +164,10 @@ export class AuthRepo {
     }
 
     static async signOut() {
-        AppInfoLocalDB.deleteById(APP_INFO_LOCAL_DB_COLLECTIONS.INFO, 'user')
+        AppInfoLocalDB.deleteById(
+            APP_INFO_LOCAL_DB_COLLECTIONS.INFO,
+            APP_INFO_LOCAL_DB_COLLECTIONS_IDS.ORGANIZATION
+        )
         return await FireAuthHelper.signOut()
     }
 

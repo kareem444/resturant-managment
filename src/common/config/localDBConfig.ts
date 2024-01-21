@@ -2,14 +2,17 @@ import { LocalDB } from '../LocalDB/LocalDB'
 
 export enum APP_INFO_LOCAL_DB_COLLECTIONS {
     INFO = 'info',
-    CURRENT_USER = 'current_user'
+}
+
+export enum APP_INFO_LOCAL_DB_COLLECTIONS_IDS {
+    ORGANIZATION = 'organization',
+    CURRENT_USER = 'current_user',
 }
 
 const APP_INFO_DB_NAME = 'AppInfo'
 const APP_INFO_DB_VERSION = 1
 const APP_INFO_DB_COLLECTIONS = [
     APP_INFO_LOCAL_DB_COLLECTIONS.INFO,
-    APP_INFO_LOCAL_DB_COLLECTIONS.CURRENT_USER
 ]
 
 export const AppInfoLocalDB = new LocalDB(

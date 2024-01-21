@@ -6,6 +6,7 @@ export interface IApiUserModel {
     organizationName: string
     organizationCode?: string
     password?: string
+    temporaryPassword?: string
     forgetPassword?: string
     isRegistered?: boolean
     createdAt?: Date

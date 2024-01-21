@@ -5,19 +5,21 @@ import AuthSignUserEnterPasswordFeature from './features/AuthSignUserEnterPasswo
 import useFetch from 'src/common/DataHandler/hooks/server/useFetch'
 import {
     APP_INFO_LOCAL_DB_COLLECTIONS,
+    APP_INFO_LOCAL_DB_COLLECTIONS_IDS,
     AppInfoLocalDB
 } from 'src/common/config/localDBConfig'
 import { AsyncHelper } from 'src/common/DataHandler/helper/ServerDataHandlerHelper'
-import { ILocalUserModel } from '../../models/local/AuthLocalModel'
+import { ILocalOrganizationModel } from '../../models/local/AuthLocalModel'
+import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 
 function SignUserPage() {
-    const { data } = useFetch<ILocalUserModel>({
-        key: 'localUserData',
+    const { data } = useFetch<ILocalOrganizationModel>({
+        key: AsyncStateConstants.localOrganizationData,
         queryFn: async () =>
             AsyncHelper.createPromise(() => {
                 return AppInfoLocalDB.getOneById(
                     APP_INFO_LOCAL_DB_COLLECTIONS.INFO,
-                    'user'
+                    APP_INFO_LOCAL_DB_COLLECTIONS_IDS.ORGANIZATION
                 )
             }),
         options: {

@@ -35,23 +35,27 @@ const NumpadButtonComponent: FC<NumpadButtonComponentProps> = ({
 interface NumpadComponentProps {
     onChange?: (value: string) => void
     buttonClassName?: string
-    className?: string
+    isSecured?: boolean
     resultClassName?: string
     showResult?: boolean
+    allowZeroAtFirst?: boolean
+    placeHolder?: string
 }
 
 const NumpadComponent: FC<NumpadComponentProps> = ({
     onChange,
     buttonClassName,
-    className,
     resultClassName,
-    showResult = true
+    showResult = true,
+    isSecured = false,
+    allowZeroAtFirst = false,
+    placeHolder
 }) => {
     const [result, setResult] = useState('')
 
     const handleClick = (text: string) => {
         if (text === '.' && result.includes('.')) return
-        if (text === '0' && result.length === 0) return
+        if (text === '0' && result.length === 0 && !allowZeroAtFirst) return
         setResult(result + text)
     }
 
@@ -64,12 +68,21 @@ const NumpadComponent: FC<NumpadComponentProps> = ({
         setResult(result.slice(0, -1))
     }
 
+    const handelResult = (): string => {
+        if (isSecured) {
+            return result.replace(/./g, '*')
+        }
+        return result
+    }
+
     return (
         <>
             {showResult && (
                 <div className='flex justify-end my-2'>
-                    <div className={basicGlassName + ' active:bg-white active:text-slate-500 py-2 ' + resultClassName}>
-                        {result || '0'}
+                    <div className={basicGlassName + ' active:bg-white active:text-slate-500 py-2 ' +
+                        ` ${(!result && !!placeHolder) ? '!text-gray-300' : ''} `
+                        + resultClassName}>
+                        {handelResult() || placeHolder || '0'}
                     </div>
                 </div>
             )}
