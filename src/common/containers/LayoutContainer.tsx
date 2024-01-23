@@ -6,7 +6,9 @@ import PosPageContainer from 'src/app/pos/containers/PosPageContainer'
 function LayoutContainer() {
     return (
         <>
-            {true ? <AdminPageContainer /> : <PosPageContainer />}
+            {/* <AppLayout /> */}
+            <AdminPageContainer />
+            <PosPageContainer />
 
             {/* Right drawer - containing secondary content like notifications list etc.. */}
             <RightSidebarContainer />

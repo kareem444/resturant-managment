@@ -59,7 +59,9 @@ const GuardedRouteComponent: FC<GuardedRouteComponentProps> = ({
 }) => {
     if (authGuard || notAuthGuard)
         return (
-            <AuthGuardComponent notAuthGuard={notAuthGuard}>{children}</AuthGuardComponent>
+            <AuthGuardComponent notAuthGuard={notAuthGuard}>
+                {children}
+            </AuthGuardComponent>
         )
     return <>{guard ? children : <Navigate to={pathToRedirect} />}</>
 }

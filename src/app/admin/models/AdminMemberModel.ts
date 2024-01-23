@@ -1,4 +1,5 @@
 import { IAdminMemberInputs } from "../pages/members/interfaces/AdminMembersInterface"
+import { iRoleTypes } from "../pages/roles/interfaces/AdminRoleInterface"
 
 export interface IAdminMemberModel extends IAdminMemberInputs {
     id?: string
@@ -9,6 +10,7 @@ export interface IAdminMemberModel extends IAdminMemberInputs {
     role: {
         id: string
         name: string
+        roleType: iRoleTypes
     }
     createdAt?: Date
     updatedAt?: Date

@@ -2,6 +2,7 @@ import Bars3Icon from '@heroicons/react/24/outline/Bars3Icon'
 import usePageTitle from '../../../common/hooks/usePageTitle'
 import NotificationButtonComponent from '../components/AdminNotificationButtonComponent'
 import HeaderDropDownMenuComponent from '../components/AdminHeaderDropDownMenuComponent'
+import AdminPosNavigateComponent from '../components/AdminPosNavigateComponent'
 
 function AdminHeaderContainer() {
     const { title } = usePageTitle()
@@ -19,12 +20,9 @@ function AdminHeaderContainer() {
                     {title && <h1 className='text-2xl font-semibold ml-2'>{title}</h1>}
                 </div>
 
-                <div className='order-last'>
-
-                    {/* Notification icon */}
+                <div className='order-last gap-5'>
+                    <AdminPosNavigateComponent />
                     <NotificationButtonComponent />
-
-                    {/* Profile icon, opening menu on click */}
                     <HeaderDropDownMenuComponent />
                 </div>
             </div>

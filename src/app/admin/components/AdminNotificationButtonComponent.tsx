@@ -15,7 +15,7 @@ export default function NotificationButtonComponent() {
 
     return (
         <button
-            className='btn btn-ghost ml-4  btn-circle'
+            className='btn btn-ghost btn-circle'
             onClick={() => openNotification()}
         >
             <div className='indicator'>

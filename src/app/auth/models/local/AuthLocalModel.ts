@@ -1,4 +1,4 @@
-import { IDashboardRoles } from "src/app/admin/pages/roles/interfaces/AdminRoleInterface"
+import { IDashboardRoles, iRoleTypes } from "src/app/admin/pages/roles/interfaces/AdminRoleInterface"
 
 export interface ILocalOrganizationModel {
     id: string
@@ -24,5 +24,6 @@ export interface ILocalCurrentUserModel {
     email?: string
     mobile?: string
     is_organization_owner?: boolean
+    roleType?: iRoleTypes
     permissions?: IDashboardRoles
 }

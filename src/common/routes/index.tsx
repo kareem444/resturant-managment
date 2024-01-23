@@ -14,7 +14,9 @@ export default function RoutesContainer() {
           <Route path={routes.otp.path} element={<routes.otp.component />} />
 
           {/* Place new routes over this */}
-          <Route path={routes.layout.path} element={<routes.layout.component />} />
+          {/* <Route path={routes.layout.path} element={<routes.layout.component />} /> */}
+          <Route path={routes.adminLayout.path} element={<routes.adminLayout.component />} />
+          <Route path={routes.posLayout.path} element={<routes.posLayout.component />} />
 
           <Route
             path='*'

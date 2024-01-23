@@ -16,6 +16,7 @@ import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AdminMembersRepo } from '../repo/AdminMembersRepo'
 import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent'
+import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
 
 export const AdminEditMemberModalFormStructure =
     (): IFormComponentProperties => {
@@ -33,7 +34,7 @@ export const AdminEditMemberModalFormStructure =
             selectedMember?.branch as any,
             true
         )
-        const { state: pickedRole } = useEchoState<IAdminMemberModel>(
+        const { state: pickedRole } = useEchoState<IAdminRoleModel>(
             EchoStateConstants.pickedRole,
             undefined,
             selectedMember?.role as any,
@@ -74,7 +75,8 @@ export const AdminEditMemberModalFormStructure =
                 },
                 role: {
                     id: pickedRole?.id || '',
-                    name: pickedRole?.name || ''
+                    name: pickedRole?.name || '',
+                    roleType: pickedRole?.role || ''
                 },
                 name: (data.name as string).trim() || '',
                 password: (data.password as string).trim() || '',

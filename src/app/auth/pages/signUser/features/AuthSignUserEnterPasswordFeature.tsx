@@ -1,19 +1,19 @@
 import NumpadComponent from 'src/common/components/NumpadComponent'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { routes } from 'src/common/routes/routes'
 import { AuthService } from 'src/app/auth/services/AuthService';
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate';
 import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent';
+import { ILocalCurrentUserModel } from 'src/app/auth/models/local/AuthLocalModel';
+import useCurrentUser from 'src/common/hooks/useCurrentUser';
 
 const AuthSignUserEnterPasswordFeature = () => {
     const [result, setResult] = useState('')
-    const navigate = useNavigate()
+    const { setCurrentUser } = useCurrentUser()
 
     const { mutate, isLoading } = useMutate({
         queryFn: AuthService.signUser, options: {
-            onSuccess: () => {
-                navigate(routes.admin.dashboard.fullPath)
+            onSuccess: (currentUser: ILocalCurrentUserModel) => {
+                setCurrentUser (currentUser)
             },
             onError(formattedError) {
                 showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message ?? 'Something went wrong')

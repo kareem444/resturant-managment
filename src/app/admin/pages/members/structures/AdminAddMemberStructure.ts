@@ -18,13 +18,14 @@ import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
 import { IAdminMemberModel } from 'src/app/admin/models/AdminMemberModel'
 import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
+import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
 
 export const AdminAddMemberFeatureFormStructure =
     (): IFormComponentProperties => {
         const { translate } = useTranslate()
 
         const { state: pickedBranch } = useEchoState<IAdminMemberModel>(EchoStateConstants.pickedBranch)
-        const { state: pickedRole } = useEchoState<IAdminMemberModel>(EchoStateConstants.pickedRole)
+        const { state: pickedRole } = useEchoState<IAdminRoleModel>(EchoStateConstants.pickedRole)
 
         const { setState } = useAsyncState<IAdminMemberModel[]>(AsyncStateConstants.members)
 
@@ -56,7 +57,8 @@ export const AdminAddMemberFeatureFormStructure =
                 },
                 role: {
                     id: pickedRole?.id || '',
-                    name: pickedRole?.name || ''
+                    name: pickedRole?.name,
+                    roleType: pickedRole?.role
                 },
                 name: (data.name as string).trim() || '',
                 password: (data.password as string).trim() || '',

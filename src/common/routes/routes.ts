@@ -1,5 +1,8 @@
 import { lazy } from 'react'
 
+const PosPageContainer = lazy(() => import('../../app/pos/containers/PosPageContainer'))
+const AdminPageContainer = lazy(() => import('../../app/admin/containers/AdminPageContainer'))
+
 const LoginPage = lazy(() => import('../../app/auth/pages/login'))
 const RegisterPage = lazy(() => import('../../app/auth/pages/register'))
 const SignUserPage = lazy(() => import('../../app/auth/pages/signUser'))
@@ -91,8 +94,10 @@ interface Routes {
     register: Route
     signUser: Route
     otp: Route
-    layout: Route
+    // layout: Route
     admin: NestedRoutes
+    adminLayout: Route
+    posLayout: Route
     pos: {
         home: NestedRoutes
         settings: FullRoute
@@ -112,7 +117,7 @@ export const routes: Routes = {
         path: '/register',
         component: RegisterPage
     },
-    signUser:{
+    signUser: {
         path: '/sign-user',
         component: SignUserPage
     },
@@ -120,203 +125,207 @@ export const routes: Routes = {
         path: '/otp',
         component: OtpPage
     },
-    layout: {
-        path: '/app/*',
-        component: LayoutContainer
+    adminLayout: {
+        path: '/admin/*',
+        component: AdminPageContainer
+    },
+    posLayout: {
+        path: '/pos/*',
+        component: PosPageContainer
     },
     admin: {
         dashboard: {
-            path: '/admin/dashboard',
-            fullPath: '/app/admin/dashboard',
+            path: '/dashboard',
+            fullPath: '/admin/dashboard',
             component: DashBoardPage
         },
         groups: {
-            path: '/admin/groups',
-            fullPath: '/app/admin/groups',
+            path: '/groups',
+            fullPath: '/admin/groups',
             component: GroupsPage
         },
         units: {
-            path: '/admin/units',
-            fullPath: '/app/admin/units',
+            path: '/units',
+            fullPath: '/admin/units',
             component: UnitsPage
         },
         products: {
-            path: '/admin/products',
-            fullPath: '/app/admin/products',
+            path: '/products',
+            fullPath: '/admin/products',
             component: ProductsPage
         },
         additions: {
-            path: '/admin/additions',
-            fullPath: '/app/admin/additions',
+            path: '/additions',
+            fullPath: '/admin/additions',
             component: AdditionsPage
         },
         comboOffers: {
-            path: '/admin/combo-offers',
-            fullPath: '/app/admin/combo-offers',
+            path: '/combo-offers',
+            fullPath: '/admin/combo-offers',
             component: ComboOffersPage
         },
         tables: {
-            path: '/admin/tables',
-            fullPath: '/app/admin/tables',
+            path: '/tables',
+            fullPath: '/admin/tables',
             component: TablesPage
         },
         delivery: {
-            path: '/admin/delivery',
-            fullPath: '/app/admin/delivery',
+            path: '/delivery',
+            fullPath: '/admin/delivery',
             component: DeliveryPage
         },
         customers: {
-            path: '/admin/customers',
-            fullPath: '/app/admin/customers',
+            path: '/customers',
+            fullPath: '/admin/customers',
             component: CustomersPage
         },
         salesBills: {
-            path: '/admin/sales-bills',
-            fullPath: '/app/admin/sales-bills',
+            path: '/sales-bills',
+            fullPath: '/admin/sales-bills',
             component: SalesBillsPage
         },
         bouncedSales: {
-            path: '/admin/bounced-sales',
-            fullPath: '/app/admin/bounced-sales',
+            path: '/bounced-sales',
+            fullPath: '/admin/bounced-sales',
             component: BouncedSalesPage
         },
         suppliers: {
-            path: '/admin/suppliers',
-            fullPath: '/app/admin/suppliers',
+            path: '/suppliers',
+            fullPath: '/admin/suppliers',
             component: SuppliersPage
         },
         purchasesBills: {
-            path: '/admin/purchases-bills',
-            fullPath: '/app/admin/purchases-bills',
+            path: '/purchases-bills',
+            fullPath: '/admin/purchases-bills',
             component: PurchasesBillsPage
         },
         bouncedPurchases: {
-            path: '/admin/bounced-purchases',
-            fullPath: '/app/admin/bounced-purchases',
+            path: '/bounced-purchases',
+            fullPath: '/admin/bounced-purchases',
             component: BouncedPurchasesPage
         },
         expensesDestination: {
-            path: '/admin/expenses-destinations',
-            fullPath: '/app/admin/expenses-destinations',
+            path: '/expenses-destinations',
+            fullPath: '/admin/expenses-destinations',
             component: ExpensesDestinationPage
         },
         expenses: {
-            path: '/admin/expenses',
-            fullPath: '/app/admin/expenses',
+            path: '/expenses',
+            fullPath: '/admin/expenses',
             component: ExpensesPage
         },
         productsReports: {
-            path: '/admin/products-reports',
-            fullPath: '/app/admin/products-reports',
+            path: '/products-reports',
+            fullPath: '/admin/products-reports',
             component: ProductsReportsPage
         },
         salesReports: {
-            path: '/admin/sales-reports',
-            fullPath: '/app/admin/sales-reports',
+            path: '/sales-reports',
+            fullPath: '/admin/sales-reports',
             component: SalesReportsPage
         },
         valueAddedReports: {
-            path: '/admin/value-added-reports',
-            fullPath: '/app/admin/value-added-reports',
+            path: '/value-added-reports',
+            fullPath: '/admin/value-added-reports',
             component: ValueAddedReportsPage
         },
         tobaccoDutyReports: {
-            path: '/admin/tobacco-duty-reports',
-            fullPath: '/app/admin/tobacco-duty-reports',
+            path: '/tobacco-duty-reports',
+            fullPath: '/admin/tobacco-duty-reports',
             component: TobaccoDutyReportsPage
         },
         purchasesReports: {
-            path: '/admin/purchases-reports',
-            fullPath: '/app/admin/purchases-reports',
+            path: '/purchases-reports',
+            fullPath: '/admin/purchases-reports',
             component: PurchasesReportsPage
         },
         expensesReports: {
-            path: '/admin/expenses-reports',
-            fullPath: '/app/admin/expenses-reports',
+            path: '/expenses-reports',
+            fullPath: '/admin/expenses-reports',
             component: ExpensesReportsPage
         },
         paymentsReports: {
-            path: '/admin/payments-reports',
-            fullPath: '/app/admin/payments-reports',
+            path: '/payments-reports',
+            fullPath: '/admin/payments-reports',
             component: PaymentsReportsPage
         },
         deliveryReports: {
-            path: '/admin/delivery-reports',
-            fullPath: '/app/admin/delivery-reports',
+            path: '/delivery-reports',
+            fullPath: '/admin/delivery-reports',
             component: DeliveryReportsPage
         },
         shiftReports: {
-            path: '/admin/shift-reports',
-            fullPath: '/app/admin/shift-reports',
+            path: '/shift-reports',
+            fullPath: '/admin/shift-reports',
             component: ShiftReportsPage
         },
         members: {
-            path: '/admin/members',
-            fullPath: '/app/admin/members',
+            path: '/members',
+            fullPath: '/admin/members',
             component: MembersPage
         },
         roles: {
-            path: '/admin/roles',
-            fullPath: '/app/admin/roles',
+            path: '/roles',
+            fullPath: '/admin/roles',
             component: RolesPage
         },
         branches: {
-            path: '/admin/branches',
-            fullPath: '/app/admin/branches',
+            path: '/branches',
+            fullPath: '/admin/branches',
             component: BranchesPage
         },
         discounts: {
-            path: '/admin/discounts',
-            fullPath: '/app/admin/discounts',
+            path: '/discounts',
+            fullPath: '/admin/discounts',
             component: DiscountsPage
         },
         taxes: {
-            path: '/admin/taxes',
-            fullPath: '/app/admin/taxes',
+            path: '/taxes',
+            fullPath: '/admin/taxes',
             component: TaxesPage
         },
         paymentsMethods: {
-            path: '/admin/payments-methods',
-            fullPath: '/app/admin/payments-methods',
+            path: '/payments-methods',
+            fullPath: '/admin/payments-methods',
             component: PaymentsMethodsPage
         },
         settings: {
-            path: '/admin/settings',
-            fullPath: '/app/admin/settings',
+            path: '/settings',
+            fullPath: '/admin/settings',
             component: SettingsPage
         }
     },
     pos: {
         home: {
             homeLayout: {
-                path: '/pos/home/*',
-                fullPath: '/app/pos/home/*',
+                path: '/home/*',
+                fullPath: '/pos/home/*',
                 component: PosHomeLayoutContainer
             },
             products: {
                 path: '/products',
-                fullPath: '/app/pos/home/products',
+                fullPath: '/pos/home/products',
                 component: PosProductsPage
             },
             tables: {
                 path: '/tables',
-                fullPath: '/app/pos/home/tables',
+                fullPath: '/pos/home/tables',
                 component: PosTablesPage
             },
             delivery: {
                 path: '/delivery',
-                fullPath: '/app/pos/home/delivery',
+                fullPath: '/pos/home/delivery',
                 component: PosDeliveryPage
             },
             invoice: {
                 path: '/invoice',
-                fullPath: '/app/pos/home/invoice',
+                fullPath: '/pos/home/invoice',
                 component: PosInvoicePage
             }
         },
         settings: {
-            path: '/pos/settings',
-            fullPath: '/app/pos/settings',
+            path: '/settings',
+            fullPath: '/pos/settings',
             component: PosSettingsPage
         }
     }
