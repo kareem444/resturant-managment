@@ -10,7 +10,6 @@ const ForgotPasswordPage = lazy(
     () => import('../../app/auth/pages/forgotPassword')
 )
 const OtpPage = lazy(() => import('../../app/auth/pages/otp'))
-const LayoutContainer = lazy(() => import('../containers/LayoutContainer'))
 const DashBoardPage = lazy(() => import('../../app/admin/pages/dashboard'))
 const GroupsPage = lazy(() => import('../../app/admin/pages/groups'))
 const SalesBillsPage = lazy(() => import('../../app/admin/pages/salesBills'))
@@ -94,7 +93,6 @@ interface Routes {
     register: Route
     signUser: Route
     otp: Route
-    // layout: Route
     admin: NestedRoutes
     adminLayout: Route
     posLayout: Route
