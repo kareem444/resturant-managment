@@ -9,7 +9,7 @@ import { IAdminBranchInputs } from "../interfaces/AdminBranchesInterface"
 import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState"
 import useMutate from "src/common/DataHandler/hooks/server/useMutate"
 import { AdminBranchesRepo } from "../repo/AdminBranchesRepo"
-import { NOTIFICATION_TYPE, showNotification } from "src/common/components/ShowNotificationComponent"
+import { showNotification } from "src/common/components/ShowNotificationComponent"
 import useModalReducer from "src/common/redux/modal/useModalReducer"
 import { EchoStateConstants } from "src/common/constants/EchoStateConstants"
 import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants"
@@ -35,13 +35,12 @@ export const AdminEditBranchModalFormStructure = (): IFormComponentProperties =>
                     }
                 })
                 showNotification(
-                    NOTIFICATION_TYPE.SUCCESS,
                     'Branch updated successfully'
                 )
                 closeModal()
             },
             onError(formattedError) {
-                showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message)
+                showNotification(formattedError?.message ?? 'Some Thing Went Wrong', 'error')
             },
         }
     })

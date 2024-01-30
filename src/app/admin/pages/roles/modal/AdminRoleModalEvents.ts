@@ -3,7 +3,7 @@ import useEchoState from "src/common/DataHandler/hooks/client/useEchoState"
 import useMutate from "src/common/DataHandler/hooks/server/useMutate"
 import { EchoStateConstants } from "src/common/constants/EchoStateConstants"
 import { AdminRolesRepo } from "../repo/AdminRolesRepo"
-import { NOTIFICATION_TYPE, showNotification } from "src/common/components/ShowNotificationComponent"
+import {  showNotification } from "src/common/components/ShowNotificationComponent"
 import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState"
 import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants"
 
@@ -24,7 +24,7 @@ export const OnDeleteRoleModalDeleteEvent = (): {
                 })
             },
             onError() {
-                showNotification(NOTIFICATION_TYPE.ERROR, 'Something went wrong')
+                showNotification('Something went wrong', 'error')
             }
         }
     })

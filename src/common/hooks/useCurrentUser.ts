@@ -42,6 +42,12 @@ const useCurrentUser = () => {
 
     const is_organization_owner: boolean = state?.is_organization_owner || false
 
+    useEffect(() => {
+        if (isCurrentUser && !is_organization_owner && !roleType) {
+            deleteCurrentUser()
+        }
+    }, [isCurrentUser, is_organization_owner, roleType])
+
     return {
         currentUser: state,
         isCurrentUser,

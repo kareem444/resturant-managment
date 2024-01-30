@@ -7,7 +7,6 @@ import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonC
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AdminBranchesRepo } from '../repo/AdminBranchesRepo'
 import {
-    NOTIFICATION_TYPE,
     showNotification
 } from 'src/common/components/ShowNotificationComponent'
 import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
@@ -29,12 +28,11 @@ export const AdminAddBranchFeatureFormStructure =
                         }
                     })
                     showNotification(
-                        NOTIFICATION_TYPE.SUCCESS,
                         'Branch added successfully'
                     )
                 },
                 onError(formattedError) {
-                    showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message)
+                    showNotification(formattedError?.message ?? 'Some thing went wrong', 'error')
                 }
             }
         })

@@ -8,7 +8,7 @@ import { routes } from '../../../../../common/routes/routes'
 import { ILoginInputs } from '../interfaces/AuthLoginInterface'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AuthRepo } from 'src/app/auth/repo/AuthRepo'
-import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent'
+import { showNotification } from 'src/common/components/ShowNotificationComponent'
 
 export default function LoginFormFeature() {
     const { translate } = useTranslate()
@@ -29,14 +29,12 @@ export default function LoginFormFeature() {
         options: {
             onSuccess() {
                 showNotification(
-                    NOTIFICATION_TYPE.SUCCESS,
                     'Login successfully',
                 )
             },
             onError(e) {
                 showNotification(
-                    NOTIFICATION_TYPE.ERROR,
-                    e?.message || 'Something went wrong',
+                    e?.message || 'Something went wrong','error'
                 )
             }
         }

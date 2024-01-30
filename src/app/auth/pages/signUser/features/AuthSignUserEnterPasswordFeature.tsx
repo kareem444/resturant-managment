@@ -2,7 +2,7 @@ import NumpadComponent from 'src/common/components/NumpadComponent'
 import { useState } from 'react'
 import { AuthService } from 'src/app/auth/services/AuthService';
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate';
-import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent';
+import {  showNotification } from 'src/common/components/ShowNotificationComponent';
 import { ILocalCurrentUserModel } from 'src/app/auth/models/local/AuthLocalModel';
 import useCurrentUser from 'src/common/hooks/useCurrentUser';
 
@@ -16,7 +16,7 @@ const AuthSignUserEnterPasswordFeature = () => {
                 setCurrentUser (currentUser)
             },
             onError(formattedError) {
-                showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message ?? 'Something went wrong')
+                showNotification( formattedError?.message ?? 'Something went wrong', 'error')
             },
         }
     })

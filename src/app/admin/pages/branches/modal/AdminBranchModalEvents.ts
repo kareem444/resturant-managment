@@ -3,7 +3,7 @@ import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AdminBranchesRepo } from '../repo/AdminBranchesRepo'
-import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent'
+import { showNotification } from 'src/common/components/ShowNotificationComponent'
 import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
 import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 
@@ -22,7 +22,7 @@ export const OnDeleteBranchModalDeleteEvent = (): {
                 })
             },
             onError() {
-                showNotification(NOTIFICATION_TYPE.ERROR, 'Something went wrong')
+                showNotification('Something went wrong', 'error')
             }
         }
     })

@@ -1,13 +1,16 @@
-import { AdminDrawerRoutes } from '../routes/AdminDrawerRoutes'
+import { SideBarRoute } from '../routes/AdminDrawerRoutes'
 import { NavLink, useLocation } from 'react-router-dom'
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon'
 import SideBarSubMenuContainer from '../../../common/containers/SideBarSubMenuContainer'
 import { useTranslate } from '../../../common/hooks/useTranslate'
 import { TRANSLATE } from '../../../common/constants/TranslateConstants'
 import { IMAGE_SRC } from '../../../common/constants/SrcConstants'
-import { useState } from 'react'
+import { memo, useState } from 'react'
+import {
+    removeDashFromRoutNameHelper
+} from 'src/common/helper/routesHelper'
 
-function LeftSidebarContainer() {
+function AdminDrawerContainer({ routes }: { routes: SideBarRoute[] | undefined }) {
     const location = useLocation()
     const { translate } = useTranslate()
 
@@ -26,8 +29,6 @@ function LeftSidebarContainer() {
                 <XMarkIcon className='h-5 inline-block w-5' />
             </button>
             <li className='mb-2 font-semibold text-xl '>
-                {/* //TODO: Add a link to the welcome page */}
-
                 <a className='active:bg-inherit active:text-inherit'>
                     <img
                         className='mask mask-squircle w-10'
@@ -37,10 +38,11 @@ function LeftSidebarContainer() {
                     {translate(TRANSLATE.APP_NAME)}
                 </a>
             </li>
-            {AdminDrawerRoutes.map((route, index) => {
-                return (
-                    <li key={index}>
-                        {route.submenu ? (
+            {routes?.map((route, index) => {
+                if (route.submenu) {
+                    if (route.submenu.length === 0) return null
+                    return (
+                        <li key={index}>
                             <SideBarSubMenuContainer
                                 {...route}
                                 isMenuExpanded={expandedMenuIndex === index}
@@ -50,7 +52,11 @@ function LeftSidebarContainer() {
                                     setExpandedMenuIndex(expandedMenuIndex === index ? -1 : index)
                                 }}
                             />
-                        ) : (
+                        </li>
+                    )
+                } else {
+                    return (
+                        <li key={index}>
                             <NavLink
                                 end
                                 to={route.path}
@@ -60,7 +66,8 @@ function LeftSidebarContainer() {
                                     ' active:bg-base-300 active:dark:text-white active:text-accent-content'
                                 }
                             >
-                                {route.icon} {translate(route.name)}
+                                {route.icon}{' '}
+                                {translate(removeDashFromRoutNameHelper(route.name))}
                                 {location.pathname === route.path ? (
                                     <span
                                         className='absolute inset-y-0 left-0 w-1 rounded-tr-md rounded-br-md bg-primary '
@@ -68,12 +75,12 @@ function LeftSidebarContainer() {
                                     ></span>
                                 ) : null}
                             </NavLink>
-                        )}
-                    </li>
-                )
+                        </li>
+                    )
+                }
             })}
         </ul>
     )
 }
 
-export default LeftSidebarContainer
+export default memo(AdminDrawerContainer)

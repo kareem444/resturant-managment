@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { IRegisterInputs } from '../interfaces/AuthRegisterInterface'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AuthRepo } from 'src/app/auth/repo/AuthRepo'
-import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent'
+import { showNotification } from 'src/common/components/ShowNotificationComponent'
 
 export default function RegisterFormFeature() {
     const { translate } = useTranslate()
@@ -33,14 +33,12 @@ export default function RegisterFormFeature() {
             onSuccess() {
                 navigate(routes.login.path)
                 showNotification(
-                    NOTIFICATION_TYPE.SUCCESS,
                     'User created successfully',
                 )
             },
             onError(e) {
                 showNotification(
-                    NOTIFICATION_TYPE.ERROR,
-                    e?.message || 'Something went wrong',
+                    e?.message || 'Something went wrong','error'
                 )
             }
         }

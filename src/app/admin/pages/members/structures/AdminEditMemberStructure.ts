@@ -15,7 +15,7 @@ import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
 import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AdminMembersRepo } from '../repo/AdminMembersRepo'
-import { NOTIFICATION_TYPE, showNotification } from 'src/common/components/ShowNotificationComponent'
+import { showNotification } from 'src/common/components/ShowNotificationComponent'
 import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
 
 export const AdminEditMemberModalFormStructure =
@@ -56,13 +56,12 @@ export const AdminEditMemberModalFormStructure =
                         }
                     })
                     showNotification(
-                        NOTIFICATION_TYPE.SUCCESS,
                         'Branch updated successfully'
                     )
                     closeModal()
                 },
                 onError(formattedError) {
-                    showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message)
+                    showNotification(formattedError?.message ?? 'Something went wrong', 'error')
                 },
             }
         })

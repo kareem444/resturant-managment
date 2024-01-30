@@ -8,7 +8,6 @@ import { AdminMembersInputsItemsStructure } from './AdminMembersInputsStructure'
 import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonContainer'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import {
-    NOTIFICATION_TYPE,
     showNotification
 } from 'src/common/components/ShowNotificationComponent'
 import { AdminMembersRepo } from '../repo/AdminMembersRepo'
@@ -39,12 +38,11 @@ export const AdminAddMemberFeatureFormStructure =
                         }
                     })
                     showNotification(
-                        NOTIFICATION_TYPE.SUCCESS,
                         'Member added successfully'
                     )
                 },
                 onError(formattedError) {
-                    showNotification(NOTIFICATION_TYPE.ERROR, formattedError?.message)
+                    showNotification(formattedError?.message ?? 'Something went wrong', 'error')
                 }
             }
         })
