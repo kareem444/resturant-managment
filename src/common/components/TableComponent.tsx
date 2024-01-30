@@ -75,7 +75,7 @@ export const TableComponent: React.FC<ITableContent> = ({
                                 </td>
                             )
                         })}
-                        {buttons && <td></td>}
+                        {(buttons && Object.keys(buttons).length > 0) && <td></td>}
                     </tr>
                 </thead>
                 <tbody>
@@ -115,7 +115,7 @@ export const TableComponent: React.FC<ITableContent> = ({
                                     // @ts-ignore
                                     return <td key={index}>{value}</td>
                                 })}
-                                {buttons && (
+                                {(buttons && Object.keys(buttons).length > 0) && (
                                     <td >
                                         <div className='flex justify-end'>
                                             <TableButtonsComponent {...handelButtons(l)} item={l} />

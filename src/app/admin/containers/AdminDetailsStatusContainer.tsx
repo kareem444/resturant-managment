@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import ErrorComponent from 'src/common/components/ErrorComponent'
 import LoadingSpinComponent from 'src/common/components/LoadingSpinComponent'
 import NoDataAvailableComponent from 'src/common/components/NoDataAvailableComponent'
 import { AdminDetailsPageContainer } from './AdminDetailsPageContainer'
 import { ITableContent } from 'src/common/components/TableComponent'
+import useAdminPermissions from '../hooks/useAdminPermissions'
 
 const Wrapper = ({ children }: { children: JSX.Element }) => {
     return (
@@ -26,6 +27,16 @@ const AdminDetailsStatusContainer: FC<IAdminDetailsStatusContainerProps> = ({
     isError,
     tableContent
 }) => {
+    const { isCanEdit, isCanDelete } = useAdminPermissions()
+
+    if (!isCanEdit && tableContent.buttons?.onEdit) {
+        delete tableContent.buttons.onEdit
+    }
+
+    if (!isCanDelete && tableContent.buttons?.onDelete) {
+        delete tableContent.buttons.onDelete
+    }
+
     if (isError) {
         return (
             <Wrapper>
