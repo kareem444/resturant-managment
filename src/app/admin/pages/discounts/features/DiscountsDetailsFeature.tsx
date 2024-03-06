@@ -37,8 +37,6 @@ export default function DiscountsDetailsFeature() {
 
     const tableContent: ITableContent = {
         header: ['Name', 'Amount', 'Type', 'Branch', 'Apply To','Date'],
-        filter: ['Name'],
-        defaultFilterItem: 'Name',
         items: RECENT_TRANSACTIONS,
         maxStringLength: 15,
         selectors: {

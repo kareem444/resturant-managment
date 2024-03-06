@@ -13,15 +13,15 @@ import useAdminPermissions from "src/app/admin/hooks/useAdminPermissions";
 import { handelRoutesWithPermission } from "../helper/AdminRoutesHelper";
 
 function AdminPageContainer() {
-    const { isCurrentUser, is_organization_owner, permissions } = useCurrentUser();
+    const { isCurrentUser, isOrganizationOwner, permissions } = useCurrentUser();
 
     const [updatedRoutes, setUpdatedRoutes] = useState<SideBarRoute[]>(AdminDrawerRoutes);
 
     useEffect(() => {
-        if (isCurrentUser && !is_organization_owner) {
+        if (isCurrentUser && !isOrganizationOwner) {
             setUpdatedRoutes(handelRoutesWithPermission(permissions));
         }
-    }, [isCurrentUser, is_organization_owner]);
+    }, [isCurrentUser, isOrganizationOwner]);
 
     const { isCanAccess, isAdmin } = useAdminPermissions();
 
@@ -43,10 +43,7 @@ function AdminPageContainer() {
                                 </ScrollToTopComponent>
                             </div>
                             <div className="drawer-side">
-                                <label
-                                    htmlFor="left-sidebar-drawer"
-                                    className="drawer-overlay"
-                                ></label>
+                                <label htmlFor="left-sidebar-drawer" className="drawer-overlay" ></label>
                                 <AdminDrawerContainer routes={updatedRoutes} />
                             </div>
                         </div>

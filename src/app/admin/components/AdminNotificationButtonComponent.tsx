@@ -1,5 +1,4 @@
 import BellIcon from '@heroicons/react/24/outline/BellIcon'
-import React from 'react'
 import useRightBarReducer from '../../../common/redux/rightDrawer/useRightDrawerReducer'
 
 export default function NotificationButtonComponent() {

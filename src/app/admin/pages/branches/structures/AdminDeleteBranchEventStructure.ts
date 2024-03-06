@@ -1,28 +1,26 @@
 import { IAdminBranchModel } from 'src/app/admin/models/AdminBranchModel'
 import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
-import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AdminBranchesRepo } from '../repo/AdminBranchesRepo'
 import { showNotification } from 'src/common/components/ShowNotificationComponent'
 import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
-import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
+import useCrudHandler from 'src/common/hooks/useCrudHandler'
 
 export const OnDeleteBranchModalDeleteEvent = (): {
     click: () => void
 } => {
     const { state: selectedBranch } = useEchoState<IAdminBranchModel>(EchoStateConstants.selectedItem)
-    const { state: allBranches, setState } = useAsyncState<IAdminBranchModel[]>(AsyncStateConstants.branches)
+    const { deleteOperation } = useCrudHandler<IAdminBranchModel>('branches')
 
     const { mutate } = useMutate({
         queryFn: () => AdminBranchesRepo.deleteBranch(selectedBranch.id!),
         options: {
             onSuccess() {
-                setState({
-                    data: allBranches?.data?.filter((branch) => branch.id !== selectedBranch.id),
-                })
+                deleteOperation(selectedBranch)
+                showNotification('Branch deleted successfully')
             },
-            onError() {
-                showNotification('Something went wrong', 'error')
+            onError(e) {
+                showNotification(e?.code, 'error')
             }
         }
     })

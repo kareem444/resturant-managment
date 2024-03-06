@@ -6,7 +6,7 @@ export default function SwitchLanguageComponent() {
 
     return (
         <label
-            className='swap pointer-events-auto border rounded-full w-12 mt-2'
+            className='swap pointer-events-auto border rounded-full w-12'
             onClick={toggleEnAr}
         >
             <div className={`m-auto ${isArabic && 'mb-1'}`}>

@@ -1,48 +1,39 @@
-import { FC, useEffect } from 'react'
-import ErrorComponent from 'src/common/components/ErrorComponent'
-import LoadingSpinComponent from 'src/common/components/LoadingSpinComponent'
-import NoDataAvailableComponent from 'src/common/components/NoDataAvailableComponent'
-import { AdminDetailsPageContainer } from './AdminDetailsPageContainer'
-import { ITableContent } from 'src/common/components/TableComponent'
-import useAdminPermissions from '../hooks/useAdminPermissions'
+import { FC } from "react";
+import ErrorComponent from "src/common/components/ErrorComponent";
+import LoadingSpinComponent from "src/common/components/LoadingSpinComponent";
+import NoDataAvailableComponent from "src/common/components/NoDataAvailableComponent";
+import { AdminDetailsPageContainer, IAdminDetailsPageContainerProps } from "./AdminDetailsPageContainer";
 
 const Wrapper = ({ children }: { children: JSX.Element }) => {
     return (
-        <div className='card w-full p-6 bg-base-100 shadow-xl flex justify-center items-center my-auto flex-1'>
+        <div className="card w-full p-6 bg-base-100 shadow-xl border border-gray-300 dark:border-none flex justify-center items-center my-auto flex-1">
             {children}
         </div>
-    )
-}
+    );
+};
 
-interface IAdminDetailsStatusContainerProps {
-    isData?: boolean
-    isLoading?: boolean
-    isError?: boolean
-    tableContent: ITableContent
+export interface IAdminDetailsStatusContainerProps extends Omit<IAdminDetailsPageContainerProps, "className"> {
+    isData?: boolean;
+    isLoading?: boolean;
+    isError?: boolean;
 }
 
 const AdminDetailsStatusContainer: FC<IAdminDetailsStatusContainerProps> = ({
     isData,
     isLoading,
     isError,
-    tableContent
+    tableContent,
+    onRefresh,
+    onPdf,
+    onPrint,
+    onWhatsapp
 }) => {
-    const { isCanEdit, isCanDelete } = useAdminPermissions()
-
-    if (!isCanEdit && tableContent.buttons?.onEdit) {
-        delete tableContent.buttons.onEdit
-    }
-
-    if (!isCanDelete && tableContent.buttons?.onDelete) {
-        delete tableContent.buttons.onDelete
-    }
-
     if (isError) {
         return (
             <Wrapper>
                 <ErrorComponent />
             </Wrapper>
-        )
+        );
     }
 
     if (isLoading) {
@@ -50,7 +41,7 @@ const AdminDetailsStatusContainer: FC<IAdminDetailsStatusContainerProps> = ({
             <Wrapper>
                 <LoadingSpinComponent />
             </Wrapper>
-        )
+        );
     }
 
     if (!isData) {
@@ -58,10 +49,18 @@ const AdminDetailsStatusContainer: FC<IAdminDetailsStatusContainerProps> = ({
             <Wrapper>
                 <NoDataAvailableComponent />
             </Wrapper>
-        )
+        );
     }
 
-    return <AdminDetailsPageContainer tableContent={tableContent} />
-}
+    return (
+        <AdminDetailsPageContainer
+            tableContent={tableContent}
+            onRefresh={onRefresh}
+            onPdf={onPdf}
+            onPrint={onPrint}
+            onWhatsapp={onWhatsapp}
+        />
+    );
+};
 
-export default AdminDetailsStatusContainer
+export default AdminDetailsStatusContainer;

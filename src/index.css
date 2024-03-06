@@ -60,3 +60,7 @@ input::-webkit-inner-spin-button {
       }
     }
   }
+
+  @page {
+    margin: 0 0 33px 0;
+  }

@@ -15,6 +15,7 @@ import AdminEditTaxModal from '../../pages/taxes/modal/AdminEditTaxModal'
 import AdminEditBranchModal from '../../pages/branches/modal/AdminEditBranchModal'
 import AdminEditDiscountModal from '../../pages/discounts/modal/AdminEditDiscountModal'
 import AdminEditComboOfferModal from '../../pages/comboOffers/modal/AdminEditComboOfferModal'
+import AdminAddBranchModal from '../../pages/branches/modal/AdminAddBranchModal'
 
 export const AdminModalComponentsStructure = {
     adminEditUnitModal: <AdminEditUnitModal />,
@@ -69,6 +70,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteTaxModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this tax?' />
     ),
+    adminAddBranchModal: <AdminAddBranchModal />,
     adminEditBranchModal: <AdminEditBranchModal />,
     adminDeleteBranchModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this branch?' />

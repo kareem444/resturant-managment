@@ -1,4 +1,4 @@
-import { OnDeleteBranchModalDeleteEvent } from '../../pages/branches/modal/AdminBranchModalEvents'
+import { OnDeleteBranchModalDeleteEvent } from '../../pages/branches/structures/AdminDeleteBranchEventStructure'
 import { OnEditComboOfferModalCloseEvent } from '../../pages/comboOffers/modal/AdminEditComboOfferModalEvents'
 import { OnDeleteMemberModalDeleteEvent } from '../../pages/members/modal/AdminMemberModalEvents'
 import {

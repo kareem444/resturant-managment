@@ -9,30 +9,23 @@ import { AdminBranchesRepo } from '../repo/AdminBranchesRepo'
 import {
     showNotification
 } from 'src/common/components/ShowNotificationComponent'
-import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
 import { IAdminBranchModel } from 'src/app/admin/models/AdminBranchModel'
-import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
+import useCrudHandler from 'src/common/hooks/useCrudHandler'
 
-export const AdminAddBranchFeatureFormStructure =
+export const AdminAddBranchStructure =
     (): IFormComponentProperties => {
         const { translate } = useTranslate()
-        const { setState } = useAsyncState<IAdminBranchModel[]>(AsyncStateConstants.branches)
+        const { createOperation } = useCrudHandler<IAdminBranchModel>('branches')
 
         const { mutate, isLoading } = useMutate({
             queryFn: data => AdminBranchesRepo.createBranch(data),
             options: {
                 onSuccess(id, param: IAdminBranchInputs) {
-                    setState(prevState => {
-                        return {
-                            data: [{ ...param, id }, ...(prevState?.data || [])]
-                        }
-                    })
-                    showNotification(
-                        'Branch added successfully'
-                    )
+                    createOperation({ ...param, id })
+                    showNotification('Branch added successfully')
                 },
-                onError(formattedError) {
-                    showNotification(formattedError?.message ?? 'Some thing went wrong', 'error')
+                onError(e) {
+                    showNotification(e?.code, 'error')
                 }
             }
         })

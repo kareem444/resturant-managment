@@ -16,7 +16,6 @@ const modalEvents = {
 export type ModalComponentsKeys = ObjectKeys<typeof modalComponents>
 export type ModalEventsKeys = ObjectKeys<typeof modalEvents>
 
-
 const Button = ({
     className,
     onClick,
@@ -81,11 +80,14 @@ function ModalLayoutContainer() {
 
     return (
         <>
-            {/* Put this part before </body> tag */}
-            <div className={`modal ${state.isOpen && 'modal-open'}`}>
+            <div
+                className={`modal ${state.isOpen && 'modal-open'}`}
+                onClick={() => state.isOpen && handelOnClose()}
+            >
                 <div
                     className={`modal-box no-scrollbar` + ` ${state.className} `}
                     style={{ maxWidth: handelMaxWidth() }}
+                    onClick={e => e.stopPropagation()}
                 >
                     {state.xButton?.showXButton && (
                         <button

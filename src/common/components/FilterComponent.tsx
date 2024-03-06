@@ -1,144 +1,114 @@
-import FunnelIcon from '@heroicons/react/24/outline/FunnelIcon'
-import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon'
-import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { FC, useState } from "react";
+import useScreenSize from "../hooks/useScreenSize";
+import useEchoState from "../DataHandler/hooks/client/useEchoState";
+import { EchoStateConstants } from "../constants/EchoStateConstants";
+import { AdminAsyncStateConstants } from "src/app/admin/constants/AdminAsyncStateConstants";
+import useAsyncState from "../DataHandler/hooks/server/useAsyncState";
+import { useTranslate } from "../hooks/useTranslate";
 
-interface FilterProps {
-  input?: {
-    styleClass?: string
-    placeholderText?: string
-    onChange?: (value: string) => void
-  }
-  filter?: {
-    items: string[]
-    showFilterBadge?: boolean
-    showFilterDropButton?: boolean
-    defaultFilterItem?: string
-    onChange?: (value: string) => void
-  }
-  onSearch?: (search: string, filter: string) => void
-  update?: {
-    items: any[]
-    onUpdateState: Dispatch<SetStateAction<any[]>>
-  }
+export type FilterItem = {
+  name: string;
+  value: string;
 }
 
-const FilterComponent: FC<FilterProps> = ({
-  input,
-  filter,
-  onSearch,
-  update
+type originalItemsKeyType = keyof typeof AdminAsyncStateConstants;
+
+export interface IFilterProps {
+  items: [FilterItem, ...FilterItem[]];
+  showFilterDropButton?: boolean;
+  showSelectedFilter?: boolean;
+  originalItemsKey: originalItemsKeyType;
+}
+
+const FilterComponent: FC<IFilterProps> = ({
+  items,
+  showFilterDropButton = true,
+  showSelectedFilter = true,
+  originalItemsKey
 }) => {
-  const [searchTextValue, setSearchTextValue] = useState('')
-  const [filterParam, setFilterParam] = useState('')
+  const [filter, setFilter] = useState<FilterItem>();
+  const { isXs } = useScreenSize();
+  const { translate } = useTranslate();
+  const { setState } = useEchoState(EchoStateConstants.searchedItems, []);
+  const { state: originalItems } = useAsyncState<any[]>(originalItemsKey);
 
-  const updateSearchInput = (val: string) => {
-    setSearchTextValue(val)
-    const filterItem =
-      filterParam?.toLowerCase() ||
-      filter?.defaultFilterItem?.toLowerCase() ||
-      filter?.items[0]?.toLowerCase() ||
-      ''
-    if (input?.onChange) {
-      input.onChange(val)
-    }
-    if (onSearch) {
-      onSearch(val, filterItem)
-    }
-    if (update) {
-      update.onUpdateState(
-        update.items.filter((t: any) =>
-          t[filterItem].toString().toLowerCase().includes(val.toLowerCase())
-        )
-      )
-    }
-  }
+  const defaultFilterItem = items[0]?.value;
 
-  const updateFilterParam = (val: string) => {
-    setFilterParam(val)
-    if (val === '') {
-      setSearchTextValue('')
-    }
-    if (filter?.onChange) {
-      filter.onChange(val)
-    }
-    if (onSearch) {
-      onSearch(
-        val !== '' ? searchTextValue : '',
-        val !== '' ? val.toLowerCase() : filter!.items[0]?.toLowerCase()
-      )
+  let timer: ReturnType<typeof setTimeout> | undefined = undefined
+
+  const handelOnSearch = (val: string) => {
+    if (timer) {
+      clearTimeout(timer)
     }
 
-    if (update) {
-      update.onUpdateState(
-        update.items.filter((t: any) =>
-          t[val !== '' ? val.toLowerCase() : filter!.items[0]?.toLowerCase()]
-            .toString()
-            .toLowerCase()
-            .includes(val !== '' ? searchTextValue.toLowerCase() : '')
-        )
-      )
+    timer = setTimeout(() => {
+      if (originalItems?.data) {
+        setState(
+          originalItems?.data?.filter((t: any) =>
+            t[filter?.value || defaultFilterItem]
+              .toString()
+              .toLowerCase()
+              .includes(val.toLowerCase())
+          )
+        );
+      }
+    }, 500)
+  };
+
+  const handelOnSelectFilter = (val: FilterItem | undefined) => {
+    setFilter(val);
+
+    if (!val) {
+      handelOnSearch("");
     }
-  }
+  };
 
   return (
-    <div className={'flex items-center ' + input?.styleClass}>
-      <div
-        className={`relative flex flex-wrap items-stretch flex-1 ${
-          !filterParam &&
-          (filter?.showFilterDropButton && filter?.items) &&
-          'mx-2'
-        }
-          }`}
-      >
+    <div className={"flex items-center gap-2 w-2/3 md:w-1/2 lg:w-2/5"}>
+      {(showFilterDropButton && items && items.length > 0) && (
+        <div className="dropdown dropdown-bottom">
+          <label
+            tabIndex={0}
+            className="btn btn-sm btn-outline h-12 bg-white dark:bg-base-200 dark:hover:bg-blue-700 hover:bg-blue-700 normal-case flex gap-2"
+          >
+            <i className="fi fi-rr-settings-sliders text-lg h-6 dark:text-white"></i>
+            {showSelectedFilter && !isXs && filter && (
+              <span>{filter.name}</span>
+            )}
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-2 text-sm shadow bg-base-100 rounded-box w-52 mt-2"
+          >
+            {items.map((l, k) => {
+              return (
+                <li key={k}>
+                  <a
+                    onClick={() => handelOnSelectFilter(l)}
+                    className={`${l.value === filter?.value && "text-success"}`}
+                  >
+                    {translate(l.name)}
+                  </a>
+                </li>
+              );
+            })}
+            <div className="divider mt-0 mb-0"></div>
+            <li>
+              <a onClick={() => handelOnSelectFilter(undefined)}>Remove Filter</a>
+            </li>
+          </ul>
+        </div>
+      )}
+      <div className="flex-1 w-full">
         <input
-          type='search'
-          value={searchTextValue}
-          placeholder={input?.placeholderText || 'search'}
-          onChange={e => updateSearchInput(e.target.value)}
-          className='input input-bordered w-full max-w-xs h-10'
+          type="search"
+          placeholder={"search"}
+          onChange={(e) => handelOnSearch(e.target.value)}
+          className="input input-bordered border-gray-500 h-12 w-full"
         />
       </div>
-      {filter?.showFilterBadge && filterParam && (
-        <button
-          onClick={() => updateFilterParam('')}
-          className='btn btn-xs btn-outline hover:bg-transparent hover:text-current normal-case mx-2'
-        >
-          {filterParam}
-          <XMarkIcon className='w-4 ml-2 ' />
-        </button>
-      )}
-      {filter?.showFilterDropButton &&
-        filter?.items &&
-        filter?.items.length > 0 && (
-          <div className='dropdown dropdown-bottom dropdown-end'>
-            <label tabIndex={0} className='btn btn-sm btn-outline h-10'>
-              <FunnelIcon className='w-5' />
-            </label>
-            <ul
-              tabIndex={0}
-              className='dropdown-content menu p-2 text-sm shadow bg-base-100 rounded-box w-52'
-            >
-              {filter.items.map((l, k) => {
-                return (
-                  <li key={k}>
-                    <a
-                      onClick={() => updateFilterParam(l)}
-                      className={`${l === filterParam && 'text-success'}`}
-                    >
-                      {l}
-                    </a>
-                  </li>
-                )
-              })}
-              <div className='divider mt-0 mb-0'></div>
-              <li>
-                <a onClick={() => updateFilterParam('')}>Remove Filter</a>
-              </li>
-            </ul>
-          </div>
-        )}
     </div>
-  )
-}
+  );
+};
 
-export default FilterComponent
+export default FilterComponent;

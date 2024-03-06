@@ -8,7 +8,3 @@ export interface IAdminBranchInputs {
     branchCode: string
     taxNumber: string
 }
-
-export type IAdminBranchesInputsEnum = {
-    [K in keyof IAdminBranchInputs]: K;
-};

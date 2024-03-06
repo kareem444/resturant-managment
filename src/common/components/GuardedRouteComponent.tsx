@@ -2,14 +2,16 @@ import { FC, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { routes } from "../routes/routes";
 import { onAuthStateChanged } from "firebase/auth";
-import { fireAuth } from "../config/firebase";
 import SplashScreenComponent from "./SplashScreenComponent";
+import { FireBaseConfig } from "../config/firebase";
 
 const AuthGuardComponent = ({
     children,
+    authGuard = true,
     notAuthGuard = true,
 }: {
     children: JSX.Element;
+    authGuard?: boolean;
     notAuthGuard?: boolean;
 }) => {
     const [isAuth, setIsAuth] = useState<boolean | null>(null);
@@ -19,7 +21,7 @@ const AuthGuardComponent = ({
         : routes.login.path;
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(fireAuth, (user) => {
+        const unsubscribe = onAuthStateChanged(FireBaseConfig.fireAuth, (user) => {
             if (user) {
                 setIsAuth(true);
             } else {
@@ -33,11 +35,7 @@ const AuthGuardComponent = ({
         return <SplashScreenComponent />;
     }
 
-    if (isAuth && notAuthGuard) {
-        return <Navigate to={pathToRedirect} />;
-    }
-
-    if (!isAuth && !notAuthGuard) {
+    if ((!isAuth && authGuard) || (isAuth && notAuthGuard)) {
         return <Navigate to={pathToRedirect} />;
     }
 
@@ -58,17 +56,18 @@ const GuardedRouteComponent: FC<GuardedRouteComponentProps> = ({
     guard = true,
     authGuard = false,
     notAuthGuard = false,
-    signUserGuard: signedUserGuard = false,
+    signUserGuard = false,
     pathToRedirect = routes.login.path,
 }) => {
-    if (authGuard || notAuthGuard)
+    if (authGuard || notAuthGuard) {
         return (
-            <AuthGuardComponent notAuthGuard={notAuthGuard}>
+            <AuthGuardComponent authGuard={authGuard} notAuthGuard={notAuthGuard}>
                 {children}
             </AuthGuardComponent>
         );
+    }
 
-    if (signedUserGuard) return <Navigate to={routes.signUser.path} />;
+    if (signUserGuard) return <Navigate to={routes.signUser.path} />;
 
     return <>{guard ? children : <Navigate to={pathToRedirect} />}</>;
 };

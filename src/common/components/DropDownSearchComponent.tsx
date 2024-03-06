@@ -1,219 +1,242 @@
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
-import { ControllerRenderProps } from 'react-hook-form'
-import LoadingSpinComponent from './LoadingSpinComponent'
+import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
+import LoadingSpinComponent from "./LoadingSpinComponent";
+import { useTranslate } from "../hooks/useTranslate";
 
 export interface DropDownSearchComponentProps {
     input?: {
-        placeholder?: string
-        defaultValue?: string
-        className?: string
-        field?: ControllerRenderProps<any, string>
-        disabled?: boolean
-    }
+        placeholder?: string;
+        defaultValue?: string;
+        className?: string;
+        field?: ControllerRenderProps<any, string>;
+        disabled?: boolean;
+    };
     icon?: {
-        name?: string
-        iconOnExpanded?: string
-        className?: string
-        position?: 'left' | 'right'
-    }
+        name?: string;
+        iconOnExpanded?: string;
+        className?: string;
+    };
     menu?: {
-        isMenuFloat?: boolean
-        className?: string
-    }
-    showIcon?: boolean
-    clearAfterSelect?: boolean
-    data?: any[]
-    onSelect?: (item: IDropDownSearchItemProperties, itemData?: any) => void
+        isMenuFloat?: boolean;
+        className?: string;
+    };
+    showIcon?: boolean;
+    clearAfterSelect?: boolean;
+    containerClassName?: string;
+    data?: any[];
+    onSelect?: (item: IDropDownSearchItemProperties, itemData?: any) => void;
     selectors?: {
-        text: string
-        value: string
-    },
-    defaultSelectedValue?: any,
-    isLoading?: boolean
-    onInputChange?: (val: string) => void
+        text: string;
+        value: string;
+    };
+    defaultSelectedValue?: any;
+    isLoading?: boolean;
+    isError?: boolean;
+    onInputChange?: (val: string) => void;
 }
 
 export interface IDropDownSearchItemProperties {
-    text: string
-    value: any
+    text: string;
+    value: any;
 }
 
 const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     showIcon = true,
     input = {
-        placeholder: 'Search...',
+        placeholder: "Search...",
         defaultValue: undefined,
-        className: '',
-        disabled: false
+        className: "",
+        disabled: false,
     },
     icon = {
-        name: 'fi-rs-plus',
-        iconOnExpanded: 'fi-br-minus',
-        position: 'right'
+        name: "fi-rs-plus",
+        iconOnExpanded: "fi-br-minus",
+        className: "text-gray-600",
     },
     menu = {
-        isMenuFloat: true
+        isMenuFloat: true,
     },
+    containerClassName,
     data,
     onSelect,
     selectors,
     defaultSelectedValue,
     clearAfterSelect = false,
     isLoading = false,
-    onInputChange
+    isError = false,
+    onInputChange,
 }) => {
-    const [items, setItems] = useState<IDropDownSearchItemProperties[]>()
-    const [searchedItems, setSearchedItems] = useState<IDropDownSearchItemProperties[]>()
+    const [items, setItems] = useState<IDropDownSearchItemProperties[]>();
+    const [searchedItems, setSearchedItems] =
+        useState<IDropDownSearchItemProperties[]>();
 
     useEffect(() => {
         if (data) {
-            const convertData = data.map(item => {
+            const convertData = data.map((item) => {
                 return {
                     text: selectors ? item[selectors.text] : undefined,
-                    value: selectors ? item[selectors.value] : undefined
-                }
-            })
-            setItems(convertData)
-            setSearchedItems(convertData)
+                    value: selectors ? item[selectors.value] : undefined,
+                };
+            });
+            setItems(convertData);
+            setSearchedItems(convertData);
         }
-    }, [data])
+    }, [data]);
 
-    const [selected, setSelected] = useState<IDropDownSearchItemProperties>()
-    const [showMenu, setShowMenu] = useState(false)
+    const [selected, setSelected] = useState<IDropDownSearchItemProperties>();
+    const [showMenu, setShowMenu] = useState(false);
 
-    let timer: ReturnType<typeof setTimeout> | undefined = undefined
+    let timer: ReturnType<typeof setTimeout> | undefined = undefined;
 
-    const inputRef = useRef<HTMLInputElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const resetButton = () => {
-        setSelected(undefined)
-        input.field?.onChange(undefined)
-    }
+        setSelected(undefined);
+        input.field?.onChange(undefined);
+    };
 
     const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (timer) {
-            clearTimeout(timer)
+            clearTimeout(timer);
         }
 
         if (selected) {
-            resetButton()
+            resetButton();
         }
 
         if (onInputChange) {
-            onInputChange(e.target.value)
+            onInputChange(e.target.value);
         }
 
         timer = setTimeout(() => {
-            const searchResult = items?.filter(item =>
+            const searchResult = items?.filter((item) =>
                 item.text.toLowerCase().includes(e.target.value.toLowerCase())
-            )
-            setSearchedItems(searchResult)
-        }, 500)
-    }
+            );
+            setSearchedItems(searchResult);
+        }, 500);
+    };
 
     useEffect(() => {
         if (defaultSelectedValue) {
             setSelected({
                 text: defaultSelectedValue[selectors!.text],
-                value: defaultSelectedValue[selectors!.value]
-            })
+                value: defaultSelectedValue[selectors!.value],
+            });
             if (input.field) {
-                input.field.onChange(defaultSelectedValue[selectors!.value])
+                input.field.onChange(defaultSelectedValue[selectors!.value]);
             }
         }
-    }, [defaultSelectedValue])
+    }, [defaultSelectedValue]);
 
     const handleOnChoose = (item: IDropDownSearchItemProperties) => {
-        setSelected(item)
-        const selectedItemData = data?.find(dataItem => dataItem[selectors!.value] === item.value)
+        setSelected(item);
+        const selectedItemData = data?.find(
+            (dataItem) => dataItem[selectors!.value] === item.value
+        );
         if (inputRef.current) {
-            inputRef.current.value = item.text
+            inputRef.current.value = item.text;
         }
         if (input.field) {
-            input.field?.onChange(item.value)
+            input.field?.onChange(item.value);
         }
         if (onSelect) {
-            onSelect(item, selectedItemData)
+            onSelect(item, selectedItemData);
         }
         if (clearAfterSelect) {
-            resetButton()
+            resetButton();
             if (inputRef.current) {
-                inputRef.current.value = ''
+                inputRef.current.value = "";
             }
         }
-    }
+    };
 
     const handleOnBluer = (e: React.FocusEvent<HTMLInputElement>) => {
         setTimeout(() => {
-            setShowMenu(false)
-        }, 200)
-    }
+            setShowMenu(false);
+        }, 200);
+    };
 
     const handelICon = (): string | undefined => {
         if (showIcon) {
-            if (showMenu) return icon.iconOnExpanded
-            return icon.name
+            if (showMenu) return icon.iconOnExpanded;
+            return icon.name;
         }
-    }
+    };
+
+    const { isArabic } = useTranslate();
 
     return (
-        <div className='relative'>
-            <div className='relative'>
-                {(showIcon && !isLoading) && (
+        <div className={"relative" + " " + containerClassName}>
+            <div className="relative">
+                {showIcon && !isLoading && !isError && (
                     <i
                         className={
-                            `fi w-4 h-4 absolute top-1/2 transform -translate-y-1/2 text-gray-600` +
+                            `fi w-4 h-4 absolute top-1/3 text-gray-600` +
+                            ` ${isArabic ? "left-4" : "right-4"} ` +
                             ` ${icon.className} ` +
                             `${handelICon()}`
                         }
-                        style={{
-                            right: icon.position === 'right' ? '1rem' : undefined,
-                            left: icon.position === 'left' ? '1rem' : undefined
-                        }}
                     />
                 )}
-                {
-                    isLoading && (
-                        <LoadingSpinComponent className='!w-4 !h-4 absolute top-1/3 right-4 ' />
-                    )
-                }
+                {isLoading && (
+                    <LoadingSpinComponent
+                        className={
+                            `!w-4 !h-4 absolute top-1/3` +
+                            " " +
+                            (isArabic ? "left-4" : "right-4")
+                        }
+                    />
+                )}
+                {isError && (
+                    <i
+                        className={
+                            "fi fi-rr-exclamation !w-4 !h-4 absolute top-1/3 text-red-500" +
+                            " " +
+                            (isArabic ? "left-4" : "right-4")
+                        }
+                    />
+                )}
                 <input
                     ref={inputRef}
-                    type='text'
+                    type="text"
                     placeholder={input.placeholder}
                     defaultValue={selected?.text ?? input.defaultValue ?? undefined}
-                    className={`input input-bordered w-full ${input.className}`}
+                    className={
+                        "input input-bordered w-full disabled:bg-inherit disabled:border-gray-400 dark:disabled:border-gray-600" +
+                        " " +
+                        input.className
+                    }
                     onFocus={() => setShowMenu(true)}
                     onBlur={handleOnBluer}
                     onChange={handleOnChange}
-                    disabled={input.disabled}
+                    disabled={input.disabled || isLoading || isError}
                 />
             </div>
             {showMenu && (
                 <ul
                     className={
-                        `max-h-32 w-full bg-base-200 shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar` +
-                        ` ${menu.isMenuFloat && 'absolute'} ` +
+                        `max-h-32 w-full bg-zinc-50 dark:bg-base-200 border dark:border-none shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar` +
+                        ` ${menu.isMenuFloat && "absolute"} ` +
                         ` ${menu.className} `
                     }
                 >
                     {searchedItems?.map((item, index) => (
                         <li key={index}>
                             <div
-                                className='p-2 hover:bg-base-100 cursor-pointer '
+                                className="p-2 hover:bg-blue-700 hover:text-white cursor-pointer "
                                 onClick={() => handleOnChoose(item)}
                             >
                                 {item.text}
                             </div>
                             {index !== searchedItems.length - 1 && (
-                                <div className='divider my-0 h-0' />
+                                <div className="divider my-0 h-0" />
                             )}
                         </li>
                     ))}
                 </ul>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default DropDownSearchComponent
+export default DropDownSearchComponent;

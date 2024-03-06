@@ -1,3 +1,5 @@
+import { FirebaseOptions } from "firebase/app"
+
 export interface IApiUserModel {
     id: string
     name: string
@@ -8,7 +10,7 @@ export interface IApiUserModel {
     password?: string
     temporaryPassword?: string
     forgetPassword?: string
-    isRegistered?: boolean
+    projectCredentials?: FirebaseOptions
     createdAt?: Date
     updatedAt?: Date
 }

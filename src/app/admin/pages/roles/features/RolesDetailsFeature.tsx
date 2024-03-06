@@ -33,9 +33,7 @@ export default function RolesDetailsFeature() {
         buttons: {
             onDelete: (item: IAdminRoleModel) => {
                 setState(item)
-                openDeleteModal('adminDeleteRoleModal', {
-                    onClick: 'onDeleteRoleModalDelete'
-                })
+                openDeleteModal('adminDeleteRoleModal', 'onDeleteRoleModalDelete')
             },
         }
     }

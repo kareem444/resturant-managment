@@ -1,14 +1,11 @@
-import AdminAddFeatureContainer from "../../containers/AdminAddFeatureContainer"
-import AddBranchFeature from "./features/AddBranchFeature"
-import BranchesDetailsFeature from "./features/BranchesDetailsFeature"
+import AdminAddAndSearchCurrencyFeature from "./features/AdminAddAndSearchBranchFeature"
+import AdminBranchesDetailsFeature from "./features/AdminBranchesDetailsFeature"
 
 function BranchesPage() {
     return (
         <>
-            <AdminAddFeatureContainer>
-                <AddBranchFeature />
-            </AdminAddFeatureContainer>
-            <BranchesDetailsFeature />
+            <AdminAddAndSearchCurrencyFeature />
+            <AdminBranchesDetailsFeature />
         </>
     )
 }

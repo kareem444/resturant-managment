@@ -32,14 +32,10 @@ export default function RegisterFormFeature() {
         options: {
             onSuccess() {
                 navigate(routes.login.path)
-                showNotification(
-                    'User created successfully',
-                )
+                showNotification('User created successfully')
             },
             onError(e) {
-                showNotification(
-                    e?.message || 'Something went wrong','error'
-                )
+                showNotification(e?.code || 'Something went wrong', 'error')
             }
         }
     })

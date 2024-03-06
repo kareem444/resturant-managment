@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import ErrorTextComponent from '../../../common/components/ErrorTextComponent'
-import { FormEvent, useState } from 'react'
+import { FormEvent } from 'react'
 import { SubmitHandler, UseFormHandleSubmit } from 'react-hook-form'
 
 export default function AuthFormContainer(props: {
@@ -19,19 +19,14 @@ export default function AuthFormContainer(props: {
         }
     }
 }) {
-    // const [loading, setLoading] = useState(false)
 
     const handelSubmit: SubmitHandler<any> = (e: any) => {
-        // setLoading(true)
         props.onFormSubmit && props.onFormSubmit(e)
-        // setLoading(false)
     }
 
     const handelSubmitWithOutValidation = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // setLoading(true)
         props.onFormSubmit && props.onFormSubmit()
-        // setLoading(false)
     }
 
     return (

@@ -40,13 +40,13 @@ const useCurrentUser = () => {
 
     const roleType: iRoleTypes | undefined = state?.roleType
 
-    const is_organization_owner: boolean = state?.is_organization_owner || false
+    const isOrganizationOwner: boolean = state?.isOrganizationOwner || false
 
     useEffect(() => {
-        if (isCurrentUser && !is_organization_owner && !roleType) {
+        if (isCurrentUser && !isOrganizationOwner && !roleType) {
             deleteCurrentUser()
         }
-    }, [isCurrentUser, is_organization_owner, roleType])
+    }, [isCurrentUser, isOrganizationOwner, roleType])
 
     return {
         currentUser: state,
@@ -54,8 +54,8 @@ const useCurrentUser = () => {
         deleteCurrentUser,
         permissions,
         roleType,
-        is_organization_owner,
-        userId: state?.user_id,
+        isOrganizationOwner,
+        userId: state?.userId,
         setCurrentUser: setState
     }
 }

@@ -38,9 +38,6 @@ export default function CustomerDetailsFeature() {
     const tableContent: ITableContent = {
         header: ['Name', 'Mobile', 'TaxNumber', "Address" , 'Date'],
         items: RECENT_TRANSACTIONS,
-        showFilterDropDown: true,
-        filter: ['Name', 'Mobile', 'TaxNumber', "Address"],
-        defaultFilterItem: 'Name',
         selectors: {
             Mobile: (item: any) => item['email'],
             TaxNumber: (item: any) => item['amount'],

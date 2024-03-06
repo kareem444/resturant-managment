@@ -1,3 +1,5 @@
+import { Firestore } from "firebase/firestore"
+
 export interface IFireBaseWhere {
     field: string
     operator:
@@ -30,4 +32,11 @@ export interface IFirebaseOptions {
     limit?: number,
     orderBy?: IFireBaseOrderBy | IFireBaseOrderBy[]
     isAuthGuard?: boolean
+    DB?: Firestore
+}
+
+export interface ISetFirebaseOptions {
+    isAuthGuard?: boolean
+    override?: boolean
+    DB?: Firestore
 }

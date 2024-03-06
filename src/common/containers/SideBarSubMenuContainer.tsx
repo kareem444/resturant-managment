@@ -36,15 +36,17 @@ const SideBarSubMenuContainer: FC<SideBarSubMenuContainerProps> = ({
     }, [])
 
     return (
-        <div className='flex-col active:bg-base-100 hover:bg-base-200 active:dark:text-white active:text-accent-content'>
+        <div className="flex-col bg-inherit text-inherit">
             {/** Route header */}
             <div
-                className='w-full'
+                className="w-full flex justify-between"
                 onClick={() => {
                     onClick && onClick()
                 }}
             >
-                {icon} {translate(name)}
+                <span>
+                    {icon} {translate(name)}
+                </span>
                 {isMenuExpanded ? (
                     <MinusIcon
                         className={
@@ -64,28 +66,21 @@ const SideBarSubMenuContainer: FC<SideBarSubMenuContainerProps> = ({
 
             {/** Submenu list */}
             <div className={` w-full ` + (isMenuExpanded ? '' : 'hidden')}>
-                <ul className={`menu-compact`}>
+                <ul className={`menu-compact bg-inherit text-inherit`}>
                     {submenu?.map((m, k) => {
                         return (
-                            <li
-                                key={k}
-                                className='active:bg-base-100 hover:bg-base-100 active:dark:text-white active:text-accent-content'
-                            >
+                            <li key={k} className="bg-inherit">
                                 <NavLink
                                     to={m.path}
                                     className={({ isActive }) =>
-                                        `${isActive ? 'font-semibold  bg-base-200 ' : ' font-normal'
-                                        }` +
-                                        ' active:bg-base-300 active:dark:text-white active:text-accent-content'
+                                        "active:bg-inherit active:text-slate-900 dark:active:text-gray-200 rounded-sm"
+                                        +
+                                        " " +
+                                        `${isActive ? "font-semibold !bg-blue-600 text-white" : " font-normal"
+                                        }`
                                     }
                                 >
                                     {m.icon} {translate(m.name)}
-                                    {location.pathname == m.path ? (
-                                        <span
-                                            className='absolute mt-1 mb-1 inset-y-0 left-0 w-1 rounded-tr-md rounded-br-md bg-accent '
-                                            aria-hidden='true'
-                                        ></span>
-                                    ) : null}
                                 </NavLink>
                             </li>
                         )

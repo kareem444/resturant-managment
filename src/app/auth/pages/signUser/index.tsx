@@ -3,31 +3,20 @@ import GuardedRouteComponent from 'src/common/components/GuardedRouteComponent'
 import AuthSigUserSignOutFeature from './features/AuthSigUserSignOutFeature'
 import AuthSignUserEnterPasswordFeature from './features/AuthSignUserEnterPasswordFeature'
 import useFetch from 'src/common/DataHandler/hooks/server/useFetch'
-import {
-    APP_INFO_LOCAL_DB_COLLECTIONS,
-    APP_INFO_LOCAL_DB_COLLECTIONS_IDS,
-    AppInfoLocalDB
-} from 'src/common/config/localDBConfig'
-import { AsyncHelper } from 'src/common/DataHandler/helper/ServerDataHandlerHelper'
 import { ILocalOrganizationModel } from '../../models/local/AuthLocalModel'
 import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 import { routes } from 'src/common/routes/routes'
 import useCurrentUser from 'src/common/hooks/useCurrentUser'
+import { AuthSignUserRepo } from './repo/AuthSignUserRepo'
 
 function SignUserPage() {
     const { isCurrentUser, roleType } = useCurrentUser()
 
     const { data } = useFetch<ILocalOrganizationModel>({
         key: AsyncStateConstants.localOrganizationData,
-        queryFn: async () =>
-            AsyncHelper.createPromise(() => {
-                return AppInfoLocalDB.getOneById(
-                    APP_INFO_LOCAL_DB_COLLECTIONS.INFO,
-                    APP_INFO_LOCAL_DB_COLLECTIONS_IDS.ORGANIZATION
-                )
-            }),
+        queryFn: AuthSignUserRepo.getOrganization,
         options: {
-            isExecuteOnInit: true,
+            isExecuteOnInitIfNoData: true,
             echoState: 'none'
         }
     })

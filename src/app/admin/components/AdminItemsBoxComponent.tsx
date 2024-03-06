@@ -1,4 +1,6 @@
 import { FC } from 'react'
+import { useTranslate } from '../../../common/hooks/useTranslate'
+import { TRANSLATE } from '../../../common/constants/TranslateConstants'
 
 interface AdminItemsBoxComponentProps {
     title?: string
@@ -17,6 +19,7 @@ const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
     onDeleteAll,
     onDeleteItem
 }) => {
+    const { translate } = useTranslate()
     return (
         <div className='h-full flex flex-col'>
             {(showDeleteAllIcon || title) && (
@@ -38,7 +41,7 @@ const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
                 {!items?.length && (
                     <div className='flex flex-col items-center justify-center h-full'>
                         <i className='fi fi-br-plus'></i>
-                        <span className='mt-2'>No Items</span>
+                        <span className='mt-2'>{`${translate(TRANSLATE.NO_ITEMS)}`}</span>
                     </div>
                 )}
 

@@ -6,4 +6,5 @@ export const AdminEchoStateConstants = {
     pickedRole: 'pickedRole',
     pickedProduct: 'pickedProduct',
     pickedGroup: 'pickedGroup',
+    searchedItems: 'searchedItems',
 }

@@ -37,8 +37,6 @@ export default function TablesDetailsFeature() {
 
     const tableContent: ITableContent = {
         header: ['Name', 'Number', 'Branch', 'Date'],
-        filter: ['Name', 'Number', 'Branch'],
-        defaultFilterItem: 'Name',
         items: RECENT_TRANSACTIONS,
         selectors: {
             Number: (item: any) =>  item['amount'] ,

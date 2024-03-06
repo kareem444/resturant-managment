@@ -1,7 +1,7 @@
 import { InputComponentProps } from "src/common/components/InputComponent"
 import { TRANSLATE } from "src/common/constants/TranslateConstants"
 import { useTranslate } from "src/common/hooks/useTranslate"
-import { AdminBranchesInputsConstant } from "../constants/AdminBranchConstants"
+import { AdminBranchInputsConstants } from "../constants/AdminBranchInputsConstants"
 
 export const AdminBranchInputsStructure = (): InputComponentProps[] => {
     const { translate } = useTranslate()
@@ -9,10 +9,9 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
         {
             labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
             validatedInput: {
-                name: AdminBranchesInputsConstant.name,
+                name: AdminBranchInputsConstants.name,
                 rules: {
                     isRequired: true,
-                    isEnglish: true
                 }
             }
         },
@@ -22,69 +21,60 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
             }),
             className: 'text-right',
             validatedInput: {
-                name: AdminBranchesInputsConstant.nameAr,
-                rules: {
-                    isRequired: true,
-                    isArabic: true
-                }
+                name: AdminBranchInputsConstants.nameAr,
+                // rules: {
+                //     isRequired: true,
+                //     isArabic: true
+                // }
             },
             labelStyle: 'ml-auto'
         },
         {
             labelTitle: translate(`Mobile`),
             validatedInput: {
-                name: AdminBranchesInputsConstant.mobile,
-                rules: {
-                    isRequired: true,
-                    isNumber: true
-                }
+                name: AdminBranchInputsConstants.mobile,
+                // rules: {
+                //     isRequired: true,
+                //     isNumber: true
+                // }
             }
         },
         {
             labelTitle: translate(`Address`),
             validatedInput: {
-                name: AdminBranchesInputsConstant.address,
-                rules: {
-                    isRequired: true,
-                }
+                name: AdminBranchInputsConstants.address,
             }
         },
         {
             labelTitle: translate(`Start Time`),
             type: 'time',
             validatedInput: {
-                name: AdminBranchesInputsConstant.startTime,
-                rules: {
-                    isRequired: true,
-                }
+                name: AdminBranchInputsConstants.startTime,
+                // rules: {
+                //     isRequired: true,
+                // }
             }
         },
         {
             labelTitle: translate(`End Time`),
             type: 'time',
             validatedInput: {
-                name: AdminBranchesInputsConstant.endTime,
-                rules: {
-                    isRequired: true,
-                }
+                name: AdminBranchInputsConstants.endTime,
+                // rules: {
+                //     isRequired: true,
+                // }
             }
         },
         {
             labelTitle: translate(`Branch Code`),
             validatedInput: {
-                name: AdminBranchesInputsConstant.branchCode,
-                rules: {
-                    isRequired: true,
-                }
+                name: AdminBranchInputsConstants.branchCode,
             }
         },
         {
             labelTitle: translate(`Tax Number`),
             validatedInput: {
-                name: AdminBranchesInputsConstant.taxNumber,
-                rules: {
-                    isRequired: true,
-                }
+                name: AdminBranchInputsConstants.taxNumber,
             }
         },
     ]

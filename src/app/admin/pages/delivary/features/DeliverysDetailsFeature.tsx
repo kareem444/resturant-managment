@@ -38,9 +38,6 @@ export default function DeliveryDetailsFeature() {
     const tableContent: ITableContent = {
         header: ['Name', 'Mobile', 'Branch', 'Date'],
         items: RECENT_TRANSACTIONS,
-        showFilterDropDown: true,
-        filter: ['Name', 'Mobile', 'Branch'],
-        defaultFilterItem: 'Name',
         selectors: {
             Mobile: (item: any) => item['amount'] + "$",
             Branch: (item: any) => item['location'],

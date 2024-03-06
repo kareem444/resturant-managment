@@ -38,8 +38,6 @@ export default function AdditionsDetailsFeature() {
     const tableContent: ITableContent = {
         header: ['Name', 'Price', 'Date'],
         items: RECENT_TRANSACTIONS,
-        showFilterDropDown: true,
-        filter: ['Name', 'Price'],
         selectors: {
             Price: (item: any) => item['amount'] + "$",
             Date: (item: any) => moment(item['date']).format('D MMM'),

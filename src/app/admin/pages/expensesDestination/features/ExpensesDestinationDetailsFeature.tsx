@@ -38,9 +38,6 @@ export default function ExpensesDestinationDetailsFeature() {
     const tableContent: ITableContent = {
         header: ['Name', 'Date'],
         items: RECENT_TRANSACTIONS,
-        showFilterDropDown: true,
-        filter: ['Name'],
-        defaultFilterItem: 'Destination',
         nameSelector: (item: any) => item['name'],
         selectors: {
             Date: (item: any) => moment(item['date']).format('D MMM'),

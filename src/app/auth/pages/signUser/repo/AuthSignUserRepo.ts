@@ -7,14 +7,16 @@ import {
 import {
     ILocalCurrentUserModel,
     ILocalOrganizationModel
-} from '../models/local/AuthLocalModel'
+} from '../../../models/local/AuthLocalModel'
 import { HashHelper } from 'src/common/helper/EncryptHelper'
 import { FireStoreHelper } from 'src/common/firebaseHandler/helper/FireStoreHelper'
 import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCollectionsConstants'
 import { IAdminMemberModel } from 'src/app/admin/models/AdminMemberModel'
 import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
+import { ErrorsConstants } from 'src/common/constants/ErrorsConstants'
+import { FireAuthHelper } from 'src/common/firebaseHandler/helper/FireAuthHelper'
 
-export class AuthService {
+export class AuthSignUserRepo {
     static async signUser(password: string): Promise<ILocalCurrentUserModel> {
         return AsyncHelper.createPromise(async () => {
             const organization: ILocalOrganizationModel =
@@ -23,33 +25,36 @@ export class AuthService {
                     APP_INFO_LOCAL_DB_COLLECTIONS_IDS.ORGANIZATION
                 )
 
-            if (!organization.organization_id) {
-                throw new Error('Something went wrong')
+            if (!organization.ownerId) {
+                throw ErrorsConstants.SOMETHING_WENT_WRONG
             }
 
+            // check if the password is organization owner's password
             const isPasswordMatch: boolean = await HashHelper.compare(
                 password,
                 organization.temporaryPassword
             )
 
+            // if the password is organization owner's password
             if (isPasswordMatch) {
                 const localData: ILocalCurrentUserModel = {
                     id: APP_INFO_LOCAL_DB_COLLECTIONS_IDS.CURRENT_USER,
-                    is_organization_owner: true,
-                    name: organization.organization_name,
-                    user_id: organization.organization_id,
+                    isOrganizationOwner: true,
+                    name: organization.organizationName,
+                    userId: organization.ownerId,
                     email: organization.email,
-                    mobile: organization.mobile
+                    mobile: organization.mobile,
                 }
 
                 AppInfoLocalDB.add(APP_INFO_LOCAL_DB_COLLECTIONS.INFO, localData, true)
                 return localData
             }
 
+            // if the password is member's password
             const member: IAdminMemberModel | undefined =
                 await AsyncHelper.createPromise(() =>
                     FireStoreHelper.findOne<IAdminMemberModel>(
-                        FireStoreCollectionsConstants.MEMBERS(organization.organization_id),
+                        FireStoreCollectionsConstants.MEMBERS,
                         {
                             where: { field: 'password', operator: '==', value: password }
                         }
@@ -60,35 +65,38 @@ export class AuthService {
                 const role: IAdminRoleModel | undefined =
                     await AsyncHelper.createPromise(() =>
                         FireStoreHelper.findByDocId<IAdminRoleModel>(
-                            FireStoreCollectionsConstants.ROLES(organization.organization_id),
+                            FireStoreCollectionsConstants.ROLES,
                             member.role.id
                         )
                     )
 
                 if (!role) {
-                    throw new Error('Something went wrong')
+                    throw ErrorsConstants.SOMETHING_WENT_WRONG
                 }
 
                 const localData: ILocalCurrentUserModel = {
                     id: APP_INFO_LOCAL_DB_COLLECTIONS_IDS.CURRENT_USER,
-                    is_organization_owner: false,
+                    isOrganizationOwner: false,
                     name: member.name,
-                    user_id: member.id,
+                    userId: member.id,
                     email: member.email,
                     mobile: member.mobile,
                     permissions: role.permissions,
                     branch: member.branch,
-                    roleType: member.role.roleType
+                    roleType: member.role.roleType,
                 }
 
                 AppInfoLocalDB.add(APP_INFO_LOCAL_DB_COLLECTIONS.INFO, localData, true)
                 return localData
             }
 
-            throw {
-                message: 'Incorrect password',
-                code: 'INCORRECT_PASSWORD'
-            }
+            throw ErrorsConstants.INCORRECT_PASSWORD
+        })
+    }
+
+    static getOrganization(): Promise<ILocalOrganizationModel | undefined> {
+        return AsyncHelper.createPromise(async () => {
+            return await FireAuthHelper.getOrganizationLocalData()
         })
     }
 }

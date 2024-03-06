@@ -7,7 +7,7 @@ import { routes } from "../../../common/routes/routes"
 
 export default function useAdminPermissions() {
     const { pathname } = useLocation()
-    const { isCurrentUser, is_organization_owner, permissions, roleType } = useCurrentUser()
+    const { isCurrentUser, isOrganizationOwner, permissions, roleType } = useCurrentUser()
     const [routesPermissions, setRoutePermissions] = useState<IRolesOptions>()
 
     const isAdminRole = roleType === 'dashboard' || roleType === 'dashboardAndPos'
@@ -30,10 +30,10 @@ export default function useAdminPermissions() {
     }, [pathname, isCurrentUser])
 
     return {
-        isAdmin: isCurrentUser && (is_organization_owner || isAdminRole),
-        isCanAccess: isCurrentUser && (is_organization_owner || (isAdminRole && routesPermissions?.access)),
-        isCanEdit: isCurrentUser && (is_organization_owner || (isAdminRole && routesPermissions?.edit)),
-        isCanAdd: isCurrentUser && (is_organization_owner || (isAdminRole && routesPermissions?.add)),
-        isCanDelete: isCurrentUser && (is_organization_owner || (isAdminRole && routesPermissions?.delete)),
+        isAdmin: isCurrentUser && (isOrganizationOwner || isAdminRole),
+        isCanAccess: isCurrentUser && (isOrganizationOwner || (isAdminRole && routesPermissions?.access)),
+        isCanEdit: isCurrentUser && (isOrganizationOwner || (isAdminRole && routesPermissions?.edit)),
+        isCanAdd: isCurrentUser && (isOrganizationOwner || (isAdminRole && routesPermissions?.add)),
+        isCanDelete: isCurrentUser && (isOrganizationOwner || (isAdminRole && routesPermissions?.delete)),
     }
 }

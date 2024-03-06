@@ -25,14 +25,10 @@ export default function ForgotPasswordFormFeature() {
         queryFn: (data: { mobile: string }) => AuthRepo.forgetPassword(data.mobile),
         options: {
             onSuccess() {
-                showNotification(
-                    'Your Request has been sent successfully',
-                )
+                showNotification('Your Request has been sent successfully')
             },
             onError(e) {
-                showNotification(
-                    e?.message || 'Something went wrong', 'error'
-                )
+                showNotification(e?.code || 'Something went wrong', 'error')
             }
         }
     })

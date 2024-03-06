@@ -28,21 +28,15 @@ export default function LoginFormFeature() {
         queryFn: (data: ILoginInputs) => AuthRepo.login(data.organizationCode, data.mobile, data.password),
         options: {
             onSuccess() {
-                showNotification(
-                    'Login successfully',
-                )
+                showNotification('Login successfully')
             },
             onError(e) {
-                showNotification(
-                    e?.message || 'Something went wrong','error'
-                )
+                showNotification(e?.code ?? 'Something went wrong', 'error')
             }
         }
     })
 
-    const onSubmit: SubmitHandler<ILoginInputs> = data => {
-        mutate(data)
-    }
+    const onSubmit: SubmitHandler<ILoginInputs> = data => mutate(data)
 
     const InputProperty = {
         name: 'mobile',

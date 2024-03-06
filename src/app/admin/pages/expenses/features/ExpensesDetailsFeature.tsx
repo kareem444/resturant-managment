@@ -38,9 +38,6 @@ export default function ExpensesDetailsFeature() {
     const tableContent: ITableContent = {
         header: ['Destination', 'Amount', 'PayType', "Branch", "Description", 'Date'],
         items: RECENT_TRANSACTIONS,
-        showFilterDropDown: true,
-        filter: ['Destination', 'Amount', 'PayType', "Branch"],
-        defaultFilterItem: 'Destination',
         selectors: {
             Destination: (item: any) => item['name'],
             Amount: (item: any) => '$' + item['amount'],

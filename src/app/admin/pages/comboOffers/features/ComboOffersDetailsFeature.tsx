@@ -43,9 +43,6 @@ export default function ComboOffersDetailsFeature() {
 
     const tableContent: ITableContent = {
         header: ['Name', 'Date'],
-        filter: ['Name'],
-        defaultFilterItem: 'Date',
-        showFilterDropDown: true,
         items: RECENT_TRANSACTIONS,
         selectors: {
             Date: (item: any) => moment(item['date']).format('D MMM')

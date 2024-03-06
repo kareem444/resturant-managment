@@ -1,32 +1,54 @@
-import { useEffect } from 'react'
-import { themeChange } from 'theme-change'
-// import checkAuth from './unUsed/app/auth';
-// import initializeApp from './unUsed/app/init';
-import RoutesContainer from './common/routes';
-import { useTranslate } from './common/hooks/useTranslate';
-
-// Initializing different libraries
-// initializeApp()
-
-// Check for login and initialize axios
-// const token = checkAuth()
+import { useEffect, useState } from "react";
+import { themeChange } from "theme-change";
+import RoutesContainer from "./common/routes";
+import { useTranslate } from "./common/hooks/useTranslate";
+import SplashScreenComponent from "./common/components/SplashScreenComponent";
+import useModalReducer from "./common/redux/modal/useModalReducer";
+import { appInit } from "./common/init";
 
 function App() {
-  const { dir } = useTranslate()
+  const [isInit, setIsInit] = useState(false);
+  const { dir } = useTranslate();
+  const { state, closeModal } = useModalReducer();
 
   useEffect(() => {
-    document.body.dir = dir
-  }, [dir])
+    themeChange(false);
+    if (document.querySelector("html")?.getAttribute("data-theme") === null) {
+      if (!localStorage.getItem("theme")) {
+        localStorage.setItem("theme", "winter");
+      }
+      document
+        .querySelector("html")
+        ?.setAttribute("data-theme", localStorage.getItem("theme") || "winter");
+    }
+    appInit().then(() => setIsInit(true));
+  }, []);
 
   useEffect(() => {
-    // 👆 daisy UI themes initialization
-    themeChange(false)
-  }, [])
+    document.body.dir = dir;
+  }, [dir]);
 
+  useEffect(() => {
+    const handleBackButton = (event: any) => {
+      event.preventDefault();
+      if (state.isOpen) {
+        closeModal();
+        window.history.forward();
+      }
+    };
 
-  return (
-    <RoutesContainer />
-  )
+    window.addEventListener("popstate", handleBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", handleBackButton);
+    };
+  }, [state.isOpen]);
+
+  if (!isInit) {
+    return <SplashScreenComponent />;
+  }
+
+  return <RoutesContainer />;
 }
 
-export default App
+export default App;

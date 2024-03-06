@@ -38,8 +38,6 @@ export default function GroupsDetailsFeature() {
 
     const tableContent: ITableContent = {
         header: ['Name', 'Date'],
-        filter: ['Name'],
-        defaultFilterItem: 'Name',
         items: RECENT_TRANSACTIONS,
         selectors: {
             Date: (item: any) => moment(item['date']).format('D-MM-YYYY hh:mm:ss A'),

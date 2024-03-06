@@ -37,8 +37,6 @@ export default function TaxesDetailsFeature() {
 
     const tableContent: ITableContent = {
         header: ['Name', "Amount", "Branch", 'Date'],
-        filter: ['Name'],
-        defaultFilterItem: 'Name',
         items: RECENT_TRANSACTIONS,
         selectors: {
             Amount: (item: any) => item['amount'],
