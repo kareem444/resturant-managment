@@ -1,12 +1,11 @@
-import AddUnitFeature from "./features/AddUnitFeature"
-import UnitsDetailsFeature from "./features/UnitsDetailsFeature"
+import AdminAddAndSearchCurrencyFeature from "./features/AdminAddAndSearchUnitFeature"
+import AdminUnitsDetailsFeature from "./features/AdminUnitsDetailsFeature"
 
 function UnitsPage() {
     return (
         <>
-            <AddUnitFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <UnitsDetailsFeature />
+            <AdminAddAndSearchCurrencyFeature />
+            <AdminUnitsDetailsFeature />
         </>
     )
 }

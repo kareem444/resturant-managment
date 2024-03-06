@@ -1,10 +1,10 @@
 import FormComponent from 'src/common/components/FormComponent';
-import { AdminEditGroupModalFormStructure } from '../structures/AdminAddGroupStructure';
+import { AdminEditGroupStructure } from '../structures/AdminEditGroupStructure';
 
 const AdminEditGroupModal = () => {
     return (
         <>
-            <FormComponent {...AdminEditGroupModalFormStructure()} />
+            <FormComponent {...AdminEditGroupStructure()} />
         </>
     )
 };

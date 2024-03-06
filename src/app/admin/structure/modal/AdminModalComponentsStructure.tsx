@@ -1,4 +1,5 @@
 import { ObjectKeys } from 'react-hook-form/dist/types/path/common'
+import AdminAddUnitModal from '../../pages/units/modal/AdminAddUnitModal'
 import AdminEditUnitModal from '../../pages/units/modal/AdminEditUnitModal'
 import AlertActionModalBodyComponent from 'src/common/components/AlertActionModalBodyComponent'
 import AdminEditProductModal from '../../pages/products/modal/AdminEditProductModal'
@@ -16,12 +17,16 @@ import AdminEditBranchModal from '../../pages/branches/modal/AdminEditBranchModa
 import AdminEditDiscountModal from '../../pages/discounts/modal/AdminEditDiscountModal'
 import AdminEditComboOfferModal from '../../pages/comboOffers/modal/AdminEditComboOfferModal'
 import AdminAddBranchModal from '../../pages/branches/modal/AdminAddBranchModal'
+import AdminAddGroupModal from '../../pages/groups/modal/AdminAddGroupModal'
+import AdminAddCustomerModal from '../../pages/customers/modal/AdminAddCustomerModal'
 
 export const AdminModalComponentsStructure = {
+    adminAddUnitModal: <AdminAddUnitModal />,
     adminEditUnitModal: <AdminEditUnitModal />,
     adminDeleteUnitModal: (
-        <AlertActionModalBodyComponent text='Are you sure you want to delete this unit?' />
+        <AlertActionModalBodyComponent text='Are you sure you want to delete this Unit?' />
     ),
+    adminAddGroupModal: <AdminAddGroupModal />,
     adminEditGroupModal: <AdminEditGroupModal />,
     adminDeleteGroupModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this group?' />
@@ -46,6 +51,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteDeliveryModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this delivery?' />
     ),
+    adminAddCustomerModal: <AdminAddCustomerModal />,
     adminEditCustomerModal: <AdminEditCustomerModal />,
     adminDeleteCustomerModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this customer?' />

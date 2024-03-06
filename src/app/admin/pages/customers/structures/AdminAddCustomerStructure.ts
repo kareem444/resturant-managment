@@ -1,102 +1,54 @@
-import {
-    IDefaultValuesProperties,
-    IFormComponentProperties
-} from 'src/common/components/FormComponent'
-import { InputComponentProps } from 'src/common/components/InputComponent'
+import { IFormComponentProperties } from 'src/common/components/FormComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
-import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
+import { useTranslate } from 'src/common/hooks/useTranslate'
+import { AdminCustomerInputsStructure } from './AdminCustomerInputsStructure'
+import { IAdminCustomerInputs } from '../interfaces/AdminCustomersInterface'
+import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonContainer'
+import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
+import { AdminCustomersRepo } from '../repo/AdminCustomersRepo'
+import {
+    showNotification
+} from 'src/common/components/ShowNotificationComponent'
+import { IAdminCustomerModel } from 'src/app/admin/models/AdminCustomerModel'
+import useCrudHandler from 'src/common/hooks/useCrudHandler'
 
-/* #region add unit form items Structure */
-const inputsItems = (
-    translate: (text: string | string[], option?: translateOptions) => string
-): InputComponentProps[] => {
-    return [
-        {
-            labelTitle: translate(`${TRANSLATE.NAME}`),
-            validatedInput: {
-                name: 'name',
-                rules: {
-                    isRequired: true,
-                    isEnglish: true
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Mobile`),
-            validatedInput: {
-                name: 'mobile',
-                rules: {
-                    isRequired: true,
-                    isNumber: true
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Tax Number`),
-            validatedInput: {
-                name: 'taxNumber',
-                rules: {
-                    isRequired: true,
-                    isNumber: true
-                }
-            }
-        },
-        {
-            labelTitle: translate(`Address`),
-            validatedInput: {
-                name: 'address',
-                rules: {
-                    isRequired: true,
-                    isEnglish: true
-                }
-            }
-        },
-    ]
-}
+export const AdminAddCustomerStructure =
+    (): IFormComponentProperties => {
+        const { translate } = useTranslate()
+        const { createOperation } = useCrudHandler<IAdminCustomerModel>('customers')
 
-const handelFormProperties = (
-    translate: (text: string | string[], option?: translateOptions) => string,
-    isEdit?: boolean
-): IFormComponentProperties => {
-    return {
-        inputs: inputsItems(translate),
-        button: {
-            text: translate(isEdit ? TRANSLATE.EDIT : TRANSLATE.ADD),
-            icon: isEdit ? 'fi-rr-pencil' : 'fi-rr-plus'
-        },
-        containerClassName: '',
-        childClassnames: '',
-        onSubmit: (data: IDefaultValuesProperties) => {
-            console.log(data)
-        },
-        defaultValues: {
-            name: '',
-            mobile: '',
-            taxNumber: '',
-            address: ''
+        const { mutate, isLoading } = useMutate({
+            queryFn: data => AdminCustomersRepo.createCustomer(data),
+            options: {
+                onSuccess(id, param: IAdminCustomerInputs) {
+                    createOperation({ ...param, id })
+                    showNotification('Customer added successfully')
+                },
+                onError(e) {
+                    showNotification(e?.code, 'error')
+                }
+            }
+        })
+
+        const handelOnSubmit = (data: IAdminCustomerInputs) => mutate(data)
+
+        const button: AdminButtonContainerProps = {
+            text: translate(TRANSLATE.ADD),
+            icon: 'fi-rr-plus',
+            isLoading
         }
-    }
-}
 
-export const AdminAddCustomerFeatureFormStructure =
-    (): IFormComponentProperties => {
-        const { translate } = useTranslate()
-        return handelFormProperties(translate)
-    }
-
-export const AdminEditCustomerModalFormStructure =
-    (): IFormComponentProperties => {
-        const { translate } = useTranslate()
+        const defaultValues: IAdminCustomerInputs = {
+            name: '',
+            taxNumber: '',
+            mobile: '',
+            address: '',
+        }
 
         return {
-            ...handelFormProperties(translate, true),
-            onSubmit: (data: IDefaultValuesProperties) => { },
-            defaultValues: {
-                name: 'test',
-                mobile: '0123456789',
-                taxNumber: '123456789',
-                address: 'test'
-            }
+            inputs: AdminCustomerInputsStructure(),
+            button,
+            onSubmit: handelOnSubmit,
+            defaultValues: defaultValues as any
         }
     }
-/* #endregion */

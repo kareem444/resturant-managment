@@ -5,6 +5,8 @@ export const FireStoreCollectionsConstants = {
     BRANCHES: 'branches',
     PRODUCTS: 'products',
     UNITS: 'units',
+    GROUPS: 'groups',
+    CUSTOMERS: 'customers',
     CATEGORIES: 'categories',
     MEMBERS: 'members',
     ROLES: 'roles',
