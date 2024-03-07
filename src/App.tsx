@@ -21,7 +21,9 @@ function App() {
         .querySelector("html")
         ?.setAttribute("data-theme", localStorage.getItem("theme") || "winter");
     }
-    appInit().then(() => setIsInit(true));
+    setTimeout(() => {
+      appInit().then(() => { setIsInit(true); })
+    }, 1000);
   }, []);
 
   useEffect(() => {

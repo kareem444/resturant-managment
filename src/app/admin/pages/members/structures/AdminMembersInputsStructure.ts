@@ -9,9 +9,9 @@ import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
 import { AdminRolesRepo } from '../../roles/repo/AdminRolesRepo'
 import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
-import { AdminMemberInputsConstants } from '../constants/AdminMemberConstants'
+import { AdminMemberInputsConstants } from '../constants/AdminMemberInputsConstants'
 
-export const AdminMembersInputsItemsStructure = (
+export const AdminMembersInputsStructure = (
     isEditModal = false
 ): InputComponentProps[] => {
     const { translate } = useTranslate()
@@ -42,7 +42,6 @@ export const AdminMembersInputsItemsStructure = (
     return [
         {
             labelTitle: translate(`${TRANSLATE.NAME}`),
-            containerStyle: '!col-start-1',
             validatedInput: {
                 name: AdminMemberInputsConstants.name,
                 rules: {
@@ -52,7 +51,6 @@ export const AdminMembersInputsItemsStructure = (
         },
         {
             labelTitle: translate(`Email`),
-            containerStyle: '!col-start-7',
             type: 'email',
             validatedInput: {
                 name: AdminMemberInputsConstants.email!,
@@ -63,7 +61,6 @@ export const AdminMembersInputsItemsStructure = (
         },
         {
             labelTitle: translate(`Mobile`),
-            containerStyle: '!col-start-1',
             type: 'number',
             validatedInput: {
                 name: AdminMemberInputsConstants.mobile!,
@@ -75,7 +72,6 @@ export const AdminMembersInputsItemsStructure = (
         {
             type: 'number',
             labelTitle: translate(`Password`),
-            containerStyle: '!col-start-7',
             validatedInput: {
                 name: AdminMemberInputsConstants.password!,
                 rules: {
@@ -89,7 +85,6 @@ export const AdminMembersInputsItemsStructure = (
             labelStyle: '',
             disabled: (isBranchLoading || !branches?.length),
             type: 'dropdownSearch',
-            containerStyle: '!col-start-7',
             validatedInput: {
                 name: AdminMemberInputsConstants.branch!,
                 rules: {
@@ -112,7 +107,6 @@ export const AdminMembersInputsItemsStructure = (
             labelStyle: '',
             type: 'dropdownSearch',
             disabled: (isRolesLoading || !roles?.length),
-            containerStyle: '!col-start-1',
             validatedInput: {
                 name: AdminMemberInputsConstants.role!,
                 rules: {
@@ -132,14 +126,12 @@ export const AdminMembersInputsItemsStructure = (
         },
         {
             labelTitle: translate(`Residential Number`),
-            containerStyle: '!col-start-1',
             validatedInput: {
                 name: AdminMemberInputsConstants.residentialNumber!,
             }
         },
         {
             labelTitle: translate(`Health Certificate`),
-            containerStyle: '!col-start-7',
             validatedInput: {
                 name: AdminMemberInputsConstants.healthCertificate!,
             }

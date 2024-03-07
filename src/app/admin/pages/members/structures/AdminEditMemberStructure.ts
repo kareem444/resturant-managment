@@ -4,28 +4,24 @@ import {
 } from 'src/common/components/FormComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { useTranslate } from 'src/common/hooks/useTranslate'
-import { AdminMembersInputsItemsStructure } from './AdminMembersInputsStructure'
+import { AdminMembersInputsStructure } from './AdminMembersInputsStructure'
 import { IAdminMemberInputs } from '../interfaces/AdminMembersInterface'
 import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonContainer'
 import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
 import { IAdminMemberModel } from 'src/app/admin/models/AdminMemberModel'
 import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
-import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
-import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import { AdminMembersRepo } from '../repo/AdminMembersRepo'
 import { showNotification } from 'src/common/components/ShowNotificationComponent'
 import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
+import useCrudHandler from 'src/common/hooks/useCrudHandler'
 
-export const AdminEditMemberModalFormStructure =
+export const AdminEditMemberStructure =
     (): IFormComponentProperties => {
         const { translate } = useTranslate()
         const { state: selectedMember } = useEchoState<IAdminMemberModel>(
             EchoStateConstants.selectedItem
-        )
-        const { setState } = useAsyncState<IAdminMemberModel[]>(
-            AsyncStateConstants.members
         )
         const { closeModal } = useModalReducer()
         const { state: pickedBranch } = useEchoState<IAdminMemberModel>(
@@ -40,24 +36,14 @@ export const AdminEditMemberModalFormStructure =
             selectedMember?.role as any,
             true
         )
+        const { updateOperation } = useCrudHandler<IAdminMemberModel>('members')
 
         const { mutate, isLoading } = useMutate({
             queryFn: data => AdminMembersRepo.updateMember(selectedMember?.id!, data),
             options: {
                 onSuccess(_, param: IAdminMemberModel) {
-                    setState(prevState => {
-                        return {
-                            data: prevState?.data?.map(item => {
-                                if (item.id === selectedMember.id) {
-                                    return { ...item, ...param }
-                                }
-                                return item
-                            })
-                        }
-                    })
-                    showNotification(
-                        'Branch updated successfully'
-                    )
+                    updateOperation({ ...selectedMember, ...param })
+                    showNotification('Branch updated successfully')
                     closeModal()
                 },
                 onError(formattedError) {
@@ -103,9 +89,8 @@ export const AdminEditMemberModalFormStructure =
         }
 
         return {
-            inputs: AdminMembersInputsItemsStructure(true),
+            inputs: AdminMembersInputsStructure(true),
             button,
-            containerClassName: 'grid-rows-2 grid-flow-col',
             onSubmit: handelOnSubmit,
             defaultValues: defaultValues as any
         }

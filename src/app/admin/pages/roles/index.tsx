@@ -1,9 +1,11 @@
-import RolesDetailsFeature from "./features/RolesDetailsFeature"
+import AdminAddAndSearchRoleFeature from "./features/AdminAddAndSearchRoleFeature"
+import AdminRolesDetailsFeature from "./features/AdminRolesDetailsFeature"
 
 function RolesPage() {
     return (
         <>
-            <RolesDetailsFeature />
+            <AdminAddAndSearchRoleFeature />
+            <AdminRolesDetailsFeature />
         </>
     )
 }

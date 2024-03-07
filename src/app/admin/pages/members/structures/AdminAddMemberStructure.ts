@@ -4,7 +4,7 @@ import {
 } from 'src/common/components/FormComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 import { useTranslate } from 'src/common/hooks/useTranslate'
-import { AdminMembersInputsItemsStructure } from './AdminMembersInputsStructure'
+import { AdminMembersInputsStructure } from './AdminMembersInputsStructure'
 import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonContainer'
 import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
 import {
@@ -15,34 +15,26 @@ import { IAdminMemberInputs } from '../interfaces/AdminMembersInterface'
 import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
 import { IAdminMemberModel } from 'src/app/admin/models/AdminMemberModel'
-import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
-import useAsyncState from 'src/common/DataHandler/hooks/server/useAsyncState'
 import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
+import useCrudHandler from 'src/common/hooks/useCrudHandler'
 
-export const AdminAddMemberFeatureFormStructure =
+export const AdminAddMemberStructure =
     (): IFormComponentProperties => {
         const { translate } = useTranslate()
+        const { createOperation } = useCrudHandler<IAdminMemberModel>('members')
 
         const { state: pickedBranch } = useEchoState<IAdminMemberModel>(EchoStateConstants.pickedBranch)
         const { state: pickedRole } = useEchoState<IAdminRoleModel>(EchoStateConstants.pickedRole)
-
-        const { setState } = useAsyncState<IAdminMemberModel[]>(AsyncStateConstants.members)
 
         const { mutate, isLoading } = useMutate({
             queryFn: data => AdminMembersRepo.createMember(data),
             options: {
                 onSuccess(id, param: IAdminMemberModel) {
-                    setState(prevState => {
-                        return {
-                            data: [{ ...param, id }, ...(prevState?.data || [])]
-                        }
-                    })
-                    showNotification(
-                        'Member added successfully'
-                    )
+                    createOperation({ ...param, id })
+                    showNotification('Member added successfully')
                 },
-                onError(formattedError) {
-                    showNotification(formattedError?.message ?? 'Something went wrong', 'error')
+                onError(e) {
+                    showNotification(e?.code, 'error')
                 }
             }
         })
@@ -85,9 +77,8 @@ export const AdminAddMemberFeatureFormStructure =
         }
 
         return {
-            inputs: AdminMembersInputsItemsStructure(),
+            inputs: AdminMembersInputsStructure(),
             button,
-            containerClassName: 'grid-rows-2 grid-flow-col',
             onSubmit: handelOnSubmit,
             defaultValues: defaultValues as any
         }

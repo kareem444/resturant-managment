@@ -18,8 +18,6 @@ export const initDynamicDB = async (credentials?: FirebaseOptions) => {
         );
     }
 
-    const db = await FireBaseConfig.initDynamicDB(
-        credentials ?? org?.projectCredentials
-    );
+    const db = await FireBaseConfig.initDynamicDB(credentials ?? org?.projectCredentials);
     FireStoreHelper.setDB(db);
 };

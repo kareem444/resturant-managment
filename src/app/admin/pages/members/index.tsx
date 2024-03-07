@@ -1,9 +1,11 @@
-import MembersDetailsFeature from "./features/MembersDetailsFeature"
+import AdminAddAndSearchMemberFeature from "./features/AdminAddAndSearchMemberFeature"
+import AdminMembersDetailsFeature from "./features/AdminMembersDetailsFeature"
 
 function MembersPage() {
     return (
         <>
-            <MembersDetailsFeature />
+            <AdminAddAndSearchMemberFeature />
+            <AdminMembersDetailsFeature />
         </>
     )
 }

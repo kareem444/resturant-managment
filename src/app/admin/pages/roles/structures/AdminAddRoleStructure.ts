@@ -4,7 +4,7 @@ import {
 } from "src/common/components/FormComponent";
 import { TRANSLATE } from "src/common/constants/TranslateConstants";
 import { useTranslate } from "src/common/hooks/useTranslate";
-import { AdminRolesInputsStructure } from "./AdminRolesInputsStructure";
+import { AdminRoleInputsStructure } from "./AdminRoleInputsStructure";
 import useEchoState from "src/common/DataHandler/hooks/client/useEchoState";
 import {
     adminRoleDefaultVal,
@@ -14,15 +14,15 @@ import { IAdminRoleModel } from "src/app/admin/models/AdminRoleModel";
 import { AdminRolesRepo } from "../repo/AdminRolesRepo";
 import useMutate from "src/common/DataHandler/hooks/server/useMutate";
 import { showNotification } from "src/common/components/ShowNotificationComponent";
-import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState";
-import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
 import { EchoStateConstants } from "src/common/constants/EchoStateConstants";
 import { iRoleTypes } from "../interfaces/AdminRoleInterface";
+import useCrudHandler from "src/common/hooks/useCrudHandler";
 
-export const AdminAddRoleFeatureFormStructure = (
+export const AdminAddRoleStructure = (
     setIsAdminRole: React.Dispatch<React.SetStateAction<iRoleTypes>>
 ): IFormComponentProperties => {
     const { translate } = useTranslate();
+    const { createOperation } = useCrudHandler<IAdminRoleModel>("roles");
 
     const { state: roles } = useEchoState<any>(EchoStateConstants.selectedRoles);
     const { state: roleType } = useEchoState<iRoleTypes>(
@@ -30,25 +30,15 @@ export const AdminAddRoleFeatureFormStructure = (
         "dashboardAndPos"
     );
 
-    const { setState } = useAsyncState<IAdminRoleModel[]>(
-        AsyncStateConstants.roles
-    );
-
     const { mutate, isLoading } = useMutate({
-        queryFn(param) {
-            return AdminRolesRepo.addRole(param);
-        },
+        queryFn: (param) => AdminRolesRepo.addRole(param),
         options: {
             onSuccess(id, param) {
-                setState((prevState) => {
-                    return {
-                        data: [{ ...param, id }, ...(prevState.data || [])],
-                    };
-                });
+                createOperation({ ...param, id });
                 showNotification("Role added successfully");
             },
-            onError() {
-                showNotification("Something went wrong", "error");
+            onError(e) {
+                showNotification(e?.code, "error");
             },
         },
     });
@@ -88,7 +78,7 @@ export const AdminAddRoleFeatureFormStructure = (
     };
 
     return {
-        inputs: AdminRolesInputsStructure(setIsAdminRole),
+        inputs: AdminRoleInputsStructure(setIsAdminRole),
         button,
         onSubmit: handelOnSubmit,
         defaultValues: {

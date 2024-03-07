@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import TitleCardComponent from '../../../common/components/TitleCardComponent'
 import {
     ITableContent,
@@ -23,15 +23,18 @@ export interface IAdminDetailsPageContainerProps {
 export const AdminDetailsPageContainer: React.FC<
     IAdminDetailsPageContainerProps
 > = ({ tableContent, className, onRefresh, onPrint, onPdf, onWhatsapp }) => {
-    const { state: searchedItems, setState } = useEchoState<any[] | undefined>(EchoStateConstants.searchedItems)
     const { title } = usePageTitle()
     const { translate, isArabic } = useTranslate()
-
     const { pathname } = useLocation()
+    const [isInit, setIsInit] = useState(false)
+    const { state: searchedItems, setState } = useEchoState<any[] | undefined>(EchoStateConstants.searchedItems)
 
     useEffect(() => {
         setState(tableContent.items)
+        setIsInit(true)
     }, [pathname])
+
+    const data = isInit ? (searchedItems ?? tableContent.items ?? []) : []
 
     return (
         <TitleCardComponent
@@ -42,7 +45,7 @@ export const AdminDetailsPageContainer: React.FC<
             onPdfButtonClick={onPdf}
             onWhatsappButtonClick={onWhatsapp}
         >
-            <TableComponent {...tableContent} items={searchedItems ?? tableContent.items ?? []} />
+            <TableComponent {...tableContent} items={data || []} />
         </TitleCardComponent>
     )
 }

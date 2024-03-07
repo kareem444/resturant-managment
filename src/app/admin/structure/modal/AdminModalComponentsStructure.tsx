@@ -16,6 +16,8 @@ import AdminEditBranchModal from '../../pages/branches/modal/AdminEditBranchModa
 import AdminEditDiscountModal from '../../pages/discounts/modal/AdminEditDiscountModal'
 import AdminEditComboOfferModal from '../../pages/comboOffers/modal/AdminEditComboOfferModal'
 import AdminAddBranchModal from '../../pages/branches/modal/AdminAddBranchModal'
+import AdminAddRoleModal from '../../pages/roles/modal/AdminAddRoleModal'
+import AdminAddMemberModal from '../../pages/members/modal/AdminAddMemberModal'
 
 export const AdminModalComponentsStructure = {
     adminEditUnitModal: <AdminEditUnitModal />,
@@ -62,6 +64,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteExpensesDestinationModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this expenses destination?' />
     ),
+    adminAddMemberModal: <AdminAddMemberModal />,
     adminEditMemberModal: <AdminEditMemberModal />,
     adminDeleteMemberModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this member?' />
@@ -79,6 +82,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteDiscountModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this discount?' />
     ),
+    adminAddRoleModal: <AdminAddRoleModal />,
     adminDeleteRoleModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this role?' />
     ),

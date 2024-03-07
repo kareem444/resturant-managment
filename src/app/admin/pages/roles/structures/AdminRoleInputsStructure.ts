@@ -4,7 +4,7 @@ import { useTranslate } from "src/common/hooks/useTranslate"
 import { iRoleTypes } from "../interfaces/AdminRoleInterface"
 import { AdminRolesInputsConstant } from "../constants/AdminRoleDefaultVal"
 
-export const AdminRolesInputsStructure = (
+export const AdminRoleInputsStructure = (
     setIsAdminRole: React.Dispatch<React.SetStateAction<iRoleTypes>>,
 ): InputComponentProps[] => {
     const { translate } = useTranslate()
@@ -20,7 +20,7 @@ export const AdminRolesInputsStructure = (
             }
         },
         {
-            labelTitle: 'Role',
+            labelTitle: translate(`Role`),
             type: 'dropdownSearch',
             validatedInput: {
                 name: AdminRolesInputsConstant.role,
