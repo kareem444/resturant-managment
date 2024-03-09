@@ -1,81 +1,51 @@
-import { IDefaultValuesProperties, IFormComponentProperties } from 'src/common/components/FormComponent'
-import { InputComponentProps } from 'src/common/components/InputComponent'
+import { IFormComponentProperties } from 'src/common/components/FormComponent'
 import { TRANSLATE } from 'src/common/constants/TranslateConstants'
-import { translateOptions, useTranslate } from 'src/common/hooks/useTranslate'
+import { useTranslate } from 'src/common/hooks/useTranslate'
+import { AdminUnitInputsStructure } from './AdminUnitInputsStructure'
+import { IAdminUnitInputs } from '../interfaces/AdminUnitsInterface'
+import { AdminButtonContainerProps } from 'src/app/admin/components/AdminButtonContainer'
+import useMutate from 'src/common/DataHandler/hooks/server/useMutate'
+import { AdminUnitsRepo } from '../repo/AdminUnitsRepo'
+import {
+    showNotification
+} from 'src/common/components/ShowNotificationComponent'
+import { IAdminUnitModel } from 'src/app/admin/models/AdminUnitModel'
+import useCrudHandler from 'src/common/hooks/useCrudHandler'
 
-/* #region add unit form items Structure */
-const inputsItems = (
-    translate: (text: string | string[], option?: translateOptions) => string
-): InputComponentProps[] => {
-    return [
-        {
-            labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
-            validatedInput: {
-                name: 'nameEn',
-                rules: {
-                    isRequired: true,
-                    isEnglish: true
+export const AdminAddUnitStructure =
+    (): IFormComponentProperties => {
+        const { translate } = useTranslate()
+        const { createOperation } = useCrudHandler<IAdminUnitModel>('units')
+
+        const { mutate, isLoading } = useMutate({
+            queryFn: data => AdminUnitsRepo.createUnit(data),
+            options: {
+                onSuccess(id, param: IAdminUnitInputs) {
+                    createOperation({ ...param, id })
+                    showNotification('Unit added successfully')
+                },
+                onError(e) {
+                    showNotification(e?.code, 'error')
                 }
             }
-        },
-        {
-            labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.AR} )`, {
-                isArabic: true
-            }),
-            className: 'text-right',
-            validatedInput: {
-                name: 'nameAr',
-                rules: {
-                    isRequired: true,
-                    isArabic: true
-                }
-            },
-            labelStyle: 'ml-auto'
-        },
-    ]
-}
+        })
 
-const handelFormProperties = (
-    translate: (text: string | string[], option?: translateOptions) => string,
-    isEdit?: boolean
-): IFormComponentProperties => {
-    return {
-        inputs: inputsItems(translate),
-        button: {
-            text: translate(isEdit ? TRANSLATE.EDIT : TRANSLATE.ADD),
-            icon: isEdit ? 'fi-rr-pencil' : 'fi-rr-plus'
-        },
-        containerClassName: '',
-        childClassnames: '',
-        onSubmit: (data: IDefaultValuesProperties) => {
-            console.log(data)
-        },
-        defaultValues: {
-            nameEn: '',
-            nameAr: '',
-            price: '',
-            image: ''
+        const handelOnSubmit = (data: IAdminUnitInputs) => mutate(data)
+
+        const button: AdminButtonContainerProps = {
+            text: translate(TRANSLATE.ADD),
+            icon: 'fi-rr-plus',
+            isLoading
+        }
+
+        const defaultValues: IAdminUnitInputs = {
+            name: ''
+        }
+
+        return {
+            inputs: AdminUnitInputsStructure(),
+            button,
+            onSubmit: handelOnSubmit,
+            defaultValues: defaultValues as any
         }
     }
-}
-
-export const AdminAddUnitFeatureFormStructure = (): IFormComponentProperties => {
-    const { translate } = useTranslate()
-    return handelFormProperties(translate)
-}
-
-export const AdminEditUnitModalFormStructure = (): IFormComponentProperties => {
-    const { translate } = useTranslate()
-
-    return {
-        ...handelFormProperties(translate, true),
-        onSubmit: (data: IDefaultValuesProperties) => { },
-        defaultValues: {
-            nameEn: 'Dummy Name',
-            nameAr: 'اسم وهمي',
-            price: '100',
-            image: ''
-        }
-    }
-}
-/* #endregion */

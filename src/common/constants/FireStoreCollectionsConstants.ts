@@ -9,4 +9,6 @@ export const FireStoreCollectionsConstants = {
     MEMBERS: 'members',
     ROLES: 'roles',
     TAXES: 'taxes',
+    GROUPS: 'groups',
+    CUSTOMERS: 'customers',
 }

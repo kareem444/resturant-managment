@@ -1,11 +1,14 @@
 import { ObjectKeys } from 'react-hook-form/dist/types/path/common'
+import AdminAddUnitModal from '../../pages/units/modal/AdminAddUnitModal'
 import AdminEditUnitModal from '../../pages/units/modal/AdminEditUnitModal'
 import AlertActionModalBodyComponent from 'src/common/components/AlertActionModalBodyComponent'
+import AdminAddGroupModal from '../../pages/groups/modal/AdminAddGroupModal'
 import AdminEditProductModal from '../../pages/products/modal/AdminEditProductModal'
 import AdminEditGroupModal from '../../pages/groups/modal/AdminEditGroupModal'
 import AdminEditAdditionModal from '../../pages/additions/modal/AdminEditAdditionModal'
 import AdminEditTableModal from '../../pages/tables/modal/AdminEditTableModal'
 import AdminEditDeliveryModal from '../../pages/delivary/modal/AdminEditDeliveryModal'
+import AdminAddCustomerModal from '../../pages/customers/modal/AdminAddCustomerModal'
 import AdminEditCustomerModal from '../../pages/customers/modal/AdminEditCustomerModal'
 import AdminEditSupplierModal from '../../pages/subbliers/modal/AdminEditSupplierModal'
 import AdminEditExpensesModal from '../../pages/expenses/modal/AdminEditExpensesModal'
@@ -20,10 +23,12 @@ import AdminAddRoleModal from '../../pages/roles/modal/AdminAddRoleModal'
 import AdminAddMemberModal from '../../pages/members/modal/AdminAddMemberModal'
 
 export const AdminModalComponentsStructure = {
+    adminAddUnitModal: <AdminAddUnitModal />,
     adminEditUnitModal: <AdminEditUnitModal />,
     adminDeleteUnitModal: (
-        <AlertActionModalBodyComponent text='Are you sure you want to delete this unit?' />
+        <AlertActionModalBodyComponent text='Are you sure you want to delete this Unit?' />
     ),
+    adminAddGroupModal: <AdminAddGroupModal />,
     adminEditGroupModal: <AdminEditGroupModal />,
     adminDeleteGroupModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this group?' />
@@ -48,6 +53,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteDeliveryModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this delivery?' />
     ),
+    adminAddCustomerModal: <AdminAddCustomerModal />,
     adminEditCustomerModal: <AdminEditCustomerModal />,
     adminDeleteCustomerModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this customer?' />
