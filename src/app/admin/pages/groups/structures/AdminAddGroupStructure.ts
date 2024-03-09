@@ -11,7 +11,7 @@ import {
 } from 'src/common/components/ShowNotificationComponent'
 import { IAdminGroupModel } from 'src/app/admin/models/AdminGroupModel'
 import useCrudHandler from 'src/common/hooks/useCrudHandler'
-
+//
 export const AdminAddGroupStructure =
     (): IFormComponentProperties => {
         const { translate } = useTranslate()
