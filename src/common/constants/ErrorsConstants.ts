@@ -30,4 +30,10 @@ export class ErrorsConstants {
         message: 'This request is already exist',
         status: 400
     }
+
+    static readonly ROLES_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'ROLES_NOT_EXIST',
+        message: 'Roles not exist',
+        status: 400
+    }
 }

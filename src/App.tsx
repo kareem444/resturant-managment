@@ -5,11 +5,14 @@ import { useTranslate } from "./common/hooks/useTranslate";
 import SplashScreenComponent from "./common/components/SplashScreenComponent";
 import useModalReducer from "./common/redux/modal/useModalReducer";
 import { appInit } from "./common/init";
+import { useDispatch } from "react-redux";
 
 function App() {
   const [isInit, setIsInit] = useState(false);
   const { dir } = useTranslate();
   const { state, closeModal } = useModalReducer();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     themeChange(false);
@@ -22,7 +25,7 @@ function App() {
         ?.setAttribute("data-theme", localStorage.getItem("theme") || "winter");
     }
     setTimeout(() => {
-      appInit().then(() => { setIsInit(true); })
+      appInit(dispatch).then(() => { setIsInit(true); })
     }, 1000);
   }, []);
 

@@ -71,7 +71,7 @@ export class AuthSignUserRepo {
                     )
 
                 if (!role) {
-                    throw ErrorsConstants.SOMETHING_WENT_WRONG
+                    throw ErrorsConstants.ROLES_NOT_EXIST
                 }
 
                 const localData: ILocalCurrentUserModel = {

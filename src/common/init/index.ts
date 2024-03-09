@@ -1,10 +1,14 @@
+import { Dispatch } from "react";
 import { AsyncHelper } from "../DataHandler/helper/ServerDataHandlerHelper";
-import { initDynamicDB } from "./FirebaseDynamicDbInit";
+import { initFireStoreDynamicDB } from "./InitFireStoreDynamicDB";
+import { AnyAction } from "@reduxjs/toolkit";
+import { initCurrentUser } from "./InitCurrentUser";
 
-export const appInit = async () => {
+export const appInit = async (dispatch: Dispatch<AnyAction>) => {
     AsyncHelper.createPromise(
         async () => {
-            await initDynamicDB();
+            await initFireStoreDynamicDB();
+            await initCurrentUser(dispatch);
         },
         (e) => {
             console.error(e);

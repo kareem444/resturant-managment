@@ -16,7 +16,7 @@ import { ILocalOrganizationModel } from "../models/local/AuthLocalModel";
 import { HashHelper } from "src/common/helper/EncryptHelper";
 import { FireBaseConfig } from "src/common/config/firebase";
 import { ErrorsConstants } from "src/common/constants/ErrorsConstants";
-import { initDynamicDB } from "src/common/init/FirebaseDynamicDbInit";
+import { initFireStoreDynamicDB } from "src/common/init/InitFireStoreDynamicDB";
 
 export class AuthRepo {
     private static checkRequestTrailExist(data: {
@@ -115,7 +115,7 @@ export class AuthRepo {
                     projectCredentials: user.projectCredentials,
                     temporaryPassword: user.temporaryPassword ?? hashedRandomPassword,
                 };
-                await initDynamicDB(localData.projectCredentials);
+                await initFireStoreDynamicDB(localData.projectCredentials);
                 AppInfoLocalDB.add(APP_INFO_LOCAL_DB_COLLECTIONS.INFO, localData, true);
             };
 

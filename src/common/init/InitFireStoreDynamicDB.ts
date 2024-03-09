@@ -8,7 +8,7 @@ import {
 import { FireBaseConfig } from "../config/firebase";
 import { FireStoreHelper } from "../firebaseHandler/helper/FireStoreHelper";
 
-export const initDynamicDB = async (credentials?: FirebaseOptions) => {
+export const initFireStoreDynamicDB = async (credentials?: FirebaseOptions) => {
     let org: ILocalOrganizationModel | undefined;
 
     if (!credentials) {

@@ -8,7 +8,7 @@ import useModalReducer from "../redux/modal/useModalReducer";
 import useScreenSize from "../hooks/useScreenSize";
 
 export interface IDefaultValuesProperties {
-    [key: string]: string | number | boolean | undefined;
+    [key: string]: string | number | boolean | undefined | File | Date;
 }
 
 export interface IFormComponentProperties {
