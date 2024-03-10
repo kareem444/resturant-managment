@@ -144,7 +144,7 @@ export const TableComponent: React.FC<ITableContent> = ({
                                             className={isArabic ? "text-right" : "text-left"}
                                             key={index}
                                         >
-                                            {value !== "" ? value : "__"}
+                                            {(value !== undefined && value !== "") ? value : "__"}
                                         </td>
                                     );
                                 })}

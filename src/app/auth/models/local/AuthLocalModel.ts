@@ -1,5 +1,5 @@
 import { FirebaseOptions } from "firebase/app"
-import { IDashboardRoles, iRoleTypes } from "src/app/admin/pages/roles/interfaces/AdminRoleInterface"
+import { IDashboardRoles, IRoleTypes } from "src/app/admin/pages/roles/interfaces/AdminRoleInterface"
 
 export interface ILocalOrganizationModel {
     id: string
@@ -24,6 +24,6 @@ export interface ILocalCurrentUserModel {
     email?: string
     mobile?: string
     isOrganizationOwner?: boolean
-    roleType?: iRoleTypes
+    roleType?: IRoleTypes
     permissions?: IDashboardRoles
 }

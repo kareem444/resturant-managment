@@ -29,11 +29,11 @@ const AdminGetMembersStructure = (): IAdminDetailsStatusContainerProps => {
         items: data || [],
         maxStringLength: 15,
         selectors: {
-            Mobile: (item: IAdminMemberModel) => item.mobile,
-            Email: (item: IAdminMemberModel) => item.email,
-            Password: (item: IAdminMemberModel) => item.password,
-            Branch: (item: IAdminMemberModel) => item.branch.name,
-            Role: (item: IAdminMemberModel) => item.role.name,
+            1: (item: IAdminMemberModel) => item.mobile,
+            2: (item: IAdminMemberModel) => item.email,
+            3: (item: IAdminMemberModel) => item.password,
+            4: (item: IAdminMemberModel) => item.branch?.name,
+            5: (item: IAdminMemberModel) => item.role?.name,
         },
         nameSelector: (item: IAdminMemberModel) => item.name,
         buttons: {

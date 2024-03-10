@@ -15,17 +15,17 @@ import { AdminRolesRepo } from "../repo/AdminRolesRepo";
 import useMutate from "src/common/DataHandler/hooks/server/useMutate";
 import { showNotification } from "src/common/components/ShowNotificationComponent";
 import { EchoStateConstants } from "src/common/constants/EchoStateConstants";
-import { iRoleTypes } from "../interfaces/AdminRoleInterface";
+import { IRoleTypes } from "../interfaces/AdminRoleInterface";
 import useCrudHandler from "src/common/hooks/useCrudHandler";
 
 export const AdminAddRoleStructure = (
-    setIsAdminRole: React.Dispatch<React.SetStateAction<iRoleTypes>>
+    setIsAdminRole: React.Dispatch<React.SetStateAction<IRoleTypes>>
 ): IFormComponentProperties => {
     const { translate } = useTranslate();
     const { createOperation } = useCrudHandler<IAdminRoleModel>("roles");
 
     const { state: roles } = useEchoState<any>(EchoStateConstants.selectedRoles);
-    const { state: roleType } = useEchoState<iRoleTypes>(
+    const { state: roleType } = useEchoState<IRoleTypes>(
         EchoStateConstants.selectedRoleType,
         "dashboardAndPos"
     );

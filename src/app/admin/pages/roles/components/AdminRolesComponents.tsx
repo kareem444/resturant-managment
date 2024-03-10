@@ -4,10 +4,10 @@ import { AdminAccordionDataStructure } from '../structures/AdminAddRoleAccordion
 import AdminPosRoleOptionsComponent from './AdminPosRoleOptionsComponent'
 import useEchoState from 'src/common/DataHandler/hooks/client/useEchoState'
 import { EchoStateConstants } from 'src/common/constants/EchoStateConstants'
-import { iRoleTypes } from '../interfaces/AdminRoleInterface'
+import { IRoleTypes } from '../interfaces/AdminRoleInterface'
 
 interface AdminRolesComponentsProps {
-    selectedRoleType: iRoleTypes
+    selectedRoleType: IRoleTypes
 }
 
 const AdminRolesComponents: FC<AdminRolesComponentsProps> = ({

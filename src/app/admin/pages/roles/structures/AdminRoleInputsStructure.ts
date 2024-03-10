@@ -1,11 +1,11 @@
 import { InputComponentProps } from "src/common/components/InputComponent"
 import { TRANSLATE } from "src/common/constants/TranslateConstants"
 import { useTranslate } from "src/common/hooks/useTranslate"
-import { iRoleTypes } from "../interfaces/AdminRoleInterface"
+import { IRoleTypes } from "../interfaces/AdminRoleInterface"
 import { AdminRolesInputsConstant } from "../constants/AdminRoleDefaultVal"
 
 export const AdminRoleInputsStructure = (
-    setIsAdminRole: React.Dispatch<React.SetStateAction<iRoleTypes>>,
+    setIsAdminRole: React.Dispatch<React.SetStateAction<IRoleTypes>>,
 ): InputComponentProps[] => {
     const { translate } = useTranslate()
 

@@ -2,6 +2,7 @@ import { FireStoreHelper } from 'src/common/firebaseHandler/helper/FireStoreHelp
 import { IAdminBranchInputs } from '../interfaces/AdminBranchesInterface'
 import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCollectionsConstants'
 import { AsyncHelper } from 'src/common/DataHandler/helper/ServerDataHandlerHelper'
+import { IAdminBranchModel } from 'src/app/admin/models/AdminBranchModel'
 
 export class AdminBranchesRepo {
     static createBranch = async (data: IAdminBranchInputs): Promise<string> => {
@@ -14,13 +15,12 @@ export class AdminBranchesRepo {
         })
     }
 
-    static getBranches = async () => {
+    static getBranches = async (): Promise<IAdminBranchModel[]> => {
         return await AsyncHelper.createPromise(async () => {
-            const branches = await FireStoreHelper.find(
+            return await FireStoreHelper.find(
                 FireStoreCollectionsConstants.BRANCHES,
                 { isAuthGuard: true, orderBy: [{ field: 'createdAt', direction: 'desc' }] }
             )
-            return branches
         })
     }
 

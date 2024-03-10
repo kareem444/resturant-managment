@@ -1,16 +1,16 @@
 import { IAdminMemberInputs } from "../pages/members/interfaces/AdminMembersInterface"
-import { iRoleTypes } from "../pages/roles/interfaces/AdminRoleInterface"
+import { IRoleTypes } from "../pages/roles/interfaces/AdminRoleInterface"
 
-export interface IAdminMemberModel extends IAdminMemberInputs {
+export interface IAdminMemberModel extends Omit<IAdminMemberInputs, "branchId" | "roleId">{
     id?: string
-    branch: {
+    branch?: {
         id: string
         name: string
     }
-    role: {
+    role?: {
         id: string
         name: string
-        roleType: iRoleTypes
+        roleType: IRoleTypes
     }
     createdAt?: Date
     updatedAt?: Date

@@ -1,4 +1,4 @@
-export type iRoleTypes = 'dashboard' | 'pos' | 'dashboardAndPos';
+export type IRoleTypes = 'dashboard' | 'pos' | 'dashboardAndPos';
 
 export interface IRolesOptions {
     access: boolean;
@@ -53,7 +53,7 @@ export interface IDashboardRoles extends IPosRoles {
 
 export interface IAdminRolesInputs {
     name: string
-    role: iRoleTypes
+    role: IRoleTypes
 }
 
 export type IAdminRolesInputsEnum = {

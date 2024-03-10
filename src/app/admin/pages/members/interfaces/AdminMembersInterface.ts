@@ -3,8 +3,8 @@ export interface IAdminMemberInputs {
     email?: string
     mobile?: string
     password: string
-    branch?: any
-    role?: any
+    branchId?: string
+    roleId?: string
     residentialNumber?: string
     healthCertificate?: string
 }

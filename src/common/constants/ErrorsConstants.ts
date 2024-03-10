@@ -36,4 +36,22 @@ export class ErrorsConstants {
         message: 'Roles not exist',
         status: 400
     }
+
+    static readonly BRANCH_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'BRANCH_NOT_EXIST',
+        message: 'Branch not exist',
+        status: 400
+    }
+
+    static readonly MEMBER_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'MEMBER_NOT_EXIST',
+        message: 'Member not exist',
+        status: 400
+    }
+
+    static readonly ROLE_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'ROLE_NOT_EXIST',
+        message: 'Role not exist',
+        status: 400
+    }
 }

@@ -11,10 +11,11 @@ import {
 import { HashHelper } from 'src/common/helper/EncryptHelper'
 import { FireStoreHelper } from 'src/common/firebaseHandler/helper/FireStoreHelper'
 import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCollectionsConstants'
-import { IAdminMemberModel } from 'src/app/admin/models/AdminMemberModel'
 import { IAdminRoleModel } from 'src/app/admin/models/AdminRoleModel'
 import { ErrorsConstants } from 'src/common/constants/ErrorsConstants'
 import { FireAuthHelper } from 'src/common/firebaseHandler/helper/FireAuthHelper'
+import { IAdminMemberInputs } from 'src/app/admin/pages/members/interfaces/AdminMembersInterface'
+import { IAdminBranchModel } from 'src/app/admin/models/AdminBranchModel'
 
 export class AuthSignUserRepo {
     static async signUser(password: string): Promise<ILocalCurrentUserModel> {
@@ -51,9 +52,9 @@ export class AuthSignUserRepo {
             }
 
             // if the password is member's password
-            const member: IAdminMemberModel | undefined =
+            const member: IAdminMemberInputs & { id: string } | undefined =
                 await AsyncHelper.createPromise(() =>
-                    FireStoreHelper.findOne<IAdminMemberModel>(
+                    FireStoreHelper.findOne(
                         FireStoreCollectionsConstants.MEMBERS,
                         {
                             where: { field: 'password', operator: '==', value: password }
@@ -61,17 +62,29 @@ export class AuthSignUserRepo {
                     )
                 )
 
-            if (!!member) {
+            if (!!member && member.roleId && member.branchId) {
                 const role: IAdminRoleModel | undefined =
                     await AsyncHelper.createPromise(() =>
                         FireStoreHelper.findByDocId<IAdminRoleModel>(
                             FireStoreCollectionsConstants.ROLES,
-                            member.role.id
+                            member.roleId!
+                        )
+                    )
+
+                const branch: IAdminBranchModel | undefined =
+                    await AsyncHelper.createPromise(() =>
+                        FireStoreHelper.findByDocId<IAdminBranchModel>(
+                            FireStoreCollectionsConstants.BRANCHES,
+                            member.branchId!
                         )
                     )
 
                 if (!role) {
                     throw ErrorsConstants.ROLES_NOT_EXIST
+                }
+
+                if (!branch) {
+                    throw ErrorsConstants.BRANCH_NOT_EXIST
                 }
 
                 const localData: ILocalCurrentUserModel = {
@@ -82,8 +95,11 @@ export class AuthSignUserRepo {
                     email: member.email,
                     mobile: member.mobile,
                     permissions: role.permissions,
-                    branch: member.branch,
-                    roleType: member.role.roleType,
+                    branch: {
+                        id: branch.id!,
+                        name: branch.name
+                    },
+                    roleType: role.role,
                 }
 
                 AppInfoLocalDB.add(APP_INFO_LOCAL_DB_COLLECTIONS.INFO, localData, true)

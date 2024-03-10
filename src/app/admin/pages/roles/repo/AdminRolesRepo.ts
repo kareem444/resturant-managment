@@ -14,7 +14,7 @@ export class AdminRolesRepo {
         })
     }
 
-    static async getRoles() {
+    static async getRoles(): Promise<IAdminRoleModel[]> {
         return AsyncHelper.createPromise(async () => {
             return await FireStoreHelper.find(
                 FireStoreCollectionsConstants.ROLES,

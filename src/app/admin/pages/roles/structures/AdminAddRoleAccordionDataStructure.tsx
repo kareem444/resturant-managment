@@ -5,7 +5,7 @@ import {
 import AdminRolesOptionsItems from '../components/AdminRolesOptionsItems'
 import { removeDashFromRoutNameHelper } from 'src/common/helper/routesHelper'
 import AdminRegularRoleOptionComponent from '../components/AdminRegularRoleOptionComponent'
-import { IRolesOptions, iRoleTypes } from '../interfaces/AdminRoleInterface'
+import { IRolesOptions, IRoleTypes } from '../interfaces/AdminRoleInterface'
 
 const handelAddPosRolesForDashboardRole = (
     setRoles: React.Dispatch<
@@ -81,7 +81,7 @@ const handelEnableOnlyAccessButton = (
 }
 
 const handelRolesItem = (
-    roleType: iRoleTypes,
+    roleType: IRoleTypes,
     setRoles: React.Dispatch<
         React.SetStateAction<{
             [key: string]: IRolesOptions | { [key: string]: boolean }
@@ -135,7 +135,7 @@ const handelRolesItem = (
 
 /* #region accordion items area */
 export const AdminAccordionDataStructure = (
-    roleType: iRoleTypes,
+    roleType: IRoleTypes,
     setRoles: React.Dispatch<
         React.SetStateAction<{
             [key: string]: IRolesOptions | { [key: string]: boolean }
