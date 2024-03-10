@@ -66,6 +66,7 @@ export const TRANSLATE = {
     PURCHASES_BILL: 'purchases-bill',
     BOUNCED_PURCHASES: 'bounced-purchases',
     BOUNCED_PURCHASE: 'bounced-purchase',
+    EXPENSES_DEST: 'expenses-destinations',
     EXPENSES: 'expenses',
     EXPENSE: 'expense',
     MEMBERS: 'members',

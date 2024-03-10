@@ -1,14 +1,13 @@
-import AddTableFeature from "./features/AddTableFeature"
-import TablesDetailsFeature from "./features/TablesDetailsFeature"
+import AdminAddAndSearchCurrencyFeature from './features/AdminAddAndSearchTablesFeature';
+import AdminTablesDetailsFeature from './features/AdminTablesDetailsFeature';
 
 function TablesPage() {
-    return (
-        <>
-            <AddTableFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <TablesDetailsFeature />
-        </>
-    )
+  return (
+    <>
+      <AdminAddAndSearchCurrencyFeature />
+      <AdminTablesDetailsFeature />
+    </>
+  );
 }
 
-export default TablesPage
+export default TablesPage;

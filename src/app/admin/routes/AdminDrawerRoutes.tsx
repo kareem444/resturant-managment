@@ -110,7 +110,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
       {
         path: routes.admin.expensesDestination.fullPath,
         // icon: <ArrowRightOnRectangleIcon className={submenuIconClasses} />,
-        name: 'expenses-destinations',
+        name: 'Expenses Destinations',
       },
       {
         path: routes.admin.expenses.fullPath,

@@ -6,13 +6,13 @@ import AdminAddGroupModal from '../../pages/groups/modal/AdminAddGroupModal'
 import AdminEditProductModal from '../../pages/products/modal/AdminEditProductModal'
 import AdminEditGroupModal from '../../pages/groups/modal/AdminEditGroupModal'
 import AdminEditAdditionModal from '../../pages/additions/modal/AdminEditAdditionModal'
-import AdminEditTableModal from '../../pages/tables/modal/AdminEditTableModal'
+import AdminEditTableModal from '../../pages/tables/modal/AdminEditTablesModal'
 import AdminEditDeliveryModal from '../../pages/delivary/modal/AdminEditDeliveryModal'
 import AdminAddCustomerModal from '../../pages/customers/modal/AdminAddCustomerModal'
 import AdminEditCustomerModal from '../../pages/customers/modal/AdminEditCustomerModal'
 import AdminEditSupplierModal from '../../pages/subbliers/modal/AdminEditSupplierModal'
 import AdminEditExpensesModal from '../../pages/expenses/modal/AdminEditExpensesModal'
-import AdminEditExpensesDestinationModal from '../../pages/expensesDestination/modal/AdminEditExpensesDestinationModal'
+import AdminEditExpensesDestinationModal from '../../pages/expensesDestination/modal/AdminEditExpensesDestModal'
 import AdminEditMemberModal from '../../pages/members/modal/AdminEditMemberModal'
 import AdminEditTaxModal from '../../pages/taxes/modal/AdminEditTaxModal'
 import AdminEditBranchModal from '../../pages/branches/modal/AdminEditBranchModal'
@@ -21,6 +21,8 @@ import AdminEditComboOfferModal from '../../pages/comboOffers/modal/AdminEditCom
 import AdminAddBranchModal from '../../pages/branches/modal/AdminAddBranchModal'
 import AdminAddRoleModal from '../../pages/roles/modal/AdminAddRoleModal'
 import AdminAddMemberModal from '../../pages/members/modal/AdminAddMemberModal'
+import AdminAddExpensesDestModal from '../../pages/expensesDestination/modal/AdminAddExpensesDestModal'
+import AdminAddTablesModal from '../../pages/tables/modal/AdminAddTablesModal'
 
 export const AdminModalComponentsStructure = {
     adminAddUnitModal: <AdminAddUnitModal />,
@@ -45,6 +47,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteAdditionModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this addition?' />
     ),
+    adminAddTableModal: <AdminAddTablesModal />,
     adminEditTableModal: <AdminEditTableModal />,
     adminDeleteTableModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this table?' />
@@ -66,6 +69,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteExpensesModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this expenses?' />
     ),
+    adminAddExpensesDestinationModal: <AdminAddExpensesDestModal />,
     adminEditExpensesDestinationModal: <AdminEditExpensesDestinationModal />,
     adminDeleteExpensesDestinationModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this expenses destination?' />

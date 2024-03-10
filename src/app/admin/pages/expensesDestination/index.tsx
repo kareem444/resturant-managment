@@ -1,14 +1,13 @@
-import AddExpensesDestinationFeature from "./features/AddExpensesDestinationFeature"
-import ExpensesDestinationDetailsFeature from "./features/ExpensesDestinationDetailsFeature"
+import AdminAddAndSearchExpensesDestFeature from './features/AdminAddAndSearchExpensesDestFeature';
+import AdminExpensesDestsDetailsFeature from './features/AdminExpensesDestDetailsFeature';
 
-function ExpensesDestinationPage() {
-    return (
-        <>
-            <AddExpensesDestinationFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <ExpensesDestinationDetailsFeature />
-        </>
-    )
+function ExpensesDestsPage() {
+  return (
+    <>
+      <AdminAddAndSearchExpensesDestFeature />
+      <AdminExpensesDestsDetailsFeature />
+    </>
+  );
 }
 
-export default ExpensesDestinationPage
+export default ExpensesDestsPage;
