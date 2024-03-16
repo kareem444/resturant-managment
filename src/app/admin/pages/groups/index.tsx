@@ -1,10 +1,10 @@
-import AdminAddAndSearchCurrencyFeature from "./features/AdminAddAndSearchGroupFeature"
+import AdminAddAndSearchGroupFeature from "./features/AdminAddAndSearchGroupFeature"
 import AdminGroupsDetailsFeature from "./features/AdminGroupsDetailsFeature"
 
 function GroupsPage() {
     return (
         <>
-            <AdminAddAndSearchCurrencyFeature />
+            <AdminAddAndSearchGroupFeature />
             <AdminGroupsDetailsFeature />
         </>
     )

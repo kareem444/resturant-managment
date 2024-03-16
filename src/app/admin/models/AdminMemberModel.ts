@@ -1,17 +1,17 @@
-import { IAdminMemberInputs } from "../pages/members/interfaces/AdminMembersInterface"
-import { IRoleTypes } from "../pages/roles/interfaces/AdminRoleInterface"
+import { IAppModel } from "src/common/interfaces/modeInterface";
+import { IAdminMemberInputs } from "../pages/members/interfaces/AdminMembersInterface";
+import { IRoleTypes } from "../pages/roles/interfaces/AdminRoleInterface";
 
-export interface IAdminMemberModel extends Omit<IAdminMemberInputs, "branchId" | "roleId">{
-    id?: string
+export interface IAdminMemberModel
+    extends IAppModel,
+    Omit<IAdminMemberInputs, "branchId" | "roleId"> {
     branch?: {
-        id: string
-        name: string
-    }
+        id: string;
+        name: string;
+    };
     role?: {
-        id: string
-        name: string
-        roleType: IRoleTypes
-    }
-    createdAt?: Date
-    updatedAt?: Date
+        id: string;
+        name: string;
+        roleType: IRoleTypes;
+    };
 }

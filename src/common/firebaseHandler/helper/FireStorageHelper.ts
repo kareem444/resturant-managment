@@ -31,7 +31,7 @@ export class FireStorageHelper {
             DB?: FirebaseStorage;
             allowedExtensions?: string[];
         } = {}
-    ): Promise<String> => {
+    ): Promise<string> => {
         if (!DB) {
             throw "Storage not initialized";
         }

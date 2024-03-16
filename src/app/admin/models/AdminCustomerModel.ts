@@ -1,7 +1,4 @@
+import { IAppModel } from "src/common/interfaces/modeInterface";
 import { IAdminCustomerInputs } from "../pages/customers/interfaces/AdminCustomersInterface";
 
-export interface IAdminCustomerModel extends IAdminCustomerInputs {
-    id?: string
-    createdAt?: Date
-    updatedAt?: Date
-}
+export interface IAdminCustomerModel extends IAppModel, IAdminCustomerInputs {}

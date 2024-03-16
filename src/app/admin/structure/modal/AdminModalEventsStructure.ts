@@ -9,6 +9,7 @@ import OnDeleteRoleModalDeleteEvent from '../../pages/roles/structures/AdminDele
 import { OnDeleteUnitModalDeleteEvent } from '../../pages/units/structures/AdminDeleteUnitEventStructure'
 import { OnDeleteGroupModalDeleteEvent } from '../../pages/groups/structures/AdminDeleteGroupEventStructure'
 import { OnDeleteCustomerModalDeleteEvent } from '../../pages/customers/structures/AdminDeleteCustomerEventStructure'
+import { OnDeleteSupplierModalDeleteEvent } from '../../pages/suppliers/structures/AdminDeleteSupplierEventStructure'
 
 export const AdminModalEventsStructure = {
     onEditProductModalClose: OnEditProductModalCloseEvent,
@@ -20,4 +21,5 @@ export const AdminModalEventsStructure = {
     onDeleteUnitModalDelete: OnDeleteUnitModalDeleteEvent,
     onDeleteGroupModalDelete: OnDeleteGroupModalDeleteEvent,
     onDeleteCustomerModalDelete: OnDeleteCustomerModalDeleteEvent,
+    onDeleteSupplierModalDelete: OnDeleteSupplierModalDeleteEvent,
 }
