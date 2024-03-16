@@ -1,12 +1,11 @@
-import AddExpensesDestinationFeature from "./features/AddExpensesDestinationFeature"
-import ExpensesDestinationDetailsFeature from "./features/ExpensesDestinationDetailsFeature"
+import AdminAddAndSearchGroupFeature from "./features/AdminAddAndSearchExpensesDestinationFeature"
+import AdminGroupsDetailsFeature from "./features/AdminExpensesDestinationsDetailsFeature"
 
 function ExpensesDestinationPage() {
     return (
         <>
-            <AddExpensesDestinationFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <ExpensesDestinationDetailsFeature />
+            <AdminAddAndSearchGroupFeature />
+            <AdminGroupsDetailsFeature />
         </>
     )
 }

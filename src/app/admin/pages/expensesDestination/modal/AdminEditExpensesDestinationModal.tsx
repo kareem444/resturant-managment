@@ -1,10 +1,10 @@
 import FormComponent from 'src/common/components/FormComponent';
-import { AdminEditExpensesDestinationModalFormStructure } from '../structures/AdminAddExpensesDestinationStructure';
+import { AdminEditExpensesDestinationStructure } from '../structures/AdminEditExpensesDestinationStructure';
 
 const AdminEditExpensesDestinationModal = () => {
     return (
         <>
-            <FormComponent {...AdminEditExpensesDestinationModalFormStructure()} />
+            <FormComponent {...AdminEditExpensesDestinationStructure()} />
         </>
     )
 };

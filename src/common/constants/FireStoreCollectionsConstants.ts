@@ -12,4 +12,5 @@ export const FireStoreCollectionsConstants = {
     GROUPS: 'groups',
     CUSTOMERS: 'customers',
     SUPPLIERS: 'suppliers',
+    EXPENSES_DESTINATIONS: 'expenses_destinations',
 }

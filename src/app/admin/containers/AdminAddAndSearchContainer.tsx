@@ -17,7 +17,8 @@ interface AdminAddAndSearchContainerProps {
   addModalComponent?: ModalComponentsKeys;
   addModalSize?: IModalSizes;
   filter?: IFilterProps;
-  formatTitle?: 'none' | 's' | 'es'
+  formatTitle?: "none" | "s" | "es";
+  buttonClassName?: string;
 }
 
 const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
@@ -26,7 +27,8 @@ const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
   addModalComponent,
   addModalSize = "3xl",
   filter,
-  formatTitle = 's'
+  formatTitle = "s",
+  buttonClassName,
 }) => {
   const { titleWithoutLetterS, title, titleWithoutLetterES } = usePageTitle();
   const { translate, isArabic } = useTranslate();
@@ -34,19 +36,19 @@ const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
   const { openAddModal } = AdminModalActionsStructure();
 
   const handelTitle = () => {
-    if (formatTitle === 'none') {
-      return title
-    } else if (formatTitle === 's') {
-      return titleWithoutLetterS
+    if (formatTitle === "none") {
+      return title;
+    } else if (formatTitle === "s") {
+      return titleWithoutLetterS;
     } else {
-      return titleWithoutLetterES
+      return titleWithoutLetterES;
     }
-  }
+  };
 
   return (
     <>
       <div className="flex justify-between gap-2">
-        {(isEnableSearch && !!filter) && <FilterComponent {...filter} />}
+        {isEnableSearch && !!filter && <FilterComponent {...filter} />}
         {isEnableAdd && (
           <AdminButtonComponent
             text={
@@ -57,6 +59,8 @@ const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
             buttonClassName={
               "!w-1/3 md:!w-1/4" +
               " " +
+              buttonClassName +
+              " " +
               (!(isEnableSearch && !!filter) && !isArabic ? "ml-auto" : "") +
               " " +
               (!(isEnableSearch && !!filter) && isArabic ? "mr-auto" : "")
@@ -64,7 +68,11 @@ const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
             icon="fi-rr-plus"
             onClick={
               !!addModalComponent
-                ? () => openAddModal(addModalComponent, { size: addModalSize, formatTitle })
+                ? () =>
+                  openAddModal(addModalComponent, {
+                    size: addModalSize,
+                    formatTitle,
+                  })
                 : undefined
             }
           />

@@ -118,6 +118,8 @@
   "ar": "AR",
   "en": "ENG",
   "refresh": "Refresh",
-  "theData": "Data"
+  "theData": "Data",
+  "expenses-destinations": "Expenses Destinations",
+  "expenses-destination": "Expenses Destination"
 }
 
