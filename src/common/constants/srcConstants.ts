@@ -14,45 +14,46 @@ export const IMAGE_SRC = {
 
 export const BRANDS_SRC = [
     {
-        name: 'Hunger Station',
+        name: 'hungerStation',
         avatar: hungerStationImage
     },
     {
-        name: 'Jahez',
+        name: 'jahez',
         avatar: jahezImage
     },
     {
-        name: 'To You',
+        name: 'toYou',
         avatar: toYouImage
     },
     {
-        name: 'Marsool',
+        name: 'marsool',
         avatar: marsoolImage
     },
     {
-        name: 'Mr. Mandob',
+        name: 'mrMandob',
         avatar: mrMandobImage
     },
 ]
 
 export const PAYMENTS_WAY_SRC = [
     {
-        name: 'stc pay',
-        avatar: stcImage
+        name: 'cash',
+        avatar: cashImage,
+        active: true,
+    },
+    BRANDS_SRC[0],
+    BRANDS_SRC[1],
+    BRANDS_SRC[2],
+    {
+        name: 'mada',
+        avatar: madaImage
     },
     {
         name: 'visa',
         avatar: visaImage
     },
     {
-        name: 'mada',
-        avatar: madaImage
-    },
-    BRANDS_SRC[0],
-    BRANDS_SRC[1],
-    BRANDS_SRC[2],
-    {
-        name: 'cash',
-        avatar: cashImage
+        name: 'stcPay',
+        avatar: stcImage
     },
 ]

@@ -7,4 +7,5 @@ export const AdminAsyncStateConstants = {
     customers: 'customers',
     suppliers: 'suppliers',
     expensesDestinations: 'expensesDestinations',
+    paymentMethods: 'paymentMethods',
 }

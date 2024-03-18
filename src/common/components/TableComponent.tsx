@@ -77,18 +77,6 @@ export const TableComponent: React.FC<ITableContent> = ({
         }
     }, [dragResult[0], dragResult[1]]);
 
-    const handelButtons = (item: any) => {
-        if (buttons) {
-            if (buttons.switch) {
-                if (buttons.switch.defaultValueSelector) {
-                    buttons.switch.defaultValue =
-                        buttons.switch.defaultValueSelector(item);
-                }
-            }
-            return buttons;
-        }
-    };
-
     return (
         <div className="overflow-x-auto w-full no-scrollbar overflow-y-scroll h-full">
             <table className="table w-full">
@@ -155,7 +143,7 @@ export const TableComponent: React.FC<ITableContent> = ({
                                         }
                                     >
                                         <div className="flex justify-end">
-                                            <TableButtonsComponent {...handelButtons(l)} item={l} />
+                                            <TableButtonsComponent {...buttons} item={l} />
                                         </div>
                                     </td>
                                 )}

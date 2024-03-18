@@ -14,6 +14,7 @@ interface ITableButtonsComponent {
     onLock?: (item: any) => void
     switch?: {
         defaultValue?: boolean
+        defaultValueSelector?: (item: any) => boolean
         onSwitch?: (value: boolean, item: any) => void
     }
 }
@@ -24,7 +25,7 @@ export const TableButtonsComponent: React.FC<ITableButtonsComponent> = ({
     onDelete,
     onPrint,
     onLock,
-    switch: { defaultValue, onSwitch } = {},
+    switch: { defaultValue, onSwitch, defaultValueSelector } = {},
 }) => {
     return (
         <>
@@ -55,7 +56,7 @@ export const TableButtonsComponent: React.FC<ITableButtonsComponent> = ({
             {
                 onSwitch && (
                     <SwitchButtonComponent
-                        defaultValue={defaultValue}
+                        defaultValue={defaultValueSelector?.(item) || defaultValue}
                         onSwitch={(value) => { onSwitch(value, item) }}
                     />
                 )
