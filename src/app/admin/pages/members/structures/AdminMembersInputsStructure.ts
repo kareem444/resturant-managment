@@ -37,7 +37,7 @@ export const AdminMembersInputsStructure = (
         },
     });
 
-    const { state, setState } = useEchoState<IAdminMemberModel>(
+    const { state } = useEchoState<IAdminMemberModel>(
         EchoStateConstants.selectedItem
     );
 
@@ -99,18 +99,8 @@ export const AdminMembersInputsStructure = (
                     value: "id",
                     text: "name",
                 },
-                onSelect: (_, item: IAdminBranchModel) =>
-                    setState({
-                        ...state,
-                        branch: {
-                            id: item.id!,
-                            name: item.name,
-                        },
-                    }),
                 isLoading: isBranchLoading,
-                defaultSelectedValue: isEditModal
-                    ? state.branch || undefined
-                    : undefined,
+                defaultSelectedValue: isEditModal && state.branch,
             },
         },
         {
@@ -130,17 +120,8 @@ export const AdminMembersInputsStructure = (
                     value: "id",
                     text: "name",
                 },
-                onSelect: (_, item: IAdminRoleModel) =>
-                    setState({
-                        ...state,
-                        role: {
-                            id: item.id!,
-                            name: item.name,
-                            roleType: item.role,
-                        },
-                    }),
                 isLoading: isRolesLoading,
-                defaultSelectedValue: isEditModal ? state.role || undefined : undefined,
+                defaultSelectedValue: isEditModal && state.role,
             },
         },
         {

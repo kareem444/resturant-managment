@@ -11,7 +11,7 @@ import { IRoleTypes } from "../../roles/interfaces/AdminRoleInterface"
 import { ErrorsConstants } from "src/common/constants/ErrorsConstants"
 
 export class AdminMembersRepo {
-    static createMember = (member: IAdminMemberInputs) => {
+    static createMember = (member: IAdminMemberInputs): Promise<IAdminMemberModel> => {
         return AsyncHelper.createPromise(async () => {
             const branches: IAdminBranchModel[] = await AdminBranchesRepo.getBranches();
             const roles: IAdminRoleModel[] = await AdminRolesRepo.getRoles();
@@ -27,8 +27,15 @@ export class AdminMembersRepo {
                 throw ErrorsConstants.ROLE_NOT_EXIST;
             }
 
-            const refactorMember: IAdminMemberModel = {
+            const id: string = await FireStoreHelper.add(
+                FireStoreCollectionsConstants.MEMBERS,
+                member,
+                { isAuthGuard: true }
+            )
+
+            return {
                 ...member,
+                id,
                 branch: {
                     id: branch?.id as string,
                     name: branch?.name as string
@@ -39,14 +46,6 @@ export class AdminMembersRepo {
                     roleType: role?.role as IRoleTypes
                 }
             }
-
-            const id: string = await FireStoreHelper.add(
-                FireStoreCollectionsConstants.MEMBERS,
-                member,
-                { isAuthGuard: true }
-            )
-
-            return { ...refactorMember, id }
         })
     }
 
@@ -63,34 +62,32 @@ export class AdminMembersRepo {
                 if (!!member.branchId) {
                     const branch = branches?.find(branch => branch.id === member.branchId);
 
-                    if (!branch) {
-                        throw ErrorsConstants.BRANCH_NOT_EXIST;
+                    if (branch) {
+                        member.branch = {
+                            id: branch?.id as string,
+                            name: branch?.name as string
+                        };
                     }
 
-                    member.branch = {
-                        id: branch?.id as string,
-                        name: branch?.name as string
-                    };
+                    delete member.branchId;
                 }
 
                 if (!!member.roleId) {
                     const role = roles?.find(role => role.id === member.roleId);
 
-                    if (!role) {
-                        throw ErrorsConstants.ROLE_NOT_EXIST;
+                    if (role) {
+                        member.role = {
+                            id: role?.id as string,
+                            name: role?.name as string,
+                            roleType: role?.role as IRoleTypes
+                        };
                     }
 
-                    member.role = {
-                        id: role?.id as string,
-                        name: role?.name as string,
-                        roleType: role?.role as IRoleTypes
-                    };
+                    delete member.roleId;
                 }
 
                 return member
             })
-
-            console.log(refactorMembers);
 
             return refactorMembers as IAdminMemberModel[]
         })
@@ -119,7 +116,7 @@ export class AdminMembersRepo {
                 { isAuthGuard: true }
             )
 
-            const refactorMember: IAdminMemberModel = {
+            return {
                 ...member,
                 branch: {
                     id: branch?.id as string,
@@ -131,8 +128,6 @@ export class AdminMembersRepo {
                     roleType: role?.role as IRoleTypes
                 }
             }
-
-            return refactorMember
         })
     }
 

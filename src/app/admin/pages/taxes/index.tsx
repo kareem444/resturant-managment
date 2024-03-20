@@ -1,12 +1,11 @@
-import AddTaxFeature from "./features/AddTaxFeature"
-import TaxesDetailsFeature from "./features/TaxesDetailsFeature"
+import AdminAddAndSearchMemberFeature from "./features/AdminAddAndSearchTaxesFeature"
+import AdminMembersDetailsFeature from "./features/AdminTaxesDetailsFeature"
 
 function TaxesPage() {
     return (
         <>
-            <AddTaxFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <TaxesDetailsFeature />
+            <AdminAddAndSearchMemberFeature />
+            <AdminMembersDetailsFeature />
         </>
     )
 }

@@ -1,10 +1,10 @@
 import FormComponent from 'src/common/components/FormComponent';
-import { AdminEditTaxModalFormStructure } from '../structures/AdminAddTaxStructure';
+import { AdminEditTaxStructure } from '../structures/AdminEditTaxesStructure';
 
 const AdminEditTaxModal = () => {
     return (
         <>
-            <FormComponent {...AdminEditTaxModalFormStructure()} />
+            <FormComponent {...AdminEditTaxStructure()} />
         </>
     )
 };
