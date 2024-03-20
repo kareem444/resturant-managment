@@ -40,13 +40,11 @@ export const AdminAddBranchStructure =
 
         const defaultValues: IAdminBranchInputs = {
             name: '',
-            nameAr: '',
             mobile: '',
             address: '',
             startTime: '',
             endTime: '',
             branchCode: '',
-            taxNumber: ''
         }
 
         return {

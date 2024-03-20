@@ -7,7 +7,7 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
     const { translate } = useTranslate()
     return [
         {
-            labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.EN} )`),
+            labelTitle: translate(TRANSLATE.NAME),
             validatedInput: {
                 name: AdminBranchInputsConstants.name,
                 rules: {
@@ -16,18 +16,10 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`${TRANSLATE.NAME} ( ${TRANSLATE.AR} )`, {
-                isArabic: true
-            }),
-            className: 'text-right',
+            labelTitle: translate(`Branch Code`),
             validatedInput: {
-                name: AdminBranchInputsConstants.nameAr,
-                // rules: {
-                //     isRequired: true,
-                //     isArabic: true
-                // }
-            },
-            labelStyle: 'ml-auto'
+                name: AdminBranchInputsConstants.branchCode,
+            }
         },
         {
             labelTitle: translate(`Mobile`),
@@ -63,18 +55,6 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
                 // rules: {
                 //     isRequired: true,
                 // }
-            }
-        },
-        {
-            labelTitle: translate(`Branch Code`),
-            validatedInput: {
-                name: AdminBranchInputsConstants.branchCode,
-            }
-        },
-        {
-            labelTitle: translate(`Tax Number`),
-            validatedInput: {
-                name: AdminBranchInputsConstants.taxNumber,
             }
         },
     ]

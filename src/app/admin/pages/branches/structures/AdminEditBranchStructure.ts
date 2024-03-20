@@ -43,13 +43,11 @@ export const AdminEditBranchStructure = (): IFormComponentProperties => {
 
     const defaultValues: IAdminBranchInputs = {
         name: selectedBranch?.name || '',
-        nameAr: selectedBranch?.nameAr || '',
         mobile: selectedBranch?.mobile || '',
         address: selectedBranch?.address || '',
         startTime: selectedBranch?.startTime || '',
         endTime: selectedBranch?.endTime || '',
         branchCode: selectedBranch?.branchCode || '',
-        taxNumber: selectedBranch?.taxNumber || ''
     }
 
     return {
