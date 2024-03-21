@@ -2,6 +2,7 @@ import { FireStoreHelper } from 'src/common/firebaseHandler/helper/FireStoreHelp
 import { IAdminExpensesDestinationInputs } from '../interfaces/AdminExpensesDestinationsInterface'
 import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCollectionsConstants'
 import { AsyncHelper } from 'src/common/DataHandler/helper/ServerDataHandlerHelper'
+import { IAdminExpensesDestinationModel } from 'src/app/admin/models/AdminExpensesDestinationModel'
 
 export class AdminExpensesDestinationsRepo {
     static createExpensesDestination = async (data: IAdminExpensesDestinationInputs): Promise<string> => {
@@ -14,13 +15,12 @@ export class AdminExpensesDestinationsRepo {
         })
     }
 
-    static getExpensesDestinations = async () => {
+    static getExpensesDestinations = async (): Promise<IAdminExpensesDestinationModel[]> => {
         return await AsyncHelper.createPromise(async () => {
-            const ExpensesDestinations = await FireStoreHelper.find(
+            return await FireStoreHelper.find(
                 FireStoreCollectionsConstants.EXPENSES_DESTINATIONS,
                 { isAuthGuard: true, orderBy: [{ field: 'createdAt', direction: 'desc' }] }
             )
-            return ExpensesDestinations
         })
     }
 

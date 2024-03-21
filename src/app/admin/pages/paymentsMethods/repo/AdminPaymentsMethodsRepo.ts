@@ -2,15 +2,24 @@ import { AsyncHelper } from "src/common/DataHandler/helper/ServerDataHandlerHelp
 import { FireStoreCollectionsConstants } from "src/common/constants/FireStoreCollectionsConstants"
 import { FireStoreHelper } from "src/common/firebaseHandler/helper/FireStoreHelper"
 import { IAdminPaymentsMethods } from "../interface/AdminPaymentsMethodsInterface"
+import { IAdminPaymentsMethodsModel } from "src/app/admin/models/AdminPaymentsMethodsModel"
 
 export class AdminPaymentsMethodsRepo {
-    static getPaymentsMethods = async () => {
+    static getPaymentsMethods = async (): Promise<IAdminPaymentsMethodsModel[]> => {
         return await AsyncHelper.createPromise(async () => {
-            const paymentsMethods = await FireStoreHelper.find(
+            return await FireStoreHelper.find(
                 FireStoreCollectionsConstants.PAYMENTS_METHODS,
                 { isAuthGuard: true }
             )
-            return paymentsMethods
+        })
+    }
+
+    static getActivePaymentsMethods = async (): Promise<IAdminPaymentsMethodsModel[]> => {
+        return await AsyncHelper.createPromise(async () => {
+            return await FireStoreHelper.find(
+                FireStoreCollectionsConstants.PAYMENTS_METHODS,
+                { isAuthGuard: true, where: { field: 'active', operator: '==', value: true } }
+            )
         })
     }
 

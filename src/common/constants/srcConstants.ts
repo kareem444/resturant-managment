@@ -39,7 +39,6 @@ export const PAYMENTS_WAY_SRC = [
     {
         name: 'cash',
         avatar: cashImage,
-        active: true,
     },
     BRANDS_SRC[0],
     BRANDS_SRC[1],

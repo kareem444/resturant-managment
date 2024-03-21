@@ -25,6 +25,7 @@ import AdminAddSupplierModal from '../../pages/suppliers/modal/AdminAddSupplierM
 import AdminAddExpensesDestinationModal from '../../pages/expensesDestination/modal/AdminAddExpensesDestinationModal'
 import AdminAddTaxModal from '../../pages/taxes/modal/AdminAddTaxModal'
 import AdminAddTableModal from '../../pages/tables/modal/AdminAddTableModal'
+import AdminAddExpensesModal from '../../pages/expenses/modal/AdminAddExpensesModal'
 
 export const AdminModalComponentsStructure = {
     adminAddUnitModal: <AdminAddUnitModal />,
@@ -68,6 +69,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteSupplierModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this supplier?' />
     ),
+    adminAddExpensesModal: <AdminAddExpensesModal />,
     adminEditExpensesModal: <AdminEditExpensesModal />,
     adminDeleteExpensesModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this expenses?' />

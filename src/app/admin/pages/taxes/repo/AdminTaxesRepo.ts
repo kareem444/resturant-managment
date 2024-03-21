@@ -52,10 +52,9 @@ export class AdminTaxesRepo {
                             name: branch?.name as string
                         };
                     }
-
-                    delete tax.branchId;
                 }
 
+                delete tax.branchId;
                 return tax
             })
 

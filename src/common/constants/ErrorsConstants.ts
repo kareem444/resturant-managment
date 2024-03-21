@@ -54,4 +54,16 @@ export class ErrorsConstants {
         message: 'Role not exist',
         status: 400
     }
+
+    static readonly EXPENSES_DESTINATION_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'EXPENSES_DESTINATION_NOT_EXIST',
+        message: 'Expenses destination not exist',
+        status: 400
+    }
+
+    static readonly PAYMENT_METHOD_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'PAYMENT_METHOD_NOT_EXIST',
+        message: 'Payment method not exist',
+        status: 400
+    }
 }

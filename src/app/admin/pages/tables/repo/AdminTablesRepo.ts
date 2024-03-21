@@ -52,10 +52,9 @@ export class AdminTablesRepo {
                             name: branch?.name as string
                         };
                     }
-
-                    delete Table.branchId;
                 }
 
+                delete Table.branchId;
                 return Table
             })
 

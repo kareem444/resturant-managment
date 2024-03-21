@@ -68,8 +68,6 @@ export class AdminMembersRepo {
                             name: branch?.name as string
                         };
                     }
-
-                    delete member.branchId;
                 }
 
                 if (!!member.roleId) {
@@ -82,10 +80,10 @@ export class AdminMembersRepo {
                             roleType: role?.role as IRoleTypes
                         };
                     }
-
-                    delete member.roleId;
                 }
 
+                delete member.roleId;
+                delete member.branchId;
                 return member
             })
 
