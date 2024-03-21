@@ -9,4 +9,5 @@ export const AdminAsyncStateConstants = {
     expensesDestinations: 'expensesDestinations',
     paymentMethods: 'paymentMethods',
     taxes: 'taxes',
+    tables: 'tables',
 }

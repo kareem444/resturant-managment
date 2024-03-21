@@ -17,8 +17,9 @@ export interface DropDownSearchComponentProps {
         className?: string;
     };
     menu?: {
-        isMenuFloat?: boolean;
+        isMenuFloat: boolean;
         className?: string;
+        displayedItems?: 1 | 2 | 3;
     };
     showIcon?: boolean;
     clearAfterSelect?: boolean;
@@ -55,6 +56,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     },
     menu = {
         isMenuFloat: true,
+        displayedItems: 3,
     },
     containerClassName,
     data,
@@ -163,6 +165,19 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
         }
     };
 
+    const handelDisplayedItems = (): string => {
+        switch (menu.displayedItems) {
+            case 1:
+                return "max-h-12";
+            case 2:
+                return "max-h-20";
+            case 3:
+                return "max-h-32";
+            default:
+                return "max-h-32";
+        }
+    }
+
     const { isArabic } = useTranslate();
 
     return (
@@ -215,8 +230,9 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
             {showMenu && (
                 <ul
                     className={
-                        `max-h-32 w-full bg-zinc-50 dark:bg-base-200 border dark:border-none shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar` +
+                        `w-full bg-zinc-50 dark:bg-base-200 border dark:border-none shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar` +
                         ` ${menu.isMenuFloat && "absolute"} ` +
+                        ` ${handelDisplayedItems()} `+
                         ` ${menu.className} `
                     }
                 >

@@ -14,4 +14,5 @@ export const FireStoreCollectionsConstants = {
     SUPPLIERS: 'suppliers',
     EXPENSES_DESTINATIONS: 'expenses_destinations',
     PAYMENTS_METHODS: 'payments_methods',
+    TABLES: 'tables',
 }
