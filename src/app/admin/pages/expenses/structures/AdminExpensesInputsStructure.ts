@@ -55,6 +55,7 @@ export const AdminExpensesInputsStructure = (
     return [
         {
             labelTitle: translate(`${TRANSLATE.NAME}`),
+            containerStyle: 'col-span-12 md:col-span-6',
             validatedInput: {
                 name: AdminExpensesInputsConstants.name,
                 rules: {
@@ -65,6 +66,7 @@ export const AdminExpensesInputsStructure = (
         {
             labelTitle: translate("Branch"),
             disabled: isBranchLoading || !branches?.length,
+            containerStyle: 'col-span-12 md:col-span-6',
             type: "dropdownSearch",
             validatedInput: {
                 name: AdminExpensesInputsConstants.branchId!,
@@ -84,6 +86,7 @@ export const AdminExpensesInputsStructure = (
         },
         {
             labelTitle: translate('Expenses Destination'),
+            containerStyle: 'col-span-12 md:col-span-6',
             type: "dropdownSearch",
             disabled: isExpensesDestinationsLoading || !expensesDestinations?.length,
             validatedInput: {
@@ -104,6 +107,7 @@ export const AdminExpensesInputsStructure = (
         },
         {
             labelTitle: translate('Payment Method'),
+            containerStyle: 'col-span-12 md:col-span-6',
             type: "dropdownSearch",
             disabled: isPaymentsMethodsLoading || !paymentsMethods?.length,
             validatedInput: {
