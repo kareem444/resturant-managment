@@ -7,6 +7,7 @@ export interface UploadFileComponentProps {
     onFileChange?: (file: File | null) => void
     iconClassName?: string
     disabled?: boolean
+    image?: string
 }
 
 const UploadFileComponent: FC<UploadFileComponentProps> = ({
@@ -14,7 +15,8 @@ const UploadFileComponent: FC<UploadFileComponentProps> = ({
     className,
     onFileChange,
     iconClassName,
-    disabled = false
+    disabled = false,
+    image
 }) => {
     const [file, setFile] = useState<File | null>(null)
 
@@ -44,11 +46,11 @@ const UploadFileComponent: FC<UploadFileComponentProps> = ({
                 style={{ fontSize: 0 }}
                 disabled={disabled}
             />
-            {file ? (
+            {file || image ? (
                 <img
-                    src={URL.createObjectURL(file)}
+                    src={file ? URL.createObjectURL(file) : image}
                     alt='upload'
-                    className='h-full w-full rounded-xl'
+                    className='h-full w-full rounded-xl object-contain'
                 />
             ) : (
                 <i className={'fi fi-rr-picture m-auto text-4xl dark:text-gray-500' + ' ' + iconClassName} />

@@ -21,7 +21,7 @@ const ProductsPage = lazy(() => import('../../app/admin/pages/products'))
 const ComboOffersPage = lazy(() => import('../../app/admin/pages/comboOffers'))
 const AdditionsPage = lazy(() => import('../../app/admin/pages/additions'))
 const TablesPage = lazy(() => import('../../app/admin/pages/tables'))
-const DeliveryPage = lazy(() => import('../../app/admin/pages/delivary'))
+const DeliveryPage = lazy(() => import('../../app/admin/pages/delivery'))
 const CustomersPage = lazy(() => import('../../app/admin/pages/customers'))
 const SuppliersPage = lazy(() => import('../../app/admin/pages/suppliers'))
 const PurchasesBillsPage = lazy(

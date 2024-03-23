@@ -9,6 +9,7 @@ export interface IInputCustomRulesProperties {
     isNumber?: boolean | { value: boolean; message: string }
     minLength?: number | { value: number; message: string }
     maxLength?: number | { value: number; message: string }
+    maxFileSize?: number | { value: number; message: string }
 }
 
 interface IValidationArrayProperties {
@@ -63,6 +64,11 @@ const validationArray: IValidationArrayProperties[] = [
         ruleToValidate: 'maxLength',
         rule: 'maxLength',
         defaultMessage: 'Please enter a valid maxLength'
+    },
+    {
+        ruleToValidate: 'validate',
+        rule: 'maxFileSize',
+        defaultMessage: 'Please enter a valid maxFileSize'
     }
 ]
 
@@ -78,11 +84,18 @@ const CustomValidationHelper = (
                         continue
                     }
                 }
-                const rule = validationArray.find(
-                    rule => rule.rule === key
-                ) as IValidationArrayProperties
+                const rule = validationArray.find(rule => rule.rule === key) as IValidationArrayProperties
                 const validation = rule.validation ?? value.value ?? value
                 const message = value.message ?? rule.defaultMessage
+                if (key === 'maxFileSize') {
+                    rules.validate = (file: File) => {
+                        if (file.size > (validation * 1024 * 1024)) {
+                            return message
+                        }
+                        return true
+                    }
+                    continue
+                }
                 rules[rule.ruleToValidate] = {
                     value: validation,
                     message: message

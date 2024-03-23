@@ -60,6 +60,7 @@ const InputComponent: FC<InputComponentProps> = ({
         if (type == 'file')
             return (
                 <UploadFileComponent
+                    {...uploadFileInput}
                     iconClassName={uploadFileInput?.iconClassName}
                     field={field}
                     className={className}

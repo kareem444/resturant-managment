@@ -8,6 +8,7 @@ import {
     getDownloadURL,
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import { FireBaseErrorsConstants } from "../constants/FireBaseErrorsConstants";
 
 export class FireStorageHelper {
     private static storageDB: FirebaseStorage | undefined = undefined;
@@ -17,6 +18,10 @@ export class FireStorageHelper {
             this.storageDB = getStorage(app);
         }
     };
+
+    private static refactorFileName = (fileName: string): string => {
+        return fileName.split(".").slice(0, -1).join("_").split(" ").join("_").split("/").join("_");
+    }
 
     static uploadFile = async (
         file: File,
@@ -33,17 +38,17 @@ export class FireStorageHelper {
         } = {}
     ): Promise<string> => {
         if (!DB) {
-            throw "Storage not initialized";
+            throw FireBaseErrorsConstants.STORAGE_NOT_INITIALIZED;
         }
 
         const fileExtension = file.name.split(".").pop();
 
         if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
-            throw "File type not allowed";
+            throw FireBaseErrorsConstants.FILE_TYPE_NOT_ALLOWED;
         }
 
         if (!fileName) {
-            fileName = uuidv4() + "." + fileExtension;
+            fileName = this.refactorFileName(file.name) + '+' + uuidv4() + "." + fileExtension;
         }
 
         const storageRef = ref(DB, directory + "/" + fileName);

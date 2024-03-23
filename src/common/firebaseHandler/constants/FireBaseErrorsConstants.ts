@@ -16,4 +16,16 @@ export class FireBaseErrorsConstants {
         code: 'INVALID_EMAIL',
         status: 400
     }
+
+    static FILE_TYPE_NOT_ALLOWED = {
+        message: 'File type not allowed',
+        code: 'FILE_TYPE_NOT_ALLOWED',
+        status: 400
+    }
+
+    static STORAGE_NOT_INITIALIZED = {
+        message: 'Storage not initialized',
+        code: 'STORAGE_NOT_INITIALIZED',
+        status: 500
+    }
 }

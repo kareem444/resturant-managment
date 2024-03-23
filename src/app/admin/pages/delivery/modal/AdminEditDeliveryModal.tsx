@@ -1,10 +1,10 @@
 import FormComponent from 'src/common/components/FormComponent';
-import { AdminEditDeliveryModalFormStructure } from '../structures/AdminAddDeliveryStructure';
+import { AdminEditDeliveryStructure } from '../structures/AdminEditDeliveryStructure';
 
 const AdminEditDeliveryModal = () => {
     return (
         <>
-            <FormComponent {...AdminEditDeliveryModalFormStructure()} />
+            <FormComponent {...AdminEditDeliveryStructure()} />
         </>
     )
 };
