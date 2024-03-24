@@ -1,12 +1,11 @@
-import AddAdditionFeature from "./features/AddAdditionFeature"
-import AdditionsDetailsFeature from "./features/AdditionsDetailsFeature"
+import AdminAddAndSearchMemberFeature from "./features/AdminAddAndSearchAdditionFeature"
+import AdminMembersDetailsFeature from "./features/AdminAdditionDetailsFeature"
 
 function AdditionsPage() {
     return (
         <>
-            <AddAdditionFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <AdditionsDetailsFeature />
+            <AdminAddAndSearchMemberFeature />
+            <AdminMembersDetailsFeature />
         </>
     )
 }

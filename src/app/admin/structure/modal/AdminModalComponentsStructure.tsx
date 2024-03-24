@@ -5,7 +5,7 @@ import AlertActionModalBodyComponent from 'src/common/components/AlertActionModa
 import AdminAddGroupModal from '../../pages/groups/modal/AdminAddGroupModal'
 import AdminEditProductModal from '../../pages/products/modal/AdminEditProductModal'
 import AdminEditGroupModal from '../../pages/groups/modal/AdminEditGroupModal'
-import AdminEditAdditionModal from '../../pages/additions/modal/AdminEditAdditionModal'
+import AdminEditAdditionModal from '../../pages/additions/modal/AdminEditAdditionsModal'
 import AdminEditTableModal from '../../pages/tables/modal/AdminEditTableModal'
 import AdminEditDeliveryModal from '../../pages/delivery/modal/AdminEditDeliveryModal'
 import AdminAddCustomerModal from '../../pages/customers/modal/AdminAddCustomerModal'
@@ -27,6 +27,7 @@ import AdminAddTaxModal from '../../pages/taxes/modal/AdminAddTaxModal'
 import AdminAddTableModal from '../../pages/tables/modal/AdminAddTableModal'
 import AdminAddExpensesModal from '../../pages/expenses/modal/AdminAddExpensesModal'
 import AdminAddDeliveryModal from '../../pages/delivery/modal/AdminAddDeliveryModal'
+import AdminAddAdditionsModal from '../../pages/additions/modal/AdminAddAdditionsModal'
 
 export const AdminModalComponentsStructure = {
     adminAddUnitModal: <AdminAddUnitModal />,
@@ -47,6 +48,7 @@ export const AdminModalComponentsStructure = {
     adminDeleteComboOfferModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this combo offer?' />
     ),
+    adminAddAdditionModal: <AdminAddAdditionsModal />,
     adminEditAdditionModal: <AdminEditAdditionModal />,
     adminDeleteAdditionModal: (
         <AlertActionModalBodyComponent text='Are you sure you want to delete this addition?' />

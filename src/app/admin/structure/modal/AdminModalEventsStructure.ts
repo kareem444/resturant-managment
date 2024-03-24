@@ -15,6 +15,7 @@ import { OnDeleteTaxModalDeleteEvent } from "../../pages/taxes/structures/AdminD
 import { OnDeleteTableModalDeleteEvent } from "../../pages/tables/structures/AdminDeleteTablesEventStructure";
 import { OnDeleteExpensesModalDeleteEvent } from "../../pages/expenses/structures/AdminDeleteExpensesEventStructure";
 import { OnDeleteDeliveryModalDeleteEvent } from "../../pages/delivery/structures/AdminDeleteDeliveryEventStructure";
+import { OnDeleteAdditionsModalDeleteEvent } from "../../pages/additions/structures/AdminDeleteAdditionsEventStructure";
 
 export const AdminModalEventsStructure = {
     onEditProductModalClose: OnEditProductModalCloseEvent,
@@ -33,4 +34,5 @@ export const AdminModalEventsStructure = {
     onDeleteTableModalDelete: OnDeleteTableModalDeleteEvent,
     onDeleteExpensesModalDelete: OnDeleteExpensesModalDeleteEvent,
     onDeleteDeliveryModalDelete: OnDeleteDeliveryModalDeleteEvent,
+    onDeleteAdditionsModalDelete: OnDeleteAdditionsModalDeleteEvent,
 };

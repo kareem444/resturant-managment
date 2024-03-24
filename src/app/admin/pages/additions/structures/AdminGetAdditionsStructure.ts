@@ -5,18 +5,18 @@ import useEchoState from "src/common/DataHandler/hooks/client/useEchoState";
 import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
 import { EchoStateConstants } from "src/common/constants/EchoStateConstants";
 import { showNotification } from "src/common/components/ShowNotificationComponent";
-import { IAdminDeliveryModel } from "src/app/admin/models/AdminDeliveryModel";
-import { AdminDeliveryTableHeaderConstants } from "../constants/AdminDeliveryTableConstants";
-import { AdminDeliveryRepo } from "../repo/AdminDeliveryRepo";
+import { IAdminAdditionsModel } from "src/app/admin/models/AdminAdditionsModel";
+import { AdminAdditionsTableHeaderConstants } from "../constants/AdminAdditionsTableConstants";
+import { AdminAdditionsRepo } from "../repo/AdminAdditionsRepo";
 import { IAdminDetailsStatusContainerProps } from "src/app/admin/containers/AdminDetailsStatusContainer";
 
-const AdminGetDeliveryStructure = (): IAdminDetailsStatusContainerProps => {
+const AdminGetAdditionsStructure = (): IAdminDetailsStatusContainerProps => {
     const { openEditModal, openDeleteModal } = AdminModalActionsStructure();
     const { setState } = useEchoState(EchoStateConstants.selectedItem);
 
-    const { data, isLoading, isError, query } = useFetch<IAdminDeliveryModel[]>({
-        key: AsyncStateConstants.delivery,
-        queryFn: AdminDeliveryRepo.getDelivery,
+    const { data, isLoading, isError, query } = useFetch<IAdminAdditionsModel[]>({
+        key: AsyncStateConstants.additions,
+        queryFn: AdminAdditionsRepo.getAdditions,
         options: {
             isExecuteOnInitIfNoData: true,
             echoState: "all",
@@ -25,23 +25,22 @@ const AdminGetDeliveryStructure = (): IAdminDetailsStatusContainerProps => {
     });
 
     const tableContent: ITableContent = {
-        header: AdminDeliveryTableHeaderConstants,
+        header: AdminAdditionsTableHeaderConstants,
         items: data || [],
         maxStringLength: 15,
         selectors: {
-            1: (item: IAdminDeliveryModel) => item.branch?.name,
-            2: (item: IAdminDeliveryModel) => item.mobile,
+            1: (item: IAdminAdditionsModel) => item.price,
         },
-        nameSelector: (item: IAdminDeliveryModel) => item.name,
-        avatarSelector: (item: IAdminDeliveryModel) => item.image,
+        nameSelector: (item: IAdminAdditionsModel) => item.name,
+        avatarSelector: (item: IAdminAdditionsModel) => item.image,
         buttons: {
-            onEdit: (item: IAdminDeliveryModel) => {
+            onEdit: (item: IAdminAdditionsModel) => {
                 setState(item);
-                openEditModal("adminEditDeliveryModal");
+                openEditModal("adminEditAdditionModal", { size: 'xl' });
             },
-            onDelete: (item: IAdminDeliveryModel) => {
+            onDelete: (item: IAdminAdditionsModel) => {
                 setState(item);
-                openDeleteModal("adminDeleteDeliveryModal", "onDeleteDeliveryModalDelete");
+                openDeleteModal("adminDeleteAdditionModal", "onDeleteAdditionsModalDelete");
             },
         },
     };
@@ -55,4 +54,4 @@ const AdminGetDeliveryStructure = (): IAdminDetailsStatusContainerProps => {
     };
 };
 
-export default AdminGetDeliveryStructure;
+export default AdminGetAdditionsStructure;
