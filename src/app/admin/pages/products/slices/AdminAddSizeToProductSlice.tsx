@@ -94,7 +94,7 @@ const AdminAddSizeToProductSlice: FC<
                         disabled={result.size.length < 1 || result.price.length < 1}
                         onClick={handelOnSubmit}
                         buttonClassName={
-                            `!w-full !justify-center` +
+                            `!justify-center col-span-2` +
                             ` ` +
                             `${error.size || error.price
                                 ? 'cursor-not-allowed !my-auto'

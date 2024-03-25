@@ -1,6 +1,6 @@
 import { ModalComponentsKeys, ModalEventsKeys } from "src/common/containers/ModalContainer";
 
-export type IModalSizes = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "full" | "max";
+export type IModalSizes = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl";
 
 export interface IModalState {
     isOpen?: boolean;

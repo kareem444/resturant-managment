@@ -1,12 +1,11 @@
-import AddProductFeature from "./features/AddProductFeature"
-import UnitsProductsFeature from "./features/ProductsDetailsFeature"
+import AdminAddAndSearchMemberFeature from "./features/AdminAddAndSearchProductsFeature"
+import AdminMembersDetailsFeature from "./features/AdminProductsDetailsFeature"
 
 function ProductsPage() {
     return (
         <>
-            <AddProductFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <UnitsProductsFeature />
+            <AdminAddAndSearchMemberFeature />
+            <AdminMembersDetailsFeature />
         </>
     )
 }

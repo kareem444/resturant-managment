@@ -52,7 +52,7 @@ const Button = ({
 function ModalLayoutContainer() {
     const { state, closeModal } = useModalReducer()
 
-    const onCloseEvent = modalEvents[state.onClose || 'onEditProductModalClose']()
+    const onCloseEvent = modalEvents[state.onClose || 'onProductModalClose']()
 
     const handelMaxWidth = (): string => {
         const sizes = [

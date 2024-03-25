@@ -7,7 +7,7 @@ import usePageTitle from "src/common/hooks/usePageTitle";
 import FilterComponent, {
   IFilterProps,
 } from "src/common/components/FilterComponent";
-import { ModalComponentsKeys } from "src/common/containers/ModalContainer";
+import { ModalComponentsKeys, ModalEventsKeys } from "src/common/containers/ModalContainer";
 import AdminModalActionsStructure from "../structure/modal/AdminModalActionsStructure";
 import { IModalSizes } from "src/common/redux/modal/ModalInterface";
 
@@ -19,6 +19,7 @@ interface AdminAddAndSearchContainerProps {
   filter?: IFilterProps;
   formatTitle?: "none" | "s" | "es";
   buttonClassName?: string;
+  onModalClose?: ModalEventsKeys | undefined
 }
 
 const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
@@ -29,6 +30,7 @@ const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
   filter,
   formatTitle = "s",
   buttonClassName,
+  onModalClose
 }) => {
   const { titleWithoutLetterS, title, titleWithoutLetterES } = usePageTitle();
   const { translate, isArabic } = useTranslate();
@@ -72,6 +74,7 @@ const AdminAddAndSearchContainer: FC<AdminAddAndSearchContainerProps> = ({
                   openAddModal(addModalComponent, {
                     size: addModalSize,
                     formatTitle,
+                    onClose: onModalClose
                   })
                 : undefined
             }
