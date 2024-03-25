@@ -18,13 +18,15 @@ export interface IFilterProps {
   showFilterDropButton?: boolean;
   showSelectedFilter?: boolean;
   originalItemsKey: originalItemsKeyType;
+  containerClassName?: string
 }
 
 const FilterComponent: FC<IFilterProps> = ({
   items,
   showFilterDropButton = true,
   showSelectedFilter = true,
-  originalItemsKey
+  originalItemsKey,
+  containerClassName = ''
 }) => {
   const [filter, setFilter] = useState<FilterItem>();
   const { isXs } = useScreenSize();
@@ -64,7 +66,7 @@ const FilterComponent: FC<IFilterProps> = ({
   };
 
   return (
-    <div className={"flex items-center gap-2 w-2/3 md:w-1/2 lg:w-2/5"}>
+    <div className={"flex items-center gap-2 w-2/3 md:w-1/2 lg:w-2/5" + " " + containerClassName}>
       {(showFilterDropButton && items && items.length > 0) && (
         <div className="dropdown dropdown-bottom">
           <label

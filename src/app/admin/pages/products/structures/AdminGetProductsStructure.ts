@@ -9,10 +9,12 @@ import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 import { AdminProductsTableHeaderConstants } from "../constants/AdminProductsTableConstants";
 import { AdminProductsRepo } from "../repo/AdminProductsRepo";
 import { IAdminDetailsStatusContainerProps } from "src/app/admin/containers/AdminDetailsStatusContainer";
+import useScreenSize from "src/common/hooks/useScreenSize";
 
 const AdminGetProductsStructure = (): IAdminDetailsStatusContainerProps => {
     const { openEditModal, openDeleteModal } = AdminModalActionsStructure();
     const { setState } = useEchoState(EchoStateConstants.selectedItem);
+    const { isSm } = useScreenSize();
 
     const { data, isLoading, isError, query } = useFetch<IAdminProductsModel[]>({
         key: AsyncStateConstants.products,
@@ -35,10 +37,12 @@ const AdminGetProductsStructure = (): IAdminDetailsStatusContainerProps => {
         nameSelector: (item: IAdminProductsModel) => item.name,
         avatarSelector: (item: IAdminProductsModel) => item.image,
         buttons: {
-            onEdit: (item: IAdminProductsModel) => {
-                setState(item);
-                openEditModal("adminEditProductModal");
-            },
+            onEdit: isSm
+                ? undefined
+                : (item: IAdminProductsModel) => {
+                    setState(item);
+                    openEditModal("adminEditProductModal");
+                },
             onDelete: (item: IAdminProductsModel) => {
                 setState(item);
                 openDeleteModal(
