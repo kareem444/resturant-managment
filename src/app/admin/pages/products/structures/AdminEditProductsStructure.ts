@@ -12,6 +12,11 @@ import useMutate from "src/common/DataHandler/hooks/server/useMutate";
 import { AdminProductsRepo } from "../repo/AdminProductsRepo";
 import { showNotification } from "src/common/components/ShowNotificationComponent";
 import useCrudHandler from "src/common/hooks/useCrudHandler";
+import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
+import { IAdminGroupModel } from "src/app/admin/models/AdminGroupModel";
+import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
+import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState";
+import useProductUiReducer from "../redux/ui/useProductUiReducer";
 
 export const AdminEditProductsStructure = (): IFormComponentProperties => {
     const { translate } = useTranslate();
@@ -20,9 +25,23 @@ export const AdminEditProductsStructure = (): IFormComponentProperties => {
     );
     const { closeModal } = useModalReducer();
     const { updateOperation } = useCrudHandler<IAdminProductsModel>("products");
+    const { state: products } = useProductUiReducer();
+    const { state: branches } = useAsyncState<IAdminBranchModel[]>(
+        AsyncStateConstants.branches
+    );
+    const { state: groups } = useAsyncState<IAdminGroupModel[]>(
+        AsyncStateConstants.groups
+    );
 
     const { mutate, isLoading } = useMutate({
-        queryFn: (data) => AdminProductsRepo.updateProducts(selectedProducts?.id!, data),
+        queryFn: (data) =>
+            AdminProductsRepo.updateProducts(
+                selectedProducts?.id!,
+                data,
+                products,
+                branches?.data,
+                groups?.data
+            ),
         options: {
             onSuccess(Products: IAdminProductsModel) {
                 updateOperation({ ...selectedProducts, ...Products });
@@ -35,7 +54,11 @@ export const AdminEditProductsStructure = (): IFormComponentProperties => {
         },
     });
 
-    const handelOnSubmit = (data: IAdminProductsInputs) => mutate(data);
+    const handelOnSubmit = (data: IAdminProductsInputs) => {
+        if (!branches?.isLoading && !groups?.isLoading) {
+            mutate(data);
+        }
+    }
 
     const button: AdminButtonContainerProps = {
         text: translate(TRANSLATE.EDIT),
@@ -45,7 +68,9 @@ export const AdminEditProductsStructure = (): IFormComponentProperties => {
 
     const defaultValues: IAdminProductsInputs = {
         name: selectedProducts?.name || "",
-        mobile: selectedProducts?.mobile || "",
+        code: selectedProducts?.code || "",
+        productType: selectedProducts?.productType || "",
+        price: selectedProducts?.price || "",
     };
 
     return {

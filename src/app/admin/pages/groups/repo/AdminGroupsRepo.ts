@@ -2,6 +2,7 @@ import { FireStoreHelper } from 'src/common/firebaseHandler/helper/FireStoreHelp
 import { IAdminGroupInputs } from '../interfaces/AdminGroupsInterface'
 import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCollectionsConstants'
 import { AsyncHelper } from 'src/common/DataHandler/helper/ServerDataHandlerHelper'
+import { IAdminGroupModel } from 'src/app/admin/models/AdminGroupModel'
 
 export class AdminGroupsRepo {
     static createGroup = async (data: IAdminGroupInputs): Promise<string> => {
@@ -14,13 +15,12 @@ export class AdminGroupsRepo {
         })
     }
 
-    static getGroups = async () => {
+    static getGroups = async (): Promise<IAdminGroupModel[]> => {
         return await AsyncHelper.createPromise(async () => {
-            const groups = await FireStoreHelper.find(
+            return await FireStoreHelper.find(
                 FireStoreCollectionsConstants.GROUPS,
                 { isAuthGuard: true, orderBy: [{ field: 'createdAt', direction: 'desc' }] }
             )
-            return groups
         })
     }
 

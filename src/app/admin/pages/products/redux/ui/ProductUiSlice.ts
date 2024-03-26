@@ -11,13 +11,15 @@ import {
     removeAllProductTaxes,
     removeProductAddition,
     removeProductSize,
-    removeProductTax
+    removeProductTax,
+    updateProduct
 } from './ProductUiActions'
 
 export const ProductUiSlice = createSlice({
     name: REDUX.slice.admin.productUi,
     initialState: ProductUiInitialState,
     reducers: {
+        updateProductAction: updateProduct,
         changeProductTypeAction: changeProductType,
         addProductSizeAction: addProductSize,
         removeProductSizeAction: removeProductSize,
@@ -32,6 +34,7 @@ export const ProductUiSlice = createSlice({
 })
 
 export const {
+    updateProductAction,
     changeProductTypeAction,
     addProductSizeAction,
     removeProductSizeAction,

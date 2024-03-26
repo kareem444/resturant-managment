@@ -10,11 +10,13 @@ import { AdminProductsTableHeaderConstants } from "../constants/AdminProductsTab
 import { AdminProductsRepo } from "../repo/AdminProductsRepo";
 import { IAdminDetailsStatusContainerProps } from "src/app/admin/containers/AdminDetailsStatusContainer";
 import useScreenSize from "src/common/hooks/useScreenSize";
+import useProductUiReducer from "../redux/ui/useProductUiReducer";
 
 const AdminGetProductsStructure = (): IAdminDetailsStatusContainerProps => {
     const { openEditModal, openDeleteModal } = AdminModalActionsStructure();
     const { setState } = useEchoState(EchoStateConstants.selectedItem);
     const { isSm } = useScreenSize();
+    const { updateProduct } = useProductUiReducer();
 
     const { data, isLoading, isError, query } = useFetch<IAdminProductsModel[]>({
         key: AsyncStateConstants.products,
@@ -32,7 +34,10 @@ const AdminGetProductsStructure = (): IAdminDetailsStatusContainerProps => {
         maxStringLength: 15,
         selectors: {
             1: (item: IAdminProductsModel) => item.branch?.name,
-            2: (item: IAdminProductsModel) => item.mobile,
+            2: (item: IAdminProductsModel) => item.group?.name,
+            3: (item: IAdminProductsModel) => item.code,
+            4: (item: IAdminProductsModel) => item.productType,
+            5: (item: IAdminProductsModel) => item.price,
         },
         nameSelector: (item: IAdminProductsModel) => item.name,
         avatarSelector: (item: IAdminProductsModel) => item.image,
@@ -41,7 +46,18 @@ const AdminGetProductsStructure = (): IAdminDetailsStatusContainerProps => {
                 ? undefined
                 : (item: IAdminProductsModel) => {
                     setState(item);
-                    openEditModal("adminEditProductModal");
+                    updateProduct({
+                        productType: item.productType,
+                        data: {
+                            productSizes: item.sizes,
+                            productTaxes: item.taxes,
+                            productAdditions: item.additions,
+                        },
+                    });
+                    openEditModal("adminEditProductModal", {
+                        size: "5xl",
+                        onClose: "onProductModalClose",
+                    });
                 },
             onDelete: (item: IAdminProductsModel) => {
                 setState(item);

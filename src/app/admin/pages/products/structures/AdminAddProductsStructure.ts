@@ -9,13 +9,21 @@ import { AdminProductsRepo } from "../repo/AdminProductsRepo";
 import { IAdminProductsInputs } from "../interfaces/AdminProductsInterface";
 import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 import useCrudHandler from "src/common/hooks/useCrudHandler";
+import useProductUiReducer from "../redux/ui/useProductUiReducer";
+import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
+import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
+import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState";
+import { IAdminGroupModel } from "src/app/admin/models/AdminGroupModel";
 
 export const AdminAddProductsStructure = (): IFormComponentProperties => {
     const { translate } = useTranslate();
     const { createOperation } = useCrudHandler<IAdminProductsModel>("products");
+    const { state: products } = useProductUiReducer()
+    const { state: branches } = useAsyncState<IAdminBranchModel[]>(AsyncStateConstants.branches);
+    const { state: groups } = useAsyncState<IAdminGroupModel[]>(AsyncStateConstants.groups);
 
     const { mutate, isLoading } = useMutate({
-        queryFn: (data) => AdminProductsRepo.createProducts(data),
+        queryFn: (data) => AdminProductsRepo.createProducts(data, products, branches?.data, groups?.data),
         options: {
             onSuccess(Products) {
                 createOperation(Products);
@@ -27,7 +35,11 @@ export const AdminAddProductsStructure = (): IFormComponentProperties => {
         },
     });
 
-    const handelOnSubmit = (data: IAdminProductsInputs) => mutate(data);
+    const handelOnSubmit = (data: IAdminProductsInputs) => {
+        if (!branches?.isLoading && !groups?.isLoading) {
+            mutate(data);
+        }
+    }
 
     const button: AdminButtonContainerProps = {
         text: translate(TRANSLATE.ADD),
@@ -37,7 +49,9 @@ export const AdminAddProductsStructure = (): IFormComponentProperties => {
 
     const defaultValues: IAdminProductsInputs = {
         name: "",
-        mobile: "",
+        code: "",
+        productType: "fixed",
+        price: "",
     };
 
     return {

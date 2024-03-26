@@ -34,7 +34,7 @@ export class AdminTaxesRepo {
         })
     }
 
-    static getTaxes = async (): Promise<IAdminTaxModel[] | undefined> => {
+    static getTaxes = async (): Promise<IAdminTaxModel[]> => {
         return AsyncHelper.createPromise(async () => {
             const Taxes: (IAdminTaxInputs & IAdminTaxModel)[] | undefined = await FireStoreHelper.find(
                 FireStoreCollectionsConstants.TAXES,

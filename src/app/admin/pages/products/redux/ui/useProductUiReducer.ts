@@ -11,7 +11,8 @@ import {
     removeAllProductTaxesAction,
     removeProductAdditionAction,
     removeProductSizeAction,
-    removeProductTaxAction
+    removeProductTaxAction,
+    updateProductAction
 } from './ProductUiSlice'
 
 export default function useProductUiReducer() {
@@ -20,6 +21,9 @@ export default function useProductUiReducer() {
 
     return {
         state,
+        updateProduct: (payload: IProductUiState) => {
+            dispatch(updateProductAction(payload))
+        },
         changeProductType: (payload: IProductUiState) => {
             dispatch(changeProductTypeAction(payload))
         },

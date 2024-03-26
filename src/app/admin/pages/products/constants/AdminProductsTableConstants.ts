@@ -1,7 +1,10 @@
 export const AdminProductsTableConstants = {
     name: "name",
     branch: "branch",
-    mobile: "mobile",
+    group: "group",
+    code: "code",
+    productType: "productType",
+    price: "price",
 };
 
 type ProductsTableKeys = keyof typeof AdminProductsTableConstants;

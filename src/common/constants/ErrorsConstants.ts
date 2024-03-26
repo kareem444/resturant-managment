@@ -66,4 +66,10 @@ export class ErrorsConstants {
         message: 'Payment method not exist',
         status: 400
     }
+
+    static readonly GROUP_NOT_EXIST: IServerDataHandlerErrorProperties = {
+        code: 'GROUP_NOT_EXIST',
+        message: 'Group not exist',
+        status: 400
+    }
 }

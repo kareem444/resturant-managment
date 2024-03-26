@@ -11,36 +11,30 @@ import { AdminProductsInputsConstants } from "../constants/AdminProductsInputsCo
 import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 import useProductUiReducer from "../redux/ui/useProductUiReducer";
 import { IDropDownSearchItemProperties } from "src/common/components/DropDownSearchComponent";
+import { AdminGroupsRepo } from "../../groups/repo/AdminGroupsRepo";
+import { AdminTaxesRepo } from "../../taxes/repo/AdminTaxesRepo";
+import { AdminAdditionsRepo } from "../../additions/repo/AdminAdditionsRepo";
+import { IAdminGroupModel } from "src/app/admin/models/AdminGroupModel";
+import { IAdminTaxModel } from "src/app/admin/models/AdminTaxModel";
+import { IAdminAdditionsModel } from "src/app/admin/models/AdminAdditionsModel";
 
 export const AdminProductsInputsStructure = (
     isEditModal = false
 ): InputComponentProps[] => {
     const { translate } = useTranslate();
 
+    const sizeTypes = [
+        { id: "fixed", name: translate("Fixed Size") },
+        { id: "multi", name: translate("Multi Size") },
+    ];
+
     const {
         state: products,
         changeProductType,
         removeAllProductSize,
         addProductTax,
-        addProductAddition
-    } = useProductUiReducer()
-
-    const handelOnProductTypeSelect = (value: IDropDownSearchItemProperties) => {
-        if (value.value === 1) {
-            changeProductType({ productType: 'fixed' })
-            removeAllProductSize()
-            return
-        }
-        changeProductType({ productType: 'multi' })
-    }
-
-    const handelOnAddTax = (value: IDropDownSearchItemProperties) => {
-        addProductTax({ id: value.value, name: value.text })
-    }
-
-    const handelOnAddAddition = (value: IDropDownSearchItemProperties) => {
-        addProductAddition({ id: value.value, name: value.text })
-    }
+        addProductAddition,
+    } = useProductUiReducer();
 
     const { data: branches, isLoading: isBranchLoading } = useFetch<
         IAdminBranchModel[]
@@ -52,9 +46,54 @@ export const AdminProductsInputsStructure = (
         },
     });
 
+    const { data: groups, isLoading: isGroupLoading } = useFetch<
+        IAdminGroupModel[]
+    >({
+        key: AsyncStateConstants.groups,
+        queryFn: () => AdminGroupsRepo.getGroups(),
+        options: {
+            isExecuteOnInitIfNoData: true,
+        },
+    });
+
+    const { data: taxes, isLoading: isTaxesLoading } = useFetch<IAdminTaxModel[]>(
+        {
+            key: AsyncStateConstants.taxes,
+            queryFn: () => AdminTaxesRepo.getTaxes(),
+            options: {
+                isExecuteOnInitIfNoData: true,
+            },
+        }
+    );
+
+    const { data: additions, isLoading: isAdditionsLoading } = useFetch<
+        IAdminAdditionsModel[]
+    >({
+        key: AsyncStateConstants.additions,
+        queryFn: () => AdminAdditionsRepo.getAdditions(),
+        options: {
+            isExecuteOnInitIfNoData: true,
+        },
+    });
+
     const { state } = useEchoState<IAdminProductsModel>(
         EchoStateConstants.selectedItem
     );
+
+    const handelOnProductTypeSelect = (value: IDropDownSearchItemProperties) => {
+        changeProductType({ productType: value.value });
+        if (value.value === sizeTypes[0].id) {
+            removeAllProductSize();
+        }
+    };
+
+    const handelOnAddTax = (value: IDropDownSearchItemProperties) => {
+        addProductTax({ id: value.value, name: value.text });
+    };
+
+    const handelOnAddAddition = (value: IDropDownSearchItemProperties) => {
+        addProductAddition({ id: value.value, name: value.text });
+    };
 
     return [
         {
@@ -69,7 +108,7 @@ export const AdminProductsInputsStructure = (
         {
             labelTitle: translate(`Code`),
             validatedInput: {
-                name: AdminProductsInputsConstants.name,
+                name: AdminProductsInputsConstants.code,
                 rules: {
                     isRequired: true,
                 },
@@ -77,29 +116,29 @@ export const AdminProductsInputsStructure = (
         },
         {
             labelTitle: "Group",
-            disabled: isBranchLoading || !branches?.length,
-            containerStyle: 'sm:!col-span-4',
+            disabled: isGroupLoading || !groups?.length,
+            containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
             validatedInput: {
-                name: AdminProductsInputsConstants.branchId!,
+                name: AdminProductsInputsConstants.groupId!,
                 rules: {
                     isRequired: true,
                 },
             },
             dropDownSearchInput: {
-                data: branches,
+                data: groups,
                 selectors: {
                     value: "id",
                     text: "name",
                 },
-                isLoading: isBranchLoading,
-                defaultSelectedValue: isEditModal && state.branch,
+                isLoading: isGroupLoading,
+                defaultSelectedValue: isEditModal && state.group,
             },
         },
         {
             labelTitle: "Branch",
             disabled: isBranchLoading || !branches?.length,
-            containerStyle: 'sm:!col-span-4',
+            containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
             validatedInput: {
                 name: AdminProductsInputsConstants.branchId!,
@@ -118,15 +157,16 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            type: 'file',
-            containerStyle: 'flex justify-center sm:row-span-2 sm:!col-span-4 sm:!col-start-9 sm:!row-start-2',
+            type: "file",
+            containerStyle:
+                "flex justify-center sm:row-span-2 sm:!col-span-4 sm:!col-start-9 sm:!row-start-2",
             uploadFileInput: {
-                iconClassName: '!text-5xl',
+                iconClassName: "!text-5xl",
                 image: isEditModal ? state.image : undefined,
             },
-            className: '!w-full sm:!w-3/4 sm:!h-full sm:!max-h-36 h-28',
+            className: "!w-full sm:!w-3/4 sm:!h-full sm:!max-h-36 h-28",
             labelTitle: translate(`Image`),
-            labelStyle: 'sm:m-auto',
+            labelStyle: "sm:m-auto",
             validatedInput: {
                 name: AdminProductsInputsConstants.image!,
                 rules: {
@@ -135,81 +175,77 @@ export const AdminProductsInputsStructure = (
                         message: translate(`Max file size is 1MB`),
                     },
                 },
-            }
+            },
         },
         {
             labelTitle: "Taxes",
-            disabled: isBranchLoading || !branches?.length,
-            containerStyle: 'sm:!col-span-4',
+            disabled: isTaxesLoading || !taxes?.length,
+            containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
             validatedInput: {
-                name: AdminProductsInputsConstants.branchId!,
-                rules: {
-                    isRequired: true,
-                },
+                name: AdminProductsInputsConstants.taxesIds!,
             },
             dropDownSearchInput: {
-                data: branches,
+                data: taxes,
                 selectors: {
                     value: "id",
                     text: "name",
                 },
-                isLoading: isBranchLoading,
-                defaultSelectedValue: isEditModal && state.branch,
+                onSelect: handelOnAddTax,
+                isLoading: isTaxesLoading,
+                // defaultSelectedValue: isEditModal && state.branch,
             },
         },
         {
             labelTitle: "Additions",
-            disabled: isBranchLoading || !branches?.length,
-            containerStyle: 'sm:!col-span-4',
+            disabled: isAdditionsLoading || !additions?.length,
+            containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
             validatedInput: {
-                name: AdminProductsInputsConstants.branchId!,
-                rules: {
-                    isRequired: true,
-                },
+                name: AdminProductsInputsConstants.additionsIds!,
             },
             dropDownSearchInput: {
-                data: branches,
+                data: additions,
                 selectors: {
                     value: "id",
                     text: "name",
                 },
-                isLoading: isBranchLoading,
-                defaultSelectedValue: isEditModal && state.branch,
+                onSelect: handelOnAddAddition,
+                isLoading: isAdditionsLoading,
+                // defaultSelectedValue: isEditModal && state.branch,
             },
         },
         {
             labelTitle: translate(`Price`),
+            type: products.productType == "fixed" ? "number" : "hidden",
             validatedInput: {
-                name: AdminProductsInputsConstants.name,
+                name: AdminProductsInputsConstants.price!,
                 rules: {
                     isRequired: true,
                 },
             },
         },
         {
-            labelTitle: 'Product Type',
-            type: 'dropdownSearch',
+            labelTitle: "Product Type",
+            type: "dropdownSearch",
+            containerStyle: products.productType == "fixed" ? "" : "sm:!col-span-12",
             validatedInput: {
-                name: AdminProductsInputsConstants.branchId!,
+                name: AdminProductsInputsConstants.productType!,
                 rules: {
                     isRequired: true,
-                    isArabic: true
-                }
+                },
             },
             dropDownSearchInput: {
                 onSelect: handelOnProductTypeSelect,
-                data: [
-                    { id: 1, name: 'Fixed Size' },
-                    { id: 2, name: 'Multi Size' }
-                ],
+                data: sizeTypes,
                 selectors: {
-                    value: 'id',
-                    text: 'name'
+                    value: "id",
+                    text: "name",
                 },
-                defaultSelectedValue: { id: 1, name: 'Fixed Size' }
-            }
+                defaultSelectedValue: isEditModal
+                    ? sizeTypes.find((item) => item.id === state.productType)
+                    : sizeTypes[0],
+            },
         },
     ];
 };

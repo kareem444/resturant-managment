@@ -1,5 +1,17 @@
 import { IProductUiState } from './ProductUiInterface'
 
+export const updateProduct = (
+    state: IProductUiState,
+    action: {
+        payload: IProductUiState
+        type: string
+    }
+) => {
+    const { productType, data } = action.payload
+    state.productType = productType
+    state.data = data
+}
+
 export const changeProductType = (
     state: IProductUiState,
     action: {

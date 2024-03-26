@@ -4,5 +4,10 @@ export const AdminProductsInputsConstants: { [K in keyof IAdminProductsInputs]: 
     image: 'image',
     name: 'name',
     branchId: 'branchId',
-    mobile: 'mobile'
-}
+    groupId: 'groupId',
+    code: 'code',
+    productType: 'productType',
+    price: 'price',
+    taxesIds: 'taxesIds',
+    additionsIds: 'additionsIds',
+};

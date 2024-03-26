@@ -1,115 +1,252 @@
-import { AsyncHelper } from "src/common/DataHandler/helper/ServerDataHandlerHelper"
-import { FireStoreCollectionsConstants } from "src/common/constants/FireStoreCollectionsConstants"
-import { FireStoreHelper } from "src/common/firebaseHandler/helper/FireStoreHelper"
-import { IAdminProductsInputs } from "../interfaces/AdminProductsInterface"
-import { AdminBranchesRepo } from "../../branches/repo/AdminBranchesRepo"
-import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel"
-import { ErrorsConstants } from "src/common/constants/ErrorsConstants"
-import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel"
-import { FireStorageHelper } from "src/common/firebaseHandler/helper/FireStorageHelper"
+import { AsyncHelper } from "src/common/DataHandler/helper/ServerDataHandlerHelper";
+import { FireStoreCollectionsConstants } from "src/common/constants/FireStoreCollectionsConstants";
+import { FireStoreHelper } from "src/common/firebaseHandler/helper/FireStoreHelper";
+import {
+    IAdminProductsInputs,
+    IAdminRefactoredProductsInputs,
+} from "../interfaces/AdminProductsInterface";
+import { AdminBranchesRepo } from "../../branches/repo/AdminBranchesRepo";
+import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
+import { ErrorsConstants } from "src/common/constants/ErrorsConstants";
+import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
+import { FireStorageHelper } from "src/common/firebaseHandler/helper/FireStorageHelper";
+import { IProductUiState } from "../redux/ui/ProductUiInterface";
+import { IAdminGroupModel } from "src/app/admin/models/AdminGroupModel";
+import { IAdminTaxModel } from "src/app/admin/models/AdminTaxModel";
+import { IAdminAdditionsModel } from "src/app/admin/models/AdminAdditionsModel";
+import { AdminGroupsRepo } from "../../groups/repo/AdminGroupsRepo";
+import { AdminTaxesRepo } from "../../taxes/repo/AdminTaxesRepo";
+import { AdminAdditionsRepo } from "../../additions/repo/AdminAdditionsRepo";
 
 export class AdminProductsRepo {
-    static createProducts = (Products: IAdminProductsInputs): Promise<IAdminProductsModel> => {
+    static createProducts = (
+        productsInputs: IAdminRefactoredProductsInputs,
+        productsState: IProductUiState,
+        branches?: IAdminBranchModel[],
+        groups?: IAdminGroupModel[]
+    ): Promise<IAdminProductsModel> => {
         return AsyncHelper.createPromise(async () => {
-            const branches: IAdminBranchModel[] = await AdminBranchesRepo.getBranches();
-            const branch = branches?.find(branch => branch.id === Products.branchId);
+            const refactoredData: IAdminRefactoredProductsInputs = {
+                name: productsInputs.name,
+                code: productsInputs.code,
+                price: productsInputs.price,
+                branchId: productsInputs.branchId,
+                groupId: productsInputs.groupId,
+                image: productsInputs.image,
+                productType: productsState.productType,
+                sizes: productsState.data?.productSizes,
+                additionsIds: productsState.data?.productAdditions?.map(
+                    (item) => item.id
+                ),
+                taxesIds: productsState.data?.productTaxes?.map((item) => item.id),
+            };
 
-            if (!branch) {
+            const branch = branches?.find(
+                (branch) => branch.id === refactoredData.branchId
+            );
+            if (!branch?.id) {
                 throw ErrorsConstants.BRANCH_NOT_EXIST;
+            }
+
+            const group = groups?.find(
+                (group) => group.id === refactoredData.groupId
+            );
+            if (!group?.id) {
+                throw ErrorsConstants.GROUP_NOT_EXIST;
             }
 
             let image: string | undefined = undefined;
 
-            if (!!Products.image) {
-                image = await FireStorageHelper.uploadFile(Products.image, { directory: 'products' })
+            if (!!refactoredData.image) {
+                image = await FireStorageHelper.uploadFile(refactoredData.image, {
+                    directory: "products",
+                });
             }
 
             const id: string = await FireStoreHelper.add(
                 FireStoreCollectionsConstants.PRODUCTS,
-                { ...Products, image: image || '' },
+                { ...refactoredData, image: image || "" },
                 { isAuthGuard: true }
-            )
+            );
 
             return {
-                ...Products,
+                ...refactoredData,
                 id,
                 image,
                 branch: {
-                    id: branch?.id as string,
-                    name: branch?.name as string
-                }
-            }
-        })
-    }
+                    id: branch.id,
+                    name: branch.name,
+                },
+                group: {
+                    id: group.id,
+                    name: group.name,
+                },
+                additions: productsState.data?.productAdditions,
+                taxes: productsState.data?.productTaxes,
+            };
+        });
+    };
 
-    static getProducts = async (): Promise<IAdminProductsModel[] | undefined> => {
+    static getProducts = async (): Promise<IAdminProductsModel[]> => {
         return AsyncHelper.createPromise(async () => {
-            const Products: (IAdminProductsInputs & IAdminProductsModel)[] | undefined = await FireStoreHelper.find(
-                FireStoreCollectionsConstants.PRODUCTS,
-                { isAuthGuard: true, orderBy: [{ field: 'createdAt', direction: 'desc' }] }
-            )
-            const branches: IAdminBranchModel[] = await AdminBranchesRepo.getBranches();
+            const products:
+                | (IAdminProductsInputs & IAdminProductsModel)[]
+                | undefined = await FireStoreHelper.find(
+                    FireStoreCollectionsConstants.PRODUCTS,
+                    {
+                        isAuthGuard: true,
+                        orderBy: [{ field: "createdAt", direction: "desc" }],
+                    }
+                );
 
-            const refactorProducts = Products?.map(el => {
+            if (!products || products.length === 0) {
+                return [];
+            }
+
+            const branches: IAdminBranchModel[] =
+                await AdminBranchesRepo.getBranches();
+            const groups: IAdminGroupModel[] = await AdminGroupsRepo.getGroups();
+            const taxes: IAdminTaxModel[] = await AdminTaxesRepo.getTaxes();
+            const additions: IAdminAdditionsModel[] =
+                await AdminAdditionsRepo.getAdditions();
+
+            const refactorProducts = products?.map((el) => {
                 if (!!el.branchId) {
-                    const branch = branches?.find(branch => branch.id === el.branchId);
+                    const branch = branches?.find((branch) => branch.id === el.branchId);
 
                     if (branch) {
                         el.branch = {
                             id: branch?.id as string,
-                            name: branch?.name as string
+                            name: branch?.name as string,
                         };
                     }
                 }
 
+                if (!!el.groupId) {
+                    const group = groups?.find((group) => group.id === el.groupId);
+
+                    if (group) {
+                        el.group = {
+                            id: group?.id as string,
+                            name: group?.name as string,
+                        };
+                    }
+                }
+
+                if (!!el.taxesIds) {
+                    const filteredTaxes = taxes?.filter((tax) => {
+                        if (tax.id && el.taxesIds?.includes(tax.id)) {
+                            return {
+                                id: tax.id,
+                                name: tax.name,
+                            };
+                        }
+                    });
+                    el.taxes = filteredTaxes as { id: string; name: string }[];
+                }
+
+                if (!!el.additionsIds) {
+                    const filteredAdditions = additions?.filter((addition) => {
+                        if (addition.id && el.additionsIds?.includes(addition.id)) {
+                            return {
+                                id: addition.id,
+                                name: addition.name,
+                            };
+                        }
+                    });
+                    el.additions = filteredAdditions as { id: string; name: string }[];
+                }
+
                 delete el.branchId;
-                return el
-            })
+                delete el.groupId;
+                delete el.taxesIds;
+                delete el.additionsIds;
+                return el;
+            });
 
-            return refactorProducts as IAdminProductsModel[]
-        })
-    }
+            return refactorProducts as IAdminProductsModel[];
+        });
+    };
 
-    static updateProducts = (ProductsId: string, Products: IAdminProductsInputs): Promise<IAdminProductsModel> => {
+    static updateProducts = (
+        productId: string,
+        productsInputs: IAdminRefactoredProductsInputs,
+        productsState: IProductUiState,
+        branches?: IAdminBranchModel[],
+        groups?: IAdminGroupModel[]
+    ): Promise<IAdminProductsModel> => {
         return AsyncHelper.createPromise(async () => {
-            const branches: IAdminBranchModel[] = await AdminBranchesRepo.getBranches();
-            const branch = branches?.find(branch => branch.id === Products.branchId);
+            const refactoredData: IAdminRefactoredProductsInputs = {
+                name: productsInputs.name,
+                code: productsInputs.code,
+                price: productsInputs.price,
+                branchId: productsInputs.branchId,
+                groupId: productsInputs.groupId,
+                image: productsInputs.image,
+                productType: productsState.productType,
+                sizes: productsState.data?.productSizes,
+                additionsIds: productsState.data?.productAdditions?.map(
+                    (item) => item.id
+                ),
+                taxesIds: productsState.data?.productTaxes?.map((item) => item.id),
+            };
 
-            if (!branch) {
+            const branch = branches?.find((branch) => branch.id === refactoredData.branchId);
+            if (!branch?.id) {
                 throw ErrorsConstants.BRANCH_NOT_EXIST;
+            }
+
+            const group = groups?.find((group) => group.id === refactoredData.groupId);
+            if (!group?.id) {
+                throw ErrorsConstants.GROUP_NOT_EXIST;
             }
 
             let image: string | undefined = undefined;
 
-            if (!!Products.image) {
-                image = await FireStorageHelper.uploadFile(Products.image, { directory: 'products' })
+            if (!!refactoredData.image) {
+                image = await FireStorageHelper.uploadFile(refactoredData.image, {
+                    directory: "products",
+                });
+            } else {
+                delete refactoredData.image
             }
 
-            const refactoredProducts: IAdminProductsModel | IAdminProductsInputs = {
-                name: Products.name,
-                mobile: Products.mobile,
-            }
-
-            if (image) {
-                refactoredProducts.image = image;
+            if(refactoredData.productType === "multi"){
+                refactoredData.price = ""
+            } else {
+                refactoredData.sizes = []
             }
 
             await FireStoreHelper.update(
                 FireStoreCollectionsConstants.PRODUCTS,
-                ProductsId,
-                {...refactoredProducts, branchId: Products.branchId},
+                productId,
+                !!image ? { ...refactoredData, image: image || "" } : refactoredData,
                 { isAuthGuard: true }
-            )
+            );
 
-            return {
-                ...refactoredProducts,
+            const product: IAdminProductsModel = {
+                ...refactoredData,
+                id: productId,
+                image ,
                 branch: {
-                    id: branch?.id as string,
-                    name: branch?.name as string
-                }
-            } as IAdminProductsModel
-        })
-    }
+                    id: branch.id,
+                    name: branch.name,
+                },
+                group: {
+                    id: group.id,
+                    name: group.name,
+                },
+                additions: productsState.data?.productAdditions,
+                taxes: productsState.data?.productTaxes,
+            };
+
+            if(!image){
+                delete product.image
+            }
+
+            return product;
+        });
+    };
 
     static deleteProducts = (ProductsId: string) => {
         return AsyncHelper.createPromise(async () => {
@@ -117,7 +254,7 @@ export class AdminProductsRepo {
                 FireStoreCollectionsConstants.PRODUCTS,
                 ProductsId,
                 { isAuthGuard: true }
-            )
-        })
-    }
+            );
+        });
+    };
 }

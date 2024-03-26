@@ -1,6 +1,20 @@
 export interface IAdminProductsInputs {
-    image?: File
     name: string
+    code: string
+    productType: 'fixed' | 'multi'
+    price?: string
+    image?: File
     branchId?: string
-    mobile?: string
+    groupId?: string
+    taxesIds?: string
+    additionsIds?: string
+}
+
+export interface IAdminRefactoredProductsInputs extends Omit<IAdminProductsInputs, "taxesIds" | "additionsIds"> {
+    taxesIds?: string[];
+    additionsIds?: string[];
+    sizes?: {
+        size: string;
+        price: string;
+    }[];
 }

@@ -28,7 +28,7 @@ export class AdminAdditionsRepo {
         })
     }
 
-    static getAdditions = async (): Promise<IAdminAdditionsModel[] | undefined> => {
+    static getAdditions = async (): Promise<IAdminAdditionsModel[]> => {
         return AsyncHelper.createPromise(async () => {
             return await FireStoreHelper.find(
                 FireStoreCollectionsConstants.ADDITIONS,
