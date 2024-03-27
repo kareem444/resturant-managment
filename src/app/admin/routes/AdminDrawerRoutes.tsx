@@ -68,7 +68,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Sales',
+    name: TRANSLATE.SALES,
     submenu: [
       {
         path: routes.admin.customers.fullPath,
@@ -90,7 +90,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Purchases',
+    name: TRANSLATE.PURCHASES,
     submenu: [
       {
         path: routes.admin.suppliers.fullPath,
@@ -122,7 +122,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'reports',
+    name: TRANSLATE.REPORTS,
     submenu: [
       {
         path: routes.admin.productsReports.fullPath,
@@ -184,7 +184,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'management',
+    name: TRANSLATE.MANAGEMENT,
     submenu: [
       {
         name: 'members',

@@ -118,4 +118,10 @@ export const TRANSLATE = {
     EN: 'en',
     REFRESH: 'refresh',
     THE_DATA: 'theData',
-}
+    MANAGEMENT: 'management',
+    DISCOUNTS: 'discounts',
+    PURCHASES: 'purchases',
+    TYPE: 'type',
+    BRANCH: 'branch',
+    APPLY_TO: 'apply-to'
+};
