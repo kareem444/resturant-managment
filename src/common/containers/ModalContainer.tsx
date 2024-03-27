@@ -3,6 +3,8 @@ import { PosModalStructure } from '../../app/pos/structure/PosModalStructure'
 import { AdminModalComponentsStructure } from '../../app/admin/structure/modal/AdminModalComponentsStructure'
 import { ObjectKeys } from 'react-hook-form/dist/types/path/common'
 import { AdminModalEventsStructure } from 'src/app/admin/structure/modal/AdminModalEventsStructure'
+import { TRANSLATE } from '../constants/TranslateConstants'
+import { useTranslate } from '../hooks/useTranslate'
 
 const modalComponents = {
     ...PosModalStructure,
@@ -77,7 +79,7 @@ function ModalLayoutContainer() {
             onCloseEvent?.click()
         }
     }
-
+    const { translate } = useTranslate();
     return (
         <>
             <div
@@ -125,7 +127,7 @@ function ModalLayoutContainer() {
                                         }
                                         onClick={handelOnClose}
                                     >
-                                        {state.closeButton?.text ?? 'Close'}
+                                        {state.closeButton?.text ?? translate(TRANSLATE.CLOSE)}
                                     </button>
                                 )}
                                 {state.buttons?.map((button, index) => {

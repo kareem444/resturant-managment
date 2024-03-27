@@ -2,6 +2,7 @@ import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 import LoadingSpinComponent from "./LoadingSpinComponent";
 import { useTranslate } from "../hooks/useTranslate";
+import { TRANSLATE } from "../constants/TranslateConstants";
 
 export interface DropDownSearchComponentProps {
     input?: {
@@ -178,7 +179,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
         }
     }
 
-    const { isArabic } = useTranslate();
+    const { isArabic, translate } = useTranslate();
 
     return (
         <div className={"relative" + " " + containerClassName}>
@@ -214,7 +215,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
                 <input
                     ref={inputRef}
                     type="text"
-                    placeholder={input.placeholder}
+                    placeholder={translate(TRANSLATE.SEARCH)}
                     defaultValue={selected?.text ?? input.defaultValue ?? undefined}
                     className={
                         "input input-bordered w-full disabled:bg-inherit disabled:border-gray-400 dark:disabled:border-gray-600" +

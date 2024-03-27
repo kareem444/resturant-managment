@@ -118,4 +118,8 @@ export const TRANSLATE = {
     EN: 'en',
     REFRESH: 'refresh',
     THE_DATA: 'theData',
+    CLOSE: 'close',
+    REMOVE_FILTER: 'remove-filter',
+    MENU: 'menu',
+    BRANCH: 'branch'
 }

@@ -5,6 +5,7 @@ import { EchoStateConstants } from "../constants/EchoStateConstants";
 import { AdminAsyncStateConstants } from "src/app/admin/constants/AdminAsyncStateConstants";
 import useAsyncState from "../DataHandler/hooks/server/useAsyncState";
 import { useTranslate } from "../hooks/useTranslate";
+import { TRANSLATE } from "../constants/TranslateConstants";
 
 export type FilterItem = {
   name: string;
@@ -96,7 +97,7 @@ const FilterComponent: FC<IFilterProps> = ({
             })}
             <div className="divider mt-0 mb-0"></div>
             <li>
-              <a onClick={() => handelOnSelectFilter(undefined)}>Remove Filter</a>
+              <a onClick={() => handelOnSelectFilter(undefined)}>{translate(TRANSLATE.REMOVE_FILTER)}</a>
             </li>
           </ul>
         </div>
@@ -104,7 +105,7 @@ const FilterComponent: FC<IFilterProps> = ({
       <div className="flex-1 w-full">
         <input
           type="search"
-          placeholder={"search"}
+          placeholder= {translate(TRANSLATE.SEARCH)}
           onChange={(e) => handelOnSearch(e.target.value)}
           className="input input-bordered border-gray-500 h-12 w-full"
         />

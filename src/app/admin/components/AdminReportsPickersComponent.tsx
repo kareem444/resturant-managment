@@ -6,6 +6,8 @@ import DropDownSearchComponent, {
     DropDownSearchComponentProps,
 } from "src/common/components/DropDownSearchComponent";
 import LoadingSpinComponent from "src/common/components/LoadingSpinComponent";
+import { TRANSLATE } from "src/common/constants/TranslateConstants";
+import { useTranslate } from "src/common/hooks/useTranslate";
 
 function SearchButton({
     onClick,
@@ -72,6 +74,7 @@ export const AdminReportsPickersComponent: FC<
             endDate: result.endDate.replace(/-/g, "/"),
         };
 
+    const { translate } = useTranslate();
         return (
             <div className="flex justify-between flex-col sm:flex-row gap-4 mb-4">
                 <div className="flex flex-1 gap-4 justify-between">
@@ -107,7 +110,7 @@ export const AdminReportsPickersComponent: FC<
                             input={{
                                 className:
                                     "input input-bordered w-full md:w-64 border-gray-400 dark:border-gray-600",
-                                placeholder: "search",
+                                placeholder: translate(TRANSLATE.SEARCH),
                             }}
                             containerClassName="w-full"
                             isLoading={

@@ -6,6 +6,8 @@ import AdminButtonComponent, {
 } from "src/app/admin/components/AdminButtonContainer";
 import useModalReducer from "../redux/modal/useModalReducer";
 import useScreenSize from "../hooks/useScreenSize";
+import { TRANSLATE } from "../constants/TranslateConstants";
+import { useTranslate } from "../hooks/useTranslate";
 
 export interface IDefaultValuesProperties {
     [key: string]: string | number | boolean | undefined | File | Date;
@@ -43,7 +45,7 @@ const FormComponent: FC<IFormComponentProperties> = ({
     });
 
     const { isXs } = useScreenSize();
-
+    const { translate } = useTranslate();
     const { closeModal } = useModalReducer();
     const onFormSubmit: SubmitHandler<any> = (data) => onSubmit && onSubmit(data);
 
@@ -78,7 +80,7 @@ const FormComponent: FC<IFormComponentProperties> = ({
                 <div className={"flex mt-5 gap-5 " + (isXs ? "flex-col-reverse" : "")}>
                     {showCloseModalButton && (
                         <button className="btn btn-outline flex-1" onClick={closeModal}>
-                            Close
+                            {translate(TRANSLATE.CLOSE)}
                         </button>
                     )}
                     {button && (

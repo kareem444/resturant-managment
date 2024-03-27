@@ -37,5 +37,17 @@
   "code": "الكود",
   "edit": "تعديل",
   "refresh": "تحديث",
-  "theData": "البيانات"
+  "theData": "البيانات",
+  "units": "الوحدات",
+  "unit": "الوحدة",
+  "close": "إغلاق",
+  "remove-filter": "إزالة التصفية",
+  "menu": "القائمة",
+  "delete": "حذف",
+  "groups": "المجموعات",
+  "group": "مجموعة",
+  "products": "المنتجات",
+  "branch": "الفرع",
+  "additions": "الإضافات",
+  "addition": "الاضافة"
 }

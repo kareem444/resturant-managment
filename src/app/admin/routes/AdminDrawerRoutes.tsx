@@ -24,7 +24,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Menu',
+    name: TRANSLATE.MENU,
     submenu: [
       {
         path: routes.admin.units.fullPath,

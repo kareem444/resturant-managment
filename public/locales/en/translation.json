@@ -120,6 +120,10 @@
   "refresh": "Refresh",
   "theData": "Data",
   "expenses-destinations": "Expenses Destinations",
-  "expenses-destination": "Expenses Destination"
+  "expenses-destination": "Expenses Destination",
+  "close": "Close",
+  "remove-filter": "Remove filter",
+  "menu": "Menu",
+  "branch": "Branch"
 }
 
