@@ -127,4 +127,9 @@ export const TRANSLATE = {
     IMAGE: 'image',
     TAXES: 'taxes',
     SIZES: 'sizes',
-}
+    MANAGEMENT: 'management',
+    DISCOUNTS: 'discounts',
+    PURCHASES: 'purchases',
+    TYPE: 'type',
+    APPLY_TO: 'apply-to'
+};

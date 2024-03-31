@@ -90,7 +90,7 @@
   "units-reports" : "Units Reports",
   "groups-reports" : "Groups Reports",
   "tables-reports" : "Tables Reports",
-  "customers-reports" : "Customers Reports",
+  "shift-reports": "Shift Reports",
   "suppliers-reports" : "Suppliers Reports",
   "store": "Store",
   "item-groups": "Item Groups",
@@ -130,6 +130,16 @@
   "image": "Image",
   "taxes": "Taxes",
   "sizes": "Sizes",
-  "sales": "Sales"
+  "sales": "Sales",
+  "management": "Management",
+  "roles": "Roles",
+  "branches": "Branches",
+  "startTime": "Start Time", 
+  "discounts": "Discounts",
+  "payments-methods": "Payments Methods",
+  "purchases": "purchases",
+  "endTime": "End Time",
+  "type": "Type",
+  "apply-to": "Apply To",
+  "RoleType": "Role Type"
 }
-

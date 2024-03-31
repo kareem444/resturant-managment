@@ -3,10 +3,12 @@ import moment from 'moment'
 import { ITableContent } from '../../../../../common/components/TableComponent'
 import { AdminDetailsPageContainer } from '../../../containers/AdminDetailsPageContainer'
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
+import { useTranslate } from 'src/common/hooks/useTranslate'
+import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 
 export default function DiscountsDetailsFeature() {
     const { openModel } = useModalReducer()
-
+    const { translate } = useTranslate();
     const openEditDiscountModal = () => {
         openModel({
             modalComponent: 'adminEditDiscountModal',
@@ -36,7 +38,7 @@ export default function DiscountsDetailsFeature() {
     }
 
     const tableContent: ITableContent = {
-        header: ['Name', 'Amount', 'Type', 'Branch', 'Apply To','Date'],
+        header: [translate(TRANSLATE.NAME), translate(TRANSLATE.AMOUNT), translate(TRANSLATE.TYPE), translate(TRANSLATE.BRANCH), translate(TRANSLATE.APPLY_TO),translate(TRANSLATE.Date)],
         items: RECENT_TRANSACTIONS,
         maxStringLength: 15,
         selectors: {
