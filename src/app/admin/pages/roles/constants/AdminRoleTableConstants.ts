@@ -1,6 +1,6 @@
 export const AdminRoleTableConstants = {
     name: "name",
-    roleType: "role type",
+    roleType: "roleType",
     date : 'date'
 };
 

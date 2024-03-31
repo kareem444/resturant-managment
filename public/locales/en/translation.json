@@ -133,6 +133,6 @@
   "endTime": "End Time",
   "type": "Type",
   "branch": "Branch",
-  "apply-to": "Apply To"
+  "apply-to": "Apply To",
+  "RoleType": "Role Type"
 }
-
