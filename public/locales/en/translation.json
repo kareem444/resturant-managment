@@ -124,6 +124,12 @@
   "close": "Close",
   "remove-filter": "Remove filter",
   "menu": "Menu",
-  "branch": "Branch"
+  "branch": "Branch",
+  "services": "Services",
+  "number": "Number",
+  "image": "Image",
+  "taxes": "Taxes",
+  "sizes": "Sizes",
+  "sales": "Sales"
 }
 

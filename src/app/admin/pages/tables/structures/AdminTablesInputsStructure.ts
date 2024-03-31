@@ -31,7 +31,7 @@ export const AdminTablesInputsStructure = (
 
     return [
         {
-            labelTitle: translate(`Number`),
+            labelTitle: translate(`${TRANSLATE.NUMBER}`),
             validatedInput: {
                 name: AdminTableInputsConstants.number,
                 rules: {
@@ -40,7 +40,7 @@ export const AdminTablesInputsStructure = (
             },
         },
         {
-            labelTitle: "Branch",
+            labelTitle: translate(`${TRANSLATE.BRANCH}`),
             disabled: isBranchLoading || !branches?.length,
             type: "dropdownSearch",
             validatedInput: {

@@ -37,7 +37,7 @@ const AdminGetDeliveryStructure = (): IAdminDetailsStatusContainerProps => {
         buttons: {
             onEdit: (item: IAdminDeliveryModel) => {
                 setState(item);
-                openEditModal("adminEditDeliveryModal");
+                openEditModal("adminEditDeliveryModal", { formatTitle: "none" });
             },
             onDelete: (item: IAdminDeliveryModel) => {
                 setState(item);

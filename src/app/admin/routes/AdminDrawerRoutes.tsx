@@ -51,7 +51,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Services',
+    name: TRANSLATE.SERVICES,
     submenu: [
       {
         path: routes.admin.tables.fullPath,
@@ -68,7 +68,7 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
   {
     path: '',
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
-    name: 'Sales',
+    name: TRANSLATE.SALES,
     submenu: [
       {
         path: routes.admin.customers.fullPath,

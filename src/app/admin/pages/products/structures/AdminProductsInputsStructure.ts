@@ -106,7 +106,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Code`),
+            labelTitle: translate(`${TRANSLATE.STORE_CODE}`),
             validatedInput: {
                 name: AdminProductsInputsConstants.code,
                 rules: {
@@ -115,7 +115,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: "Group",
+            labelTitle: translate(`${TRANSLATE.GROUP}`),
             disabled: isGroupLoading || !groups?.length,
             containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
@@ -136,7 +136,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: "Branch",
+            labelTitle: translate(`${TRANSLATE.BRANCH}`),
             disabled: isBranchLoading || !branches?.length,
             containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
@@ -165,7 +165,7 @@ export const AdminProductsInputsStructure = (
                 image: isEditModal ? state.image : undefined,
             },
             className: "!w-full sm:!w-3/4 sm:!h-full sm:!max-h-36 h-28",
-            labelTitle: translate(`Image`),
+            labelTitle: translate(`${TRANSLATE.IMAGE}`),
             labelStyle: "sm:m-auto",
             validatedInput: {
                 name: AdminProductsInputsConstants.image!,
@@ -178,7 +178,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: "Taxes",
+            labelTitle: translate(`${TRANSLATE.TAXES}`),
             disabled: isTaxesLoading || !taxes?.length,
             containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
@@ -197,7 +197,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: "Additions",
+            labelTitle: translate(`${TRANSLATE.ADDITIONS}`),
             disabled: isAdditionsLoading || !additions?.length,
             containerStyle: "sm:!col-span-4",
             type: "dropdownSearch",
@@ -216,7 +216,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Price`),
+            labelTitle: translate(`${TRANSLATE.PRICE}`),
             type: products.productType == "fixed" ? "number" : "hidden",
             validatedInput: {
                 name: AdminProductsInputsConstants.price!,
@@ -226,7 +226,7 @@ export const AdminProductsInputsStructure = (
             },
         },
         {
-            labelTitle: "Product Type",
+            labelTitle: translate(`${TRANSLATE.PRODUCT_TYPE}`),
             type: "dropdownSearch",
             containerStyle: products.productType == "fixed" ? "" : "sm:!col-span-12",
             validatedInput: {

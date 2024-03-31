@@ -18,7 +18,7 @@
   "currency": "العملات",
   "add": "إضافة",
   "quantity": "كمية",
-  "price": "سعر",
+  "price": "السعر",
   "bill_id": "رقم الفاتورة",
   "status": "حالة",
   "inventory-disbursement": "صرف من المخزن",
@@ -49,5 +49,15 @@
   "products": "المنتجات",
   "branch": "الفرع",
   "additions": "الإضافات",
-  "addition": "الاضافة"
+  "addition": "الاضافة",
+  "services": "الخدمات",
+  "number": "الرقم",
+  "mobile": "الجوال",
+  "delivery": "التوصيل",
+  "tables": "الجداول",
+  "table": "الجدول",
+  "image": "الصورة",
+  "taxes": "الضرائب",
+  "sizes": "الأحجام",
+  "sales": "المبيعات"
 }

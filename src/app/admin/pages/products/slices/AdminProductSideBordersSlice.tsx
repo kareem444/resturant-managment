@@ -1,5 +1,7 @@
 import AdminItemsBoxComponent from 'src/app/admin/components/AdminItemsBoxComponent'
 import useProductUiReducer from '../redux/ui/useProductUiReducer'
+import { useTranslate } from 'src/common/hooks/useTranslate'
+import { TRANSLATE } from 'src/common/constants/TranslateConstants'
 
 export default function AdminProductSideBordersSlice() {
     const {
@@ -15,12 +17,12 @@ export default function AdminProductSideBordersSlice() {
     const showProductSizesBorder = state.productType === 'multi'
     const showProductTaxesBorder = state.data?.productTaxes?.length
     const showProductAdditionsBorder = state.data?.productAdditions?.length
-
+    const { translate } = useTranslate();
     return (
         <>
             {!!showProductSizesBorder && (
                 <AdminItemsBoxComponent
-                    title='Sizes'
+                    title= {translate(`${TRANSLATE.SIZES}`)}
                     items={state.data?.productSizes}
                     selector={(item: { size: string; price: string }) =>
                         `${item.size} - Rs.${item.price}`
@@ -32,7 +34,7 @@ export default function AdminProductSideBordersSlice() {
 
             {!!showProductAdditionsBorder && (
                 <AdminItemsBoxComponent
-                    title='Additions'
+                    title= {translate(`${TRANSLATE.ADDITIONS}`)}
                     items={state.data?.productAdditions}
                     selector={(item: { id: string; name: string }) => `${item.name}`}
                     onDeleteAll={() => removeAllProductAdditions()}
@@ -42,7 +44,7 @@ export default function AdminProductSideBordersSlice() {
 
             {!!showProductTaxesBorder && (
                 <AdminItemsBoxComponent
-                    title='Taxes'
+                    title= {translate(`${TRANSLATE.TAXES}`)}
                     items={state.data?.productTaxes}
                     selector={(item: { id: string; name: string }) => `${item.name}`}
                     onDeleteAll={() => removeAllProductTaxes()}

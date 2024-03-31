@@ -121,5 +121,10 @@ export const TRANSLATE = {
     CLOSE: 'close',
     REMOVE_FILTER: 'remove-filter',
     MENU: 'menu',
-    BRANCH: 'branch'
+    BRANCH: 'branch',
+    SERVICES: 'services',
+    NUMBER: 'number',
+    IMAGE: 'image',
+    TAXES: 'taxes',
+    SIZES: 'sizes',
 }

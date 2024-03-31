@@ -41,7 +41,7 @@ export const AdminDeliveryInputsStructure = (
             },
         },
         {
-            labelTitle: "Branch",
+            labelTitle: translate(`${TRANSLATE.BRANCH}`),
             labelStyle: "",
             disabled: isBranchLoading || !branches?.length,
             containerStyle: 'sm:!col-span-4',
@@ -63,7 +63,7 @@ export const AdminDeliveryInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Mobile`),
+            labelTitle: translate(`${TRANSLATE.MOBILE}`),
             containerStyle: 'sm:!col-span-8',
             validatedInput: {
                 name: AdminDeliveryInputsConstants.mobile!,
@@ -80,7 +80,7 @@ export const AdminDeliveryInputsStructure = (
                 image: isEditModal ? state.image : undefined,
             },
             className: '!w-full sm:!w-3/4 sm:!h-full sm:!max-h-36 h-28',
-            labelTitle: translate(`Image`),
+            labelTitle: translate(`${TRANSLATE.IMAGE}`),
             labelStyle: 'sm:m-auto',
             validatedInput: {
                 name: AdminDeliveryInputsConstants.image!,
