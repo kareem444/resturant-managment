@@ -13,19 +13,19 @@ export const AdminSupplierInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`Address`),
+            labelTitle: translate(`${TRANSLATE.ADDRESS}`),
             validatedInput: {
                 name: AdminSupplierInputsConstants.address,
             }
         },
         {
-            labelTitle: translate(`Phone`),
+            labelTitle: translate(`${TRANSLATE.MOBILE}`),
             validatedInput: {
                 name: AdminSupplierInputsConstants.phone,
             }
         },
         {
-            labelTitle: translate(`Tax Number`),
+            labelTitle: translate(`${TRANSLATE.TAX_NUMBER}`),
             validatedInput: {
                 name: AdminSupplierInputsConstants.taxNumber,
             }

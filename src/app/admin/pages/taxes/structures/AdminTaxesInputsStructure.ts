@@ -40,7 +40,7 @@ export const AdminTaxesInputsStructure = (
             },
         },
         {
-            labelTitle: "Branch",
+            labelTitle: translate(`${TRANSLATE.BRANCH}`),
             labelStyle: "",
             disabled: isBranchLoading || !branches?.length,
             type: "dropdownSearch",
@@ -61,7 +61,7 @@ export const AdminTaxesInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Amount (%)`),
+            labelTitle: translate(`${TRANSLATE.AMOUNT} (%)`),
             containerStyle: "",
             type: "number",
             validatedInput: {
@@ -72,7 +72,7 @@ export const AdminTaxesInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Minimum Amount`),
+            labelTitle: translate(`${TRANSLATE.MIN_AMOUNT}`),
             containerStyle: "",
             type: "number",
             validatedInput: {

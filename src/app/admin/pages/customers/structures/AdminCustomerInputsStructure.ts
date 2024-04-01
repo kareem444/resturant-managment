@@ -17,7 +17,7 @@ export const AdminCustomerInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`Mobile`),
+            labelTitle: translate(`${TRANSLATE.MOBILE}`),
             validatedInput: {
                 name: 'mobile',
                 rules: {
@@ -27,7 +27,7 @@ export const AdminCustomerInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`Tax Number`),
+            labelTitle: translate(`${TRANSLATE.TAX_NUMBER}`),
             validatedInput: {
                 name: 'taxNumber',
                 rules: {
@@ -37,7 +37,7 @@ export const AdminCustomerInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`Address`),
+            labelTitle: translate(`${TRANSLATE.ADDRESS}`),
             validatedInput: {
                 name: 'address',
                 rules: {

@@ -16,13 +16,13 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`Branch Code`),
+            labelTitle: translate(TRANSLATE.BRANCH_CODE),
             validatedInput: {
                 name: AdminBranchInputsConstants.branchCode,
             }
         },
         {
-            labelTitle: translate(`Mobile`),
+            labelTitle: translate(TRANSLATE.MOBILE),
             validatedInput: {
                 name: AdminBranchInputsConstants.mobile,
                 // rules: {
@@ -32,13 +32,13 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`Address`),
+            labelTitle: translate(TRANSLATE.ADDRESS),
             validatedInput: {
                 name: AdminBranchInputsConstants.address,
             }
         },
         {
-            labelTitle: translate(`Start Time`),
+            labelTitle: translate(TRANSLATE.START_TIME),
             type: 'time',
             validatedInput: {
                 name: AdminBranchInputsConstants.startTime,
@@ -48,7 +48,7 @@ export const AdminBranchInputsStructure = (): InputComponentProps[] => {
             }
         },
         {
-            labelTitle: translate(`End Time`),
+            labelTitle: translate(TRANSLATE.END_TIME),
             type: 'time',
             validatedInput: {
                 name: AdminBranchInputsConstants.endTime,

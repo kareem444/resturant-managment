@@ -68,6 +68,8 @@ export const TRANSLATE = {
     BOUNCED_PURCHASE: 'bounced-purchase',
     EXPENSES: 'expenses',
     EXPENSE: 'expense',
+    EXPENSES_DESTINATIONS: "expenses-destinations",
+    EXPENSES_DESTINATION: "expensesDestination",
     MEMBERS: 'members',
     MEMBER: 'member',
     LOGOUT: 'logout',
@@ -131,5 +133,18 @@ export const TRANSLATE = {
     DISCOUNTS: 'discounts',
     PURCHASES: 'purchases',
     TYPE: 'type',
-    APPLY_TO: 'apply-to'
+    APPLY_TO: 'apply-to',
+    TAX_NUMBER: 'taxNumber',
+    ADDRESS: 'address',
+    EMAIL: 'email',
+    DESCRIPTION: 'description',
+    PAYMENT_METHOD: 'paymentMethod',
+    MIN_AMOUNT: 'minAmount',
+    TAX: 'tax',
+    BRANCH_CODE: 'branch-code',
+    START_TIME: 'startTime',
+    END_TIME: 'endTime',
+    ROLE: 'role',
+    RESIDENTIAL_NUMBER: 'residentialNumber',
+    HEALTH_CERTIFICATE: 'healthCertificate'
 };

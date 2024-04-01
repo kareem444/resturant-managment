@@ -52,7 +52,7 @@ export const AdminMembersInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Email`),
+            labelTitle: translate(`${TRANSLATE.EMAIL}`),
             type: "email",
             validatedInput: {
                 name: AdminMemberInputsConstants.email!,
@@ -62,7 +62,7 @@ export const AdminMembersInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Mobile`),
+            labelTitle: translate(`${TRANSLATE.MOBILE}`),
             type: "number",
             validatedInput: {
                 name: AdminMemberInputsConstants.mobile!,
@@ -73,7 +73,7 @@ export const AdminMembersInputsStructure = (
         },
         {
             type: "number",
-            labelTitle: translate(`Password`),
+            labelTitle: translate(`${TRANSLATE.PASSWORD}`),
             validatedInput: {
                 name: AdminMemberInputsConstants.password!,
                 rules: {
@@ -83,7 +83,7 @@ export const AdminMembersInputsStructure = (
             },
         },
         {
-            labelTitle: "Branch",
+            labelTitle: translate(`${TRANSLATE.BRANCH}`),
             labelStyle: "",
             disabled: isBranchLoading || !branches?.length,
             type: "dropdownSearch",
@@ -104,7 +104,7 @@ export const AdminMembersInputsStructure = (
             },
         },
         {
-            labelTitle: "Role",
+            labelTitle: translate(`${TRANSLATE.ROLE}`),
             labelStyle: "",
             type: "dropdownSearch",
             disabled: isRolesLoading || !roles?.length,
@@ -125,13 +125,13 @@ export const AdminMembersInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Residential Number`),
+            labelTitle: translate(`${TRANSLATE.RESIDENTIAL_NUMBER}`),
             validatedInput: {
                 name: AdminMemberInputsConstants.residentialNumber!,
             },
         },
         {
-            labelTitle: translate(`Health Certificate`),
+            labelTitle: translate(`${TRANSLATE.HEALTH_CERTIFICATE}`),
             validatedInput: {
                 name: AdminMemberInputsConstants.healthCertificate!,
             },

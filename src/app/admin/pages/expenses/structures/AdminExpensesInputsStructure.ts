@@ -64,7 +64,7 @@ export const AdminExpensesInputsStructure = (
             },
         },
         {
-            labelTitle: translate("Branch"),
+            labelTitle: translate(`${TRANSLATE.BRANCH}`),
             disabled: isBranchLoading || !branches?.length,
             containerStyle: 'col-span-12 md:col-span-6',
             type: "dropdownSearch",
@@ -85,7 +85,7 @@ export const AdminExpensesInputsStructure = (
             },
         },
         {
-            labelTitle: translate('Expenses Destination'),
+            labelTitle: translate(`${TRANSLATE.EXPENSES_DESTINATION}`),
             containerStyle: 'col-span-12 md:col-span-6',
             type: "dropdownSearch",
             disabled: isExpensesDestinationsLoading || !expensesDestinations?.length,
@@ -106,7 +106,7 @@ export const AdminExpensesInputsStructure = (
             },
         },
         {
-            labelTitle: translate('Payment Method'),
+            labelTitle: translate(`${TRANSLATE.PAYMENT_METHOD}`),
             containerStyle: 'col-span-12 md:col-span-6',
             type: "dropdownSearch",
             disabled: isPaymentsMethodsLoading || !paymentsMethods?.length,
@@ -124,7 +124,7 @@ export const AdminExpensesInputsStructure = (
             },
         },
         {
-            labelTitle: translate(`Description`),
+            labelTitle: translate(`${TRANSLATE.DESCRIPTION}`),
             containerStyle: '!col-span-12',
             validatedInput: {
                 name: AdminExpensesInputsConstants.description!,

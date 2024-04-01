@@ -20,7 +20,7 @@ export const AdminRoleInputsStructure = (
             }
         },
         {
-            labelTitle: translate(`Role`),
+            labelTitle: translate(`${TRANSLATE.ROLE}`),
             type: 'dropdownSearch',
             validatedInput: {
                 name: AdminRolesInputsConstant.role,
