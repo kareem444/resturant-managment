@@ -1,6 +1,6 @@
 import FormComponent from "src/common/components/FormComponent";
 import { AdminEditProductsStructure } from "../structures/AdminEditProductsStructure";
-import useProductUiReducer from "../redux/ui/useProductUiReducer";
+import useProductUiReducer from "../redux/useProductUiReducer";
 import AdminProductSideBordersSlice from "../slices/AdminProductSideBordersSlice";
 import AdminAddSizeToProductSlice from "../slices/AdminAddSizeToProductSlice";
 

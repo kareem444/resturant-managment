@@ -9,7 +9,7 @@ import useEchoState from "src/common/DataHandler/hooks/client/useEchoState";
 import { EchoStateConstants } from "src/common/constants/EchoStateConstants";
 import { AdminProductsInputsConstants } from "../constants/AdminProductsInputsConstants";
 import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
-import useProductUiReducer from "../redux/ui/useProductUiReducer";
+import useProductUiReducer from "../redux/useProductUiReducer";
 import { IDropDownSearchItemProperties } from "src/common/components/DropDownSearchComponent";
 import { AdminGroupsRepo } from "../../groups/repo/AdminGroupsRepo";
 import { AdminTaxesRepo } from "../../taxes/repo/AdminTaxesRepo";

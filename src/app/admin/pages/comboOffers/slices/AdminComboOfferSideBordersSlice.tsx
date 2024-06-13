@@ -1,42 +1,32 @@
-import AdminItemsBoxComponent from 'src/app/admin/components/AdminItemsBoxComponent'
-import useComboOfferUiReducer from '../redux/ui/useComboOfferUiReducer'
-import { IComboOfferProduct } from '../interfaces/AdminComboOfferInterface'
-import { FC } from 'react'
+import AdminItemsBoxComponent from "src/app/admin/components/AdminItemsBoxComponent";
+import useComboOfferUiReducer from "../redux/useComboOfferUiReducer";
+import { FC } from "react";
+import { IComboOfferProduct } from "../interfaces/AdminComboOffersInterface";
 
 interface IProps {
-    isEditModal?: boolean
+    isEditModal?: boolean;
 }
 
-const AdminComboOfferSideBordersSlice: FC<IProps> = ({ isEditModal = false }) => {
-    const {
-        state,
-        removeComboOfferProductToAdd,
-        removeComboOfferAllProductsToAdd,
-        removeComboOfferProductToEdit,
-        removeComboOfferAllProductsToEdit
-    } = useComboOfferUiReducer()
+const AdminComboOfferSideBordersSlice: FC<IProps> = () => {
+    const { state, removeComboOfferProduct, resetComboOfferProducts } =
+        useComboOfferUiReducer();
 
     return (
         <>
             <AdminItemsBoxComponent
-                title='Product'
-                items={isEditModal ? state.productsToEdit : state.productsToAdd}
+                title="Product"
+                items={state.data}
                 selector={(item: IComboOfferProduct) =>
-                    `${item.product.name} - ${item.size} - Rs.${item.price}`
+                    (item.product ? `${item.product?.name} ` : `Deleted `) +
+                    (item.size ? `- ${item.size}` : "") +
+                    ` - Rs.${item.price}`
                 }
-                onDeleteAll={() =>
-                    isEditModal
-                        ? removeComboOfferAllProductsToEdit()
-                        : removeComboOfferAllProductsToAdd()
-                }
-                onDeleteItem={(item: any, index) =>
-                    isEditModal
-                        ? removeComboOfferProductToEdit(index)
-                        : removeComboOfferProductToAdd(index)
-                }
+                onDeleteAll={() => resetComboOfferProducts()}
+                onDeleteItem={(_, index) => removeComboOfferProduct(index)}
+                disabled={(item: IComboOfferProduct) => !item.product}
             />
         </>
-    )
-}
+    );
+};
 
-export default AdminComboOfferSideBordersSlice
+export default AdminComboOfferSideBordersSlice;

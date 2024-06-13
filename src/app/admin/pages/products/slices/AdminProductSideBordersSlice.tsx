@@ -1,5 +1,5 @@
 import AdminItemsBoxComponent from 'src/app/admin/components/AdminItemsBoxComponent'
-import useProductUiReducer from '../redux/ui/useProductUiReducer'
+import useProductUiReducer from '../redux/useProductUiReducer'
 
 export default function AdminProductSideBordersSlice() {
     const {

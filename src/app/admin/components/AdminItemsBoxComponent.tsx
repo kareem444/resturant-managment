@@ -9,6 +9,7 @@ interface AdminItemsBoxComponentProps {
     showDeleteAllIcon?: boolean
     onDeleteAll?: () => void
     onDeleteItem?: (item: any, index: number) => void
+    disabled?: (item: any) => boolean
 }
 
 const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
@@ -17,7 +18,8 @@ const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
     showDeleteAllIcon = true,
     selector,
     onDeleteAll,
-    onDeleteItem
+    onDeleteItem,
+    disabled,
 }) => {
     const { translate } = useTranslate()
     return (
@@ -50,7 +52,7 @@ const AdminItemsBoxComponent: FC<AdminItemsBoxComponentProps> = ({
                         <div className='flex justify-between'>
                             <span>
                                 {index + 1}.{' '}
-                                <span className='font-bold'>
+                                <span className={disabled?.(item) ? 'text-red-600 line-through' : ''}>
                                     {selector ? selector(item) : item}
                                 </span>
                             </span>

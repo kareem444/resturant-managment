@@ -1,4 +1,4 @@
-import useProductUiReducer from "../redux/ui/useProductUiReducer"
+import useProductUiReducer from "../redux/useProductUiReducer"
 
 export const OnEditProductModalCloseEvent = (): { click: () => void } => {
     const { resetProduct } = useProductUiReducer()

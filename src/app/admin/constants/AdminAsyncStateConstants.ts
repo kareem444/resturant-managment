@@ -14,4 +14,5 @@ export const AdminAsyncStateConstants = {
     delivery: 'delivery',
     additions: 'additions',
     products: 'products',
+    comboOffers: 'comboOffers',
 }

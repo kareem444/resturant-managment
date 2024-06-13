@@ -34,7 +34,6 @@ export class FireAuthHelper {
             const user = userCredential.user;
             return user;
         } catch (error) {
-            console.log(error);
             throw error;
         }
     }

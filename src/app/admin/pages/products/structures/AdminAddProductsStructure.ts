@@ -9,7 +9,7 @@ import { AdminProductsRepo } from "../repo/AdminProductsRepo";
 import { IAdminProductsInputs } from "../interfaces/AdminProductsInterface";
 import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 import useCrudHandler from "src/common/hooks/useCrudHandler";
-import useProductUiReducer from "../redux/ui/useProductUiReducer";
+import useProductUiReducer from "../redux/useProductUiReducer";
 import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
 import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
 import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState";

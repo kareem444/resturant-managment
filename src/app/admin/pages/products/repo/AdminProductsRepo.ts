@@ -10,7 +10,7 @@ import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
 import { ErrorsConstants } from "src/common/constants/ErrorsConstants";
 import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 import { FireStorageHelper } from "src/common/firebaseHandler/helper/FireStorageHelper";
-import { IProductUiState } from "../redux/ui/ProductUiInterface";
+import { IProductUiState } from "../redux/ProductUiInterface";
 import { IAdminGroupModel } from "src/app/admin/models/AdminGroupModel";
 import { IAdminTaxModel } from "src/app/admin/models/AdminTaxModel";
 import { IAdminAdditionsModel } from "src/app/admin/models/AdminAdditionsModel";

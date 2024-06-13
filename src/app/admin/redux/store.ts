@@ -1,5 +1,5 @@
-import ProductReducer from "../pages/products/redux/ui/ProductUiSlice";
-import ComboOfferReducer from "../pages/comboOffers/redux/ui/ComboOfferUiSlice";
+import ProductReducer from "../pages/products/redux/ProductUiSlice";
+import ComboOfferReducer from "../pages/comboOffers/redux/ComboOfferUiSlice";
 
 export const adminReducer = {
     productUi: ProductReducer,

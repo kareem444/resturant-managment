@@ -34,6 +34,7 @@ export interface DropDownSearchComponentProps {
     isLoading?: boolean;
     isError?: boolean;
     onInputChange?: (val: string) => void;
+    clearSearchInput?: boolean;
 }
 
 export interface IDropDownSearchItemProperties {
@@ -67,6 +68,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
     isLoading = false,
     isError = false,
     onInputChange,
+    clearSearchInput = false,
 }) => {
     const [items, setItems] = useState<IDropDownSearchItemProperties[]>();
     const [searchedItems, setSearchedItems] =
@@ -180,16 +182,31 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
 
     const { isArabic } = useTranslate();
 
+    useEffect(() => {
+        if (clearSearchInput && inputRef.current) {
+            inputRef.current.value = "";
+        }
+    }, [clearSearchInput]);
+
     return (
         <div className={"relative" + " " + containerClassName}>
             <div className="relative">
-                {showIcon && !isLoading && !isError && (
+                {showIcon && !isLoading && !isError && !input.disabled && (
                     <i
                         className={
                             `fi w-4 h-4 absolute top-1/3 text-gray-600` +
                             ` ${isArabic ? "left-4" : "right-4"} ` +
                             ` ${icon.className} ` +
                             `${handelICon()}`
+                        }
+                    />
+                )}
+                {showIcon && !isLoading && !isError && input.disabled && (
+                    <i
+                        className={
+                            "fi fi-br-ban !w-4 !h-4 absolute top-1/3 text-gray-600" +
+                            " " +
+                            (isArabic ? "left-4" : "right-4")
                         }
                     />
                 )}
@@ -232,7 +249,7 @@ const DropDownSearchComponent: FC<DropDownSearchComponentProps> = ({
                     className={
                         `w-full bg-zinc-50 dark:bg-base-200 border dark:border-none shadow-md z-20 rounded-lg overflow-y-scroll no-scrollbar` +
                         ` ${menu.isMenuFloat && "absolute"} ` +
-                        ` ${handelDisplayedItems()} `+
+                        ` ${handelDisplayedItems()} ` +
                         ` ${menu.className} `
                     }
                 >

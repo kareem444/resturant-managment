@@ -1,7 +1,11 @@
 import { FC, useState } from 'react'
 import AdminButtonComponent from 'src/app/admin/components/AdminButtonContainer'
 import BasicInputComponent from 'src/common/components/BasicInputComponent'
-import { IComboOfferProduct } from '../interfaces/AdminComboOfferInterface'
+import { IComboOfferProduct } from '../interfaces/AdminComboOffersInterface'
+import useFetch from 'src/common/DataHandler/hooks/server/useFetch'
+import { IAdminProductsModel } from 'src/app/admin/models/AdminProductsModel'
+import { AsyncStateConstants } from 'src/common/constants/AsyncStateConstants'
+import { AdminProductsRepo } from '../../products/repo/AdminProductsRepo'
 
 interface AdminAddComboOfferProductProps {
     onSubmit?: (val: any) => void
@@ -23,8 +27,15 @@ const AdminAddComboOfferProductSlice: FC<AdminAddComboOfferProductProps> = ({
         setResult({ ...result, price: '' })
     }
 
-    const isButtonDisabled =
-        result.product === undefined || result.price.length < 1
+    const isButtonDisabled = result.product === undefined || result.price.length < 1
+
+    const { data, isLoading, isError } = useFetch<IAdminProductsModel[]>({
+        key: AsyncStateConstants.products,
+        queryFn: AdminProductsRepo.getProducts,
+        options: {
+            isExecuteOnInitIfNoData: true,
+        },
+    });
 
     return (
         <div className='py-3 mt-5'>
@@ -40,14 +51,13 @@ const AdminAddComboOfferProductSlice: FC<AdminAddComboOfferProductProps> = ({
                         <BasicInputComponent
                             type='dropdownSearch'
                             label='Product'
-                            onChange={(val: any, item: any) => setResult({ ...result, product: item })}
+                            onChange={(val: any, item: any) => setResult({ ...result, product: item, size: undefined })}
                             dropDownSearchInput={{
-                                data: [
-                                    { name: 'Product 1', id: 1 },
-                                    { name: 'Product 2', id: 2 }
-                                ],
+                                data: data || [],
+                                isLoading,
+                                isError,
                                 selectors: { text: 'name', value: 'id' },
-                                onInputChange: () => setResult({ ...result, size: undefined, product: undefined })
+                                onInputChange: () => setResult({ ...result, size: undefined, product: undefined }),
                             }}
                         />
                     </div>
@@ -57,17 +67,17 @@ const AdminAddComboOfferProductSlice: FC<AdminAddComboOfferProductProps> = ({
                             label='Size'
                             onChange={(val: any) => setResult({ ...result, size: val.text })}
                             dropDownSearchInput={{
-                                data: [
-                                    { name: 'Size 1', id: 1 },
-                                    { name: 'Size 2', id: 2 }
-                                ],
-                                selectors: { text: 'name', value: 'id' },
-                                onInputChange: () => setResult({ ...result, size: undefined })
+                                data: result.product?.sizes || [],
+                                isLoading,
+                                isError,
+                                selectors: { text: 'size', value: 'size' },
+                                onInputChange: () => setResult({ ...result, size: undefined }),
+                                clearSearchInput: result.product === undefined || result.product?.sizes?.length === 0
                             }}
-                            disabled={result.product === undefined}
+                            disabled={result.product === undefined || result.product?.sizes?.length === 0}
                         />
                     </div>
-                    <div className='col-span-12'>
+                    <div className='col-span-6'>
                         <BasicInputComponent
                             type='number'
                             label='Price'
@@ -75,12 +85,14 @@ const AdminAddComboOfferProductSlice: FC<AdminAddComboOfferProductProps> = ({
                             onChange={(val: any) => setResult({ ...result, price: val })}
                         />
                     </div>
-                    <AdminButtonComponent
-                        icon='fi-rr-plus'
-                        disabled={isButtonDisabled}
-                        onClick={handelOnSubmit}
-                        buttonClassName={`!w-full !justify-center`}
-                    />
+                    <div className='col-span-6 items-end flex'>
+                        <AdminButtonComponent
+                            icon='fi-rr-plus'
+                            disabled={isButtonDisabled}
+                            onClick={handelOnSubmit}
+                            buttonClassName={`!w-full !justify-center`}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

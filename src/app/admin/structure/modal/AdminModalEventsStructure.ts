@@ -1,5 +1,4 @@
 import { OnDeleteBranchModalDeleteEvent } from "../../pages/branches/structures/AdminDeleteBranchEventStructure";
-import { OnEditComboOfferModalCloseEvent } from "../../pages/comboOffers/modal/AdminEditComboOfferModalEvents";
 import { OnDeleteMemberModalDeleteEvent } from "../../pages/members/structures/AdminDeleteMemberEventStructure";
 import OnDeleteRoleModalDeleteEvent from "../../pages/roles/structures/AdminDeleteRoleEventStructure";
 import { OnDeleteUnitModalDeleteEvent } from "../../pages/units/structures/AdminDeleteUnitEventStructure";
@@ -14,11 +13,14 @@ import { OnDeleteDeliveryModalDeleteEvent } from "../../pages/delivery/structure
 import { OnDeleteAdditionsModalDeleteEvent } from "../../pages/additions/structures/AdminDeleteAdditionsEventStructure";
 import { OnDeleteProductsModalDeleteEvent } from "../../pages/products/structures/AdminDeleteProductsEventStructure";
 import { OnEditProductModalCloseEvent } from "../../pages/products/structures/AdminCloseProductsEventStructure";
+import { OnComboOfferModalCloseEvent } from "../../pages/comboOffers/structures/AdminCloseComboOffersEventStructure";
+import { OnDeleteComboOffersModalDeleteEvent } from "../../pages/comboOffers/structures/AdminDeleteComboOffersEventStructure";
 
 export const AdminModalEventsStructure = {
     onProductModalClose: OnEditProductModalCloseEvent,
     onDeleteProductModalDelete: OnDeleteProductsModalDeleteEvent,
-    onEditComboOfferModalClose: OnEditComboOfferModalCloseEvent,
+    onComboOfferModalClose: OnComboOfferModalCloseEvent,
+    onDeleteComboOfferModalDelete: OnDeleteComboOffersModalDeleteEvent,
     onDeleteBranchModalDelete: OnDeleteBranchModalDeleteEvent,
     onDeleteRoleModalDelete: OnDeleteRoleModalDeleteEvent,
     onDeleteMemberModalDelete: OnDeleteMemberModalDeleteEvent,

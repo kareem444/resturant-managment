@@ -10,7 +10,7 @@ import { AdminProductsTableHeaderConstants } from "../constants/AdminProductsTab
 import { AdminProductsRepo } from "../repo/AdminProductsRepo";
 import { IAdminDetailsStatusContainerProps } from "src/app/admin/containers/AdminDetailsStatusContainer";
 import useScreenSize from "src/common/hooks/useScreenSize";
-import useProductUiReducer from "../redux/ui/useProductUiReducer";
+import useProductUiReducer from "../redux/useProductUiReducer";
 
 const AdminGetProductsStructure = (): IAdminDetailsStatusContainerProps => {
     const { openEditModal, openDeleteModal } = AdminModalActionsStructure();

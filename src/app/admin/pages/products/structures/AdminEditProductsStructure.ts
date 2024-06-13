@@ -16,7 +16,7 @@ import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
 import { IAdminGroupModel } from "src/app/admin/models/AdminGroupModel";
 import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
 import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState";
-import useProductUiReducer from "../redux/ui/useProductUiReducer";
+import useProductUiReducer from "../redux/useProductUiReducer";
 
 export const AdminEditProductsStructure = (): IFormComponentProperties => {
     const { translate } = useTranslate();
