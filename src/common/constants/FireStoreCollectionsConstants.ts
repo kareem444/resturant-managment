@@ -19,4 +19,5 @@ export const FireStoreCollectionsConstants = {
     DELIVERY: 'delivery',
     ADDITIONS: 'additions',
     COMBO_OFFERS: 'combo_offers',
+    DISCOUNTS: 'discounts',
 }

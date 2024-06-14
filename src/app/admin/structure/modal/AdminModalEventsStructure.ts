@@ -15,6 +15,8 @@ import { OnDeleteProductsModalDeleteEvent } from "../../pages/products/structure
 import { OnEditProductModalCloseEvent } from "../../pages/products/structures/AdminCloseProductsEventStructure";
 import { OnComboOfferModalCloseEvent } from "../../pages/comboOffers/structures/AdminCloseComboOffersEventStructure";
 import { OnDeleteComboOffersModalDeleteEvent } from "../../pages/comboOffers/structures/AdminDeleteComboOffersEventStructure";
+import { OnDeleteDiscountsModalDeleteEvent } from "../../pages/discounts/structures/AdminDeleteDiscountsEventStructure";
+import { OnDiscountModalCloseEvent } from "../../pages/discounts/structures/AdminCloseDiscountsEventStructure";
 
 export const AdminModalEventsStructure = {
     onProductModalClose: OnEditProductModalCloseEvent,
@@ -28,11 +30,12 @@ export const AdminModalEventsStructure = {
     onDeleteGroupModalDelete: OnDeleteGroupModalDeleteEvent,
     onDeleteCustomerModalDelete: OnDeleteCustomerModalDeleteEvent,
     onDeleteSupplierModalDelete: OnDeleteSupplierModalDeleteEvent,
-    onDeleteExpensesDestinationModalDelete:
-        OnDeleteExpensesDestinationModalDeleteEvent,
+    onDeleteExpensesDestinationModalDelete: OnDeleteExpensesDestinationModalDeleteEvent,
     onDeleteTaxModalDelete: OnDeleteTaxModalDeleteEvent,
     onDeleteTableModalDelete: OnDeleteTableModalDeleteEvent,
     onDeleteExpensesModalDelete: OnDeleteExpensesModalDeleteEvent,
     onDeleteDeliveryModalDelete: OnDeleteDeliveryModalDeleteEvent,
     onDeleteAdditionsModalDelete: OnDeleteAdditionsModalDeleteEvent,
+    onDeleteDiscountsModalDelete: OnDeleteDiscountsModalDeleteEvent,
+    onDiscountModalClose: OnDiscountModalCloseEvent,
 };

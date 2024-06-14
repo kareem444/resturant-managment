@@ -2,6 +2,7 @@ import { FireStoreHelper } from 'src/common/firebaseHandler/helper/FireStoreHelp
 import { IAdminCustomerInputs } from '../interfaces/AdminCustomersInterface'
 import { FireStoreCollectionsConstants } from 'src/common/constants/FireStoreCollectionsConstants'
 import { AsyncHelper } from 'src/common/DataHandler/helper/ServerDataHandlerHelper'
+import { IAdminCustomerModel } from 'src/app/admin/models/AdminCustomerModel'
 
 export class AdminCustomersRepo {
     static createCustomer = async (data: IAdminCustomerInputs): Promise<string> => {
@@ -14,13 +15,13 @@ export class AdminCustomersRepo {
         })
     }
 
-    static getCustomers = async () => {
+    static getCustomers = async (): Promise<IAdminCustomerModel[]> => {
         return await AsyncHelper.createPromise(async () => {
             const customers = await FireStoreHelper.find(
                 FireStoreCollectionsConstants.CUSTOMERS,
                 { isAuthGuard: true, orderBy: [{ field: 'createdAt', direction: 'desc' }] }
             )
-            return customers
+            return customers as IAdminCustomerModel[]
         })
     }
 

@@ -15,4 +15,5 @@ export const AdminAsyncStateConstants = {
     additions: 'additions',
     products: 'products',
     comboOffers: 'comboOffers',
+    discounts: 'discounts',
 }

@@ -7,8 +7,8 @@ import {
     removeComboOfferProduct,
 } from './ComboOfferUiActions'
 
-export const ProductUiSlice = createSlice({
-    name: REDUX.slice.admin.productUi,
+export const ComboOfferUiSlice = createSlice({
+    name: REDUX.slice.admin.comboOfferUi,
     initialState: ComboOfferUiInitialState,
     reducers: {
         addComboOfferProductAction: addComboOfferProduct,
@@ -21,6 +21,6 @@ export const {
     addComboOfferProductAction,
     removeComboOfferProductAction,
     resetComboOfferProductsAction,
-} = ProductUiSlice.actions
+} = ComboOfferUiSlice.actions
 
-export default ProductUiSlice.reducer
+export default ComboOfferUiSlice.reducer

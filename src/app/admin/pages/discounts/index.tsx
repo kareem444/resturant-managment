@@ -1,12 +1,11 @@
-import AddDiscountFeature from "./features/AddDiscountFeature"
-import DiscountsDetailsFeature from "./features/DiscountsDetailsFeature"
+import AdminAddAndSearchMemberFeature from "./features/AdminAddAndSearchDiscountsFeature"
+import AdminMembersDetailsFeature from "./features/AdminDiscountsDetailsFeature"
 
 function DiscountsPage() {
     return (
         <>
-            <AddDiscountFeature />
-            <div className='divider my-2 w-1/4 collapse-open mx-auto'></div>
-            <DiscountsDetailsFeature />
+            <AdminAddAndSearchMemberFeature />
+            <AdminMembersDetailsFeature />
         </>
     )
 }

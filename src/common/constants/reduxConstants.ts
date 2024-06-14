@@ -6,6 +6,8 @@ export const REDUX = {
         notification: "notification",
         admin: {
             productUi: "admin/productUi",
+            comboOfferUi: "admin/comboOfferUi",
+            discountUi: "admin/discountUi",
         }
     },
 };
