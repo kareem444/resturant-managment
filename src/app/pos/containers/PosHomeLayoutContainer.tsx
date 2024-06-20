@@ -4,11 +4,11 @@ import { PosRoutes } from "../routes/PosRoutes";
 
 const PosHomeLayoutContainer = () => {
     return (
-        <div className="ml-4 flex h-screen">
-            <div className="w-full sm:w-3/5 md:w-7/12 lg:w-8/12 pr-2">
+        <div className="ml-4 grid grid-cols-12 h-screen gap-2">
+            <div className="col-span-8 h-full flex flex-col overflow-y-hidden pb-3">
                 <SetRoutesContainer routes={PosRoutes.withOrderSection} />
             </div>
-            <div className="hidden sm:block sm:w-2/5 md:w-5/12 lg:w-4/12 py-4 px-2">
+            <div className="py-3 px-2 col-span-4 h-full flex flex-col overflow-y-hidden">
                 <PosOrderContainer />
             </div>
         </div>

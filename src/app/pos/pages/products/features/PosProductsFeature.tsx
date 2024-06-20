@@ -7,10 +7,10 @@ const PosProductsFeature = () => {
             onSwipeFromLeft={() => console.log('swipe from left')}
             onSwipeFromRight={() => console.log('swipe from right')}
         >
-            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 flex-1'>
+            <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 flex-1'>
                 {RECENT_TRANSACTIONS.map((item, index) => (
                     <div
-                        className='card bg-white shadow-md cursor-pointer h-52'
+                        className='card bg-white shadow-sm cursor-pointer h-48'
                         key={index}
                     >
                         <figure className='p-3 h-5/6'>

@@ -9,7 +9,7 @@ export default function PosDeliveryPage() {
                 <PosDeliveryHeaderFeature />
             </div>
 
-            <div className='overflow-y-scroll h-5/6 no-scrollbar'>
+            <div className='overflow-y-scroll flex-1 no-scrollbar'>
                 <PosDeliveryFeature />
             </div>
         </>

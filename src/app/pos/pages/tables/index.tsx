@@ -7,7 +7,7 @@ export default function PosTablesPage() {
             <div className='my-4'>
                 <PosTablesHeaderFeature />
             </div>
-            <div className='overflow-y-scroll h-5/6 no-scrollbar'>
+            <div className='overflow-y-scroll flex-1 no-scrollbar'>
                 <PosTablesFeature />
             </div>
         </>

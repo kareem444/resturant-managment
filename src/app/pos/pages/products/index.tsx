@@ -4,10 +4,10 @@ import PosProductsFeature from "./features/PosProductsFeature"
 export default function PosProductsPage() {
     return (
         <>
-            <div className="my-4">
+            <div className="my-3">
                 <PosProductsHeaderFeature />
             </div>
-            <div className="overflow-y-scroll h-5/6 no-scrollbar">
+            <div className="overflow-y-scroll flex-1 no-scrollbar">
                 <PosProductsFeature />
             </div>
         </>

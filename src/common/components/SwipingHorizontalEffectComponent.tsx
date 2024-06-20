@@ -22,8 +22,12 @@ const SwipingHorizontalEffectComponent: FC<
     SwipingHorizontalEffectComponentProps
 > = ({ children, onSwipeFromLeft, onSwipeFromRight }) => {
     const ref = useRef<HTMLDivElement>(null)
-    const { onSwipeLeft, onSwipeRight, onSwipeMove, onSwipeEnd } =
-        useSwipeEvents(ref)
+    const { onSwipeLeft, onSwipeRight, onSwipeMove, onSwipeEnd } = useSwipeEvents(
+        ref,
+        {
+            preventDefault: false
+        }
+    )
 
     const [isSwipingFromRight, setIsSwipingFromRight] = useState(false)
     const [isSwipingFromLeft, setIsSwipingFromLeft] = useState(false)
