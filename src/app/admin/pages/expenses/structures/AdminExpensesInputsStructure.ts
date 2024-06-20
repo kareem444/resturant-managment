@@ -124,8 +124,18 @@ export const AdminExpensesInputsStructure = (
             },
         },
         {
+            labelTitle: translate(`Price`),
+            type: 'number',
+            validatedInput: {
+                name: AdminExpensesInputsConstants.price!,
+                rules: {
+                    isRequired: true,
+                    isNumber: true,
+                }
+            }
+        },
+        {
             labelTitle: translate(`Description`),
-            containerStyle: '!col-span-12',
             validatedInput: {
                 name: AdminExpensesInputsConstants.description!,
                 rules: {}

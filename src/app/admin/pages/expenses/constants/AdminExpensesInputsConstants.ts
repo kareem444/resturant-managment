@@ -6,4 +6,5 @@ export const AdminExpensesInputsConstants: { [K in keyof IAdminExpensesInputs]: 
     expensesDestinationId: 'expensesDestinationId',
     paymentMethodId: 'paymentMethodId',
     description: 'description',
+    price: 'price',
 }

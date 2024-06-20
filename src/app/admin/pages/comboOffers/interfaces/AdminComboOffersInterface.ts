@@ -3,6 +3,8 @@ import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 export interface IAdminComboOffersInputs {
     name: string;
     code: string;
+    branchId?: string;
+    image?: File
 }
 
 export interface IAdminRefactoredComboOffersInputs extends IAdminComboOffersInputs {

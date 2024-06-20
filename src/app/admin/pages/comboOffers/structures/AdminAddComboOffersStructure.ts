@@ -10,14 +10,26 @@ import { IAdminComboOffersInputs } from "../interfaces/AdminComboOffersInterface
 import { IAdminComboOffersModel } from "src/app/admin/models/AdminComboOffersModel";
 import useCrudHandler from "src/common/hooks/useCrudHandler";
 import useComboOfferUiReducer from "../redux/useComboOfferUiReducer";
+import { AsyncStateConstants } from "src/common/constants/AsyncStateConstants";
+import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
+import useAsyncState from "src/common/DataHandler/hooks/server/useAsyncState";
 
 export const AdminAddComboOffersStructure = (): IFormComponentProperties => {
     const { translate } = useTranslate();
-    const { createOperation } = useCrudHandler<IAdminComboOffersModel>("comboOffers");
-    const { state: ComboOffers } = useComboOfferUiReducer()
+    const { createOperation } =
+        useCrudHandler<IAdminComboOffersModel>("comboOffers");
+    const { state: branches } = useAsyncState<IAdminBranchModel[]>(
+        AsyncStateConstants.branches
+    );
+    const { state: ComboOffers } = useComboOfferUiReducer();
 
     const { mutate, isLoading } = useMutate({
-        queryFn: (data) => AdminComboOffersRepo.createComboOffers(data, ComboOffers.data),
+        queryFn: (data) =>
+            AdminComboOffersRepo.createComboOffers(
+                data,
+                ComboOffers.data,
+                branches?.data
+            ),
         options: {
             onSuccess(ComboOffers) {
                 createOperation(ComboOffers);

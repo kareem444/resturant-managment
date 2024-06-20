@@ -34,9 +34,11 @@ const AdminGetComboOffersStructure = (): IAdminDetailsStatusContainerProps => {
         maxStringLength: 15,
         selectors: {
             1: (item: IAdminComboOffersModel) => item.code,
-            2: (item: IAdminComboOffersModel) => item.products.length.toString(),
+            2: (item: IAdminComboOffersModel) => item.branch?.name,
+            3: (item: IAdminComboOffersModel) => item.products.length.toString(),
         },
         nameSelector: (item: IAdminComboOffersModel) => item.name,
+        avatarSelector: (item: IAdminComboOffersModel) => item.image,
         buttons: {
             onEdit: isSm
                 ? undefined

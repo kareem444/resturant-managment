@@ -18,7 +18,7 @@ const AdminAddComboOffersModal = () => {
                     />
                 }
             />
-            <div className='w-1/4 flex flex-col gap-5 max-h-[426px]'>
+            <div className='w-1/4 flex flex-col gap-5 max-h-[634px]'>
                 <AdminComboOfferSideBordersSlice />
             </div>
         </div>

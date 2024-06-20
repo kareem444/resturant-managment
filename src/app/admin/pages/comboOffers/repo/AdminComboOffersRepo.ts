@@ -9,11 +9,15 @@ import {
 import { IAdminProductsModel } from "src/app/admin/models/AdminProductsModel";
 import { AdminProductsRepo } from "../../products/repo/AdminProductsRepo";
 import { IAdminComboOffersModel } from "src/app/admin/models/AdminComboOffersModel";
+import { AdminBranchesRepo } from "../../branches/repo/AdminBranchesRepo";
+import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel";
+import { FireStorageHelper } from "src/common/firebaseHandler/helper/FireStorageHelper";
 
 export class AdminComboOffersRepo {
     static createComboOffers = (
         data: IAdminComboOffersInputs,
-        comboOffers: IComboOfferProduct[] | undefined
+        comboOffers: IComboOfferProduct[] | undefined,
+        branches?: IAdminBranchModel[],
     ): Promise<IAdminComboOffersModel> => {
         return AsyncHelper.createPromise(async () => {
             const refactoredProducts = comboOffers?.map((el) => {
@@ -29,9 +33,17 @@ export class AdminComboOffersRepo {
                 products: refactoredProducts,
             };
 
+            let image: string | undefined = undefined;
+
+            if (!!refactoredData.image) {
+                image = await FireStorageHelper.uploadFile(refactoredData.image, {
+                    directory: "comboOffers",
+                });
+            }
+
             const id: string = await FireStoreHelper.add(
                 FireStoreCollectionsConstants.COMBO_OFFERS,
-                refactoredData,
+                { ...refactoredData, image: image || "" },
                 { isAuthGuard: true }
             );
 
@@ -39,6 +51,8 @@ export class AdminComboOffersRepo {
                 id,
                 ...refactoredData,
                 products: comboOffers,
+                branch: branches?.find((branch) => branch.id === data.branchId),
+                image,
             } as IAdminComboOffersModel;
         });
     };
@@ -55,8 +69,8 @@ export class AdminComboOffersRepo {
                     }
                 );
 
-            const products: IAdminProductsModel[] =
-                await AdminProductsRepo.getProducts();
+            const products: IAdminProductsModel[] = await AdminProductsRepo.getProducts();
+            const branches: IAdminBranchModel[] = await AdminBranchesRepo.getBranches();
 
             const refactoredComboOffers = comboOffers?.map(
                 (el: IAdminRefactoredComboOffersInputs & IAdminComboOffersModel) => {
@@ -73,6 +87,7 @@ export class AdminComboOffersRepo {
                     return {
                         ...el,
                         products: refactoredProducts,
+                        branch: branches.find((branch) => branch.id === el.branchId),
                     };
                 }
             );
@@ -84,7 +99,8 @@ export class AdminComboOffersRepo {
     static updateComboOffers = (
         ComboOfferId: string,
         data: IAdminComboOffersInputs,
-        comboOffers: IComboOfferProduct[] | undefined
+        comboOffers: IComboOfferProduct[] | undefined,
+        branches?: IAdminBranchModel[],
     ): Promise<IAdminComboOffersModel> => {
         return AsyncHelper.createPromise(async () => {
             const refactoredProducts = comboOffers?.map((el) => {
@@ -95,10 +111,23 @@ export class AdminComboOffersRepo {
                 };
             });
 
+            const refactoredData: IAdminRefactoredComboOffersInputs = {
+                ...data,
+                products: refactoredProducts,
+            };
+
+            let image: string | undefined = undefined;
+
+            if (!!refactoredData.image) {
+                image = await FireStorageHelper.uploadFile(refactoredData.image, {
+                    directory: "comboOffers",
+                });
+            }
+
             await FireStoreHelper.update(
                 FireStoreCollectionsConstants.COMBO_OFFERS,
                 ComboOfferId,
-                { ...data, products: refactoredProducts },
+                { ...refactoredData, image: image || "" },
                 { isAuthGuard: true }
             );
 
@@ -106,6 +135,8 @@ export class AdminComboOffersRepo {
                 id: ComboOfferId,
                 ...data,
                 products: comboOffers,
+                branch: branches?.find((branch) => branch.id === data.branchId),
+                image,
             } as IAdminComboOffersModel;
         });
     };

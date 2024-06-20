@@ -3,7 +3,7 @@ export const AdminExpensesTableConstants = {
     branch: "branch",
     expensesDestination: "expenses destination",
     paymentMethod: "payment method",
-    description: "description",
+    price: "price",
 };
 
 type ExpensesTableKeys = keyof typeof AdminExpensesTableConstants;

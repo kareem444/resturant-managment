@@ -1,6 +1,7 @@
 export const AdminComboOffersTableConstants = {
     name: "name",
     code: "code",
+    branch: "branch",
     productsAmount: "productsAmount",
 };
 

@@ -46,6 +46,7 @@ export const AdminEditExpensesStructure = (): IFormComponentProperties => {
     const defaultValues: IAdminExpensesInputs = {
         name: selectedExpenses?.name || "",
         description: selectedExpenses?.description || "",
+        price: selectedExpenses?.price || "",
     };
 
     return {

@@ -4,4 +4,5 @@ export interface IAdminExpensesInputs {
     expensesDestinationId?: string
     paymentMethodId?: string
     description?: string
+    price?: string
 }

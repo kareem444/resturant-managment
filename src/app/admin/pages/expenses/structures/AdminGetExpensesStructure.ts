@@ -32,7 +32,7 @@ const AdminGetExpensesStructure = (): IAdminDetailsStatusContainerProps => {
             1: (item: IAdminExpensesModel) => item.branch?.name,
             2: (item: IAdminExpensesModel) => item.expensesDestination?.name,
             3: (item: IAdminExpensesModel) => item.paymentMethod?.name,
-            4: (item: IAdminExpensesModel) => item.description,
+            4: (item: IAdminExpensesModel) => item.price,
         },
         nameSelector: (item: IAdminExpensesModel) => item.name,
         buttons: {
