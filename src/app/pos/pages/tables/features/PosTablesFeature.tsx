@@ -1,5 +1,4 @@
 import PosTableItemComponent from 'src/app/pos/components/PosTableItemComponent'
-import useLongPress from 'beautiful-react-hooks/useLongPress';
 
 const PosTablesFeature = () => {
     return (

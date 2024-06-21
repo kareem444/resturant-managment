@@ -3,14 +3,12 @@ import {
     IAdminComboOffersInputs,
     IComboOfferProduct,
 } from "../pages/comboOffers/interfaces/AdminComboOffersInterface";
+import { IAdminBranchModel } from "./AdminBranchModel";
 
 export interface IAdminComboOffersModel
     extends IAppModel,
     Omit<IAdminComboOffersInputs, "branchId" | "image"> {
     products: IComboOfferProduct[];
-    branch?: {
-        id: string;
-        name: string;
-    };
+    branch?: IAdminBranchModel;
     image?: string;
 }

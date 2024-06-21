@@ -26,10 +26,10 @@ export const AdminDrawerRoutes: SideBarRoute[] = [
     // icon: <DocumentDuplicateIcon className={`${iconClasses} inline`} />,
     name: 'Menu',
     submenu: [
-      {
-        path: routes.admin.units.fullPath,
-        name: 'units',
-      },
+      // {
+      //   path: routes.admin.units.fullPath,
+      //   name: 'units',
+      // },
       {
         path: routes.admin.groups.fullPath,
         name: 'groups',

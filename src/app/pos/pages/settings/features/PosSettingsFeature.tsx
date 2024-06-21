@@ -1,6 +1,6 @@
 import AccordionComponent from 'src/common/components/AccordionComponent'
-import PosGeneralSettingsComponents from '../components/PosGeneralSettingsComponents'
-import PosPrintersComponent from '../components/PosPrintersComponent'
+import PosPrintersComponent from '../components/printer/PosPrintersComponent'
+import { memo } from 'react'
 
 const data = [
     {
@@ -15,4 +15,4 @@ const PosSettingsFeature = () => {
     )
 }
 
-export default PosSettingsFeature
+export default memo(PosSettingsFeature)

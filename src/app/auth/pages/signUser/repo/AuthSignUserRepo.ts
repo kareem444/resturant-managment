@@ -95,10 +95,7 @@ export class AuthSignUserRepo {
                     email: member.email,
                     mobile: member.mobile,
                     permissions: role.permissions,
-                    branch: {
-                        id: branch.id!,
-                        name: branch.name
-                    },
+                    branch: branch,
                     roleType: role.role,
                 }
 

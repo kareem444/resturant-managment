@@ -14,6 +14,8 @@ import {
     removeProductTaxAction,
     updateProductAction
 } from './ProductUiSlice'
+import { IAdminAdditionsModel } from 'src/app/admin/models/AdminAdditionsModel'
+import { IAdminTaxModel } from 'src/app/admin/models/AdminTaxModel'
 
 export default function useProductUiReducer() {
     const state: IProductUiState = useAppSelector(productUiState)
@@ -36,7 +38,7 @@ export default function useProductUiReducer() {
         removeAllProductSize: () => {
             dispatch(removeAllProductSizeAction())
         },
-        addProductTax: (payload: { id: string, name: string }) => {
+        addProductTax: (payload: IAdminTaxModel) => {
             dispatch(addProductTaxAction(payload))
         },
         removeProductTax: (payload: { index: number }) => {
@@ -45,7 +47,7 @@ export default function useProductUiReducer() {
         removeAllProductTaxes: () => {
             dispatch(removeAllProductTaxesAction())
         },
-        addProductAddition: (payload: { id: string, name: string }) => {
+        addProductAddition: (payload: IAdminAdditionsModel) => {
             dispatch(addProductAdditionAction(payload))
         },
         removeProductAddition: (payload: { index: number }) => {

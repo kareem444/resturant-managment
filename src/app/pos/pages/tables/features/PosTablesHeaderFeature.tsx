@@ -2,6 +2,7 @@ import DropDownComponent from 'src/common/components/DropDownComponent';
 import { ReactComponent as BusyIcon } from '../../../../../common/assets/svg/busy.svg'
 import { ReactComponent as CheckIcon } from '../../../../../common/assets/svg/check.svg'
 import { ReactComponent as IntermittentFastingIcon } from '../../../../../common/assets/svg/intermittent-fasting.svg'
+import { memo } from 'react';
 
 const items = [
     {
@@ -40,4 +41,4 @@ const PosTablesHeaderFeature = () => {
     )
 };
 
-export default PosTablesHeaderFeature;
+export default memo(PosTablesHeaderFeature);

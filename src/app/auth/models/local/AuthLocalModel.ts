@@ -1,4 +1,5 @@
 import { FirebaseOptions } from "firebase/app"
+import { IAdminBranchModel } from "src/app/admin/models/AdminBranchModel"
 import { IDashboardRoles, IRoleTypes } from "src/app/admin/pages/roles/interfaces/AdminRoleInterface"
 
 export interface ILocalOrganizationModel {
@@ -17,10 +18,7 @@ export interface ILocalCurrentUserModel {
     id: string
     userId?: string
     name: string
-    branch?: {
-        id: string
-        name: string
-    }
+    branch?: IAdminBranchModel
     email?: string
     mobile?: string
     isOrganizationOwner?: boolean

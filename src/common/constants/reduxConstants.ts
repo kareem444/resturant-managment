@@ -8,6 +8,7 @@ export const REDUX = {
             productUi: "admin/productUi",
             comboOfferUi: "admin/comboOfferUi",
             discountUi: "admin/discountUi",
-        }
+        },
+        pos: "pos"
     },
 };

@@ -3,6 +3,7 @@ import { PosModalStructure } from '../../app/pos/structure/PosModalStructure'
 import { AdminModalComponentsStructure } from '../../app/admin/structure/modal/AdminModalComponentsStructure'
 import { ObjectKeys } from 'react-hook-form/dist/types/path/common'
 import { AdminModalEventsStructure } from 'src/app/admin/structure/modal/AdminModalEventsStructure'
+import { memo } from 'react'
 
 const modalComponents = {
     ...PosModalStructure,
@@ -146,4 +147,4 @@ function ModalLayoutContainer() {
     )
 }
 
-export default ModalLayoutContainer
+export default memo(ModalLayoutContainer)

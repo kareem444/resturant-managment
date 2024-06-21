@@ -1,4 +1,6 @@
+import { IAdminAdditionsModel } from 'src/app/admin/models/AdminAdditionsModel'
 import { IProductUiState } from './ProductUiInterface'
+import { IAdminTaxModel } from 'src/app/admin/models/AdminTaxModel'
 
 export const updateProduct = (
     state: IProductUiState,
@@ -56,14 +58,14 @@ export const removeAllProductSize = (
 export const addProductTax = (
     state: IProductUiState,
     action: {
-        payload: { id: string, name: string }
+        payload: IAdminTaxModel
         type: string
     }
 ) => {
-    const { id, name } = action.payload
-    const isTaxExist = state.data?.productTaxes?.find((tax) => tax.id === id)
+    const tax = action.payload
+    const isTaxExist = state.data?.productTaxes?.find((el) => el.id === tax.id)
     if (!isTaxExist) {
-        state.data?.productTaxes?.push({ id, name })
+        state.data?.productTaxes?.push(tax)
     }
 }
 
@@ -89,14 +91,14 @@ export const removeAllProductTaxes = (
 export const addProductAddition = (
     state: IProductUiState,
     action: {
-        payload: { id: string, name: string }
+        payload: IAdminAdditionsModel
         type: string
     }
 ) => {
-    const { id, name } = action.payload
-    const isAdditionExist = state.data?.productAdditions?.find((addition) => addition.id === id)
+    const addition = action.payload
+    const isAdditionExist = state.data?.productAdditions?.find((el) => el.id === addition.id)
     if (!isAdditionExist) {
-        state.data?.productAdditions?.push({ id, name })
+        state.data?.productAdditions?.push(addition)
     }
 }
 

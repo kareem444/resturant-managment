@@ -6,6 +6,7 @@ import PosLogoComponent from '../components/PosLogoComponent'
 import { PosRoutes } from '../routes/PosRoutes'
 import useModalReducer from 'src/common/redux/modal/useModalReducer'
 import OnlineStateComponent from 'src/common/components/OnlineStateComponent'
+import { memo } from 'react'
 
 function PosDrawerContainer() {
     const { openModel } = useModalReducer()
@@ -21,7 +22,6 @@ function PosDrawerContainer() {
                 className: 'btn btn-outline btn-sm'
             },
             modalComponent: 'posShiftModalComponent',
-            isOpen: true
         })
     }
 
@@ -52,4 +52,4 @@ function PosDrawerContainer() {
     )
 }
 
-export default PosDrawerContainer
+export default memo(PosDrawerContainer)

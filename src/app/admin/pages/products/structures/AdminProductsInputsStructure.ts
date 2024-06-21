@@ -92,7 +92,10 @@ export const AdminProductsInputsStructure = (
     };
 
     const handelOnAddAddition = (value: IDropDownSearchItemProperties) => {
-        addProductAddition({ id: value.value, name: value.text });
+        const addition = additions?.find((item) => item.id === value.value);
+        if (addition) {
+            addProductAddition(addition);
+        }
     };
 
     return [

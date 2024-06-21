@@ -36,9 +36,9 @@ export class AdminProductsRepo {
                 productType: productsState.productType,
                 sizes: productsState.data?.productSizes,
                 additionsIds: productsState.data?.productAdditions?.map(
-                    (item) => item.id
+                    (item) => item.id!
                 ),
-                taxesIds: productsState.data?.productTaxes?.map((item) => item.id),
+                taxesIds: productsState.data?.productTaxes?.map((item) => item.id!),
             };
 
             const branch = branches?.find(
@@ -73,14 +73,8 @@ export class AdminProductsRepo {
                 ...refactoredData,
                 id,
                 image,
-                branch: {
-                    id: branch.id,
-                    name: branch.name,
-                },
-                group: {
-                    id: group.id,
-                    name: group.name,
-                },
+                branch,
+                group,
                 additions: productsState.data?.productAdditions,
                 taxes: productsState.data?.productTaxes,
             };
@@ -113,48 +107,30 @@ export class AdminProductsRepo {
             const refactorProducts = products?.map((el) => {
                 if (!!el.branchId) {
                     const branch = branches?.find((branch) => branch.id === el.branchId);
-
-                    if (branch) {
-                        el.branch = {
-                            id: branch?.id as string,
-                            name: branch?.name as string,
-                        };
-                    }
+                    el.branch = branch;
                 }
 
                 if (!!el.groupId) {
                     const group = groups?.find((group) => group.id === el.groupId);
-
-                    if (group) {
-                        el.group = {
-                            id: group?.id as string,
-                            name: group?.name as string,
-                        };
-                    }
+                    el.group = group;
                 }
 
                 if (!!el.taxesIds) {
                     const filteredTaxes = taxes?.filter((tax) => {
                         if (tax.id && el.taxesIds?.includes(tax.id)) {
-                            return {
-                                id: tax.id,
-                                name: tax.name,
-                            };
+                            return tax;
                         }
                     });
-                    el.taxes = filteredTaxes as { id: string; name: string }[];
+                    el.taxes = filteredTaxes;
                 }
 
                 if (!!el.additionsIds) {
                     const filteredAdditions = additions?.filter((addition) => {
                         if (addition.id && el.additionsIds?.includes(addition.id)) {
-                            return {
-                                id: addition.id,
-                                name: addition.name,
-                            };
+                            return addition;
                         }
                     });
-                    el.additions = filteredAdditions as { id: string; name: string }[];
+                    el.additions = filteredAdditions;
                 }
 
                 delete el.branchId;
@@ -186,9 +162,9 @@ export class AdminProductsRepo {
                 productType: productsState.productType,
                 sizes: productsState.data?.productSizes,
                 additionsIds: productsState.data?.productAdditions?.map(
-                    (item) => item.id
+                    (item) => item.id!
                 ),
-                taxesIds: productsState.data?.productTaxes?.map((item) => item.id),
+                taxesIds: productsState.data?.productTaxes?.map((item) => item.id!),
             };
 
             const branch = branches?.find((branch) => branch.id === refactoredData.branchId);
@@ -211,7 +187,7 @@ export class AdminProductsRepo {
                 delete refactoredData.image
             }
 
-            if(refactoredData.productType === "multi"){
+            if (refactoredData.productType === "multi") {
                 refactoredData.price = ""
             } else {
                 refactoredData.sizes = []
@@ -227,20 +203,14 @@ export class AdminProductsRepo {
             const product: IAdminProductsModel = {
                 ...refactoredData,
                 id: productId,
-                image ,
-                branch: {
-                    id: branch.id,
-                    name: branch.name,
-                },
-                group: {
-                    id: group.id,
-                    name: group.name,
-                },
+                image,
+                branch,
+                group,
                 additions: productsState.data?.productAdditions,
                 taxes: productsState.data?.productTaxes,
             };
 
-            if(!image){
+            if (!image) {
                 delete product.image
             }
 
